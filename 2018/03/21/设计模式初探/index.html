@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="面向对象的设计原则  在看设计模式的时候都会多少提到面向对象的设计原则，明白了这些设计原则对于理解设计模式是很有帮助的，所以我就先介绍下面向对象的设计原则。设计原则是为了服务于软件开发，提高一个软件的可维护性和复用性。常见的设计原则如下：      设计原则   说明       单一原则   一个类只负责一个具体领域的职责     开闭原则   软件实体应对拓展开放，对修改关闭     里氏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式初探">
+<meta property="og:url" content="https://luomingbear.github.io/2018/03/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%9D%E6%8E%A2/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="面向对象的设计原则  在看设计模式的时候都会多少提到面向对象的设计原则，明白了这些设计原则对于理解设计模式是很有帮助的，所以我就先介绍下面向对象的设计原则。设计原则是为了服务于软件开发，提高一个软件的可维护性和复用性。常见的设计原则如下：      设计原则   说明       单一原则   一个类只负责一个具体领域的职责     开闭原则   软件实体应对拓展开放，对修改关闭     里氏">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/designPatternBearever.jpg">
+<meta property="article:published_time" content="2018-03-21T07:17:06.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.994Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/designPatternBearever.jpg"><title>设计模式初探 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/03/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%9D%E6%8E%A2/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">设计模式初探</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-03-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><img src="https://file.2fun.xyz/designPatternBearever.jpg" alt="设计模式" title="设计模式" />
+
+<h3>面向对象的设计原则</h3>
+
+<p>在看设计模式的时候都会多少提到面向对象的设计原则，明白了这些设计原则对于理解设计模式是很有帮助的，所以我就先介绍下面向对象的设计原则。<br>设计原则是为了服务于软件开发，<strong>提高一个软件的可维护性和复用性</strong>。常见的设计原则如下：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+  <th>设计原则</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>单一原则</td>
+  <td>一个类只负责一个具体领域的职责</td>
+</tr>
+<tr>
+  <td>开闭原则</td>
+  <td>软件实体应对拓展开放，对修改关闭</td>
+</tr>
+<tr>
+  <td>里氏代换原则</td>
+  <td>所有引用基类对象的地方可以透明地使用它子类的对象</td>
+</tr>
+<tr>
+  <td>依赖倒转原则</td>
+  <td>抽象不应该依赖于具体细节，细节应该依赖于抽象</td>
+</tr>
+<tr>
+  <td>合成复用原则</td>
+  <td>尽量使用对象组合而不是继承达到复用的目的</td>
+</tr>
+<tr>
+  <td>迪卡特法则</td>
+  <td>一个软件实体应该尽可能少的于其他实体发生关系</td>
+</tr>
+</tbody>
+</table></div>
+
+<h3>设计模式</h3>
+
+<p>知道了常用的设计原则之后，我们可以看看常见的设计模式，本篇文章不对设计模式进行具体的讨论，具体的请看详细分析的文章。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+  <th>设计模式</th>
+  <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>单例模式</td>
+  <td>一个类在全局只有一个实例，并且提供全局访问的方法</td>
+</tr>
+<tr>
+  <td>工厂模式</td>
+  <td>定义一个创建对象的接口，让子类决定具体生成什么</td>
+</tr>
+<tr>
+  <td>外观模式</td>
+  <td>为一个复杂的业务提供一个统一的入口，使得外部使用更加方便</td>
+</tr>
+<tr>
+  <td>迭代器模式</td>
+  <td>提供一种方法来访问聚合对象，而不用暴露这个对象的内部表示</td>
+</tr>
+<tr>
+  <td>观察者模式</td>
+  <td>一对多的依赖关系，被观察对象的状态改变，所有的观察者都会受到通知</td>
+</tr>
+<tr>
+  <td>组合模式</td>
+  <td>组合多个对象形成树形结构，组合对象和单个对象的使用具有一致性</td>
+</tr>
+<tr>
+  <td>适配器模式</td>
+  <td>将一个接口转化为客户端希望的另外的接口，使得不兼容的接口可以正常工作</td>
+</tr>
+<tr>
+  <td>命令模式</td>
+  <td>使用抽象命令类将请求参数化，客户端只需要知道使用命令即可</td>
+</tr>
+<tr>
+  <td>策略模式</td>
+  <td>将算法的使用和定义分开，让算法可以随客户而变化</td>
+</tr>
+</tbody>
+</table></div></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/03/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%9D%E6%8E%A2/">https://luomingbear.github.io/2018/03/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%88%9D%E6%8E%A2/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/03/22/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">备忘录模式</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/03/15/%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6Android/"><span class="paginator-prev__text">安装软件Android</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">面向对象的设计原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">设计模式</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

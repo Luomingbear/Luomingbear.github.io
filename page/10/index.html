@@ -1,0 +1,1279 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗啰明天">
+<meta property="og:url" content="https://luomingbear.github.io/page/10/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="不只是技术">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/page/10/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/">在SpringMvc中集成Mybatis</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><img src="https://file.2fun.xyz/932056-20170403015857113-916302220.png" alt="" />
+Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。
+
+<h3>1.添加依赖</h3>
+
+<p>首先我们添加Mybatis的依赖，打开<code>pom.xml</code>在<code>properties</code>添加依赖的版本参数：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">    &lt;properties&gt;
+        &lt;mybatis.spring.version&gt;1.2.5&lt;/mybatis.spring.version&gt;
+        &lt;mybatis.generator.version&gt;1.3.2&lt;/mybatis.generator.version&gt;
+        &lt;mysql.version&gt;5.1.38&lt;/mysql.version&gt;
+    &lt;/properties&gt;
+</code></pre>
+
+<p>然后在<code>dependencies</code>里面添加如下代码:</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">        &lt;!--mybatis start--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;mybatis.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;mybatis.spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--mybatis end--&gt;
+
+        &lt;!--mybatis-generator--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;mybatis.generator.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--mysql--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;mysql.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+</code></pre>
+
+<p>其中<code>mybatis-generator</code>是一个自动生成mybatis文件的插件。还需要在<code>plugins</code>里面添加插件的信息：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;!--MBG--&gt;
+&lt;plugin&gt;
+    &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;$&#123;mybatis.generator.version&#125;&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;verbose&gt;true&lt;/verbose&gt;
+        &lt;overwrite&gt;true&lt;/overwrite&gt;
+    &lt;/configuration&gt;
+   &lt;/plugin&gt;
+</code></pre>
+
+<h3>2.配置自动加载ApplicationContext</h3>
+
+<p>打开<code>web.xml</code>，修改为：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1"&gt;
+    &lt;display-name&gt;Hello&lt;/display-name&gt;
+
+    &lt;!--ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。--&gt;
+    &lt;listener&gt;
+        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    &lt;/listener&gt;
+
+    &lt;!--配置applicationContext--&gt;
+    &lt;context-param&gt;
+        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+        &lt;!--下面目录下的xml文件会自动加载--&gt;
+        &lt;param-value&gt;classpath:spring/*.xml&lt;/param-value&gt;
+    &lt;/context-param&gt;
+
+    &lt;!--配置servlet处理请求--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!--自定义servlet配置文件地址--&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;!--classpath:指向的是resources文件夹--&gt;
+            &lt;param-value&gt;classpath:spring/Hello-Servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;!--/表示任何形式的请求都可以通过，可以设置为.do表示后缀为.do的接口才可以访问--&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+
+</code></pre>
+
+<h3>3.配置Mybatis</h3>
+
+<p>在<code>resources</code>下面创建<code>mapper</code>文件夹，作为mybatis的mapper文件夹。配置mybatis先把mybatis和mybatis-generator需要使用到的参数配置到一个单独的文件,然后再调用这个文件的值方便后期修改。</p>
+<ul>
+<li>a.创建<code>mybatis.properties</code>
+在<code>resources</code>文件夹下面创建一个文件<code>mybatis.properties</code>，将数据库和mybatis-generator需要的参数加进去，如下：</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">#jdbc
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.2.199:3306/ming?characterEncoding=utf-8&amp;&amp;useUnicode=true&amp;&amp;zeroDateTimeBehavior=convertToNull
+jdbc.username=lingsir
+jdbc.password=123qwe
+#mybatis-generator的相关配置
+mybatis.targetProject=src/main/java
+mybatis.modelPackage=com.bearever.model.entities
+mybatis.daoMapperPackage=com.bearever.dao
+mybatis.targetMapperProject=src/main/resources
+mybatis.sqlMapperPackage=mapper
+</code></pre>
+
+<ul>
+<li>b.创建<code>mybatis-spring.xml</code>
+这个文件的作用是引入mybatis的配置，名字无所谓，只要放入web.xml定义的<code>contextConfigLocation</code>文件夹下面就行了，通过<code>ContextLoaderListener</code>可以自动加载目录下的xml文件。</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd"&gt;
+
+    &lt;context:property-placeholder location="classpath:mybatis.properties"/&gt;
+
+    &lt;!--jdbc配置--&gt;
+    &lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
+        &lt;property name="driverClassName" value="$&#123;jdbc.driver&#125;"/&gt;
+        &lt;property name="url" value="$&#123;jdbc.url&#125;"/&gt;
+        &lt;property name="username" value="$&#123;jdbc.username&#125;"/&gt;
+        &lt;property name="password" value="$&#123;jdbc.password&#125;"/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置--&gt;
+    &lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+        &lt;property name="mapperLocations" value="classpath:mapper/*.xml"/&gt;
+        &lt;!-- 引入mybatis configuration的相关配置 --&gt;
+        &lt;property name="configLocation" value="classpath:mybatisConfig.xml"/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了 --&gt;
+    &lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
+        &lt;!-- 这里需要注意，必须写入映射文件的目录 --&gt;
+        &lt;property name="basePackage" value="com.bearever.dao"/&gt;
+        &lt;property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- 事物管理器 --&gt;
+    &lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+        &lt;property name="dataSource" ref="dataSource"/&gt;
+    &lt;/bean&gt;
+
+    &lt;tx:annotation-driven transaction-manager="transactionManager"/&gt;
+
+&lt;/beans&gt;
+</code></pre>
+
+<ul>
+<li>c.创建<code>mybatisConfig.xml</code>
+在web.xml定义的<code>contextConfigLocation</code>文件夹下面创建<code>mybatisConfig.xml</code>,在开发中会遇到需要切换数据库环境,可以通过<code>environments</code>配置。</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;
+
+&lt;configuration&gt;
+    &lt;properties resource="mybatis/mybatis.properties"/&gt;
+    &lt;environments default="development"&gt;
+        &lt;environment id="development"&gt;
+            &lt;transactionManager type="JDBC"/&gt;
+            &lt;dataSource type="POOLED"&gt;
+                &lt;property name="driver" value="$&#123;jdbc.drive&#125;"/&gt;
+                &lt;property name="url" value="$&#123;jdbc.url&#125;"/&gt;
+                &lt;property name="username" value="$&#123;jdbc.username&#125;"/&gt;
+                &lt;property name="password" value="$&#123;jdbc.password&#125;"/&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<h3>4.配置mybatis-generator</h3>
+
+<p>通过Mybatis-Generator自动生成mybatis的mapper等文件，在<code>resources</code>创建<code>generatorConfig.xml</code>文件，如下：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;
+
+&lt;generatorConfiguration&gt;
+
+    &lt;properties resource="mybatis.properties"/&gt;
+
+    &lt;!--mysql-connector的位置--&gt;
+    &lt;classPathEntry
+            location="C:\Users\luomi\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/&gt;
+
+    &lt;context id="mybatis" targetRuntime="MyBatis3"&gt;
+        &lt;!-- 防止生成的代码中有很多注释--&gt;
+        &lt;commentGenerator&gt;
+            &lt;property name="suppressAllComments" value="true"/&gt;
+            &lt;property name="suppressDate" value="true"/&gt;
+        &lt;/commentGenerator&gt;
+
+        &lt;!--数据库--&gt;
+        &lt;jdbcConnection driverClass="$&#123;jdbc.driver&#125;"
+                        connectionURL="$&#123;jdbc.url&#125;"
+                        userId="$&#123;jdbc.username&#125;"
+                        password="$&#123;jdbc.password&#125;"&gt;
+        &lt;/jdbcConnection&gt;
+
+        &lt;!--Java类型解析器不应该强制型对象字段BigDecimal的使用，此功能是为了使数据库DECIMAL和NUMERIC列容易处理--&gt;
+        &lt;javaTypeResolver&gt;
+            &lt;property name="forceBigDecimals" value="false"/&gt;
+        &lt;/javaTypeResolver&gt;
+
+        &lt;!--生成Model类存放位置--&gt;
+        &lt;javaModelGenerator targetPackage="$&#123;mybatis.modelPackage&#125;" targetProject="$&#123;mybatis.targetProject&#125;"&gt;
+            &lt;property name="enableSubPackages" value="true"/&gt;
+            &lt;property name="trimStrings" value="true"/&gt;
+        &lt;/javaModelGenerator&gt;
+
+        &lt;!--生成映射文件存放位置--&gt;
+        &lt;sqlMapGenerator targetPackage="$&#123;mybatis.sqlMapperPackage&#125;" targetProject="$&#123;mybatis.targetMapperProject&#125;"&gt;
+            &lt;property name="enableSubPackages" value="true"/&gt;
+        &lt;/sqlMapGenerator&gt;
+
+        &lt;!--生成Dao类存放位置--&gt;
+        &lt;javaClientGenerator type="XMLMAPPER" targetPackage="$&#123;mybatis.daoMapperPackage&#125;"
+                             targetProject="$&#123;mybatis.targetProject&#125;"&gt;
+            &lt;property name="enableSubPackages" value="true"/&gt;
+        &lt;/javaClientGenerator&gt;
+
+        &lt;!--生成对应表及类名 ByExample="false" 不自动生成实例代码--&gt;
+        &lt;table tableName="tb_user" domainObjectName="User"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/&gt;
+
+    &lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+</code></pre>
+
+<p>终端cd到项目目录，执行命令生成mybatis代码和xml,提示<code>BUILD SUCCESS</code>表示配置成功了。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-shell">mvn mybatis-generator:generate
+</code></pre>
+
+<p>在代码文件夹里面，会自动生成<code>User</code>、<code>UserMapper</code>和资源文件夹下面的</p>
+<h3>5.编写Service</h3>
+
+<p>创建<code>UserService</code>接口文件，添加下面的方法：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">public interface UserService &#123;
+    User findUser(Integer id);
+&#125;
+</code></pre>
+
+<p>实现接口方法，创建<code>UserServiceIml</code>文件，这里需要注意<code>@Service</code>标签，如果不设置<code>value</code>的值会默认将类名首字母小写设置为value，通常我们将他的接口名设置为value。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Service(value = "userService")
+public class UserServiceIml implements UserService &#123;
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public User findUser(Integer id) &#123;
+        User user = userMapper.selectByPrimaryKey(id);
+        if (user == null) &#123;
+            return new User();
+        &#125;
+        return user;
+    &#125;
+&#125;
+</code></pre>
+
+<h3>6.编写Controller</h3>
+
+<p>在<code>Controller</code>里面增加Service引用，通过<code>UserMapper</code>来操作数据库。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Controller
+public class HelloController &#123;
+    @Autowired
+    private UserService userService;
+
+    @ResponseBody
+    @RequestMapping(value = "s", method = RequestMethod.GET)
+    public ResponseEntity&lt;User&gt; s(@RequestParam(value = "id", defaultValue = "") String id) &#123;
+        if (StringUtils.isEmpty(id)) &#123;
+            return new ResponseEntity&lt;&gt;(new User(), HttpStatus.OK);
+        &#125;
+        Integer uid = Integer.parseInt(id);
+        User user = this.userService.findUser(uid);
+        return new ResponseEntity&lt;&gt;(user, HttpStatus.OK);
+    &#125;
+&#125;
+</code></pre>
+
+<h3>7.运行</h3>
+
+<p>运行项目，打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/jump_war/s?id=1" >http://localhost:8085/jump_war/s?id=1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，如果你在数据库里面添加了user的表，并且增加了数据，就会看到如下的页面：<br><img src="https://file.2fun.xyz/spring_20181227204113.png" alt="" /></p>
+<p><strong>Enjoy It</strong></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">SpringMvc返回值中文乱码</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>通过<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/server/springmvc-start/"  title="SpringMvc搭建">SpringMvc简单搭建</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>完成之后，我们尝试输出中文，结果显示的却是<code>???</code>，下面是解决输出文本乱码的方法。<br>编辑<code>sevlet</code>文件，将<code>mvc:annotation-driven</code>修改为：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml"><br />    &lt;!--打开注解扫描--&gt;
+    &lt;mvc:annotation-driven&gt;
+        &lt;mvc:message-converters&gt;
+            &lt;!--解决返回值有中文会乱码的情况--&gt;
+            &lt;bean class="org.springframework.http.converter.StringHttpMessageConverter"&gt;
+                &lt;property name="defaultCharset" value="UTF-8"/&gt;
+            &lt;/bean&gt;
+        &lt;/mvc:message-converters&gt;
+    &lt;/mvc:annotation-driven&gt;
+</code></pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/">SpringMvc配置</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><img src="https://file.2fun.xyz/spring20181212121212.jpg" alt="" />
+Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。
+
+<h3>1.IntelliJ IDE</h3>
+
+<p>一开始我下载的社区版的IntelliJ，发现项目中没有Spring的选项，看网上的教程都可以直接点击Spring创建项目，后来才知道<strong>需要下载完整版的IDE</strong>，破解的方式就不写了，可自行百度。</p>
+<h3>2.创建Maven工程</h3>
+
+<p>我们可以直接使用IDE创建SpringMvc的工程，但是由于目录结构与网络教程差异过大，新人表示看不懂，所以选择了创建Maven工程。大多数的Spring项目都是使用Maven构建的，通过它可以方便的实现依赖管理。很多有用的插件也在maven的仓库可以找到。<br><strong>NEW Project</strong>的时候找到<strong>Maven</strong>打开<strong>Create from archetype</strong>选择后缀为<strong>webapp</strong>的方式创建项目。<br>点击<strong>Next</strong>，填写goupId等信息就可以打开项目了。<br><img src="https://file.2fun.xyz/spring_20181227144525.png" alt="" /></p>
+<h3>3.添加依赖</h3>
+
+<p>打开<code>pom.xml</code>文件，可以在<code>properties</code>标签里面定义参数，下面的<code>dependencies</code>就可以直接使用了，这样便于版本管理。例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
+         &lt;!--这是spring的版本号--&gt;
+        &lt;spring.version&gt;4.3.18.RELEASE&lt;/spring.version&gt;
+        &lt;jackson.version&gt;2.9.7&lt;/jackson.version&gt;
+&lt;/properties&gt;
+</code></pre>
+
+<p>插入springmvc的依赖</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.11&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--json转换的库--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>依赖添加完毕之后，鼠标右键选择<code>Maven-&gt;Reimport</code>就可以将依赖导入项目了。</p>
+<h3>4.设置文件夹</h3>
+
+<p>在<code>src/main</code>目录下面创建两个文件夹<code>java</code>和<code>resources</code>分别作为代码文件夹和资源文件夹。鼠标选中<code>java</code>文件夹，右键执行<code>Make Directory as -&gt;Sources Root</code>；鼠标选中<code>resources</code>文件夹，鼠标右键执行<code>Make Directory as -&gt;Resources Root</code></p>
+<h3>5.配置web.xml</h3>
+
+<p>打开<code>webapp/WEB-INF/web.xml</code>文件配置springMvc。<br>首先需要添加<code>servlet</code>,在<code>web-app</code>标签内加入如下代码</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml"><br />    &lt;!--配置servlet处理请求--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!--自定义servlet配置文件地址--&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;!--classpath:指向的是resources文件夹--&gt;
+            &lt;param-value&gt;classpath:config/Hello-Servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;!--/表示任何形式的请求都可以通过，可以设置为.do表示后缀为.do的接口才可以访问--&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>打开<code>classpath:config/Hello-Servlet.xml</code>文件，继续配置SpringMvc</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">    &lt;!--打开注解扫描--&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!--注解扫描的位置--&gt;
+    &lt;context:component-scan base-package="com.demo"/&gt;
+
+    &lt;!--配置view资源的生成器，在prefix文件夹寻找后缀为suffix的文件--&gt;
+    &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;!--寻找jsp文件的路径--&gt;
+        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
+        &lt;property name="suffix" value=".jsp"/&gt;
+    &lt;/bean&gt;
+</code></pre>
+
+<h3>6.编写hello.jsp</h3>
+
+<p>在<code>webapp/WEB-INF/pages</code>下面创建文件<code>hello.jsp</code>,之所以在这个目录是因为我们在<code>/Hello-Servlet.xml</code>里面配置了InternalResourceViewResolver的路径为<code>/WEB-INF/pages/</code>。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-jsp">&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Jsp Page
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>7.编写Controller</h3>
+
+<p>在<code>com.demo</code>（这个目录取决于你定义的项目goupId）目录下面创建一个<code>HelloController</code>：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Controller
+public class HelloController &#123;
+
+    @RequestMapping(value = "helloPage", method = RequestMethod.GET)
+    public String helloPage() &#123;
+        //返回名字为hello.jsp的view
+        return "hello";
+    &#125;
+
+    //ResponseBody注解说明返回的不是一个view，而是数据，RequestMapping注解指定接口访问的url地址
+    @ResponseBody
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    public String hello() &#123;
+        return "Nice to meet U";
+    &#125;
+&#125;
+</code></pre>
+
+<h3>8.运行</h3>
+
+<p>在IDE的右上角，点击<code>Add Configuration</code>,然后点击做上角的加号，新建一个tomcat服务<br><img src="https://file.2fun.xyz/spring_20181227152642.png" alt="" /><br>提示<strong>Warning: No artifacts marked for deployment</strong>,我们点击右边的<code>Fix</code>按钮，选择一个war包，点击<code>Ok</code>就可以了。<br>现在我们运行工程，编译完成之后会默认打开网页，可以看到“Hello World”的默认页面。<br>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/helloPage" >http://localhost:8085/hello_war/helloPage</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155753.png" alt="" /></p>
+<p>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/hello" >http://localhost:8085/hello_war/hello</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155953.png" alt="" /></p>
+<p>至此简单的SpringMvc就搭建完毕了。</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/05/AndroidLint%E4%BD%BF%E7%94%A8/">AndroidLint使用</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>Android Lint 说明</h3>
+
+<p>使用lint可以帮助我们找到编码的问题，然后方便解决问题提高代码的稳定性。</p>
+<h3>命令行调用</h3>
+
+<p>在命令行中可调用gradle执行Task，例如在命令行中调用gradle lint即可执行lint任务。对于某个具体的BuildType（例如Debug）和ProductFlavor（例如Huawei），还可以执行gradle lintHuaweiDebug只对这种Build版本做Lint检查。</p>
+<h3>Lint报告</h3>
+
+<p>Lint默认会把所有结果以XML和HTML格式，输出到build/reports/lint-results-xxx中，可以在此查看所有Lint问题，包括具体在哪一行，以及Lint问题对应的ID。</p>
+<h3>常见命令</h3>
+
+<p>Android的Gradle环境下，有下面几个常见的Task。</p>
+<ul>
+<li><p>assemble：Gradle内建的编译任务</p></li>
+<li><p>check：Gradle内建的检查任务</p></li>
+<li><p>test：Gradle内建的测试任务</p></li>
+<li><p>build：包含assemble、check、test</p></li>
+<li><p>lint：Android插件定义的Lint检查任务，被包含到check任务中</p></li>
+</ul>
+
+<h3>Gradle配置</h3>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">android &#123;
+    lintOptions &#123;
+        // 设置为 true，则当 Lint 发现错误时停止 Gradle 构建
+        abortOnError false
+        // 设置为 true，则当有错误时会显示文件的全路径或绝对路径 (默认情况下为true)
+        absolutePaths true
+        // 仅检查指定的问题（根据 id 指定）
+        check 'NewApi', 'InlinedApi'
+        // 设置为 true 则检查所有的问题，包括默认不检查问题
+        checkAllWarnings true
+        // 设置为 true 后，release 构建都会以 Fatal 的设置来运行 Lint。
+        // 如果构建时发现了致命（Fatal）的问题，会中止构建（具体由 abortOnError 控制）
+        checkReleaseBuilds true
+        // 不检查指定的问题（根据问题 id 指定）
+        disable 'TypographyFractions','TypographyQuotes'
+        // 检查指定的问题（根据 id 指定）
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // 在报告中是否返回对应的 Lint 说明
+        explainIssues true
+        // 写入报告的路径，默认为构建目录下的 lint-results.html
+        htmlOutput file("lint-report.html")
+        // 设置为 true 则会生成一个 HTML 格式的报告
+        htmlReport true
+        // 设置为 true 则只报告错误
+        ignoreWarnings true
+        // 重新指定 Lint 规则配置文件
+        lintConfig file("default-lint.xml")
+        // 设置为 true 则错误报告中不包括源代码的行号
+        noLines true
+        // 设置为 true 时 Lint 将不报告分析的进度
+        quiet true
+        // 覆盖 Lint 规则的严重程度，例如：
+        severityOverrides ["MissingTranslation": LintOptions.SEVERITY_WARNING]
+        // 设置为 true 则显示一个问题所在的所有地方，而不会截短列表
+        showAll true
+        // 配置写入输出结果的位置，格式可以是文件或 stdout
+        textOutput 'stdout'
+        // 设置为 true，则生成纯文本报告（默认为 false）
+        textReport false
+        // 设置为 true，则会把所有警告视为错误处理
+        warningsAsErrors true
+        // 写入检查报告的文件（不指定默认为 lint-results.xml）
+        xmlOutput file("lint-report.xml")
+        // 设置为 true 则会生成一个 XML 报告
+        xmlReport false
+        // 将指定问题（根据 id 指定）的严重级别（severity）设置为 Fatal
+        fatal 'NewApi', 'InlineApi'
+        // 将指定问题（根据 id 指定）的严重级别（severity）设置为 Error
+        error 'Wakelock', 'TextViewEdits'
+        // 将指定问题（根据 id 指定）的严重级别（severity）设置为 Warning
+        warning 'ResourceAsColor'
+        // 将指定问题（根据 id 指定）的严重级别（severity）设置为 ignore
+        ignore 'TypographyQuotes'
+    &#125;
+&#125;
+</code></pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/">Jenkins+Android打包实践</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>缘由</h3>
+
+<p>由于Android项目代码和模块的增加，每次打包需要花费很长的时间，有时候只改了几行代码重新打个包就的等待半个小时，然后啥也干不了，实在是浪费时间，于是决定研究自动化打包，目前Jenkins是使用的比较多的项目构建工具，可以轻松（才怪）实现Android的打包工作。</p>
+<h3>准备</h3>
+
+<p>需要下载Jenkins到你的计算机或者服务器，并且启动服务，这里不重点讲解，可以自行百度。纪录下可能使用到的Jenkins服务命令（windows平台）：</p>
+<ul>
+<li>启动<br><code>net start jenkins</code>，这行命令是针对已经配置好了Jenkins服务，并且启动过一次。电脑重启了，需要重新启动服务的情况，注意可能需要管理员权限。</li>
+</ul>
+<ul>
+<li>停止
+<code>net stop jenkins</code></p></li>
+<li><p>重新启动
+浏览器输入<code>http://localhost:8080/restart</code></p></li>
+</ul>
+
+<h3>安装插件</h3>
+
+<p>进行Android项目的构建，必须要安装的插件有：<code>Gradle</code>，如果你希望能看到代码编写的问题，还可以安装<code>Android Lint</code>。
+
+<h3>Android Job</h3>
+
+<p>进入Jenkins网站，默认是<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8080/" >http://localhost:8080/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>,点击新建任务，选择<strong>构建一个自由风格的软件项目</strong>。<br>在新的页面里面你可以添加一些项目描述，方便识别。</p>
+<h4>源码管理</h4>
+
+<p>在<strong>源码管理</strong>栏目，具体配置根据你的实际情况选择即可，例如我的代码保存在subversion的，所以选择<strong>subversion</strong>，<strong>Repository URL</strong>填入你的代码在svn的地址。然后点击右边的小钥匙按钮<em>Add</em>添加的你的svn账号</p>
+<h4>构建</h4>
+
+<img src="https://file.2fun.xyz/wx_20181204140349.png" alt="invoke gradle script" />
+选择<strong>invoke gradle script</strong>，在新的面板<strong>Tasks</strong>里面填写<code>clean assembleRelease</code>表示先执行clean任务，然后编译所有的release包。
+
+<p>通常情况下，这样的配置就可以完成一个简单Android项目的编译了，但是！！！，有些项目的根目录下面没有<code>build.gradle</code>,可能在某个子目录下，这就需要配置目录了。我们展开<strong>高级</strong>按钮，在<strong>Root Build script</strong>里面填入主工程的目录，这里填写的是相对路径，例如你的项目在跟目录下的<code>LSX</code>文件夹,那你填入<code>LSX</code>即可。</p>
+<h4>巨大的坑</h4>
+
+<p>这里还有一个<strong>深坑</strong>！在windows系统里面，编译可能会报一个png格式不对的问题，但是这个png文件根本不是你的项目里面的，可能是Android Support包里面的。这个问题的原因是gradle编译的缓存文件路径名太长了，所以会报这个错误。解决办法是修改缓存地址。这里可以修改主项目目录下面的<code>gradle.properties</code>添加一行代码</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">android.buildCacheDir = 你希望的缓存地址
+</code></pre>
+
+<p>但是这种写法不便于本地编码，因为如果你的Jenkins不是安装在自己的电脑上的，就会出现缓存地址不存在的问题。这里可以利用Gradle的一个功能，在命令行传入参数,规则是<code>-PK=V</code>，上面的参数就变成了</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">-Pandroid.buildCacheDir="你希望的缓存地址"
+</code></pre>
+
+<img src="https://file.2fun.xyz/wx_20181204143935.png" alt="gradle script 配置" />
+（<em>这个问题折腾了我一个下午，没想到就一句话说完了</em>）</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/">上传aar到maven服务器</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>通过maven私服搭建教程，我们成功的搭建了自己的maven服务器，接下来，我们可以把Android项目的模块打包成aar包，可以提高编译速度，也可以减少编程时不小心把代码修改的了问题。</p>
+<h3>配置上传</h3>
+
+<ul>
+<li>Release
+使用Gradle可以非常方便的打包aar并上传，打开模块所在的目录下的<code>build.gradle</code>文件，顶部添加如下代码：</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bearever' //分组，相当于文件夹
+version '1.0.1' //版本号
+</code></pre>
+
+<p><code>appply plugin: 'xxx'</code>表示的是需要引用插件xxx，这里的<code>com.android.library</code>表示需要引用Android库的插件，因为我们需要打包的是一个Android的aar包。下面的<code>maven</code>表示需要引用Maven的插件，这样我们就可以上传到自己的maven服务器了。<br><code>group 'android.cn.bear'</code>表示的是这个文件在maven服务器的文件目录，<code>version '1.0.1'</code>就表示这个库的版本是“1.0.1”。<br>下面我们开始配置上传到maven服务器，在文件的最底部添加如下代码：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-grrovy">uploadArchives &#123;
+    repositories &#123;
+        mavenDeployer &#123;
+            //release包
+            repository(url: 'http://localhost:8081/nexus/content/repositories/releases') &#123;
+                authentication(userName: 'admin', password: 'admin123')
+            &#125;
+            //快照
+            snapshotRepository(url: 'http://localhost:8081/nexus/content/repositories/snapshots') &#123;
+                authentication(userName: 'admin', password: 'admin123')
+            &#125;
+            pom.artifactId = 'mylib' //库名字
+            pom.packaging = 'aar' //文件类型
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>这里的<code>uploadArchives</code>就是上传aar包的Task，<code>mavenDeployer</code>表示这是发布到maven的，<code>repository和snapshotRepository</code>分别表示正式包和快照包的配置。<br><code>url</code>是maven服务器的地址，可以在maven服务器里面查看<br><img src="https://file.2fun.xyz/wx_20181204113742.png" alt="maven-summary" /><br><code>authentication(userName: 'admin', password: 'admin123')</code>就是maven的登录账号。<br><code>pom.artifactId</code>表示的是这个库的名字，<code>pom.packaging</code>表示的是库的文件格式。</p>
+<p>最后整个<code>build.gradle</code>文件格式大概如下</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bearever' //分组，相当于文件夹
+version '1.0.1' //版本号
+
+android&#123;&#125;
+
+dependencies&#123;&#125;
+
+uploadArchives&#123;&#125;
+</code></pre>
+
+<ul>
+<li>Snapshot
+前面提到还有快照版本的库，那么怎么上传快照版本的库呢？只需要在<code>version</code>里面加上<code>-SNAPSHOT</code>就会上传到快照仓库。例如</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bear' //分组，相当于文件夹
+version '1.0.1-SNAPSHOT' //版本号,-SNAPSHOT表示这是快照版本
+....
+</code></pre>
+
+<h3>生成aar包上传到maven</h3>
+
+<p>最后进入模块目录在终端输入<code>gradlew uploadArchives</code>就可以了。或者 <code>gradlew moudleName:uploadArchives</code></p>
+<h3>引用</h3>
+
+<ul>
+<li>Release
+首先需要规定仓库的地址，在跟项目的<code>build.gradle</code>里面添加</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null"> repositories &#123;
+        maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/releases'
+        &#125;
+        google()
+        jcenter()
+    &#125;
+</code></pre>
+
+<p>在其他模块的<code>build.gradle</code>的<code>dependencies</code>添加依赖引用，例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">dependencies &#123;
+    .....其他的依赖引用
+    implementation 'android.cn.bearever:mylib:1.0.1'
+&#125;
+</code></pre>
+
+<p>implementation语法规则<code>implementation 'groupId:libname:version'</code></p>
+<ul>
+<li>Snapshot</li>
+</ul>
+
+<p>那怎么引用<code>snapshot</code>版本的库呢，需要在根项目添加快照的仓库地址。例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">  repositories &#123;
+        maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/releases'
+        &#125;
+         maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/snapshots'
+        &#125;
+        google()
+        jcenter()
+    &#125;
+</code></pre>
+
+<p>引用的时候在版本号后面加上<code>-SNAPSHOT</code>就表示需要引用快照版本,例如：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">implementation 'android.cn.bearever:mylib:1.0.1-SNAPSHOT'
+</code></pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">Gradle 笔记（一）</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><img src="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png" alt="gradle" title="gradle" />
+
+<h3>缘由</h3>
+
+<p>在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。</p>
+<h3>Groovy</h3>
+
+<p>Gradle使用Groovy作为开发语音，而Groovy完全兼容Java语法。<br>需要注意的点：</p>
+<h4>字符串</h4>
+
+<ul>
+<li><code>''</code>单引号
+表示一段不可变的字符串，不可以执行字符串内的表达式计算</li>
+<li><code>""</code>双引号
+表示一段可变的字符串，可以使用字符串内的表达式计算，例如<code>"$&#123;rootProject&#125;"</code></li>
+</ul>
+
+<h4>Map</h4>
+
+<p>在Groovy里面，Map表示的是一个K-V列表，本质是<code>LinkedHashMap</code>，使用方式如下：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">def map = ['width':1024,'height':1820]
+//下面两种方式都可以取值
+println map['width']
+println map.height
+</code></pre>
+
+<h4>方法</h4>
+
+<p>在Groovy中，执行一个方法可以不加括号<code>()</code>，例如方法<code>sum(int a,int b)</code>，调用的时候可以写成<code>sum 1,2</code>结果与<code>sum(1,2)</code>一样</p>
+<h4>get/set</h4>
+
+<p>Java Bean 的设计里面，通过<code>get</code>来获取属性值，在Groovy里面不需要写这些方法，直接通过<code>.</code>就可以读取和设置属性的值。例如我们经常使用的获取项目编译目录文件夹<code>rootProject.buildDir</code>，他的本质也是<code>rootProject.getBuildDir()</code>。<br>对于<code>set</code>设置属性，在groovy里面只需要添加<code></code>面就可以跟新的值，例如<code>description '这是描述'</code>，等同于<code>setDescription('这是描述')</code>。</p>
+<h3>Gradle</h3>
+
+<p>asdasd</p>
+<h3>断言onlyIf</h3>
+
+<p><code>onlyIf</code>可以用来控制一个Task是否执行，当返回值为<code>true</code>时表示执行，否则表示不执行。这个效果同<code>enabled</code>属性一样可以控制是否执行，但是<code>onlyIf</code>接收的是一个闭包<code>&#123;&#125;</code>可以在里面添加代码进行判断。例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">taskTest.onlyIf &#123;
+    false
+&#125;
+</code></pre>
+
+<h4>编译参数</h4>
+
+<p>在执行<code>gradlew</code>命令的时候，可以添加一些参数来改变编译环境，例如我们在打包APK的时候，可以设计一个字段<code>buildMarket</code>来表示打包的具体应用市场渠道，在编译的时候通过<code>-PK=V</code>的形式这只属性值，其中<code>K V</code>表示的是key和value。</p>
+<h4>创建任务</h4>
+
+<ul>
+<li>使用任务名+闭包的形式：</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">task name&#123;
+    doLast&#123;
+        doSomething....
+    &#125;
+&#125;
+</code></pre>
+
+<ul>
+<li>任务名的形式</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">def Task name = task(name)
+name.doLast&#123;
+    doSomething.....
+&#125;
+</code></pre>
+
+<h4>查找任务</h4>
+
+<p>可以通过<code>tasks</code>找到定义好的任务，例如<code>tasks.findByName(name)</code>或者<code>tasks.findByPath(path)</code>等。</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/11/21/Shader%E6%8C%87%E5%8D%97(%E4%B8%80)/">Shader指南(一)</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-11-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><img src="https://file.2fun.xyz/2018/11/45333de4dcd2c6c3.jpg" alt="Unity水面Shader" title="Unity水面Shader" />
+尽管Unity为我们开发游戏提供了很多便利，但是在一些需要特殊画面效果的地方，仍然很复杂，其中Shader就是里面的一大难题。
+
+<h3>什么是Shader</h3>
+
+<p>Shader程序：GPU执行的，针对3D对象进行操作的程序。</p>
+<h3>Shader编程有那几种？</h3>
+
+<ul>
+<li>CG
+与DirectX 9.0 以上以及OpenGL 完全兼容。运行时或事先编译成GPU汇编代码</p></li>
+<li><p>HLSL
+主要用于Direct3D。平台：Windows</p></li>
+<li><p>GLSL
+主要用于OPenGL。 平台：移动平台（IOS,Android）,Mac(only use when you target Mac OS X or OpenGL ES 2.0)</p></li>
+</ul>
+
+<h3>Unity3d 里CG输出什么？</h3>
+
+<ul>
+<li><p>Windows
+Direct3D,GPU汇编代码</p></li>
+<li><p>Mac
+OpenGL GPU汇编代码</p></li>
+<li><p>Flash
+Flash GPU 汇编代码</p></li>
+<li><p>IOS/Android
+Unity会将CG转换成GLSL代码。</p></li>
+</ul>
+
+<p>总结：<strong>也就是除了移动平台会把CG转换成GLSL代码，其余平台都是转化成汇编代码。</strong>
+
+<h3>Unity中自定义的Shader:</h3>
+
+<ul>
+<li><p>Surface Shaders
+表面着色器（最常用，比固定功能管线高级）（之前默认创建的shader类型）它是 Vertex and fragment shaders 的包装，让我们可以不用关心这些顶点和片段程序的细节，可以直接得到我们想要的着色器。</p></li>
+<li><p>Vertex and Fragment Shaders
+顶点和片元着色器（细节处理，偏底层）</p></li>
+</ul>
+
+<h3>CG部分函数列表</h3>
+
+<div class="table-container"><table>
+<thead>
+<tr>
+  <th>方法名</th>
+  <th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>abs(x)</td>
+  <td>返回x的绝对值。对x的每个元素都会独立计算一次。</td>
+</tr>
+<tr>
+  <td>acos(x)</td>
+  <td>返回x的反余弦值。对x的每个元素都会独立计算一次。</td>
+</tr>
+<tr>
+  <td>all(x)</td>
+  <td>检测x的所有元数的值是否为0.</td>
+</tr>
+<tr>
+  <td>any(x)</td>
+  <td>检测x是否有某个元数的值为0.</td>
+</tr>
+<tr>
+  <td>asfloat(x)</td>
+  <td>将x转换为float类型。</td>
+</tr>
+<tr>
+  <td>asin(x)</td>
+  <td>返回x的反正弦值。对x的每个元素都会独立计算一次。</td>
+</tr>
+<tr>
+  <td>asint(x)</td>
+  <td>将x转换为int类型。</td>
+</tr>
+<tr>
+  <td>asuint(x)</td>
+  <td>将x转换为uint类型。</td>
+</tr>
+<tr>
+  <td>atan(x)</td>
+  <td>返回x的反正切值。</td>
+</tr>
+<tr>
+  <td>atan2(y, x)</td>
+  <td>返回y、x的反正切值。</td>
+</tr>
+<tr>
+  <td>ceil(x)</td>
+  <td>返回大于或等于x的最小整数。</td>
+</tr>
+<tr>
+  <td>clamp(x, min, max)</td>
+  <td>将x截取在[min, max]范围内。</td>
+</tr>
+<tr>
+  <td>clip(x)</td>
+  <td>如果x中存在值小于0的参数，则丢弃当前像素。</td>
+</tr>
+<tr>
+  <td>cos(x)</td>
+  <td>返回x的余弦值。</td>
+</tr>
+<tr>
+  <td>cosh(x)</td>
+  <td>返回x的双曲余弦值。</td>
+</tr>
+<tr>
+  <td>cross(x, y)</td>
+  <td>返回x、y的叉积。</td>
+</tr>
+<tr>
+  <td>D3DCOLORtoUBYTE4(x)</td>
+  <td>混合和缩放4D向量x用于补偿一些对UBYTE4支持的硬件。</td>
+</tr>
+<tr>
+  <td>ddx(x)</td>
+  <td>返回关于屏幕坐标x轴的偏导数。</td>
+</tr>
+<tr>
+  <td>ddy(x)</td>
+  <td>返回关于屏幕坐标y轴的偏导数。</td>
+</tr>
+<tr>
+  <td>degrees(x)</td>
+  <td>将x（弧度）转换到角度。</td>
+</tr>
+<tr>
+  <td>determinant(m)</td>
+  <td>返回的正方形矩阵m的行列式。</td>
+</tr>
+<tr>
+  <td>distance(x, y)</td>
+  <td>返回x、y之间的距离。</td>
+</tr>
+<tr>
+  <td>dot(x, y)</td>
+  <td>返回x、y的点积。</td>
+</tr>
+<tr>
+  <td>exp(x)</td>
+  <td>返回以e为底数，x为指数的指数函数值。</td>
+</tr>
+<tr>
+  <td>exp2(x)</td>
+  <td>返回以2为底数，x为指数的指数函数值。对x的每个字段都会计算一次。</td>
+</tr>
+<tr>
+  <td>faceforward(n, i, ng)</td>
+  <td>检测多边形是否位于正面。-n * sign(•(i, ng))。</td>
+</tr>
+<tr>
+  <td>floor(x)</td>
+  <td>返回小于等于x的最大整数。</td>
+</tr>
+<tr>
+  <td>fmod(x, y)</td>
+  <td>返回x/y的浮点余数。</td>
+</tr>
+<tr>
+  <td>frac(x)</td>
+  <td>返回x的小数部分。</td>
+</tr>
+<tr>
+  <td>frexp(x, exp)</td>
+  <td>返回x的尾数和指数。</td>
+</tr>
+<tr>
+  <td>fwidth(x)</td>
+  <td>返回 abs(ddx(x)) + abs(ddy(x))，</td>
+</tr>
+<tr>
+  <td>GetRenderTargetSampleCount()</td>
+  <td>返回渲染目标采样器的个数。</td>
+</tr>
+<tr>
+  <td>GetRenderTargetSamplePosition(x)</td>
+  <td>返回关于给定采样器的一个采样点(x,y)。</td>
+</tr>
+<tr>
+  <td>isfinite(x)</td>
+  <td>如果x为有限值则返回true，否则返回false。</td>
+</tr>
+<tr>
+  <td>isinf(x)</td>
+  <td>如果x为无限值则返回true，否则返回false。</td>
+</tr>
+<tr>
+  <td>isnan(x)</td>
+  <td>如果x为NAN或QNAN则返回true，否则返回false。</td>
+</tr>
+<tr>
+  <td>ldexp(x, exp)</td>
+  <td>frexp的逆运算，返回 x * 2 ^ exp。</td>
+</tr>
+<tr>
+  <td>length(v)</td>
+  <td>返回v向量的长度。</td>
+</tr>
+<tr>
+  <td>lerp(x, y, s)</td>
+  <td>对x、y进行插值计算。Returns x + s(y - x)。</td>
+</tr>
+<tr>
+  <td>lit(n • l, n • h, m)</td>
+  <td>返回光照向量（环境光，漫反射光，镜面高光，1）。</td>
+</tr>
+<tr>
+  <td>log(x)</td>
+  <td>返回以e为底的对数。</td>
+</tr>
+<tr>
+  <td>log10(x)</td>
+  <td>返回以10为底的对数。</td>
+</tr>
+<tr>
+  <td>log2(x)</td>
+  <td>返回以2为底的对数。</td>
+</tr>
+<tr>
+  <td>max(x, y)</td>
+  <td>返回x、y中较大值。</td>
+</tr>
+<tr>
+  <td>min(x, y)</td>
+  <td>返回x、y中较小值。</td>
+</tr>
+<tr>
+  <td>modf(x, out ip)</td>
+  <td>把x分割为整数和小数部分。</td>
+</tr>
+<tr>
+  <td>mul(x, y)</td>
+  <td>返回x、y矩阵相乘的积。</td>
+</tr>
+<tr>
+  <td>noise(x)</td>
+  <td>Generates a random value using the Perlin-noise algorithm.</td>
+</tr>
+<tr>
+  <td>normalize(x)</td>
+  <td>返回单位化向量，定义为 x / length(x)。</td>
+</tr>
+<tr>
+  <td>pow(x, y)</td>
+  <td>返回x^y。</td>
+</tr>
+<tr>
+  <td>radians(x)</td>
+  <td>将x（角度）转换到弧度。</td>
+</tr>
+<tr>
+  <td>reflect(i, n)</td>
+  <td>返回入射光线i对表面法线n的反射光线。</td>
+</tr>
+<tr>
+  <td>refract(i, n, R)</td>
+  <td>返回在入射光线i，表面法线n，折射率为R下的折射光线。</td>
+</tr>
+<tr>
+  <td>round(x)</td>
+  <td>返回最接近x的整数。</td>
+</tr>
+<tr>
+  <td>rsqrt(x)</td>
+  <td>返回x平方根的倒数。 1 / sqrt(x) 。</td>
+</tr>
+<tr>
+  <td>saturate(x)</td>
+  <td>把x截取在[0, 1]之间。</td>
+</tr>
+<tr>
+  <td>sign(x)</td>
+  <td>返回x的符号。</td>
+</tr>
+<tr>
+  <td>sin(x)</td>
+  <td>返回x的正弦值。</td>
+</tr>
+<tr>
+  <td>sincos(x, out s, out c)</td>
+  <td>返回x的正弦值和余弦值。</td>
+</tr>
+<tr>
+  <td>sinh(x)</td>
+  <td>返回x的双曲正弦值。</td>
+</tr>
+<tr>
+  <td>smoothstep(min, max, x)</td>
+  <td>如果x的范围是[min, max]，则返回一个介于0和1之间的Hermite插值。</td>
+</tr>
+<tr>
+  <td>sqrt(x)</td>
+  <td>返回x的平方根，对x的每个字段都会计算一次。</td>
+</tr>
+<tr>
+  <td>step(a, x)</td>
+  <td>返回 (x >= a) ? 1 : 0 。</td>
+</tr>
+<tr>
+  <td>tan(x)</td>
+  <td>返回x的正切值。</td>
+</tr>
+<tr>
+  <td>tanh(x)</td>
+  <td>返回x的双曲正切值。</td>
+</tr>
+<tr>
+  <td>tex1D(s, t)</td>
+  <td>返回纹理s在t位置的颜色。1D texture lookup.</td>
+</tr>
+<tr>
+  <td>tex1Dbias(s, t)</td>
+  <td>使用bias返回纹理s在t位置的颜色。1D texture lookup with bias.</td>
+</tr>
+<tr>
+  <td>tex1Dgrad(s, t, ddx, ddy)</td>
+  <td>1D texture lookup with a gradient.</td>
+</tr>
+<tr>
+  <td>tex1Dlod(s, t)</td>
+  <td>使用LOD返回纹理s在t位置的颜色。1D texture lookup with LOD.</td>
+</tr>
+<tr>
+  <td>tex1Dproj(s, t)</td>
+  <td>使用透视分离返回纹理s在t位置的颜色。</td>
+</tr>
+<tr>
+  <td>tex2D(s, t)</td>
+  <td>返回纹理s在t位置的颜色。</td>
+</tr>
+<tr>
+  <td>tex2Dbias(s, t)</td>
+  <td>2D texture lookup with bias.</td>
+</tr>
+<tr>
+  <td>tex2Dgrad(s, t, ddx, ddy)</td>
+  <td>2D texture lookup with a gradient.</td>
+</tr>
+<tr>
+  <td>tex2Dlod(s, t)</td>
+  <td>2D texture lookup with LOD.</td>
+</tr>
+<tr>
+  <td>tex2Dproj(s, t)</td>
+  <td>2D texture lookup with projective divide.</td>
+</tr>
+<tr>
+  <td>tex3D(s, t)</td>
+  <td>3D texture lookup.</td>
+</tr>
+<tr>
+  <td>tex3Dbias(s, t)</td>
+  <td>3D texture lookup with bias.</td>
+</tr>
+<tr>
+  <td>tex3Dgrad(s, t, ddx, ddy)</td>
+  <td>3D texture lookup with a gradient.</td>
+</tr>
+<tr>
+  <td>tex3Dlod(s, t)</td>
+  <td>3D texture lookup with LOD.</td>
+</tr>
+<tr>
+  <td>tex3Dproj(s, t)</td>
+  <td>3D texture lookup with projective divide.</td>
+</tr>
+<tr>
+  <td>texCUBE(s, t)</td>
+  <td>Cube texture lookup.</td>
+</tr>
+<tr>
+  <td>texCUBEbias(s, t)</td>
+  <td>Cube texture lookup with bias.</td>
+</tr>
+<tr>
+  <td>texCUBEgrad(s, t, ddx, ddy)</td>
+  <td>Cube texture lookup with a gradient.</td>
+</tr>
+<tr>
+  <td>tex3Dlod(s, t)</td>
+  <td>Cube texture lookup with LOD.</td>
+</tr>
+<tr>
+  <td>texCUBEproj(s, t)</td>
+  <td>Cube texture lookup with projective divide.</td>
+</tr>
+<tr>
+  <td>transpose(m)</td>
+  <td>返回m的转置矩阵。</td>
+</tr>
+<tr>
+  <td>trunc(x)</td>
+  <td>将x的所有元素从浮点值截断到整数值。</td>
+</tr>
+</tbody>
+</table></div>
+
+<h3>参考</h3>
+
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://gad.qq.com/article/detail/38240" >http://gad.qq.com/article/detail/38240</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/rainstorm/archive/2013/05/04/3057444.html" >https://www.cnblogs.com/rainstorm/archive/2013/05/04/3057444.html</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://onevcat.com/2013/07/shader-tutorial-1/" >https://onevcat.com/2013/07/shader-tutorial-1/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://onevcat.com/2013/08/shader-tutorial-2/" >https://onevcat.com/2013/08/shader-tutorial-2/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/09/25/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%88%B0%E6%B6%88%E6%81%AF/">极光推送接收不到消息</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-09-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>第三方系统收不到推送的消息<br>由于第三方 ROM 的管理软件需要用户手动操作</p>
+<ul>
+<li><p><strong>小米【 MIUI 】</strong>
+自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程无法开启
+通知栏设置：应用默认都是显示通知栏通知，如果关闭，则收到通知也不会提示
+网络助手：可以手动禁止已安装的第三方程序访问 2G/3G 和 WIFI 的网络和设置以后新安装程序是否允许访问 2G/3G 和 WIFI 的网络
+MIUI 7 神隐模式： 允许应用进行自定义配置模式，应用在后台保持联网可用，否则应用进入后台时，应用无法正常接收消息。【设置】下电量和性能中【神隐模式】</p></li>
+<li><p><strong>华为【 Emotion 】</strong>
+自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程不会开启，只能手动开启应用
+后台应用保护：需要手动把应用加到此列表，否则设备进入睡眠后会自动杀掉应用进程，只有手动开启应用才能恢复运行
+通知管理：应用状态有三种：提示、允许、禁止。禁止应用则通知栏不会有任何提醒</p></li>
+<li><p><strong>魅族【 Flyme 】</strong>
+自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程无法开启
+通知栏推送：关闭应用通知则收到消息不会有任何展示
+省电管理： 安全中心里设置省电模式，在【待机耗电管理】中允许应用待机时，保持允许，否则手机休眠或者应用闲置一段时间，无法正常接收消息。</p></li>
+<li><p><strong>VIVO【 Funtouch OS 】</strong>
+内存一键清理：需要将应用加入【白名单】列表，否则系统自带的“一键加速”，会杀掉进程
+自启动管理：需要将应用加入 “i 管家”中的【自启动管理】列表，否则重启手机后进程不会自启。但强制手动杀进程，即使加了这个列表中，后续进程也无法自启动。</p></li>
+<li><p><strong>OPPO【 ColorOS 】</strong>
+冻结应用管理：需要将应用加入纯净后台，否则锁屏状态下无法及时收到消息
+自启动管理：将应用加入【自启动管理】列表的同时，还需要到设置-应用程序-正在运行里锁定应用进程，否则杀进程或者开机后进程不会开启，只能手动开启应用</p></li>
+<li><p><strong>三星</strong>
+内存一键优化：需要将应用加入【白名单】列表，否则系统内存优化后，会杀掉应用进程</p></li>
+</ul></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/09/21/AS3.0Gradle%E5%BC%95%E7%94%A8%E5%8F%98%E5%8C%96/">AS3.0Gradle引用变化</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-09-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>从AS3.0开始类库依赖出现了四种新语法如下：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+  <th>新语法</th>
+  <th>旧语法</th>
+  <th>功能</th>
+  <th>支持类型</th>
+  <th>隔离效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>implementation</td>
+  <td>compile</td>
+  <td>编译期间对其他宿主不可见，运行期间可见</td>
+  <td>jar，arr</td>
+  <td>对其他宿主可见</td>
+</tr>
+<tr>
+  <td>api</td>
+  <td>compile</td>
+  <td>编译和运行期间都可见</td>
+  <td>jar，arr</td>
+  <td>不隔离</td>
+</tr>
+<tr>
+  <td>compileOnly</td>
+  <td>provided</td>
+  <td>编译期间可见，运行期间不可见</td>
+  <td>jar</td>
+  <td>不隔离</td>
+</tr>
+<tr>
+  <td>runtimeOnly</td>
+  <td>provided</td>
+  <td>编译期间不可见，运行期间可见</td>
+  <td>jar，arr</td>
+  <td>编译期间隔离</td>
+</tr>
+</tbody>
+</table></div></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/9/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/11/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

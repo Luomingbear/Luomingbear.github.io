@@ -1,0 +1,793 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗啰明天">
+<meta property="og:url" content="https://luomingbear.github.io/page/16/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="不只是技术">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/page/16/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/08/09/Android%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86/">Android代码混淆</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-08-09</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><img class="aligncenter" src="https://file.2fun.xyz/jiami.jpg" alt="加密" />
+android发布之前，都会进行一次加密的操作，减少被破解的几率，在android studio里面，我们可以非常方便的通过proguard.pro设置代码混淆实现加密的功能。
+<h3>开启代码混淆</h3>
+<img class="alignnone" src="https://file.2fun.xyz/android_proguard.png" alt="设置app-&gt;build.gradle" />
+<h3>编辑proguard.pro</h3>
+根据实际的酵母情况对下面的文件今昔修改添加，使用第三方类库的时候，根据第三方类库提供的规则进行添加
+<pre>#############################################
+#
+# 对于一些基本指令的添加
+#
+#############################################
+# 代码混淆压缩比，在0~7之间，默认为5，一般不做修改
+-optimizationpasses 5
+
+
+        <h1 id="混合时不使用大小写混合，混合后的类名为小写"   >
+          <a href="#混合时不使用大小写混合，混合后的类名为小写" class="heading-link"><i class="fas fa-link"></i></a><a href="#混合时不使用大小写混合，混合后的类名为小写" class="headerlink" title="混合时不使用大小写混合，混合后的类名为小写"></a>混合时不使用大小写混合，混合后的类名为小写</h1>
+      <p>-dontusemixedcaseclassnames</p>
+
+        <h1 id="指定不去忽略非公共库的类"   >
+          <a href="#指定不去忽略非公共库的类" class="heading-link"><i class="fas fa-link"></i></a><a href="#指定不去忽略非公共库的类" class="headerlink" title="指定不去忽略非公共库的类"></a>指定不去忽略非公共库的类</h1>
+      <p>-dontskipnonpubliclibraryclasses</p>
+
+        <h1 id="这句话能够使我们的项目混淆后产生映射文件"   >
+          <a href="#这句话能够使我们的项目混淆后产生映射文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#这句话能够使我们的项目混淆后产生映射文件" class="headerlink" title="这句话能够使我们的项目混淆后产生映射文件"></a>这句话能够使我们的项目混淆后产生映射文件</h1>
+      
+        <h1 id="包含有类名-gt-混淆后类名的映射关系"   >
+          <a href="#包含有类名-gt-混淆后类名的映射关系" class="heading-link"><i class="fas fa-link"></i></a><a href="#包含有类名-gt-混淆后类名的映射关系" class="headerlink" title="包含有类名-&gt;混淆后类名的映射关系"></a>包含有类名-&gt;混淆后类名的映射关系</h1>
+      <p>-verbose</p>
+
+        <h1 id="指定不去忽略非公共库的类成员"   >
+          <a href="#指定不去忽略非公共库的类成员" class="heading-link"><i class="fas fa-link"></i></a><a href="#指定不去忽略非公共库的类成员" class="headerlink" title="指定不去忽略非公共库的类成员"></a>指定不去忽略非公共库的类成员</h1>
+      <p>-dontskipnonpubliclibraryclassmembers</p>
+
+        <h1 id="不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。"   >
+          <a href="#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。" class="heading-link"><i class="fas fa-link"></i></a><a href="#不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。" class="headerlink" title="不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。"></a>不做预校验，preverify是proguard的四个步骤之一，Android不需要preverify，去掉这一步能够加快混淆速度。</h1>
+      <p>-dontpreverify</p>
+
+        <h1 id="保留Annotation不混淆"   >
+          <a href="#保留Annotation不混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留Annotation不混淆" class="headerlink" title="保留Annotation不混淆"></a>保留Annotation不混淆</h1>
+      <p>-keepattributes <em>Annotation</em>,InnerClasses</p>
+
+        <h1 id="避免混淆泛型"   >
+          <a href="#避免混淆泛型" class="heading-link"><i class="fas fa-link"></i></a><a href="#避免混淆泛型" class="headerlink" title="避免混淆泛型"></a>避免混淆泛型</h1>
+      <p>-keepattributes Signature</p>
+
+        <h1 id="抛出异常时保留代码行号"   >
+          <a href="#抛出异常时保留代码行号" class="heading-link"><i class="fas fa-link"></i></a><a href="#抛出异常时保留代码行号" class="headerlink" title="抛出异常时保留代码行号"></a>抛出异常时保留代码行号</h1>
+      <p>-keepattributes SourceFile,LineNumberTable</p>
+
+        <h1 id="指定混淆是采用的算法，后面的参数是一个过滤器"   >
+          <a href="#指定混淆是采用的算法，后面的参数是一个过滤器" class="heading-link"><i class="fas fa-link"></i></a><a href="#指定混淆是采用的算法，后面的参数是一个过滤器" class="headerlink" title="指定混淆是采用的算法，后面的参数是一个过滤器"></a>指定混淆是采用的算法，后面的参数是一个过滤器</h1>
+      
+        <h1 id="这个过滤器是谷歌推荐的算法，一般不做更改"   >
+          <a href="#这个过滤器是谷歌推荐的算法，一般不做更改" class="heading-link"><i class="fas fa-link"></i></a><a href="#这个过滤器是谷歌推荐的算法，一般不做更改" class="headerlink" title="这个过滤器是谷歌推荐的算法，一般不做更改"></a>这个过滤器是谷歌推荐的算法，一般不做更改</h1>
+      <p>-optimizations !code/simplification/cast,!field/<em>,!class/merging/</em></p>
+<p>#############################################<br>#</p>
+
+        <h1 id="Android开发中一些需要保留的公共部分"   >
+          <a href="#Android开发中一些需要保留的公共部分" class="heading-link"><i class="fas fa-link"></i></a><a href="#Android开发中一些需要保留的公共部分" class="headerlink" title="Android开发中一些需要保留的公共部分"></a>Android开发中一些需要保留的公共部分</h1>
+      <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>#############################################</p>
+
+        <h1 id="保留我们使用的四大组件，自定义的Application等等这些类不被混淆"   >
+          <a href="#保留我们使用的四大组件，自定义的Application等等这些类不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留我们使用的四大组件，自定义的Application等等这些类不被混淆" class="headerlink" title="保留我们使用的四大组件，自定义的Application等等这些类不被混淆"></a>保留我们使用的四大组件，自定义的Application等等这些类不被混淆</h1>
+      
+        <h1 id="因为这些子类都有可能被外部调用"   >
+          <a href="#因为这些子类都有可能被外部调用" class="heading-link"><i class="fas fa-link"></i></a><a href="#因为这些子类都有可能被外部调用" class="headerlink" title="因为这些子类都有可能被外部调用"></a>因为这些子类都有可能被外部调用</h1>
+      <p>-keep public class * extends android.app.Activity<br>-keep public class * extends android.app.Appliction<br>-keep public class * extends android.app.Service<br>-keep public class * extends android.content.BroadcastReceiver<br>-keep public class * extends android.content.ContentProvider<br>-keep public class * extends android.app.backup.BackupAgentHelper<br>-keep public class * extends android.preference.Preference<br>-keep public class * extends android.view.View<br>-keep public class com.android.vending.licensing.ILicensingService</p>
+
+        <h1 id="保留support下的所有类及其内部类"   >
+          <a href="#保留support下的所有类及其内部类" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留support下的所有类及其内部类" class="headerlink" title="保留support下的所有类及其内部类"></a>保留support下的所有类及其内部类</h1>
+      <p>-keep class android.support.** {*;}</p>
+
+        <h1 id="保留继承的"   >
+          <a href="#保留继承的" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留继承的" class="headerlink" title="保留继承的"></a>保留继承的</h1>
+      <p>-keep public class * extends android.support.v4.**<br>-keep public class * extends android.support.v7.**<br>-keep public class * extends android.support.annotation.**</p>
+
+        <h1 id="保留R下面的资源"   >
+          <a href="#保留R下面的资源" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留R下面的资源" class="headerlink" title="保留R下面的资源"></a>保留R下面的资源</h1>
+      <p>-keep class **.R$* {*;}</p>
+
+        <h1 id="保留本地native方法不被混淆"   >
+          <a href="#保留本地native方法不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留本地native方法不被混淆" class="headerlink" title="保留本地native方法不被混淆"></a>保留本地native方法不被混淆</h1>
+      <p>-keepclasseswithmembernames class * {<br>    native ;<br>}</p>
+
+        <h1 id="保留在Activity中的方法参数是view的方法，"   >
+          <a href="#保留在Activity中的方法参数是view的方法，" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留在Activity中的方法参数是view的方法，" class="headerlink" title="保留在Activity中的方法参数是view的方法，"></a>保留在Activity中的方法参数是view的方法，</h1>
+      
+        <h1 id="这样以来我们在layout中写的onClick就不会被影响"   >
+          <a href="#这样以来我们在layout中写的onClick就不会被影响" class="heading-link"><i class="fas fa-link"></i></a><a href="#这样以来我们在layout中写的onClick就不会被影响" class="headerlink" title="这样以来我们在layout中写的onClick就不会被影响"></a>这样以来我们在layout中写的onClick就不会被影响</h1>
+      <p>-keepclassmembers class * extends android.app.Activity{<br>    public void *(android.view.View);<br>}</p>
+
+        <h1 id="保留枚举类不被混淆"   >
+          <a href="#保留枚举类不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留枚举类不被混淆" class="headerlink" title="保留枚举类不被混淆"></a>保留枚举类不被混淆</h1>
+      <p>-keepclassmembers enum * {<br>    public static **[] values();<br>    public static ** valueOf(java.lang.String);<br>}</p>
+
+        <h1 id="保留我们自定义控件（继承自View）不被混淆"   >
+          <a href="#保留我们自定义控件（继承自View）不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留我们自定义控件（继承自View）不被混淆" class="headerlink" title="保留我们自定义控件（继承自View）不被混淆"></a>保留我们自定义控件（继承自View）不被混淆</h1>
+      <p>-keep public class * extends android.view.View{<br>    *** get*();<br>    void set*(***);<br>    public (android.content.Context);<br>    public (android.content.Context, android.util.AttributeSet);<br>    public (android.content.Context, android.util.AttributeSet, int);<br>}</p>
+
+        <h1 id="保留Parcelable序列化类不被混淆"   >
+          <a href="#保留Parcelable序列化类不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留Parcelable序列化类不被混淆" class="headerlink" title="保留Parcelable序列化类不被混淆"></a>保留Parcelable序列化类不被混淆</h1>
+      <p>-keep class * implements android.os.Parcelable {<br>    public static final android.os.Parcelable$Creator *;<br>}</p>
+
+        <h1 id="保留Serializable序列化的类不被混淆"   >
+          <a href="#保留Serializable序列化的类不被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#保留Serializable序列化的类不被混淆" class="headerlink" title="保留Serializable序列化的类不被混淆"></a>保留Serializable序列化的类不被混淆</h1>
+      <p>-keepclassmembers class * implements java.io.Serializable {<br>    static final long serialVersionUID;<br>    private static final java.io.ObjectStreamField[] serialPersistentFields;<br>    !static !transient ;<br>    !private ;<br>    !private ;<br>    private void writeObject(java.io.ObjectOutputStream);<br>    private void readObject(java.io.ObjectInputStream);<br>    java.lang.Object writeReplace();<br>    java.lang.Object readResolve();<br>}</p>
+
+        <h1 id="对于带有回调函数的onXXEvent、-OnListener的，不能被混淆"   >
+          <a href="#对于带有回调函数的onXXEvent、-OnListener的，不能被混淆" class="heading-link"><i class="fas fa-link"></i></a><a href="#对于带有回调函数的onXXEvent、-OnListener的，不能被混淆" class="headerlink" title="对于带有回调函数的onXXEvent、*OnListener的，不能被混淆"></a>对于带有回调函数的onXXEvent、*<em>On</em>Listener的，不能被混淆</h1>
+      <p>-keepclassmembers class * {<br>    void *(*<em>On</em>Event);<br>    void *(*<em>On</em>Listener);<br>}</p>
+
+        <h1 id="webView处理，项目中没有使用到webView忽略即可"   >
+          <a href="#webView处理，项目中没有使用到webView忽略即可" class="heading-link"><i class="fas fa-link"></i></a><a href="#webView处理，项目中没有使用到webView忽略即可" class="headerlink" title="webView处理，项目中没有使用到webView忽略即可"></a>webView处理，项目中没有使用到webView忽略即可</h1>
+      <p>-keepclassmembers class fqcn.of.javascript.interface.for.webview {<br>    public *;<br>}<br>-keepclassmembers class * extends android.webkit.webViewClient {<br>    public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);<br>    public boolean *(android.webkit.WebView, java.lang.String);<br>}<br>-keepclassmembers class * extends android.webkit.webViewClient {<br>    public void *(android.webkit.webView, jav.lang.String);<br>}</p>
+<p></pre></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/08/08/luo/">luo</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-08-08</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/08/01/%E5%B8%A6%E5%9C%86%E8%A7%92%E7%9A%84%E8%83%8C%E6%99%AF%E7%9A%84TextView/">带圆角的背景的TextView</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-08-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>效果图</h3>
+
+<p>应用中经常会遇到使用圆角TextView的情况，这是一个自定义的圆角TextView<br><img src="https://file.2fun.xyz/roundText.png" alt="圆角背景TextView" /></h3></p>
+<h3>类文件</h3>
+
+<pre>/**
+ * 带圆角的文本显示控件textview
+ * Created by Bear on 2017/6/23.
+ */
+class RoundTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0) :
+        AppCompatTextView(context, attrs, defStyleAttr) {
+    private var mPaint: Paint = Paint()
+    private var mBgColor: Int = 0 //背景颜色
+    private var mRoundSize: Float = 0.toFloat() //圆角的值
+    private var mRoundType = RoundType.ROUND_RECT //圆角的类型
+    private var rectF: RectF? = null
+
+
+    enum class RoundType {
+        ROUND_RECT,
+
+        ROUND_TOP,
+
+        ROUND_BOTTOM,
+
+        LEFT_BOTTOM,
+
+        RIGHT_BOTTOM
+    }
+
+    init {
+        if (attrs != null)
+            init(attrs)
+    }
+
+    /**
+     * 设置textView的背景色
+
+     * @param bgColor
+     */
+    var bgColor: Int
+        get() = mBgColor
+        set(bgColor) {
+            this.mBgColor = bgColor
+            invalidate()
+        }
+
+    var roundSize: Float
+        get() = mRoundSize
+        set(roundSize) {
+            this.mRoundSize = roundSize
+            invalidate()
+        }
+
+    var roundType: RoundType
+        get() = mRoundType
+        set(mRoundType) {
+            this.mRoundType = mRoundType
+            invalidate()
+        }
+
+    /**
+     * 初始化
+     */
+    private fun init(attributeSet: AttributeSet) {
+        val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.RoundTextView)
+        mRoundSize = typedArray.getDimension(R.styleable.RoundTextView_roundSize, resources.getDimension(R.dimen.border_radius_normal))
+        mBgColor = typedArray.getColor(R.styleable.RoundTextView_bgColor, 0)
+        mRoundType = RoundType.values()[typedArray.getInt(R.styleable.RoundTextView_roundType, 0)]
+        typedArray.recycle()
+
+        gravity = Gravity.CENTER
+
+    }
+
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        rectF = RectF(0f, 0f, w.toFloat(), h.toFloat())
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        if (mBgColor == 0) {
+            super.onDraw(canvas)
+            return
+        }
+
+        mPaint.color = mBgColor
+        mPaint.isAntiAlias = true
+        canvas.drawRoundRect(rectF!!, mRoundSize, mRoundSize, mPaint)
+        when (mRoundType) {
+            RoundTextView.RoundType.ROUND_RECT -&gt; {
+            }
+            RoundTextView.RoundType.ROUND_TOP -&gt; {
+                canvas.drawRect(0f, height - mRoundSize, mRoundSize, height.toFloat(), mPaint)
+                canvas.drawRect(width - mRoundSize, height - mRoundSize, width.toFloat(), height.toFloat(), mPaint)
+            }
+            RoundTextView.RoundType.ROUND_BOTTOM -&gt; {
+                canvas.drawRect(0f, 0f, mRoundSize, mRoundSize, mPaint)
+                canvas.drawRect(width - mRoundSize, 0f, width.toFloat(), mRoundSize, mPaint)
+            }
+
+            RoundTextView.RoundType.LEFT_BOTTOM -&gt; {
+                canvas.drawRect(0f, 0f, mRoundSize, mRoundSize, mPaint)
+                canvas.drawRect(0f, 0f, width.toFloat(), mRoundSize, mPaint)
+                canvas.drawRect(width - mRoundSize, height - mRoundSize, width.toFloat(), height.toFloat(), mPaint)
+            }
+
+            RoundTextView.RoundType.RIGHT_BOTTOM -&gt; {
+                canvas.drawRect(width - mRoundSize, 0f, width.toFloat(), mRoundSize, mPaint)
+                canvas.drawRect(0f, 0f, width.toFloat(), mRoundSize, mPaint)
+                canvas.drawRect(0f, height - mRoundSize, mRoundSize, height.toFloat(), mPaint)
+            }
+        }
+        super.onDraw(canvas)
+    }
+
+    /**
+     * 用于代码生成
+     */
+    class Builder(private val mContext: Context) {
+        private var bgColor: Int = 0 //背景颜色
+        private var roundSize: Float = 0.toFloat() //圆角的值
+        private var textColor: Int = 0 //文本颜色
+        private var textSize: Float = 0.toFloat() //文字大小
+        private var textString: String? = null//文本
+        private var roundType = RoundType.ROUND_RECT //圆角的类型
+
+        fun setRoundSize(roundSize: Float): Builder {
+            this.roundSize = roundSize
+            return this
+        }
+
+        fun setRoundType(roundType: RoundType): Builder {
+            this.roundType = roundType
+            return this
+        }
+
+        fun setTextColor(textColor: Int): Builder {
+            this.textColor = textColor
+            return this
+        }
+
+        fun setTextString(text: String): Builder {
+            this.textString = text
+            return this
+        }
+
+        fun setBgColor(bgColor: Int): Builder {
+            this.bgColor = bgColor
+            return this
+        }
+
+        fun setTextSize(textSize: Float): Builder {
+            this.textSize = textSize
+            return this
+        }
+
+        fun build(): RoundTextView {
+            val roundTextView = RoundTextView(mContext, null, 0)
+            roundTextView.mRoundType = roundType
+            roundTextView.mBgColor = bgColor
+            roundTextView.mRoundSize = roundSize
+            roundTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+            roundTextView.setTextColor(textColor)
+            roundTextView.text = textString
+            roundTextView.requestLayout()
+
+            return roundTextView
+        }
+    }
+}
+</pre>
+
+<h3>属性</h3>
+
+<pre>&lt;declare-styleable name="RoundTextView"&gt;
+    &lt;attr name="roundSize" format="dimension|reference" /&gt;
+    &lt;!--背景色--&gt;
+    &lt;attr name="bgColor" format="color" /&gt;
+    &lt;attr name="roundType" format="enum"&gt;
+        &lt;enum name="roundRect" value="0" /&gt;
+        &lt;enum name="roundTop" value="1" /&gt;
+        &lt;enum name="roundBottom" value="2" /&gt;
+        &lt;enum name="leftBottom" value="3" /&gt;
+        &lt;enum name="rightBottom" value="4" /&gt;
+    &lt;/attr&gt;
+&lt;/declare-styleable&gt;</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/31/android%E8%87%AA%E5%AE%9A%E4%B9%89dialog/">android自定义dialog</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>前言</h3>
+在Android开发的过程中经常会遇到自定义Dialog的需求，Android原生的Dialog在很多情况下面并不能满足我们的使用,例如下图钉钉的更新弹窗，所以今天我们就来尝试下自定义Dialog。
+<img src="https://file.2fun.xyz/dingding_update_dialog.png" alt="钉钉的更新弹窗dialog" />
+<h3>自定义Dialog基类</h3>
+自定义Dialog需要首先继承Dialog，重写<code>onCreate(Bundle savedInstanceState)</code>方法，由于在项目中我们可能不止一次的使用自定义Dialog，所以我创建了一个简单的基类<code>BaseDialog</code>,主要代码如下如下:
+<pre>@Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      //添加布局文件
+      setContentView(getLayoutRes());
+      //执行初始化view，设置弹窗大小绑定view等
+      initView();
+      //初始化事件，例如添加点击事件
+      initEvent();
+  }   
+
+<p>  public abstract int getLayoutRes();</p>
+<p>  public abstract void initView();</p>
+<p>  public abstract void initEvent();<br></pre></p>
+<h3>继承Dialog基类</h3>
+在具体的使用的时候，需要继承<code>BaseDialog</code>,在<code>initView</code>里面记得添加设置dialog大小的熟悉！！
+<pre>    override fun initView() {
+        //点击空白可以隐藏弹窗
+        window?.setBackgroundDrawable(BitmapDrawable())
+        setCanceledOnTouchOutside(true)
+
+<pre><code>    //弹窗位置
+    window?.setGravity(Gravity.CENTER)
+
+    //设置大小
+    val params = window?.attributes // 获取对话框当前的参数值
+    params?.height = SysUtils.getScreenDisplay(context).height / 3
+    params?.width = SysUtils.getScreenDisplay(context).width
+
+    //设置背景的颜色
+    //params.dimAmount = 0.5f;
+
+    //设置属性
+    window?.attributes = params
+&#125;
+</code></pre>
+<p></pre></p>
+<h3>最后</h3>
+附上完整的BaseDialog的代码
+<pre>
+public abstract class BaseDialog extends AppCompatDialog {
+
+<pre><code>public BaseDialog(@NonNull Context context) &#123;
+    super(context);
+&#125;
+
+public BaseDialog(@NonNull Context context, @StyleRes int themeResId) &#123;
+    super(context, themeResId);
+&#125;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) &#123;
+    super.onCreate(savedInstanceState);
+
+    setContentView(getLayoutRes());
+
+    initView();
+
+    initEvent();
+&#125;
+
+public abstract int getLayoutRes();
+
+public abstract void initView();
+
+public abstract void initEvent();
+</code></pre>
+<p>}<br></pre></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/26/AS%E7%A7%BB%E6%A4%8DFFmpeg%EF%BC%88Ubuntu%E5%B9%B3%E5%8F%B0%EF%BC%89/">AS移植FFmpeg（Ubuntu平台）</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>如今随着视频应用的流行，我们也有必要学习下这方面的知识了。现在市场上绝大多数的视频应用都是使用的FFmpeg进行视频处理，今天我们就来尝试将FFmpeg移植到Android平台。</p>
+<h3><span class="exturl"><a class="exturl__link"   href="http://ffmpeg.org/download.html"  target="_blank" rel="noopener noreferrer">下载FFmpeg编译好的.so文件</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></h3>
+点击标题下载我已经编译好的so文件，将下载的文件解压复制到Android工程目录<code>app/src/main/jni</code>里面,如果没有文件夹则创建文件夹。关于如何编译FFmpeg的so文件，我将在下一篇文章里面分享，因为编译会麻烦很多，所以先让大家能够轻易的使用FFmpeg才是最佳的打开方式。
+<h3>编写native方法。</h3>
+<pre>public class FFmpegNative {
+    static {
+
+<pre><code>    System.loadLibrary(&quot;avutil-55&quot;);
+    System.loadLibrary(&quot;swresample-2&quot;);
+    System.loadLibrary(&quot;avcodec-57&quot;);
+    System.loadLibrary(&quot;avformat-57&quot;);
+    System.loadLibrary(&quot;swscale-4&quot;);
+    System.loadLibrary(&quot;avfilter-6&quot;);
+    System.loadLibrary(&quot;avdevice-57&quot;);
+    System.loadLibrary(&quot;ffmpeg_codec&quot;);／／自己编写的c文件的so
+&#125;
+public  native String getStringFromNative();
+</code></pre>
+<p>}<br></pre></p>
+<h3>执行<code>build-&gt;make project</code></h3>
+在AS里面执行<code>build-&gt;make project</code>命令，生成classes文件，最终的classes文件会在debug目录下
+<img src="https://file.2fun.xyz/imagesadsadasd.png" alt="build-&gt;make project" />
+<h3>生成.h文件</h3>
+<img src="https://file.2fun.xyz/29721810.png" alt="cd目录" />
+在终端输入<code>java -jni com.you_name._your_package.FFmpegNative</code>,<code>FFmpegNative</code>是Java文件的名字，此命令会生成一个.h文件
+<img src="https://file.2fun.xyz/5575212s41.png" alt=".h文件" />
+<h3>编写.c文件</h3>
+将.h拷贝到jni目录下，编写c文件命名与头文件相同
+<img src="https://file.2fun.xyz/1932708292.png" alt=".c文件" />
+将头文件的方法规范拷贝到c文件，实现方法，注意的是，这里的返回值的编写，java的字符编码是utf16，而安卓是utf8，如：
+<pre>JNIEXPORT jstring JNICALL Java_com_bear_ffmpeg_FFmpegNative_getStringFromNative
+        (JNIEnv *env , jobject obj){
+
+<pre><code>  av_register_all();
+
+  char wd[512];
+  sprintf(wd, &quot;AVCODEC VERSION %u\n&quot;
+    , avcodec_version()
+    );
+  return (*env)-&amp;gt;NewStringUTF(env, wd);
+</code></pre>
+<p>  }<br></pre></p>
+<h3>Android.mk</h3>
+在jni目录下编写Android.mk文件
+<pre>LOCAL_PATH := $(call my-dir)
+
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := avcodec-57<br>LOCAL_SRC_FILES := prebuilt/libavcodec-57.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := avdevice-57<br>LOCAL_SRC_FILES := prebuilt/libavdevice-57.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := avfilter-6<br>LOCAL_SRC_FILES := prebuilt/libavfilter-6.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := avformat-57<br>LOCAL_SRC_FILES := prebuilt/libavformat-57.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := avutil-55<br>LOCAL_SRC_FILES := prebuilt/libavutil-55.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := swresample-2<br>LOCAL_SRC_FILES := prebuilt/libswresample-2.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := swscale-4<br>LOCAL_SRC_FILES := prebuilt/libswscale-4.so<br>include $(PREBUILT_SHARED_LIBRARY)</p>
+<p>include $(CLEAR_VARS)<br>LOCAL_MODULE    := ffmpeg_codec<br>LOCAL_SRC_FILES := com_bear_ffmpeg_FFmpegNative.c</p>
+<p>LOCAL_LDLIBS := -llog -ljnigraphics -lz -landroid<br>LOCAL_SHARED_LIBRARIES := libavformat-57 libavcodec-57 libswscale-4 libavutil-55 libswresample-2 libavdevice-57 libavfilter-6<br>include $(BUILD_SHARED_LIBRARY)<br></pre></p>
+<h3>Application.mk</h3>
+在jni目录下编写Application.mk（这里的暂时只能够用于arm处理器）
+<pre>APP_ABI :=armeabi,armeabi-v7a
+APP_PLATFORM := android-21
+APP_OPTIM := release
+
+<p>APP_STL := gnustl_static<br></pre></p>
+<h3>执行<code>ndk-build</code></h3>
+使用终端cd到app/src/main目录，执行“ndk-build”，编译so库。
+<em>注意：有时候会出现错误：找不到编译的规则，可以在jni目录下创建一个空的util.c文件解决</em>
+将生成的so库从<code>app/src/main/libs</code>拷贝一份到<code>app/Libs</code>
+<h3>修改<code>buld.gradle</code></h3>
+<pre>android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
+
+
+<pre><code>defaultConfig &#123;
+    applicationId &quot;com.bear.ffmpeg&quot;
+    minSdkVersion 15
+    targetSdkVersion 23
+    versionCode 1
+    versionName &quot;1.0&quot;
+    ndk &#123;
+        moduleName &quot;ffmpeg_codec&quot;//c库的名字
+        ldLibs &quot;log&quot;, &quot;z&quot;, &quot;m&quot;,&quot;android&quot;,&quot;jnigraphics&quot;
+        abiFilters &quot;arm64-v8a&quot;,&quot;armeabi&quot;,&quot;armeabi-v7a&quot;
+    &#125;
+    sourceSets.main&#123;
+        jni.srcDirs=[]//禁用自动ndk，在编写c代码的时候建议注释掉，因为这句话会停用c的语法提示功能
+        jniLibs.srcDir &quot;src/main/libs&quot;
+    &#125;
+
+
+&#125;
+buildTypes &#123;
+    release &#123;
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile(&#39;proguard-android.txt&#39;), &#39;proguard-rules.pro&#39;
+    &#125;
+&#125;
+</code></pre>
+<p>}<br></pre></p>
+<h3>完成!</h3>
+现在就可以在调用jni的方法了！
+一些注意事项：
+<blockquote>*so库的文件名不要写错了
+*最后运行时请禁用ndk自动运行
+*运行时提示找不到so库，可以再生成一次头文件，并且ndk-build，然后运行</blockquote></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/">Android（Kotlin）类似微博的九宫格图片显示控件</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>前言</h3>
+
+<p>在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。</p>
+<img src="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png" alt="微博九宫格截图" />
+
+<p>由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGroup。在这里，我采用的是ViewGroup的方式实现(<span class="exturl"><a class="exturl__link"   href="https://github.com/w4lle/NineGridView"  target="_blank" rel="noopener noreferrer">参考w4lle大神的源码</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>)。<br>现在Android的官方语言已经变为了Kotlin，所以这里我使用的是Kotlin编写，直接上代码吧！</p>
+<h3>NineGridlayout</h3>
+
+<p><code>NineGridlayout</code>是图片显示的自定义ViewGroup，在layout布局文件里面直接使用就可以了</p>
+<pre>class NineGridlayout : ViewGroup {
+    private val TAG = "NineGridlayout"
+    private var adapter: NineGridAdapter? = null
+    private var onItemClickListerner: OnItemClickListener? = null
+    /**
+     * 默认图片间隔
+     */
+    private val ITEM_GAP = 3
+    private val DEFAULT_WIDTH = 140
+    /**
+     * 图片之间的间隔
+     */
+    var gap: Int = 0
+    private var columns: Int = 0//
+    private var rows: Int = 0//
+    private var totalWidth: Int = 0
+    internal var singleWidth = 0
+    internal var singleHeight = 0
+    private var defaultWidth: Int = 0
+    private var defaultHeight: Int = 0
+
+    private var oldCount: Int = 0
+    private var isFirstLayout = true
+
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        gap = dip2px(context, ITEM_GAP.toFloat())
+        defaultHeight = dip2px(context, DEFAULT_WIDTH.toFloat())
+        defaultWidth = defaultHeight
+    }
+
+    fun setDefaultWidth(defaultWidth: Int) {
+        this.defaultWidth = defaultWidth
+    }
+
+    fun setDefaultHeight(defaultHeight: Int) {
+        this.defaultHeight = defaultHeight
+    }
+
+    fun setAdapter(adapter: NineGridAdapter?) {
+        this.adapter = adapter
+        if (adapter == null) {
+            return
+        }
+        //初始化布局形状
+        generateChildrenLayout(adapter.getCount())
+        removeAllViews()
+
+        for (i in 0..adapter.getCount() - 1) {
+            val itemView = adapter.getView(i)
+            addView(itemView, generateDefaultLayoutParams())
+        }
+
+        oldCount = adapter.getCount()
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        Log.e(TAG, "onMeasure")
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
+        val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
+        val sizeWidth = View.MeasureSpec.getSize(widthMeasureSpec)
+        val sizeHeight = View.MeasureSpec.getSize(heightMeasureSpec)
+        totalWidth = sizeWidth - paddingLeft - paddingRight
+        if (adapter != null &amp;&amp; adapter!!.getCount() &gt; 0) {
+            val measureHeight: Int
+            //计算单个图片的大小
+            singleWidth = (totalWidth - gap * (columns - 1)) / columns
+            singleHeight = singleWidth
+
+            measureChildren(View.MeasureSpec.makeMeasureSpec(singleWidth, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(singleHeight, View.MeasureSpec.EXACTLY))
+            measureHeight = singleHeight * rows + gap * (rows - 1) + paddingTop + paddingBottom
+            setMeasuredDimension(sizeWidth, measureHeight)
+        }
+
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        if (!isFirstLayout)
+            layoutChildrenView()
+
+        isFirstLayout = false
+    }
+
+    private fun layoutChildrenView() {
+        Log.e(TAG, "layoutChildrenView")
+
+        if (adapter == null || adapter!!.getCount() == 0) {
+            return
+        }
+        val childrenCount = adapter!!.getCount()
+        for (i in 0..childrenCount - 1) {
+            val position = findPosition(i)
+            val left = (singleWidth + gap) * position[1] + paddingLeft
+            val top = (singleHeight + gap) * position[0] + paddingTop
+            val right = left + singleWidth
+            val bottom = top + singleHeight
+            val childrenView = getChildAt(i) as ImageView
+            if (childrenCount == 1) {
+                //只有一张图片
+                childrenView.scaleType = ImageView.ScaleType.FIT_CENTER
+            } else {
+                childrenView.scaleType = ImageView.ScaleType.CENTER_CROP
+            }
+
+            val itemPosition = i
+            childrenView.setOnClickListener {
+                if (onItemClickListerner != null) {
+                    onItemClickListerner!!.onClick(itemPosition)
+                }
+            }
+            childrenView.layout(left, top, right, bottom)
+        }
+    }
+
+
+    private fun findPosition(childNum: Int): IntArray {
+        val position = IntArray(2)
+        for (i in 0..rows - 1) {
+            for (j in 0..columns - 1) {
+                if (i * columns + j == childNum) {
+                    position[0] = i//行
+                    position[1] = j//列
+                    break
+                }
+            }
+        }
+        return position
+    }
+
+    /**
+     * 根据图片个数确定行列数量
+     * 对应关系如下
+     * num  row column
+     * 1       1    1
+     * 2       1    2
+     * 3-4     2    2
+     * 5-6     2    3
+     * 7-9     3    3
+     * @param length
+     */
+    private fun generateChildrenLayout(length: Int) {
+        if (length == 1) {
+            rows = 1
+            columns = 1
+        } else if (length &lt;= 4) {
+            rows = 2
+            columns = 2
+        } else if (length &lt;= 6) {
+            rows = 2
+            columns = 3
+        } else {
+            rows = 3
+            columns = 3
+        }
+
+        singleWidth = (totalWidth - gap * (columns - 1)) / columns
+        singleHeight = singleWidth
+    }
+
+    fun setOnItemClickListener(onItemClickListerner: OnItemClickListener) {
+        this.onItemClickListerner = onItemClickListerner
+    }
+
+    companion object {
+
+        /**
+         * dp to px
+         */
+        fun dip2px(context: Context, dpValue: Float): Int {
+            val scale = context.resources.displayMetrics.density
+            return (dpValue * scale + 0.5f).toInt()
+        }
+    }
+}
+</pre>
+
+<h3>NineGridAdapter</h3>
+
+<p><code>NineGridAdapter</code>图片的数据适配器</p>
+<pre>abstract class NineGridAdapter(protected var context: Context, protected var list: List) {
+
+    abstract fun getCount(): Int
+
+    abstract fun getUrl(positopn: Int): String
+
+    abstract fun getItemId(position: Int): Long
+
+    abstract fun getView(i: Int): View
+}
+</pre>
+
+<h3>使用方法</h3>
+
+<ul>
+    <li>首先继承<code>NineGridAdapter</code></li>
+<pre>class NineGridsAdapter(context: Context, list: MutableList&lt;String&gt;) :
+        NineGridAdapter(context, list) {
+
+<pre><code>override fun getCount(): Int &#123;
+    return if (list == null) 0 else list.size
+&#125;
+
+override fun getUrl(positopn: Int): String &#123;
+    return list?.get(positopn)
+&#125;
+
+override fun getItemId(position: Int): Long &#123;
+    return position.toLong()
+&#125;
+
+override fun getView(i: Int): View &#123;
+    val iv = ImageView(context)
+    iv.setScaleType(ImageView.ScaleType.CENTER_CROP)
+    iv.setBackgroundColor(context.resources.getColor(R.color.color_gray_light))
+    Glide.with(context).load(getUrl(i)).into(iv)
+    return iv
+&#125;
+</code></pre>
+<p>}<br></pre><br>        <li>设置Adapter显示数据,添加点击响应事件</li></p>
+<pre>val imageAdapter = NineGridsAdapter(mContext!!, imageList)
+            mMvpView?.picLayout?.setAdapter(imageAdapter)
+            mMvpView?.picLayout?.setOnItemClickListener(object : OnItemClickListener {
+                override fun onClick(vararg args: Int) {
+                    clickImage(args[0])
+                }
+            })
+</pre>
+</ul>
+
+<p>在此，我们的九宫格图片显示控件就制作完毕了，Enjoy It！<br>最后我们的实际显示效果图如下：<br><img src="https://file.2fun.xyz/imageasd53a1sd31a.png" alt="最终效果图" /></p>
+<pre class="prism-highlight line-numbers" data-start="1"><code class="language-null">&lt;h3&gt;附：点击回掉接口&lt;/h3&gt;
+</code></pre>
+
+<p>文中使用的<code>OnItemClickListener</code>是一个自定义的点击回掉接口，附上代码</p>
+<pre>interface OnItemClickListener {
+    fun onClick(vararg args: Int)
+}
+</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/16/cropped-cropped-logo%E7%9A%84%E5%89%AF%E6%9C%AC.png/">cropped-cropped-logo的副本.png</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-16</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/2017/07/cropped-cropped-logo%E7%9A%84%E5%89%AF%E6%9C%AC.png" >https://file.2fun.xyz/2017/07/cropped-cropped-logo的副本.png</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/16/%E8%8E%B7%E5%8F%96apk%E7%9A%84sha1%E5%80%BC/">获取apk的sha1值</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-16</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h6>1. 方式一：terminal 输入</h6>
+
+<pre> keytool -list -v -keystore/Users/editor/AndroidStudioProjects/PocketAsk/pocketask.jks</pre>
+
+<h6>2. 方式二：Java代码</h6>
+
+<pre>public static String sHA1(Context context) {
+    try {
+        PackageInfo info = context.getPackageManager().getPackageInfo(
+                context.getPackageName(), PackageManager.GET_SIGNATURES);
+        byte[] cert = info.signatures[0].toByteArray();
+        MessageDigest md = MessageDigest.getInstance("SHA1");
+        byte[] publicKey = md.digest(cert);
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i &lt; publicKey.length; i++) {
+            String appendString = Integer.toHexString(0xFF &amp; publicKey[i])
+                    .toUpperCase(Locale.US);
+            if (appendString.length() == 1)
+                hexString.append("0");
+            hexString.append(appendString);
+            hexString.append(":");
+        }
+        String result = hexString.toString();
+        return result.substring(0, result.length() - 1);
+    } catch (PackageManager.NameNotFoundException e) {
+        e.printStackTrace();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    return null;
+}</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/13/cropped-timg.jpeg/">cropped-timg.jpeg</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/07/13/clement-dartigues-scirie/">clement-dartigues-scirie</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/15/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

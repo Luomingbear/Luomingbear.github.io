@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="问题概述：  在搜索综合页，快速滑动之后第一次点击必定无效，第二次点击才会生效。  接到这个BUG的时候我的内心是崩溃的，这又是什么奇葩的问题，然后我的第一个反应是测试又在搞事情了，肯定无法复现。怀着这样的心情，我试着复现问题：快速滑动之后第一次点击必定无效？我试试，结果第一次试就中奖了。。。  看来这个锅是推不掉了，只能试着解决一下。 定位问题 所有滑动都会导致这个问题吗？ 是所有的滑动都会导致">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Behavior快速滑动之后首次点击失效">
+<meta property="og:url" content="https://luomingbear.github.io/2021/01/12/Behavior%E5%BF%AB%E9%80%9F%E6%BB%91%E5%8A%A8%E4%B9%8B%E5%90%8E%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E5%A4%B1%E6%95%88/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="问题概述：  在搜索综合页，快速滑动之后第一次点击必定无效，第二次点击才会生效。  接到这个BUG的时候我的内心是崩溃的，这又是什么奇葩的问题，然后我的第一个反应是测试又在搞事情了，肯定无法复现。怀着这样的心情，我试着复现问题：快速滑动之后第一次点击必定无效？我试试，结果第一次试就中奖了。。。  看来这个锅是推不掉了，只能试着解决一下。 定位问题 所有滑动都会导致这个问题吗？ 是所有的滑动都会导致">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5606793610/4ddd/f950/6393/78a1f43542b50bbaff42352b637cbe52.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455540/a2a4/0b06/fa1f/7c3dc45caf0fcff379fe346631c0cdc8.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455592/975f/3299/3667/20d15e2d6809666f56837b9397376163.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455703/fa63/b167/3de7/8ab268de28d1c1078a6949886db23257.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455597/8ef1/d6d4/1c9f/651f2db3ba3ae4f337bb05aaf5f5cbc8.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455548/26d0/469d/7d9e/ebf61331d4e0791c115bbcdb92987188.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455598/12e2/7e9b/dee7/ce4a8a030e26935b3a875de0b9e47c0a.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609634810/09a0/8557/154f/799feb8367ead76f81e4ab24e93fa6a2.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609724042/4141/d542/c3dc/c2fd8591ce643ef0becd8d87fdf2e896.png">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5643662761/a3ef/52c2/2d9e/19c3b9803e2390ac53afa969775fd5f2.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5728515830/3fde/1f3e/e63d/5de179691bb3fa9c144001019f593c7e.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5644456312/b6d7/041d/2698/42ac10fddcaf847a50284d6ac3ba12c0.gif">
+<meta property="article:published_time" content="2021-01-12T13:33:55.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:55.042Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5606793610/4ddd/f950/6393/78a1f43542b50bbaff42352b637cbe52.gif"><title>Behavior快速滑动之后首次点击失效 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2021/01/12/Behavior%E5%BF%AB%E9%80%9F%E6%BB%91%E5%8A%A8%E4%B9%8B%E5%90%8E%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E5%A4%B1%E6%95%88/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Behavior快速滑动之后首次点击失效</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-01-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h2>问题概述：</h2>
+<blockquote>
+<p>在搜索综合页，快速滑动之后第一次点击必定无效，第二次点击才会生效。</p>
+</blockquote>
+<p>接到这个BUG的时候我的内心是崩溃的，这又是什么奇葩的问题，然后我的第一个反应是测试又在搞事情了，肯定无法复现。怀着这样的心情，我试着复现问题：快速滑动之后第一次点击必定无效？我试试，结果第一次试就中奖了。。。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5606793610/4ddd/f950/6393/78a1f43542b50bbaff42352b637cbe52.gif" alt="" /></p>
+<p>看来这个锅是推不掉了，只能试着解决一下。</p>
+<h2>定位问题</h2>
+<h3>所有滑动都会导致这个问题吗？</h3>
+<p>是所有的滑动都会导致这个问题，还是只有搜索综合页这个场景才有这个问题呢？为了验证这个问题，我把app里面的列表都滑动了一下进行测试：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>首页：可以点击</th>
+<th>歌单：可以点击</th>
+<th>排行榜：可以点击</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455540/a2a4/0b06/fa1f/7c3dc45caf0fcff379fe346631c0cdc8.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455592/975f/3299/3667/20d15e2d6809666f56837b9397376163.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455703/fa63/b167/3de7/8ab268de28d1c1078a6949886db23257.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>个人主页：可以点击</th>
+<th>歌手主页：不可以点击</th>
+<th>搜索单曲：可以点击</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455597/8ef1/d6d4/1c9f/651f2db3ba3ae4f337bb05aaf5f5cbc8.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455548/26d0/469d/7d9e/ebf61331d4e0791c115bbcdb92987188.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455598/12e2/7e9b/dee7/ce4a8a030e26935b3a875de0b9e47c0a.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p>经过测试发现，目前项目中其他的场景也有这个问题，例如个人/歌手主页。既然其他的场景也有这个问题，那么是否可以问一下其他场景的负责人，对这个问题是否有什么思路呢？于是我问了毛哥（歌手主页是毛哥负责的），毛哥对这个BUG表示很疑惑，还有这个操作么？然后毛哥让我找一下李哥问问，于是我又问了李哥，李哥当场给我加了一个断点，然后一行代码一行代码的看，然后我问了李哥一句：“李哥，你之前有碰到过这个问题吗？”李哥说要不你在touch事件里面加断点看看。看来李哥对这个问题也不清楚，于是我按照李哥的思路给touch事件加上了断点。</p>
+<h3>“量子力学”的BUG</h3>
+<p>当我在touch事件里面加上断点之后，无论我怎么操作，这个BUG始终无法复现，一切就像是不存在一样。这让我想起来了大刘《全频带阻塞干扰》里面描述的一个现象：当设置观察者之后，球状闪电就会沿着直线前进，而撤掉观察者之后，球状闪电就会无序的前进。难道代码也属于量子力学的范畴吗？我不由得吓出了一身汗，随即心情开始变得高兴起来，这岂不是意味着我可以不改这个BUG了！</p>
+<p>我赶紧把测试妹子拉过来演示一下，结果无论怎么演示BUG依然存在。然后测试妹子不屑的看了我一眼走掉了，临走时说：“这个问题你赶紧改吧。”</p>
+<h3>Behavior的锅？</h3>
+<p>再分析一下搜索综合页，也没有使用什么奇怪的东西，无非是ViewPager、RecyclerView、Behavior这些，等等，Behavior！仔细对比了一下没有问题的列表和有问题的列表，发现一个现象，那就是有问题的列表都使用了Behavior，于是我把综合页的Behavior去掉了，重新试了一下，一切正常。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609634810/09a0/8557/154f/799feb8367ead76f81e4ab24e93fa6a2.gif" alt="" /></p>
+<p>为什么加上Behavior就会有问题呢，难道是Behavior把触摸事件拦截了？通过查看Behavior的源码，可以发现其默认是不会拦截触摸事件的，而我也没有复写<code>onInterceptTouchEvent</code>，但是点击确实是发生了，只是没有响应，要先找到谁把触摸事件给吃了。</p>
+<p>通过重写RecyclerView和CoordinatorLayout的<code>onInterceptTouchEvent</code>、<code>dispatchTouchEvent</code>、<code>onTouchEvent</code>，在复现一次问题，观察Log发现，触摸事件其实是被RecyclerView给吃掉了。</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609724042/4141/d542/c3dc/c2fd8591ce643ef0becd8d87fdf2e896.png" alt="" /></p>
+<h3>RecyclerView吃触摸事件</h3>
+<p>那为什么在没有Behavior的时候，RecyclerView不会把触摸事件给吃掉，给加上了RecyclerView就会把触摸事件吃掉呢？通过观察RecyclerView的<code>onInterceptTouchEvent</code>可以发现，有两种情况RecyclerView会拦截触摸事件：</p>
+<ol>
+<li>OnItemTouchListener不为空的时候</li>
+<li>mScrollState等于SCROLL_STATE_DRAGGING的时候</li>
+</ol>
+<pre><code class="language-java">@Override
+public boolean onInterceptTouchEvent(MotionEvent e) &#123;
+    ... //省略
+    mInterceptingOnItemTouchListener = null;
+    if (findInterceptingOnItemTouchListener(e)) &#123;
+        cancelScroll();
+        return true;
+    &#125;
+    ... //省略
+    return mScrollState == SCROLL_STATE_DRAGGING;
+&#125;</code></pre>
+<p>对于第一种情况，我们并没有设置OnItemTouchListener，所以不会触发，那就是第二种情况了，mScrollState等于 SCROLL_STATE_DRAGGING。查看源码，可以看到同样有两种情况会导致mScrollState被设置为SCROLL_STATE_DRAGGING，分别是：</p>
+<ol>
+<li>action等于ACTION_DOWN并且mScrollState等于SCROLL_STATE_SETTLING时，也就是列表还在惯性滚动中</li>
+<li>action等于ACTION_MOVE并且列表开始滚动的时候</li>
+</ol>
+<pre><code class="language-java">switch (action) &#123;
+    case MotionEvent.ACTION_DOWN:
+        if (mScrollState == SCROLL_STATE_SETTLING) &#123;
+            getParent().requestDisallowInterceptTouchEvent(true);
+            setScrollState(SCROLL_STATE_DRAGGING);  //如果RV还在滚动中，这时候手指的DOWN事件会使state设为SCROLL_STATE_DRAGGING
+            stopNestedScroll(TYPE_NON_TOUCH);
+        &#125;
+    ... //省略
+
+<pre><code>case MotionEvent.ACTION_MOVE: &#123;
+    final int index = e.findPointerIndex(mScrollPointerId);
+
+    final int x = (int) (e.getX(index) + 0.5f);
+    final int y = (int) (e.getY(index) + 0.5f);
+    if (mScrollState != SCROLL_STATE_DRAGGING) &#123;
+        final int dx = x - mInitialTouchX;
+        final int dy = y - mInitialTouchY;
+        boolean startScroll = false;
+        if (canScrollHorizontally &amp;amp;&amp;amp; Math.abs(dx) &amp;gt; mTouchSlop) &#123;
+            mLastTouchX = x;
+            startScroll = true;
+        &#125;
+        if (canScrollVertically &amp;amp;&amp;amp; Math.abs(dy) &amp;gt; mTouchSlop) &#123;
+            mLastTouchY = y;
+            startScroll = true;
+        &#125;
+        if (startScroll) &#123;
+            setScrollState(SCROLL_STATE_DRAGGING); //如果手指一直在MOVE中，会设置state为SCROLL_STATE_DRAGGING
+        &#125;
+    &#125;
+&#125; break;
+... //省略
+&#125;&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+<p>在结合上面的Log信息，可以看到点击时只有ACTION_DOWN和ACTION_UP两种action，所以可以得出结论：<strong>快速滑动之后首次点击由于RecyclerView还处于惯性滚动中，所以点击事件被拦截了，导致点击无效。</strong></p>
+<p>所以只要我们在滚动到顶部的时候主动停止惯性滚动，这样下次点击的时候就不会因为还处于惯性滚动中而拦截触摸事件了。</p>
+<h2>解决问题</h2>
+<h3>停止惯性滚动</h3>
+<p>通过仔细分析综合页的Behavior，可以看到当列表向下移动时，如果是惯性滚动会在默认位置停下来，后续的滚动值就不管了。</p>
+<pre><code class="language-kotlin">override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout,child: View,target: View,dx: Int,dy: Int,consumed: IntArray,type: Int) &#123;
+    if (target is NestedScrollingChild2) &#123;
+        if (dy &lt; 0) &#123; //手指向下滑动的操作⬇️
+            //在惯性滚动的时候仅仅让其滚动到原始位置即可，否则会有两次回弹的问题
+            if (type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                if (target.y &lt; getDefaultListYPosition()) &#123;
+                    val newDY = target.y - getDefaultListYPosition()
+                    consumed[1] = scrollView(child, target, newDY.toInt().coerceAtLeast(dy))
+                &#125;
+              // 后续滚动没有做处理
+            &#125; else &#123;
+                consumed[1] = scrollView(child, target, dy)
+            &#125;
+        &#125; else &#123; //手指向上滑动的操作⬆️
+            consumed[1] = scrollView(child, target, dy)
+            //如果behavior没有消费滑动，并且列表也不可滑动了，则停止列表的滚动
+            if (consumed[1] == 0 &amp;&amp; type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                consumed[1] = dy
+                target.stopNestedScroll(type)
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>所以我们可以在列表恢复默认位置后对后续滚动进行处理，使得列表的惯性滚动停止，这里我们可以直接使用<code>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</code>停止滚动，看来问题还是比较简单的。于是乎我加了一行代码，重写编译打包运行，虽然点击是生效了，但是出现了一个波纹，使得顶部出现了割裂感，那有没有办法可以不出现波纹吗？</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5643662761/a3ef/52c2/2d9e/19c3b9803e2390ac53afa969775fd5f2.gif" alt="" /></p>
+<h3>不显示波纹</h3>
+<p>要让波纹不显示，就需要先弄清楚波纹是怎么形成的。在Android里面，波纹是通过EdgeEffect实现的，所以我们可以在RecyclerView里面搜索一下EdgeEffect在哪里被引用了。通过搜索，我发现RecyclerView内部一共有四个EdgeEffect，分别是mLeftGlow, mTopGlow, mRightGlow, mBottomGlow表示不同方向的波纹。然后在<code>pullGlows(float x, float overscrollX, float y, float overscrollY)</code>及<code>absorbGlows(int velocityX, int velocityY)</code>方法里面会对不同方向的波纹进行更新。</p>
+<pre><code class="language-java">/**
+* 波纹增大
+*/
+private void pullGlows(float x, float overscrollX, float y, float overscrollY) &#123;
+    boolean invalidate = false;
+    if (overscrollX &lt; 0) &#123;
+        ensureLeftGlow();
+        EdgeEffectCompat.onPull(mLeftGlow, -overscrollX / getWidth(), 1f - y  / getHeight());
+        invalidate = true;
+    &#125; 
+    ... // 省略了其他方向的判断，代码与上面类似
+
+<pre><code>if (invalidate || overscrollX != 0 || overscrollY != 0) &#123;
+    //刷新UI
+    ViewCompat.postInvalidateOnAnimation(this);
+&#125;
+</code></pre>
+<p>}</p>
+<p>/**</p>
+<ul>
+<li>波纹减小</li>
+<li>/<br>void absorbGlows(int velocityX, int velocityY) {<br>   if (velocityX &lt; 0) {<pre><code>   ensureLeftGlow();
+   if (mLeftGlow.isFinished()) &#123;
+       mLeftGlow.onAbsorb(-velocityX);
+   &#125;
+</code></pre>
+   }<br>   … // 省略了其他方向的判断，代码与上面类似<br>   if (velocityX != 0 || velocityY != 0) {<pre><code>   //刷新UI
+   ViewCompat.postInvalidateOnAnimation(this);
+</code></pre>
+   }<br>}</code></pre><p>而<code>pullGlows</code>和<code>absorbGlows</code>又分别会在<code>scrollByInternal(int x, int y, MotionEvent ev)</code>和<code>ViewFlinger.run()</code>内被调用。</p>
+<pre><code class="language-java">boolean scrollByInternal(int x, int y, MotionEvent ev) &#123;
+   ... //省略
+   //只有当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹
+   if (getOverScrollMode() != View.OVER_SCROLL_NEVER) &#123;
+       if (ev != null &amp;&amp; !MotionEventCompat.isFromSource(ev, InputDevice.SOURCE_MOUSE)) &#123;
+           pullGlows(ev.getX(), unconsumedX, ev.getY(), unconsumedY);
+       &#125;
+       considerReleasingGlowsOnScroll(x, y);
+   &#125;
+   if (consumedX != 0 || consumedY != 0) &#123;
+       dispatchOnScrolled(consumedX, consumedY);
+   &#125;
+   if (!awakenScrollBars()) &#123;
+       invalidate();
+   &#125;
+   return consumedNestedScroll || consumedX != 0 || consumedY != 0;
+&#125;</li>
+</ul>
+<p>class ViewFlinger implements Runnable &#123;</p>
+<p> @Override<br> public void run() &#123;<br>    … // 省略<br>    if (!smoothScrollerPending &amp;&amp; doneScrolling) &#123;<br>        // 只要当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹<br>        if (getOverScrollMode() != View.OVER_SCROLL_NEVER) &#123;<br>            final int vel = (int) scroller.getCurrVelocity();<br>            int velX = unconsumedX &lt; 0 ? -vel : unconsumedX &gt; 0 ? vel : 0;<br>            int velY = unconsumedY &lt; 0 ? -vel : unconsumedY &gt; 0 ? vel : 0;<br>            absorbGlows(velX, velY);<br>        &#125;<br>    &#125;<br>    … // 省略<br>  &#125;<br>&#125;</code></pre></p>
+<p>从源码可以看到只有当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹，所以只要我们把OverScrollMode设置为View.OVER_SCROLL_NEVER时，就不会显示波纹了。再结合上面的<code>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</code>方案，最后的效果如下，虽然点击可以响应了，但是当列表滚动到底部时，继续上滑却没有了视觉反馈，那有没有不影响底部的视觉反馈又不会造成顶部割裂感的方案呢？</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5728515830/3fde/1f3e/e63d/5de179691bb3fa9c144001019f593c7e.gif" alt="" /></p>
+<h3>最后的方案</h3>
+<p>再回到“RecyclerView吃触摸事件”里面介绍的，当RecyclerView内部的mScrollState等于SCROLL_STATE_DRAGGING时，触摸事件会被拦截掉，那只要我们把mScrollState改成别的值不就可以了吗。在RecyclerView内有一个函数叫<code>setScrollState(int state)</code>可以修改mScrollState，但是这个函数是外部不可访问的，难不成要使用反射的方式？就在我纠结是否要使用反射时，我发现 <code>onTouchEvent(MotionEvent e)</code>内处理MotionEvent.ACTION_CANCEL事件时会将滚动重置掉。</p>
+<pre><code class="language-java">@Override
+public boolean onTouchEvent(MotionEvent e) &#123;
+    ... //省略
+    switch (action) &#123; 
+        case MotionEvent.ACTION_CANCEL: &#123;
+            cancelScroll();
+        &#125; break;
+    &#125; 
+    ... //省略
+    return true;
+&#125;
+
+<p>private void cancelScroll() &#123;<br>    resetScroll();<br>    setScrollState(SCROLL_STATE_IDLE);<br>&#125;</code></pre></p>
+<p>所以我只需要主动触发一个MotionEvent.ACTION_CANCEL的触摸事件，这样RecyclerView的mScrollState就变成了SCROLL_STATE_IDLE，也就不会拦截触摸事件了。</p>
+<pre><code class="language-kotlin">override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout,child: View,target: View,dx: Int,dy: Int,consumed: IntArray,type: Int) &#123;
+    if (target is NestedScrollingChild2) &#123;
+        if (dy &lt; 0) &#123; //手指向下滑动的操作⬇️
+            //在惯性滚动的时候仅仅让其滚动到原始位置即可，否则会有两次回弹的问题
+            if (type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                if (target.y &lt; getDefaultListYPosition()) &#123;
+                    val newDY = target.y - getDefaultListYPosition()
+                    consumed[1] = scrollView(child, target, newDY.toInt().coerceAtLeast(dy))
+                &#125;
+              /**
+              * MUSIC-245798 模拟手指触摸取消事件,强制停止惯性滚动
+              */
+              val now = SystemClock.uptimeMillis()
+              val cancelEvent = MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0.0f, 0.0f, 0)
+              target.onTouchEvent(cancelEvent)
+              /**
+              * MUSIC-245798 模拟手指触摸取消事件,强制停止惯性滚动
+              */
+            &#125; else &#123;
+                consumed[1] = scrollView(child, target, dy)
+            &#125;
+        &#125; else &#123; //手指向上滑动的操作⬆️
+            consumed[1] = scrollView(child, target, dy)
+            //如果behavior没有消费滑动，并且列表也不可滑动了，则停止列表的滚动
+            if (consumed[1] == 0 &amp;&amp; type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                consumed[1] = dy
+                target.stopNestedScroll(type)
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5644456312/b6d7/041d/2698/42ac10fddcaf847a50284d6ac3ba12c0.gif" alt="" /></p>
+<h2>总结</h2>
+<p>RecyclerView+Behavior的模式下，进行快速滚动时如果处理不好列表的惯性滚动行为，可能会产生列表停止移动，但是内部状态仍然处理滚动中的问题，这时候点击列表则会被列表拦截掉，使得第一次点击失效，可以通过主动结束滚动来解决，具体方案有2种：</p>
+<ol>
+<li>
+<p>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</p>
+<p>这种方案虽然会停止列表滚动，但是会导致RecyclerView显示一个波纹，但是可以通过设置OverScrollMode为View.OVER_SCROLL_NEVER强制不显示波纹。</p>
+</li>
+<li>
+<p>发送MotionEvent.ACTION_CANCEL事件</p>
+<p>这种方案会停止列表滚动，并且不会显示波纹。</p>
+</li>
+</ol></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2021/01/12/Behavior%E5%BF%AB%E9%80%9F%E6%BB%91%E5%8A%A8%E4%B9%8B%E5%90%8E%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E5%A4%B1%E6%95%88/">https://luomingbear.github.io/2021/01/12/Behavior%E5%BF%AB%E9%80%9F%E6%BB%91%E5%8A%A8%E4%B9%8B%E5%90%8E%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E5%A4%B1%E6%95%88/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/01/31/%E6%9C%AA%E5%91%BD%E5%90%8D%E7%BB%98%E5%9B%BE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">未命名绘图</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2021/01/10/%E6%88%AA%E5%B1%8F2021-01-10%20%E4%B8%8B%E5%8D%885.06.00/"><span class="paginator-prev__text">截屏2021-01-10 下午5.06.00</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">问题概述：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">定位问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">所有滑动都会导致这个问题吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">“量子力学”的BUG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">Behavior的锅？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">RecyclerView吃触摸事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">解决问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.</span> <span class="toc-text">停止惯性滚动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.2.</span> <span class="toc-text">不显示波纹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.3.</span> <span class="toc-text">最后的方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

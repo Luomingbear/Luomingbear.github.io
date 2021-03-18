@@ -1,0 +1,285 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="上一篇文章介绍了LayoutManager的基本知识，这一篇文章我们来进行一个实际的功能开发，制作一个滚动的Banner，没什么比写代码更加爽的事情了————吧？ 效果图   中间的卡片显示的更大一点，两边可以看到旁边的卡片的一角，离中心距离越近卡片越大。  准备  正式编写前，我们先新建一个MyLayoutManager继承至RecyclerView.LayoutManager并且实现一个必须实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LayoutManager详解及使用（二）">
+<meta property="og:url" content="https://luomingbear.github.io/2017/09/20/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="上一篇文章介绍了LayoutManager的基本知识，这一篇文章我们来进行一个实际的功能开发，制作一个滚动的Banner，没什么比写代码更加爽的事情了————吧？ 效果图   中间的卡片显示的更大一点，两边可以看到旁边的卡片的一角，离中心距离越近卡片越大。  准备  正式编写前，我们先新建一个MyLayoutManager继承至RecyclerView.LayoutManager并且实现一个必须实">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/recycler2017-09-20-111930.gif">
+<meta property="og:image" content="https://file.2fun.xyz/slim-show.png">
+<meta property="og:image" content="https://file.2fun.xyz/recycler_2017091915543.gif">
+<meta property="og:image" content="https://file.2fun.xyz/logcat_child_count_3.png">
+<meta property="og:image" content="https://file.2fun.xyz/recycler_20170920.gif">
+<meta property="article:published_time" content="2017-09-20T03:23:39.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.986Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/recycler2017-09-20-111930.gif"><title>LayoutManager详解及使用（二） | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/09/20/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">LayoutManager详解及使用（二）</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/archives/284" >上一篇文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>介绍了LayoutManager的基本知识，这一篇文章我们来进行一个实际的功能开发，制作一个滚动的Banner，没什么比写代码更加爽的事情了————吧？</p>
+<h3>效果图</h3>
+
+<img src="https://file.2fun.xyz/recycler2017-09-20-111930.gif" alt="banner预览图" />
+中间的卡片显示的更大一点，两边可以看到旁边的卡片的一角，离中心距离越近卡片越大。
+
+<h3>准备</h3>
+
+<p>正式编写前，我们先新建一个<code>MyLayoutManager</code>继承至<code>RecyclerView.LayoutManager</code>并且实现一个必须实现的方法：</p>
+<pre>
+  @Override
+    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+        return new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, 
+        RecyclerView.LayoutParams.WRAP_CONTENT);
+    }
+</pre>
+
+<h3>简单显示</h3>
+
+<p>首先我们先让屏幕有东西显示出来，先不考虑数据的大小，adapter的所有数据显示出来,重写<code>onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state)</code>方法，如下：</p>
+<pre>
+  private int offsetX = 0; //水平偏移
+  private int mLeftX = 0; //卡片左端点的位置
+
+  @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        //没有数据就不进行处理
+        if (getItemCount() == 0) {
+            removeAndRecycleAllViews(recycler);
+            return;
+        }
+
+        //将所有的子view临时移除并且回收
+        detachAndScrapAttachedViews(recycler);
+
+        //进行布局
+        offsetX = 0;
+        for (int i = 0; i < getItemCount(); i++) {
+            View child = recycler.getViewForPosition(i);
+            addView(child);
+            measureAndLayout(child, i);
+        }
+
+    }
+
+     /**
+     * 计算view的大小并且设置位置
+     *
+     * @param view     目标view
+     * @param position 在数据里面的位置
+     */
+    private void measureAndLayout(View view, int position) {
+        //开始计算大小
+        measureChildWithMargins(view, 0, 0);
+
+        //计算宽度
+        int width = getDecoratedMeasuredWidth(view);
+        //计算高度
+        int height = getDecoratedMeasuredHeight(view);
+
+        //将view放置在RecyclerView里面
+        layoutDecoratedWithMargins(view, mLeftX , 0, mLeftX + width, height);
+
+        //更新水平位移
+        offsetX += width;    }
+</pre>
+
+<p>效果如下:<br><img src="https://file.2fun.xyz/slim-show.png" alt="简单的显示" /></p>
+<h3>简单交互</h3>
+
+<p>接下来我们来添加简单的手指滑动交互：</p>
+<pre>
+
+    /**
+     * 允许水平滑动
+     *
+     * @return
+     */
+    @Override
+    public boolean canScrollHorizontally() {
+        return true;
+    }
+
+    /**
+     * 禁止竖直滑动
+     *
+     * @return
+     */
+    @Override
+    public boolean canScrollVertically() {
+        return false;
+    }
+
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.i(TAG, "scrollHorizontallyBy: " + dx);
+
+        //移动元素
+        offsetChildrenHorizontal(-dx);
+
+        offsetX -= dx;
+        return -dx;
+    }
+</pre>
+
+<h3>添加回收机制</h3>
+
+<p><code>RecyclerView</code>的强大之处在于资源回收复用，上面的代码并没有体现，接下来我们来写一个简单的水平列表的<code>LayoutManager</code>，先看效果图：<br><img src="https://file.2fun.xyz/recycler_2017091915543.gif" alt="添加了回收机制的滑动效果" /><br>实现回收的一个重要的点就是判断哪一个view需要remove，哪些只需要detach，这里我定义了几个变量用来判断，</p>
+<pre>
+    private int maxCache = 3; //最大的缓存数量
+    private int mLeftIndex = 0; //缓存最左边的卡片的下标
+    private int mRightIndex = 0; //缓存最右边的卡片的下标
+    private int mCenterIndex = 0; //中间的卡片的下标
+</pre>
+
+<p>如果view的位置小于<code>mLeftIndex</code>或者大于<code>mRightIndex</code>，则remove，否则只需要detach。所以重点就变成了怎么显示区域可见的view的位置下标。我们暂时假设每一个卡片的宽度是一致的，在实际的应用中，Banner卡片的宽度是一致的。我们需要记录view的偏移量，根据偏移量来计算可视范围的view的下标。下面定义几个变量：</p>
+<pre>
+    private int mOffsetX = 0; //水平位移
+    private int mItemWidth = 1; //单个卡片宽度
+    private int mLeftX = 0; //卡片左端点的位置
+</pre>
+
+<h4>我的思路</h4>
+
+<blockquote>
+1.在view移动的时候更新<code>mOffsetX</code>和<code>mLeftX</code>，这两个变量的意义在代码里面详细解释。
+2.通过<code>mOffsetX</code>和<code>mItemWidth</code>计算可视范围的卡片下标。
+3.对布局中的view下标进行判断，移除不需要的。
+4.重新添加view，移动view。
+</blockquote>
+
+<p>代码如下：</p>
+<pre>
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        //dx>0 左滑
+
+        //实际要滑动的距离
+        int travel = dx;
+
+        //计算偏移量
+        mOffsetX += dx;
+        mLeftX -= travel;
+
+        //更新下标
+        updateIndex();
+
+        //移除显示区外的卡片
+        removeUnuseCard(recycler, state);
+
+        //重新添加
+        layoutItems(recycler, state);
+
+        //移动
+        offsetChildrenHorizontal(travel);
+
+        Log.i(TAG, "scrollHorizontallyBy: count:" + getChildCount());
+        return travel;
+    }
+
+    /**
+     * 更新下标
+     */
+    private void updateIndex() {
+        /**
+         * 计算中心卡片的下标
+         */
+        mCenterIndex = (mOffsetX) / mItemWidth;
+        //如果位移量除以 单个卡片的宽度的余数大于半个卡片则说明这个余下的卡片已经超过半个屏幕了
+        if (mOffsetX % mItemWidth > mItemWidth / 2) {
+            mCenterIndex++;
+        }
+        mCenterIndex = Math.max(0, mCenterIndex);
+        mCenterIndex = Math.min(getItemCount() - 1, mCenterIndex);
+
+        /**
+         * 计算最左边卡片的下标
+         */
+        mLeftIndex = mCenterIndex - maxCache / 2;
+        mLeftIndex = Math.max(0, mLeftIndex);
+
+        /**
+         * 计算最右边卡片的下标
+         */
+        mRightIndex = mLeftIndex + maxCache - 1;
+        mRightIndex = Math.min(getItemCount() - 1, mRightIndex);
+    }
+
+    /**
+     * 移除不需要的卡片
+     */
+    private void removeUnuseCard(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        if (getChildCount() == 0)
+            return;
+
+        /**
+         * 将显示范围外的完全移除
+         */
+        for (int i = 0; i < getChildCount(); i++) {
+            View view = getChildAt(i);
+            if (getPosition(view) < mLeftIndex || getPosition(view) > mRightIndex) {
+                removeAndRecycleView(view, recycler);
+            }
+        }
+
+    }
+</pre>
+
+<p>打印log，查看页面的view数量，发现稳定在3个<br><img src="https://file.2fun.xyz/logcat_child_count_3.png" alt="log信息" /></p>
+<h3>加入缩放效果</h3>
+
+<img src="https://file.2fun.xyz/recycler_20170920.gif" alt="卡片缩放" />
+下面我们来实现卡片的缩放效果，越靠近屏幕中心点的卡片显示越大。我们需要判断出卡片与中心点的距离，以此来计算卡片应该缩放的比例。在<code>measureAndLayout(View view, int position) </code>方法的最下面调用下面的方法：
+
+<pre>
+    /**
+     * 缩放卡片
+     *
+     * @param item 需要缩放的对象
+     */
+    private void scaleView(View item) {
+        //偏移量 : 卡片默认的第一张卡片左边与可视范围左边的偏移量
+        float leftX = (getWidth() - mItemWidth) / 2;
+        //卡片与中心点的距离
+        float distance = item.getX() - leftX;
+
+        //计算绝对距离
+        float d = Math.abs(distance);
+        d = Math.min(d, getItemWidth());
+
+        /**
+         * 距离最大为一个卡片的宽度
+         */
+        if (d < getItemWidth() / 4) {
+            item.setScaleX(1);
+            item.setScaleY(1);
+        } else {
+            //卡片缩放值范围1 - 0.9
+            float scale = (float) (1.1 - (0.4 * d / getItemWidth()));
+            item.setScaleX(scale);
+            item.setScaleY(scale);
+        }
+    }
+</pre></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/09/20/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">https://luomingbear.github.io/2017/09/20/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/09/29/Android%E4%BE%A7%E6%BB%91%E8%8F%9C%E5%8D%95%E5%AE%9E%E7%8E%B0/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Android侧滑菜单实现</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/09/15/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89/"><span class="paginator-prev__text">LayoutManager详解及使用（一）</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">简单显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">简单交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">添加回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">5.1.</span> <span class="toc-text">我的思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">加入缩放效果</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

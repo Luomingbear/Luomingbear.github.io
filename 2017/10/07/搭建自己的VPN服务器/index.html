@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="购买服务器  搭建VPN的重要一步就是选择一个境外的服务器用来代理数据，这里推荐使用vultr，性价比高，按小时计费，不满意直接销毁就可以了。可以点击下面的图片注册，对我们都有好处的。 安装Shadowsocks脚本  Shadowsocks是一个基于python的轻量级socks代理软件,可以在任何系统简单的实现访问被屏蔽的网站。网友也常称为科学上网，简称ss,在此分享与记录CentOS一键安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建自己的VPN服务器">
+<meta property="og:url" content="https://luomingbear.github.io/2017/10/07/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="购买服务器  搭建VPN的重要一步就是选择一个境外的服务器用来代理数据，这里推荐使用vultr，性价比高，按小时计费，不满意直接销毁就可以了。可以点击下面的图片注册，对我们都有好处的。 安装Shadowsocks脚本  Shadowsocks是一个基于python的轻量级socks代理软件,可以在任何系统简单的实现访问被屏蔽的网站。网友也常称为科学上网，简称ss,在此分享与记录CentOS一键安装">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.vultr.com/media/banner_1.png">
+<meta property="og:image" content="https://file.2fun.xyz/vultr_firwall_panal.png">
+<meta property="og:image" content="https://file.2fun.xyz/vultr_firwall_setting.png">
+<meta property="article:published_time" content="2017-10-07T06:41:29.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.989Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.vultr.com/media/banner_1.png"><title>搭建自己的VPN服务器 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/10/07/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">搭建自己的VPN服务器</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-07</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h3>购买服务器</h3>
+
+<p>搭建VPN的重要一步就是选择一个境外的服务器用来代理数据，这里推荐使用<a href="https://www.vultr.com/?ref=7226530" target="_blank" rel="noopener noreferrer"><strong>vultr</strong></a>，性价比高，按小时计费，不满意直接销毁就可以了。<br>可以点击下面的图片注册，对我们都有好处的。<br><a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=7226530"><img src="https://www.vultr.com/media/banner_1.png" width="728" height="90"></a></p>
+<h3>安装Shadowsocks脚本</h3>
+
+<p>Shadowsocks是一个基于python的轻量级socks代理软件,可以在任何系统简单的实现访问被屏蔽的网站。网友也常称为科学上网，简称ss,在此分享与记录CentOS一键安装shadowsocks脚本。</p>
+<h4>使用root用户登录，运行以下命令：按照提示输入即可</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log
+</code></pre>
+
+<h4>安装完成后，脚本提示如下：</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">Congratulations, shadowsocks install completed!
+Your Server IP:your_server_ip
+Your Server Port:8989
+Your Password:your_password
+Your Local IP:127.0.0.1
+Your Local Port:1080
+Your Encryption Method:aes-256-cfb
+
+Welcome to visit:http://teddysun.com/342.html
+Enjoy it!
+</code></pre>
+
+<h4>卸载方法</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">./shadowsocks.sh uninstall
+</code></pre>
+
+<h4>配置文件</h4>
+
+<p>配置文件路径为：<code>/etc/shadowsocks.json</code><br>单用户配置：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-json">&#123;
+    "server":"your_server_ip",
+    "server_port":8989,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"yourpassword",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+&#125;
+</code></pre>
+
+<p>多用户配置：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-json">&#123;
+    "server":"0.0.0.0",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":&#123;
+         "8989":"password0",
+         "9001":"password1",
+         "9002":"password2",
+         "9003":"password3",
+         "9004":"password4"
+    &#125;,
+    "timeout":300,
+    "method":"your_encryption_method",
+    "fast_open": false
+&#125;
+</code></pre>
+
+<h4>五、相关使用命令</h4>
+
+<ul>
+<li>启动
+<code>/etc/init.d/shadowsocks start</code></p></li>
+<li><p>停止
+<code>/etc/init.d/shadowsocks stop</code></p></li>
+<li><p>重启
+<code>/etc/init.d/shadowsocks restart</code></p></li>
+<li><p>状态
+<code>/etc/init.d/shadowsocks status</code></p></li>
+</ul>
+
+<p><strong>使用方法：</strong>
+默认配置服务器端口：8989客户端端口：1080，密码：自己设定（如不设定，默认为teddysun.com），多用户配置后需要<strong>重启</strong>shadowsocks服务。
+
+<h3>安装BBR加速</h3>
+
+<p>终端输入</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh
+</code></pre>
+
+<p>安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。</p>
+<h3>客户端下载</h3>
+
+<ul>
+<li><strong>Win:</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/Shadowsocks_win-4.0.6.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+<li><p><strong>Mac:</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/Shadowsocks_macos-1.6.1.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+<li><p><strong>Android：</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/shadowsocks_android-4-1-8.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+</ul>
+
+<h3>注意事项</h3>
+
+<p>用centOS6系统配置了多用户之后可能会出现多用户配置失败的问题，这个问题是由于系统的防火墙关闭了端口，我们可以在服务器提供商的控制面板设置防火墙。这里简单写下Vultr的防火墙设置：
+
+<p><strong>进入防火墙配置</strong><br><img src="https://file.2fun.xyz/vultr_firwall_panal.png" alt="进入防火墙设置" /></p>
+<p><strong>配置防火墙</strong><br>将你在<code>/etc/shadowsocks.json</code>里面配置的端口添加进去<br><img src="https://file.2fun.xyz/vultr_firwall_setting.png" alt="配置防火墙" /></p>
+<p>如果设置面板添加了端口之后仍然不行可以尝试命令行的方式：</p>
+<ul>
+<li><p>查看开启的端口列表：
+<code>firewall-cmd --list-ports</code></p></li>
+<li><p>开启某个端口
+<code>firewall-cmd --zone=public --add-port=9001/tcp --permanent</code>，此处的9001替换为你想要开启的端口号</p></li>
+<li><p>重启防火墙
+<code>firewall-cmd --reload</code></p></li>
+</ul></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/10/07/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/">https://luomingbear.github.io/2017/10/07/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/10/10/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">剑指Offer（Python）二维数组中的查找</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/09/29/Android%E4%BE%A7%E6%BB%91%E8%8F%9C%E5%8D%95%E5%AE%9E%E7%8E%B0/"><span class="paginator-prev__text">Android侧滑菜单实现</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">购买服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">安装Shadowsocks脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">使用root用户登录，运行以下命令：按照提示输入即可</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">安装完成后，脚本提示如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">卸载方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.5.</span> <span class="toc-text">五、相关使用命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">安装BBR加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">客户端下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">注意事项</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

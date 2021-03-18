@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf 文件结构 项目的文件目录推荐如下： #表示一级目录，##表示二级目录 #app    ----项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SlimPhp框架的使用（二）编写接口">
+<meta property="og:url" content="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf 文件结构 项目的文件目录推荐如下： #表示一级目录，##表示二级目录 #app    ----项目">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-09-12T10:29:06.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.984Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary"><title>SlimPhp框架的使用（二）编写接口 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SlimPhp框架的使用（二）编写接口</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p>SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。<br>推荐查看akrabat的简单Slim项目理解Slim的运行逻辑<span class="exturl"><a class="exturl__link"   href="https://github.com/akrabat/slim-bookshelf"  target="_blank" rel="noopener noreferrer">Glihub地址:Slim-Bookshelf</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<h3>文件结构</h3>
+项目的文件目录推荐如下：
+<code>#</code>表示一级目录，<code>##</code>表示二级目录
+<pre>#app    ----项目主要目录
+##HelloWordController.php    ----测试用的controller
+##dependencies.php    ----添加需要使用的controller文件
+##routes.php    ----定义路由
+##setting.php    ----设置的配置文件
+#public    ----用户可以访问的目录
+##index.php    ----index页面
+#vendor    ----使用composer自动生成的目录
+##composer.json    ----composer配置文件
+##composer.lock    ----composer文件不需要管
+</pre>
+<h3>创建目录</h3>
+按照上面的目录结构创建文件的目录app和public，vendor目录使用composer命令自动生成，所以不需要我们创建。
+<h3>安装Slim</h3>
+Slim的安装可以看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/slim/slimphp%e6%a1%86%e6%9e%b6%e7%9a%84%e4%bd%bf%e7%94%a8%ef%bc%88%e4%b8%80%ef%bc%89%e5%ae%89%e8%a3%85composer%e5%92%8cslim/" >上一篇文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。
+<h3>编辑composer.json</h3>
+编辑<code>composer.json</code>文件，添加<code>autoload</code>地址,然后执行终端执行<code>composer update</code>
+<pre>{
+    "require": {
+        "slim/slim": "^3.0"
+    },
+    "autoload": {
+        "psr-4":{
+          "Sample\\":"app" //“Sample” 是自己定义的一个命名空间,"app"对应的是文件路径
+        }
+    }
+}
+</pre>
+<h3>编辑Controller文件</h3>
+在app文件夹里面创建<code>HelloWordController.php</code>文件，先把<code>HelloWordController</code>代码贴上来
+<pre>namespace Sample\Controllers; //命名空间，很重要，引用文件都需要使用这个路径
+
+<p>use \interop\Container\ContainerInterface;</p>
+<p>final class HelloWordController<br>{<br>    protected $app;</p>
+<pre><code>public function __construct(ContainerInterface $ci)
+&#123;
+    $this-&amp;gt;app = $ci;
+&#125;
+/**
+* 测试的方法
+**/
+public function say($request, $response, $params)
+&#123;
+    echo &#39;Welcome Slim&#39;;
+&#125;
+</code></pre>
+<p>}<br></pre></p>
+<h3>编辑index.php文件</h3>
+在public文件夹里面创建<code>index.php</code>文件,用来处理网络访问
+<pre>use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
+<p>require ‘../vendor/autoload.php’; //自动加载的脚本</p>
+<p>$settings = require ‘../app/setting.php’; //引入设置的配置文件<br>$app = new \Slim\App($settings);</p>
+<p>require ‘../app/dependencies.php’; //引入controller配置文件<br>require ‘../app/routes.php’; //引入路由管理文件</p>
+<p>$app-&gt;run(); //执行<br></pre></p>
+<h3>编写设置配置文件</h3>
+在app目录下面创建<code>setting.php</code>文件,根据自己的需求编写配置文件
+<pre>return [
+    'settings' =&gt; [
+        'addContentLengthHeader' =&gt; false,
+        'displayErrorDetails' =&gt; true //开启错误提示
+    ],
+];
+</pre>
+<h3>编写Controller配置文件</h3>
+在app文件夹里面创建<code>dependencies.php</code>
+注意：所有的文件需要使用命名空间的路径，如“Sample\Controllers\HelloWordController”
+<pre>$container = $app-&gt;getContainer();
+
+<p>//hello<br>$container[‘Sample\Controllers\HelloWordController’] = function ($c) {<br>    return new \Sample\Controllers\HelloWordController($c);<br>};<br></pre></p>
+<h3>添加路由管理文件</h3>
+在app文件夹里面创建<code>routes.php</code>文件
+<pre>//处理域名/hello地址的访问,跳转到<code>HelloWordController</code>的say方法
+$app-&gt;get('/hello','Sample\Controllers\HelloWordController:say');
+</pre>
+<h3>完毕？</h3>
+那么现在我们访问网址，是不是就会出现我们期待的东西呢？然而事实是不是的，提示<code>controller not fund</code>。这是什么bug??WTF，我们还需要执行一步，在终端输入<code>composer dump-autoload -o</code>,然后在输入网址，总算可以了。</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/">https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/09/12/slim_php_logo/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">slim_php_logo</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85Composer%E5%92%8CSlim/"><span class="paginator-prev__text">SlimPhp框架的使用（一）安装Composer和Slim</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">创建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">安装Slim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">编辑composer.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">编辑Controller文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">编辑index.php文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">编写设置配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">编写Controller配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">添加路由管理文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">完毕？</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

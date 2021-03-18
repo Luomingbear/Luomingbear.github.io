@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="通过maven私服搭建教程，我们成功的搭建了自己的maven服务器，接下来，我们可以把Android项目的模块打包成aar包，可以提高编译速度，也可以减少编程时不小心把代码修改的了问题。 配置上传   Release 使用Gradle可以非常方便的打包aar并上传，打开模块所在的目录下的build.gradle文件，顶部添加如下代码：   apply plugin: &#39;com.android.li">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上传aar到maven服务器">
+<meta property="og:url" content="https://luomingbear.github.io/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="通过maven私服搭建教程，我们成功的搭建了自己的maven服务器，接下来，我们可以把Android项目的模块打包成aar包，可以提高编译速度，也可以减少编程时不小心把代码修改的了问题。 配置上传   Release 使用Gradle可以非常方便的打包aar并上传，打开模块所在的目录下的build.gradle文件，顶部添加如下代码：   apply plugin: &#39;com.android.li">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/wx_20181204113742.png">
+<meta property="article:published_time" content="2018-12-04T03:56:58.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.998Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/wx_20181204113742.png"><title>上传aar到maven服务器 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">上传aar到maven服务器</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p>通过maven私服搭建教程，我们成功的搭建了自己的maven服务器，接下来，我们可以把Android项目的模块打包成aar包，可以提高编译速度，也可以减少编程时不小心把代码修改的了问题。</p>
+<h3>配置上传</h3>
+
+<ul>
+<li>Release
+使用Gradle可以非常方便的打包aar并上传，打开模块所在的目录下的<code>build.gradle</code>文件，顶部添加如下代码：</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bearever' //分组，相当于文件夹
+version '1.0.1' //版本号
+</code></pre>
+
+<p><code>appply plugin: 'xxx'</code>表示的是需要引用插件xxx，这里的<code>com.android.library</code>表示需要引用Android库的插件，因为我们需要打包的是一个Android的aar包。下面的<code>maven</code>表示需要引用Maven的插件，这样我们就可以上传到自己的maven服务器了。<br><code>group 'android.cn.bear'</code>表示的是这个文件在maven服务器的文件目录，<code>version '1.0.1'</code>就表示这个库的版本是“1.0.1”。<br>下面我们开始配置上传到maven服务器，在文件的最底部添加如下代码：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-grrovy">uploadArchives &#123;
+    repositories &#123;
+        mavenDeployer &#123;
+            //release包
+            repository(url: 'http://localhost:8081/nexus/content/repositories/releases') &#123;
+                authentication(userName: 'admin', password: 'admin123')
+            &#125;
+            //快照
+            snapshotRepository(url: 'http://localhost:8081/nexus/content/repositories/snapshots') &#123;
+                authentication(userName: 'admin', password: 'admin123')
+            &#125;
+            pom.artifactId = 'mylib' //库名字
+            pom.packaging = 'aar' //文件类型
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+<p>这里的<code>uploadArchives</code>就是上传aar包的Task，<code>mavenDeployer</code>表示这是发布到maven的，<code>repository和snapshotRepository</code>分别表示正式包和快照包的配置。<br><code>url</code>是maven服务器的地址，可以在maven服务器里面查看<br><img src="https://file.2fun.xyz/wx_20181204113742.png" alt="maven-summary" /><br><code>authentication(userName: 'admin', password: 'admin123')</code>就是maven的登录账号。<br><code>pom.artifactId</code>表示的是这个库的名字，<code>pom.packaging</code>表示的是库的文件格式。</p>
+<p>最后整个<code>build.gradle</code>文件格式大概如下</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bearever' //分组，相当于文件夹
+version '1.0.1' //版本号
+
+android&#123;&#125;
+
+dependencies&#123;&#125;
+
+uploadArchives&#123;&#125;
+</code></pre>
+
+<ul>
+<li>Snapshot
+前面提到还有快照版本的库，那么怎么上传快照版本的库呢？只需要在<code>version</code>里面加上<code>-SNAPSHOT</code>就会上传到快照仓库。例如</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group 'android.cn.bear' //分组，相当于文件夹
+version '1.0.1-SNAPSHOT' //版本号,-SNAPSHOT表示这是快照版本
+....
+</code></pre>
+
+<h3>生成aar包上传到maven</h3>
+
+<p>最后进入模块目录在终端输入<code>gradlew uploadArchives</code>就可以了。或者 <code>gradlew moudleName:uploadArchives</code></p>
+<h3>引用</h3>
+
+<ul>
+<li>Release
+首先需要规定仓库的地址，在跟项目的<code>build.gradle</code>里面添加</li>
+</ul>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null"> repositories &#123;
+        maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/releases'
+        &#125;
+        google()
+        jcenter()
+    &#125;
+</code></pre>
+
+<p>在其他模块的<code>build.gradle</code>的<code>dependencies</code>添加依赖引用，例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">dependencies &#123;
+    .....其他的依赖引用
+    implementation 'android.cn.bearever:mylib:1.0.1'
+&#125;
+</code></pre>
+
+<p>implementation语法规则<code>implementation 'groupId:libname:version'</code></p>
+<ul>
+<li>Snapshot</li>
+</ul>
+
+<p>那怎么引用<code>snapshot</code>版本的库呢，需要在根项目添加快照的仓库地址。例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">  repositories &#123;
+        maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/releases'
+        &#125;
+         maven &#123;
+            url 'http://localhost:8081/nexus/content/repositories/snapshots'
+        &#125;
+        google()
+        jcenter()
+    &#125;
+</code></pre>
+
+<p>引用的时候在版本号后面加上<code>-SNAPSHOT</code>就表示需要引用快照版本,例如：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">implementation 'android.cn.bearever:mylib:1.0.1-SNAPSHOT'
+</code></pre></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/">https://luomingbear.github.io/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Jenkins+Android打包实践</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"><span class="paginator-prev__text">Gradle 笔记（一）</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">配置上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">生成aar包上传到maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">引用</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

@@ -1,0 +1,906 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗啰明天">
+<meta property="og:url" content="https://luomingbear.github.io/page/3/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="不只是技术">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/page/3/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/01/31/%E6%9C%AA%E5%91%BD%E5%90%8D%E7%BB%98%E5%9B%BE/">未命名绘图</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-01-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/01/12/Behavior%E5%BF%AB%E9%80%9F%E6%BB%91%E5%8A%A8%E4%B9%8B%E5%90%8E%E9%A6%96%E6%AC%A1%E7%82%B9%E5%87%BB%E5%A4%B1%E6%95%88/">Behavior快速滑动之后首次点击失效</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-01-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2>问题概述：</h2>
+<blockquote>
+<p>在搜索综合页，快速滑动之后第一次点击必定无效，第二次点击才会生效。</p>
+</blockquote>
+<p>接到这个BUG的时候我的内心是崩溃的，这又是什么奇葩的问题，然后我的第一个反应是测试又在搞事情了，肯定无法复现。怀着这样的心情，我试着复现问题：快速滑动之后第一次点击必定无效？我试试，结果第一次试就中奖了。。。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5606793610/4ddd/f950/6393/78a1f43542b50bbaff42352b637cbe52.gif" alt="" /></p>
+<p>看来这个锅是推不掉了，只能试着解决一下。</p>
+<h2>定位问题</h2>
+<h3>所有滑动都会导致这个问题吗？</h3>
+<p>是所有的滑动都会导致这个问题，还是只有搜索综合页这个场景才有这个问题呢？为了验证这个问题，我把app里面的列表都滑动了一下进行测试：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>首页：可以点击</th>
+<th>歌单：可以点击</th>
+<th>排行榜：可以点击</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455540/a2a4/0b06/fa1f/7c3dc45caf0fcff379fe346631c0cdc8.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455592/975f/3299/3667/20d15e2d6809666f56837b9397376163.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455703/fa63/b167/3de7/8ab268de28d1c1078a6949886db23257.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>个人主页：可以点击</th>
+<th>歌手主页：不可以点击</th>
+<th>搜索单曲：可以点击</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455597/8ef1/d6d4/1c9f/651f2db3ba3ae4f337bb05aaf5f5cbc8.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455548/26d0/469d/7d9e/ebf61331d4e0791c115bbcdb92987188.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5608455598/12e2/7e9b/dee7/ce4a8a030e26935b3a875de0b9e47c0a.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p>经过测试发现，目前项目中其他的场景也有这个问题，例如个人/歌手主页。既然其他的场景也有这个问题，那么是否可以问一下其他场景的负责人，对这个问题是否有什么思路呢？于是我问了毛哥（歌手主页是毛哥负责的），毛哥对这个BUG表示很疑惑，还有这个操作么？然后毛哥让我找一下李哥问问，于是我又问了李哥，李哥当场给我加了一个断点，然后一行代码一行代码的看，然后我问了李哥一句：“李哥，你之前有碰到过这个问题吗？”李哥说要不你在touch事件里面加断点看看。看来李哥对这个问题也不清楚，于是我按照李哥的思路给touch事件加上了断点。</p>
+<h3>“量子力学”的BUG</h3>
+<p>当我在touch事件里面加上断点之后，无论我怎么操作，这个BUG始终无法复现，一切就像是不存在一样。这让我想起来了大刘《全频带阻塞干扰》里面描述的一个现象：当设置观察者之后，球状闪电就会沿着直线前进，而撤掉观察者之后，球状闪电就会无序的前进。难道代码也属于量子力学的范畴吗？我不由得吓出了一身汗，随即心情开始变得高兴起来，这岂不是意味着我可以不改这个BUG了！</p>
+<p>我赶紧把测试妹子拉过来演示一下，结果无论怎么演示BUG依然存在。然后测试妹子不屑的看了我一眼走掉了，临走时说：“这个问题你赶紧改吧。”</p>
+<h3>Behavior的锅？</h3>
+<p>再分析一下搜索综合页，也没有使用什么奇怪的东西，无非是ViewPager、RecyclerView、Behavior这些，等等，Behavior！仔细对比了一下没有问题的列表和有问题的列表，发现一个现象，那就是有问题的列表都使用了Behavior，于是我把综合页的Behavior去掉了，重新试了一下，一切正常。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609634810/09a0/8557/154f/799feb8367ead76f81e4ab24e93fa6a2.gif" alt="" /></p>
+<p>为什么加上Behavior就会有问题呢，难道是Behavior把触摸事件拦截了？通过查看Behavior的源码，可以发现其默认是不会拦截触摸事件的，而我也没有复写<code>onInterceptTouchEvent</code>，但是点击确实是发生了，只是没有响应，要先找到谁把触摸事件给吃了。</p>
+<p>通过重写RecyclerView和CoordinatorLayout的<code>onInterceptTouchEvent</code>、<code>dispatchTouchEvent</code>、<code>onTouchEvent</code>，在复现一次问题，观察Log发现，触摸事件其实是被RecyclerView给吃掉了。</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5609724042/4141/d542/c3dc/c2fd8591ce643ef0becd8d87fdf2e896.png" alt="" /></p>
+<h3>RecyclerView吃触摸事件</h3>
+<p>那为什么在没有Behavior的时候，RecyclerView不会把触摸事件给吃掉，给加上了RecyclerView就会把触摸事件吃掉呢？通过观察RecyclerView的<code>onInterceptTouchEvent</code>可以发现，有两种情况RecyclerView会拦截触摸事件：</p>
+<ol>
+<li>OnItemTouchListener不为空的时候</li>
+<li>mScrollState等于SCROLL_STATE_DRAGGING的时候</li>
+</ol>
+<pre><code class="language-java">@Override
+public boolean onInterceptTouchEvent(MotionEvent e) &#123;
+    ... //省略
+    mInterceptingOnItemTouchListener = null;
+    if (findInterceptingOnItemTouchListener(e)) &#123;
+        cancelScroll();
+        return true;
+    &#125;
+    ... //省略
+    return mScrollState == SCROLL_STATE_DRAGGING;
+&#125;</code></pre>
+<p>对于第一种情况，我们并没有设置OnItemTouchListener，所以不会触发，那就是第二种情况了，mScrollState等于 SCROLL_STATE_DRAGGING。查看源码，可以看到同样有两种情况会导致mScrollState被设置为SCROLL_STATE_DRAGGING，分别是：</p>
+<ol>
+<li>action等于ACTION_DOWN并且mScrollState等于SCROLL_STATE_SETTLING时，也就是列表还在惯性滚动中</li>
+<li>action等于ACTION_MOVE并且列表开始滚动的时候</li>
+</ol>
+<pre><code class="language-java">switch (action) &#123;
+    case MotionEvent.ACTION_DOWN:
+        if (mScrollState == SCROLL_STATE_SETTLING) &#123;
+            getParent().requestDisallowInterceptTouchEvent(true);
+            setScrollState(SCROLL_STATE_DRAGGING);  //如果RV还在滚动中，这时候手指的DOWN事件会使state设为SCROLL_STATE_DRAGGING
+            stopNestedScroll(TYPE_NON_TOUCH);
+        &#125;
+    ... //省略
+
+<pre><code>case MotionEvent.ACTION_MOVE: &#123;
+    final int index = e.findPointerIndex(mScrollPointerId);
+
+    final int x = (int) (e.getX(index) + 0.5f);
+    final int y = (int) (e.getY(index) + 0.5f);
+    if (mScrollState != SCROLL_STATE_DRAGGING) &#123;
+        final int dx = x - mInitialTouchX;
+        final int dy = y - mInitialTouchY;
+        boolean startScroll = false;
+        if (canScrollHorizontally &amp;amp;&amp;amp; Math.abs(dx) &amp;gt; mTouchSlop) &#123;
+            mLastTouchX = x;
+            startScroll = true;
+        &#125;
+        if (canScrollVertically &amp;amp;&amp;amp; Math.abs(dy) &amp;gt; mTouchSlop) &#123;
+            mLastTouchY = y;
+            startScroll = true;
+        &#125;
+        if (startScroll) &#123;
+            setScrollState(SCROLL_STATE_DRAGGING); //如果手指一直在MOVE中，会设置state为SCROLL_STATE_DRAGGING
+        &#125;
+    &#125;
+&#125; break;
+... //省略
+&#125;&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+<p>在结合上面的Log信息，可以看到点击时只有ACTION_DOWN和ACTION_UP两种action，所以可以得出结论：<strong>快速滑动之后首次点击由于RecyclerView还处于惯性滚动中，所以点击事件被拦截了，导致点击无效。</strong></p>
+<p>所以只要我们在滚动到顶部的时候主动停止惯性滚动，这样下次点击的时候就不会因为还处于惯性滚动中而拦截触摸事件了。</p>
+<h2>解决问题</h2>
+<h3>停止惯性滚动</h3>
+<p>通过仔细分析综合页的Behavior，可以看到当列表向下移动时，如果是惯性滚动会在默认位置停下来，后续的滚动值就不管了。</p>
+<pre><code class="language-kotlin">override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout,child: View,target: View,dx: Int,dy: Int,consumed: IntArray,type: Int) &#123;
+    if (target is NestedScrollingChild2) &#123;
+        if (dy &lt; 0) &#123; //手指向下滑动的操作⬇️
+            //在惯性滚动的时候仅仅让其滚动到原始位置即可，否则会有两次回弹的问题
+            if (type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                if (target.y &lt; getDefaultListYPosition()) &#123;
+                    val newDY = target.y - getDefaultListYPosition()
+                    consumed[1] = scrollView(child, target, newDY.toInt().coerceAtLeast(dy))
+                &#125;
+              // 后续滚动没有做处理
+            &#125; else &#123;
+                consumed[1] = scrollView(child, target, dy)
+            &#125;
+        &#125; else &#123; //手指向上滑动的操作⬆️
+            consumed[1] = scrollView(child, target, dy)
+            //如果behavior没有消费滑动，并且列表也不可滑动了，则停止列表的滚动
+            if (consumed[1] == 0 &amp;&amp; type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                consumed[1] = dy
+                target.stopNestedScroll(type)
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>所以我们可以在列表恢复默认位置后对后续滚动进行处理，使得列表的惯性滚动停止，这里我们可以直接使用<code>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</code>停止滚动，看来问题还是比较简单的。于是乎我加了一行代码，重写编译打包运行，虽然点击是生效了，但是出现了一个波纹，使得顶部出现了割裂感，那有没有办法可以不出现波纹吗？</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5643662761/a3ef/52c2/2d9e/19c3b9803e2390ac53afa969775fd5f2.gif" alt="" /></p>
+<h3>不显示波纹</h3>
+<p>要让波纹不显示，就需要先弄清楚波纹是怎么形成的。在Android里面，波纹是通过EdgeEffect实现的，所以我们可以在RecyclerView里面搜索一下EdgeEffect在哪里被引用了。通过搜索，我发现RecyclerView内部一共有四个EdgeEffect，分别是mLeftGlow, mTopGlow, mRightGlow, mBottomGlow表示不同方向的波纹。然后在<code>pullGlows(float x, float overscrollX, float y, float overscrollY)</code>及<code>absorbGlows(int velocityX, int velocityY)</code>方法里面会对不同方向的波纹进行更新。</p>
+<pre><code class="language-java">/**
+* 波纹增大
+*/
+private void pullGlows(float x, float overscrollX, float y, float overscrollY) &#123;
+    boolean invalidate = false;
+    if (overscrollX &lt; 0) &#123;
+        ensureLeftGlow();
+        EdgeEffectCompat.onPull(mLeftGlow, -overscrollX / getWidth(), 1f - y  / getHeight());
+        invalidate = true;
+    &#125; 
+    ... // 省略了其他方向的判断，代码与上面类似
+
+<pre><code>if (invalidate || overscrollX != 0 || overscrollY != 0) &#123;
+    //刷新UI
+    ViewCompat.postInvalidateOnAnimation(this);
+&#125;
+</code></pre>
+<p>}</p>
+<p>/**</p>
+<ul>
+<li>波纹减小</li>
+<li>/<br>void absorbGlows(int velocityX, int velocityY) {<br>   if (velocityX &lt; 0) {<pre><code>   ensureLeftGlow();
+   if (mLeftGlow.isFinished()) &#123;
+       mLeftGlow.onAbsorb(-velocityX);
+   &#125;
+</code></pre>
+   }<br>   … // 省略了其他方向的判断，代码与上面类似<br>   if (velocityX != 0 || velocityY != 0) {<pre><code>   //刷新UI
+   ViewCompat.postInvalidateOnAnimation(this);
+</code></pre>
+   }<br>}</code></pre><p>而<code>pullGlows</code>和<code>absorbGlows</code>又分别会在<code>scrollByInternal(int x, int y, MotionEvent ev)</code>和<code>ViewFlinger.run()</code>内被调用。</p>
+<pre><code class="language-java">boolean scrollByInternal(int x, int y, MotionEvent ev) &#123;
+   ... //省略
+   //只有当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹
+   if (getOverScrollMode() != View.OVER_SCROLL_NEVER) &#123;
+       if (ev != null &amp;&amp; !MotionEventCompat.isFromSource(ev, InputDevice.SOURCE_MOUSE)) &#123;
+           pullGlows(ev.getX(), unconsumedX, ev.getY(), unconsumedY);
+       &#125;
+       considerReleasingGlowsOnScroll(x, y);
+   &#125;
+   if (consumedX != 0 || consumedY != 0) &#123;
+       dispatchOnScrolled(consumedX, consumedY);
+   &#125;
+   if (!awakenScrollBars()) &#123;
+       invalidate();
+   &#125;
+   return consumedNestedScroll || consumedX != 0 || consumedY != 0;
+&#125;</li>
+</ul>
+<p>class ViewFlinger implements Runnable &#123;</p>
+<p> @Override<br> public void run() &#123;<br>    … // 省略<br>    if (!smoothScrollerPending &amp;&amp; doneScrolling) &#123;<br>        // 只要当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹<br>        if (getOverScrollMode() != View.OVER_SCROLL_NEVER) &#123;<br>            final int vel = (int) scroller.getCurrVelocity();<br>            int velX = unconsumedX &lt; 0 ? -vel : unconsumedX &gt; 0 ? vel : 0;<br>            int velY = unconsumedY &lt; 0 ? -vel : unconsumedY &gt; 0 ? vel : 0;<br>            absorbGlows(velX, velY);<br>        &#125;<br>    &#125;<br>    … // 省略<br>  &#125;<br>&#125;</code></pre></p>
+<p>从源码可以看到只有当OverScrollMode != View.OVER_SCROLL_NEVER时才会尝试更新波纹，所以只要我们把OverScrollMode设置为View.OVER_SCROLL_NEVER时，就不会显示波纹了。再结合上面的<code>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</code>方案，最后的效果如下，虽然点击可以响应了，但是当列表滚动到底部时，继续上滑却没有了视觉反馈，那有没有不影响底部的视觉反馈又不会造成顶部割裂感的方案呢？</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5728515830/3fde/1f3e/e63d/5de179691bb3fa9c144001019f593c7e.gif" alt="" /></p>
+<h3>最后的方案</h3>
+<p>再回到“RecyclerView吃触摸事件”里面介绍的，当RecyclerView内部的mScrollState等于SCROLL_STATE_DRAGGING时，触摸事件会被拦截掉，那只要我们把mScrollState改成别的值不就可以了吗。在RecyclerView内有一个函数叫<code>setScrollState(int state)</code>可以修改mScrollState，但是这个函数是外部不可访问的，难不成要使用反射的方式？就在我纠结是否要使用反射时，我发现 <code>onTouchEvent(MotionEvent e)</code>内处理MotionEvent.ACTION_CANCEL事件时会将滚动重置掉。</p>
+<pre><code class="language-java">@Override
+public boolean onTouchEvent(MotionEvent e) &#123;
+    ... //省略
+    switch (action) &#123; 
+        case MotionEvent.ACTION_CANCEL: &#123;
+            cancelScroll();
+        &#125; break;
+    &#125; 
+    ... //省略
+    return true;
+&#125;
+
+<p>private void cancelScroll() &#123;<br>    resetScroll();<br>    setScrollState(SCROLL_STATE_IDLE);<br>&#125;</code></pre></p>
+<p>所以我只需要主动触发一个MotionEvent.ACTION_CANCEL的触摸事件，这样RecyclerView的mScrollState就变成了SCROLL_STATE_IDLE，也就不会拦截触摸事件了。</p>
+<pre><code class="language-kotlin">override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout,child: View,target: View,dx: Int,dy: Int,consumed: IntArray,type: Int) &#123;
+    if (target is NestedScrollingChild2) &#123;
+        if (dy &lt; 0) &#123; //手指向下滑动的操作⬇️
+            //在惯性滚动的时候仅仅让其滚动到原始位置即可，否则会有两次回弹的问题
+            if (type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                if (target.y &lt; getDefaultListYPosition()) &#123;
+                    val newDY = target.y - getDefaultListYPosition()
+                    consumed[1] = scrollView(child, target, newDY.toInt().coerceAtLeast(dy))
+                &#125;
+              /**
+              * MUSIC-245798 模拟手指触摸取消事件,强制停止惯性滚动
+              */
+              val now = SystemClock.uptimeMillis()
+              val cancelEvent = MotionEvent.obtain(now, now, MotionEvent.ACTION_CANCEL, 0.0f, 0.0f, 0)
+              target.onTouchEvent(cancelEvent)
+              /**
+              * MUSIC-245798 模拟手指触摸取消事件,强制停止惯性滚动
+              */
+            &#125; else &#123;
+                consumed[1] = scrollView(child, target, dy)
+            &#125;
+        &#125; else &#123; //手指向上滑动的操作⬆️
+            consumed[1] = scrollView(child, target, dy)
+            //如果behavior没有消费滑动，并且列表也不可滑动了，则停止列表的滚动
+            if (consumed[1] == 0 &amp;&amp; type == ViewCompat.TYPE_NON_TOUCH) &#123; 
+                consumed[1] = dy
+                target.stopNestedScroll(type)
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5644456312/b6d7/041d/2698/42ac10fddcaf847a50284d6ac3ba12c0.gif" alt="" /></p>
+<h2>总结</h2>
+<p>RecyclerView+Behavior的模式下，进行快速滚动时如果处理不好列表的惯性滚动行为，可能会产生列表停止移动，但是内部状态仍然处理滚动中的问题，这时候点击列表则会被列表拦截掉，使得第一次点击失效，可以通过主动结束滚动来解决，具体方案有2种：</p>
+<ol>
+<li>
+<p>NestedScrollingChild2.stopNestedScroll(@NestedScrollType int type)</p>
+<p>这种方案虽然会停止列表滚动，但是会导致RecyclerView显示一个波纹，但是可以通过设置OverScrollMode为View.OVER_SCROLL_NEVER强制不显示波纹。</p>
+</li>
+<li>
+<p>发送MotionEvent.ACTION_CANCEL事件</p>
+<p>这种方案会停止列表滚动，并且不会显示波纹。</p>
+</li>
+</ol></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2021/01/10/%E6%88%AA%E5%B1%8F2021-01-10%20%E4%B8%8B%E5%8D%885.06.00/">截屏2021-01-10 下午5.06.00</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2021-01-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/12/27/CoordinatorLayout.Behavior%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">CoordinatorLayout.Behavior使用指南</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2>1. Behavior 介绍</h2>
+<p>Behavior是CoordinatorLayout的子类，用于处理各个子view之间的行为（<strong>这就意味着需要联动的View得用CoordinatorLayout包起来</strong>），例如：手指向下滑动的时候是View A下移，还是View B下移，亦或者给View C来一个旋转？一个例子就是Bilibili客户端视频播放页的滑动效果，如图1所示：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5446761662/b7c9/fef8/b880/c9677c9541aad643b1e28ee64b699651.gif" alt="图1. Bilinili客户端的滑动效果" /></p>
+<p><em>图1. Bilibili客户端视频页滑动效果</em></p>
+<h2>2. 如何设置Behavior</h2>
+<p>设置Behavior有两种方式：XMl布局设置和Java（Kotlin）代码设置</p>
+<h3>2.1 XML布局设置</h3>
+<p>首先将CoordinatorLayout设置为父布局，对需要加Behavior控件设置<code>app:layout_behavior&quot;</code>属性。</p>
+<pre><code class="language-xml">&lt;androidx.core.widget.NestedScrollView
+    ...
+    app:layout_behavior= &quot;com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior&quot;&gt;</code></pre>
+<h3>2.2 Java/Kotlin代码设置</h3>
+<pre><code class="language-java">CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)scrollView.getLayoutParams();
+params.setBehavior(new MyBehavoir());
+scrollView.setLayoutParams(params);</code></pre>
+<h2>3. <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/com/google/android/material/appbar/AppBarLayout?hl=en" >AppBarLayout</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></h2>
+<p>AppBarLayout内部有一个默认实现的Behavior，经常和Toolbar、Recycler等结合使用，布局如下：</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;&gt;
+
+<pre><code>&amp;lt;com.google.android.material.appbar.AppBarLayout
+    android:id=&amp;quot;@+id/appbar&amp;quot;
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;100dp&amp;quot;
+    android:fitsSystemWindows=&amp;quot;true&amp;quot;&amp;gt;
+
+    &amp;lt;androidx.appcompat.widget.Toolbar
+        android:id=&amp;quot;@+id/toolbar&amp;quot;
+        android:layout_width=&amp;quot;match_parent&amp;quot;
+        android:layout_height=&amp;quot;?attr/actionBarSize&amp;quot;
+        app:layout_scrollFlags=&amp;quot;scroll&amp;quot;
+        app:layout_scrollInterpolator=&amp;quot;@android:anim/decelerate_interpolator&amp;quot;
+        app:title=&amp;quot;标题栏&amp;quot; /&amp;gt;
+&amp;lt;/com.google.android.material.appbar.AppBarLayout&amp;gt;
+
+&amp;lt;androidx.core.widget.NestedScrollView
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;match_parent&amp;quot;
+                                       app:layout_behavior= &amp;quot;com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior&amp;quot;&amp;gt;
+
+&amp;lt;/androidx.core.widget.NestedScrollView&amp;gt;
+</code></pre>
+<p>&lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre></p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif" alt="" /></p>
+<p><em>图2. AppBarLayout效果</em></p>
+<p>AppBarLayout默认的Behavior是<code>AppBarLayout$ScrollingViewBehavior</code>，可以设置layout_scrollFlags和layout_scrollInterpolator等参数，分别表示动画风格和动画差值器。正如上面的实例代码，我们对Toolbar设置了如下的属性，使toolbar可以跟随列表滚到而显示和隐藏。</p>
+<pre><code class="language-xml"> &lt;androidx.appcompat.widget.Toolbar
+           ...
+            app:layout_scrollFlags=&quot;scroll&quot;
+            app:layout_scrollInterpolator=&quot;@android:anim/decelerate_interpolator&quot;
+           ... /&gt;</code></pre>
+<h4>3.1 layout_scrollFlags</h4>
+<p>layout_scrollFlags是ScrollingViewBehavior支持的一个属性，用来设置滚动的风格，包括移入、移出效果，一共有七个，分别是noScroll、scroll、exitUntilCollapsed、enterAlways、enterAlwaysCollapsed、snap和snapMargins，其效果如表1、表2所示。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>noScroll</th>
+<th>scroll</th>
+<th>exitUntilCollapsed</th>
+<th>enterAlways</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451460834/cd7f/57e4/a50e/bc05347f3caa63583efba1dbba3b8d9c.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451899328/bd10/28a6/30c5/9fc1cfb382671221a6c3359808808352.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452109480/3e41/d134/4142/263f816ae8eddbd07ef6c95e0631d3f0.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表1. layout_scrollFlags的演示效果1</em></p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>enterAlwaysCollapsed</th>
+<th>snap</th>
+<th>snapMargins</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452999490/ad9f/00a7/7bfd/c5dde21104220d37bf7bd0057be0b6bd.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453229865/26cf/c6bb/d2c3/e8ac55ea17a14ce0a1a53a0d4ebc4990.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453546092/a584/b537/e2cb/43adde0084ac9307355e8e5721ea40ed.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表2. layout_scrollFlags的演示效果2</em></p>
+<p>关于这个七个标记的具体说明如表3所示。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noScroll</td>
+<td>禁用视图上的滚动。此标志不应与其他任何标志相结合。</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>这个标志会让view直接跟随滚动事件。如果其他标记需要在滚动的情况下使用，则必须结合<code>scroll</code>一起使用，否则设置无效。</td>
+</tr>
+<tr>
+<td>exitUntilCollapsed</td>
+<td>手指上滑会将view折叠，折叠的高度为minHeight的值，下拉再慢慢展开，高度为height的值。</td>
+</tr>
+<tr>
+<td>enterAlways</td>
+<td>这个标志和单纯的<code>scroll</code>很相似，区别在与<code>enterAlways</code>会在你下拉的时候就显示view，上滑的时候就隐藏view，而<code>scroll</code>则必须要把列表滚到顶部之后才会显示、隐藏view。</td>
+</tr>
+<tr>
+<td>enterAlwaysCollapsed</td>
+<td>需要与<code>enterAlways</code>搭配使用，效果是下拉时先显示折叠时的高度，继续下拉，列表到顶则会讲view展开。</td>
+</tr>
+<tr>
+<td>snap</td>
+<td>与单纯的<code>scroll</code>效果很相似，区别在于<code>snap</code>有吸附效果，当view的位置很靠近显示或者隐藏时，会使用动画自动显示或者隐藏，就像是有磁铁吸附的感觉。</td>
+</tr>
+<tr>
+<td>snapMargins</td>
+<td>需要与<code>snap</code>搭配使用，吸附位置为view的top和bottom margin值。</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表3. layout_scrollFlags的参数说明</em></p>
+<h2>4 自定义Behavior</h2>
+<h3>4.1 核心方法介绍</h3>
+<p>在正式自定义一个Behavior之前，先介绍一下Behavior的几个比较重要的方法：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull V child,  @NonNull View dependency)</td>
+<td>判断<code>child</code>是否依赖<code>dependency</code></td>
+</tr>
+<tr>
+<td>boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull V child,  @NonNull View dependency)</td>
+<td>当<code>dependency</code>发生了变化的时候（位置、旋转角度等）会被调用</td>
+</tr>
+<tr>
+<td>void onDependentViewRemoved(@NonNull CoordinatorLayout parent, @NonNull V child, @NonNull View dependency)</td>
+<td>当<code>dependency</code>被移除之后会调用此方法。</td>
+</tr>
+<tr>
+<td>boolean onLayoutChild(@NonNull CoordinatorLayout parent, @NonNull View child, int layoutDirection)</td>
+<td>在这里可以给<code>child</code>进行初始位置的布局。返回ture，表示我们自定义的布局，否则使用系统默认的布局。</td>
+</tr>
+<tr>
+<td>boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View directTargetChild, @NonNull View target,  @ScrollAxis int axes, @NestedScrollType int type)</td>
+<td>一个滚动事件等开始会触发此回调，可以在这里返回是否需要消耗本次滚动事件</td>
+</tr>
+<tr>
+<td>void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout,                 @NonNull V child, @NonNull View target, int dx, int dy, @NonNull int[] consumed,  @NestedScrollType int type)</td>
+<td>如果<code>onStartNestedScroll</code>返回了true，则在滚动中会回调此方法，可以在这里做view做位置等等变化</td>
+</tr>
+<tr>
+<td>void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,  @NonNull V child, @NonNull View target, @NestedScrollType int type)</td>
+<td>一个滚动事件等结束会触发此回调，可以在这里给<code>child</code>添加回弹动画。</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表4. Behavior的几个主要方法</em></p>
+<h3>4.2 基本流程</h3>
+<p>自定义Behavior的流程分为3步：</p>
+<ol>
+<li>判断依赖关系，即谁依赖谁</li>
+<li>当被依赖的view发生了变化时对依赖view进行变化</li>
+<li>处理嵌套滚动事件</li>
+</ol>
+<h5>4.2.1 判断依赖关系，即谁依赖谁</h5>
+<p>假设A依赖B，则Behavior应该设置在A上面，然后在<code>layoutDependsOn</code>方法里面，判断如果<code>dependency</code>为B则返回true。</p>
+<h5>4.2.2 当被依赖的view发生了变化时对依赖view进行变化</h5>
+<p><code>dependency</code>的位置、方向等变化之后会调用<code>onDependentViewChanged</code>方法，在这个方法里面，可以对view进行跟随变化，比如将view对bottom设置为<code>dependency</code>top位置，则view会始终在<code>dependency</code>的上面，高度跟随<code>dependency</code>动态变化。如果需要在<code>dependency</code>被移除的时候对view进行变化，则重写<code>onDependentViewRemoved</code>即可。</p>
+<h5>4.2.3 处理嵌套滚动事件</h5>
+<p>处理一个滚动事件的流程是：</p>
+<ol>
+<li>
+<p>判断滑动方向是否是自己需要的</p>
+</li>
+<li>
+<p>处理滑动值</p>
+</li>
+<li>
+<p>滚动事件结束是否需要回弹动画</p>
+</li>
+</ol>
+<p>与此对应的三个方法是：</p>
+<ol>
+<li>
+<p>boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View directTargetChild, @NonNull View target,  @ScrollAxis int axes, @NestedScrollType int type)</p>
+<p>其中<code>axes</code>表示的是本次滚动事件的方向、<code>type</code>表示手指触摸或者是惯性滚动。</p>
+<pre><code class="language-java">// 判断滚动是否是竖直方向
+boolean result = (axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;</code></pre>
+</li>
+<li>
+<p>void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, int dx, int dy, @NonNull int[] consumed,  @NestedScrollType int type)</p>
+<p>滚动事件里面的每一次滑动会调用此方法，在这里我们可以对滑动进行拦截处理。<code>consumed</code>是一个数组，表示Behavior消耗了的X、Y方向的滑动值，消耗的滑动值就不会被传递为子view了。</p>
+</li>
+<li>
+<p>void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,  @NonNull V child, @NonNull View target, @NestedScrollType int type)</p>
+<p>滚动事件结束的时候会调用此方法，可以在这里判断view是否需要回弹到默认位置。<strong>需要注意的地方是：通过动画移动view到默认位置也是会触发<code>onNestedPreScroll</code>方法的，可以结合<code>type</code>判断是否是手指触摸导致的。</strong></p>
+</li>
+</ol>
+<h2>5 实例</h2>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif" alt="" /></p>
+<p><em>图3. 实例效果图</em></p>
+<p>从图中可以知道，顶部的图片会跟随列表的滚动，列表下移的时候图片会先下移，超过默认高度之后会有一个放大的效果。也就是说背景图的高度和大小是依赖列表的位置的。所以，我们可以将Behavior设置在背景图上面，让其依赖列表。布局如图3所示。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465693999/4a78/141b/6506/8084c8332b7b827d83d2a6bdf3ee85fb.png" alt="" /></p>
+<p><em>图4. 布局文件</em></p>
+<p>接着开始自定义<code>MyBehavoir</code>。</p>
+<p>重写<code>layoutDependsOn</code>让图片依赖背景列表。</p>
+<pre><code class="language-java">@Override
+public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) &#123;
+    return dependency instanceof NestedScrollView;
+&#125;</code></pre>
+<p>当列表的位置变化的时候需要对图片的位置进行变化，使图片的底部始终跟随列表的顶部。</p>
+<pre><code class="language-java">@Override
+public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) &#123;
+    int top = dependency.getTop();
+    int bottom = child.getBottom();
+    ViewCompat.offsetTopAndBottom(child, top - bottom);
+    return true;
+&#125;</code></pre>
+<p>因为这个列表是竖直滚动的，所以我们只需要监听竖直方向的滚动。</p>
+<pre><code class="language-java">@Override
+public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) &#123;
+    return (axes &amp; ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
+&#125;</code></pre>
+<p>让列表监听滚动事件，跟随手指滑动。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    ViewCompat.offsetTopAndBottom(target, -dy);
+    consumed[1] = dy;
+&#125;</code></pre>
+<p>看看效果。</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463962431/9c7d/5de5/23fb/493fc5c848bff12f453879c4004927a5.gif" alt="" /></p>
+<p><em>图5. 滑动效果演示</em></p>
+<p>现在已经实现了图片底部贴着列表顶部，并且图片滚跟随列表移动。但是这里有一个问题，就是当图片不可见的时候滚动的应该是列表内部元素，而不是对列表进行位移。我们可以通过<code>canScrollVertically</code>判断列表是否滚动到了顶部，如果列表可以向下滑动，则说明列表没有到顶部。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    if (dy &lt; 0) &#123; //手指下滑
+        //列表是否可以继续下滑，如果不可以，则说明列表到顶了
+        boolean canScrollDown = target.canScrollVertically(-1);
+        if (!canScrollDown) &#123;//列表到顶了，此时需要移动列表位置
+            ViewCompat.offsetTopAndBottom(target, -dy);
+            consumed[1] = dy; //滑动的距离被Behavior消耗了
+        &#125;
+    &#125; else if (dy &gt; 0) &#123; //手指上滑
+        //如果列表的位置已经在顶部了，则滑动内部元素，否则移动列表的位置
+        if (target.getTop() &gt; 0) &#123;
+            int maxDy = Math.min(target.getTop(), dy);
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            consumed[1] = maxDy;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>现在列表和图片都可以滚动了。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463990611/e85f/eee8/b06e/d10116319537053473939599c60d9dfc.gif" alt="" /></p>
+<p><em>图6. 支持列表内部滚动</em></p>
+<p>但是还是有点问题，列表会无限制的下移，我们可以限制列表下移为高度不超过图片的高度。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    if (dy &lt; 0) &#123; //手指下滑
+        //列表是否可以继续下滑，如果不可以，则说明列表到顶了
+        boolean canScrollDown = target.canScrollVertically(-1);
+        if (!canScrollDown) &#123;//列表到顶了，此时需要移动列表位置
+            //列表下移的位置不得超过 图片的高度
+            int maxDy = Math.max(dy, target.getTop() - child.getHeight());
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            //滑动的距离被Behavior消耗了
+            consumed[1] = maxDy;
+        &#125;
+    &#125; else if (dy &gt; 0) &#123; //手指上滑
+        //如果列表的位置已经在顶部了，则滑动内部元素，否则移动列表的位置
+        if (target.getTop() &gt; 0) &#123;
+            int maxDy = Math.min(target.getTop(), dy);
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            consumed[1] = maxDy;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>效果如下：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465299267/5bed/6f9b/86aa/6c6e018e0dba5f0926559aa8f4dc81a1.gif" alt="" /></p>
+<p><em>图7. 限制列表下移的最大位置</em></p>
+<p>现在就剩下最后一个问题了，那就是刚进来的时候图片不可见，我们希望布局的初始位置是图片显示默认高度，列表在图片的底部，所以我们可以重写<code>onLayoutChild</code>对列表进行布局。</p>
+<pre><code class="language-java">@Override
+public boolean onLayoutChild(@NonNull CoordinatorLayout parent, @NonNull View child, int layoutDirection) &#123;
+    parent.onLayoutChild(child, layoutDirection);
+    //获取child以来的控件列表
+    List&lt;View&gt; dependencies = parent.getDependencies(child);
+    if (dependencies.size() &gt; 0) &#123;
+        //因为这个我们只依赖了一个列表，所以直接取第0个元素
+        View dependency = dependencies.get(0);
+        ViewCompat.offsetTopAndBottom(dependency, child.getHeight());
+    &#125;
+    return true;
+&#125;</code></pre>
+<p>最终的效果就是这样的了：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif" alt="" /></p>
+<p><em>图8. 列表默认布局在图片下方</em></p></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/12/26/1608975415937212.video_thumb/">1608975415937212.video_thumb</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-12-26</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/10/30/getString%E8%BF%98%E6%98%AFoptString%EF%BC%9F/">getString还是optString？</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-10-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>使用Java的JSONObject解析Json数据时经常会遇到需要解析字符串的情况，那是该使用<code>getString</code>还是<code>optString</code>或者其他呢？</p>
+</blockquote>
+<h2>Json</h2>
+<p>假设现在有这样一个Json字符串，现在要获取<code>k</code>的值，要怎么做呢？</p>
+<pre><code class="language-json">&#123;
+    &quot;k&quot; : &quot;我是值&quot;
+&#125;</code></pre>
+<h2>使用getString</h2>
+<p>我心中暗暗自喜，这还不简单，直接使用JSONObject解析不就行了，看我操作一波。</p>
+<pre><code class="language-java">String json = &quot;&#123;\&quot;k\&quot;:\&quot;我是值\&quot;&#125;&quot;;
+try &#123;
+    JSONObject jsonObject = new JSONObject(json);
+    String k = jsonObject.getString(&quot;k&quot;);
+    System.out.println(&quot;k:&quot; + k);
+&#125; catch (JSONException e) &#123;
+    e.printStackTrace();
+&#125;</code></pre>
+<p>成功获取到了k的值“我是值”。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92b4d168d8642e72b1b4b7bdi7L2T301?sign=sZWUO6kN6KP9v4wvpi9Vtb8bL00=&amp;expire=1603957453" style=""  alt="popo_2020-10-23  18-47-33.jpg" /></p>
+<p>那如果Json的内容是这样的，k不存在了呢？</p>
+<pre><code class="language-json">&#123;
+    &quot;t&quot; : &quot;我是值&quot;
+&#125;</code></pre>
+<p>再次运行代码会抛出<code>JSONException</code></p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92b58f68d8642e60e41d096XZC57BH01?sign=qpoxmFtCNsWMzFGw6I59djVE4hI=&amp;expire=1603957453" style=""  alt="popo_2020-10-23  18-50-24.jpg" /></p>
+<h2>使用optString</h2>
+<p>虽然异常被catch住了，但是代码也被中断了，大多数情况我希望他能在值不存在的时候返回一个空字符串。于是我又改了一下代码，把<code>getString</code>换成了<code>optString</code>（为了演示的清晰，我把空字符串使用中文输出了出来）。</p>
+<pre><code class="language-java">String json = &quot;&#123;\&quot;t\&quot;:\&quot;我是值\&quot;&#125;&quot;;
+try &#123;
+    JSONObject jsonObject = new JSONObject(json);
+    String k = jsonObject.optString(&quot;k&quot;);
+    System.out.println(&quot;k:&quot; +  (k.isEmpty() ? &quot;空字符串&quot; : k));
+&#125; catch (JSONException e) &#123;
+    e.printStackTrace();
+&#125;</code></pre>
+<p>然后成功的返回了我期望的空字符串返回值。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c3ef68d8642e6c1de497MpzmiiKM01?sign=CmvwqPPD3Z_spWCP4R_qb3OFGpc=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.51.58.png" /></p>
+<p>直到有一天Json数据变成了这种的，k还存在，只是变成了null。</p>
+<pre><code class="language-json">&#123;
+    &quot;k&quot; : null
+&#125;</code></pre>
+<p>然后解析出来的k是<code>&quot;null&quot;</code>，这就很尴尬了，就算这个k是null，我也希望它解析成空字符串。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c4878c56741bf7d48fdbNa7LGlCL01?sign=22bSnGFwHsqnAdAAAVkW1i-O3F8=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.54.30.png" /></p>
+<h2>判断是否为null</h2>
+<p>当然这难不倒我，经过观察我发现，只有当这个数据是null的时候才会出现这个情况，那我提前判断一下是否为null然后在取值不就行了吗，于是有了下面的代码。</p>
+<pre><code class="language-java">String json = &quot;&#123;\&quot;k\&quot;: null &#125;&quot;;
+try &#123;
+    JSONObject jsonObject = new JSONObject(json);
+    String k = &quot;&quot;;
+    if (!jsonObject.isNull(&quot;k&quot;)) &#123;
+        k = jsonObject.optString(&quot;k&quot;);
+    &#125;
+    System.out.println(&quot;k:&quot; + (k.isEmpty() ? &quot;空字符串&quot; : k));
+&#125; catch (JSONException e) &#123;
+    e.printStackTrace();
+&#125;</code></pre>
+<p>最后结果也如我所愿，成功的输出了空字符串</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c4f468d8642e72b1b7caCYJieitv01?sign=Naokis8SGDl0937v22m0Zwli8zE=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.56.25.png" /></p>
+<h2>为什么会输出&quot;null&quot;</h2>
+<p>现在我知道在解析字符串的时候应该先判断这个值是否为null然后在使用optString获取值，那为什么值为null的时候会出现<code>&quot;null&quot;</code>呢？
+点开<code>optString(@Nullable String name)</code>会发现它调用了<code>optString(@Nullable String name, @NonNull String fallback)</code>，然后查看该函数可以看到，当name对应到值存在的时候就直接返回，否则返回fallback的值。而<code>optString(@Nullable String name)</code>默认使用的是空字符作为fallback。
+<img   src="http://pfp.ps.netease.com/kmspvt/file/5f92bcd48c56741bf7d48dc19kF1AVmm01?sign=ENNL2Mj-1Uzd_3r5dg4IX0oS8NM=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.21.42.png" /></p>
+<p>通过添加断点，可以看到object的值已经变成了<code>&quot;null&quot;</code>。
+<img   src="http://pfp.ps.netease.com/kmspvt/file/5f92be2d68d8642e6e165115BdP5NxL101?sign=cjjtIbkODUiGeI8dY0pcwswqDtc=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.27.27.png" /></p>
+<p>而<code>opt(@Nullable String name)</code>仅仅是将nameValuePairs对应的值取出来，所以重点变成了nameValuePairs是怎赋值进去的。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92be946158bc3fb8967656ZX4U0Ywb01?sign=faKnAXdXcArAhrBM_zJuT02Cd_M=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.28.26.png" /></p>
+<p>当我们使用Json字符串创建JSONObject对象的时候，会通过<code>JSONTokener</code>对字符串进行解析，如下：</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92bfdd6158bc3faebbde40P6qAYtiB01?sign=ATwYOIOoY1GozL3UJrLkuqFl_nY=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.34.41.png" /></p>
+<p>当值为null的时候会执行到default语句，调用<code>readLiteral()</code>。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c0826158bc3fa292d0ffTV33plNy01?sign=GHnP4D3MjgvGbXy1Y29e2vLy6VY=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.37.22.png" /></p>
+<p>当值为null的时候会返回一个<code>JSONObject.NULL</code>对象，而这个对象的toString方法刚好就是<code>&quot;null&quot;</code>。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c1442dcade27240ad9e81LDXu6U801?sign=1kTjrSlMRfw-GxkX_cfirGgpR6k=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.39.59.png" /></p>
+<p>在<code>optString</code>方法里面会获取对象的<code>toString</code>值，所以最终返回了<code>&quot;null&quot;</code>，那一切至此就可以结案了。</p>
+<p><img   src="http://pfp.ps.netease.com/kmspvt/file/5f92c1f58c56744310599b53Iw5WJr2N01?sign=63dOlo1zcPQGcGQHO97K7-10Snk=&amp;expire=1603957453" style=""  alt="截屏2020-10-23 下午7.43.35.png" /></p>
+<h2>总结</h2>
+<p>在使用<code>JSONObject</code>解析字符串的时候，如果需求是在值不存在或者为null的时候返回空字符串，可以先对该值进行<code>isNull</code>判断，如果不为null就使用<code>optString</code>获取值，否则返回空字符串。同样的对于其他的<code>optXXXX</code>方法使用前也需要注意一下，比如<code>optJSONObject</code>，该方法可以解析一个JSONObject对象，如果不存在就返回null，不过在使用这个返回的对象之前还是要先进行非空判断的。</p></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/10/29/Bangkok%20skyline%20at%20twilight,%20Thailand./">Bangkok skyline at twilight, Thailand.</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-10-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/08/03/%E7%BB%99Android%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84C%E8%AF%AD%E8%A8%80%E6%95%99%E7%A8%8B/">给Android程序员的C语言教程</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-08-03</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1>Java2Cpp</h1>
+<h2>基础类型</h2>
+<p>int、float、double、char等以及他们占用的内存空间 ### 字符串格式化</p>
+<pre><code>&lt;pre class=&quot;line-numbers&quot; data-start=&quot;1&quot; prism-highlight=&quot;&quot;&gt;```cpp
+#include &lt;sstream&gt;
+
+<p>int main()&#123;<br>    stringstream ss;<br>    int x = 1;<br>    ss &lt;&lt;  hello , i&#039;m no. &lt;&lt; x ;<br>    string   s = ss.str();<br>    retuen 0;<br>&#125;<br></code></pre></p>
+<pre><code>
+## 申请内存
+
+malloc/freee 创建和清除内存的时候不会调用构造函数与析构函数 new/delete 创建和清除内存等时候会调用构造函数与析构函数 ## 接口和抽象
+
+CPP没有`interface`关键字,所有的接口和抽象类一样，采用`class`定义，例如这里由一个抽象的接口`Say`，如下：
+
+```cpp
+class Say
+&#123;
+public:
+    virtual say();
+&#125;;
+</code></pre>
+<h3>虚函数</h3>
+<p>`virtual`表示的是该函数是虚函数，虚函数最重要的用处是：基类可以调用子类的具体实现。虚函数有一个兄弟叫纯虚函数，如下：</p>
+<pre><code class="language-cpp">class Say
+&#123;
+public:
+    virtual say()=0;
+&#125;;
+</code></pre>
+<p>当一个函数用`virtual`标记，并且函数结尾加上`=0`则表示该函数为纯虚函数，纯虚函数的功能是被标记的类必须由子类实现，本身不可以被实例化。</p>
+<h2>规范</h2>
+<ul>
+<li>所有的文件均以小写命名，不同单词直接使用`_`连接，例如`my_class.cpp`。</li>
+<li>类的定义使用驼峰命名的方式，首字母大写，例如`MyClass`。</li>
+<li>头文件需要加上`ifndef`、`define`、`endif`进行包装，定义的宏命名需要遵循`项目名_模块名_文件名_H`的格式。</li>
+</ul>
+<pre><code class="language-cpp">#ifndef PROJECT_MODULE_FILE_H
+#define PROJECT_MODULE_FILE_H
+//code
+#endif
+</code></pre>
+<h2>设计模式</h2>
+<p>用c++实现的常见设计模式。</p>
+<h3>单例模式</h3>
+<p>首先定义头文件`singleton.h`</p>
+<pre><code class="language-cpp">class Singleton
+&#123;
+public:
+    Singleton();
+    ~Singleton();
+    static Singleton& getInstance();
+&#125;;
+</code></pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/24/Java%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">Java单例模式</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>java单例模式 编写</p>
+<pre>public static ImageLoader getInstance() {
+    if(instance == null) {
+        Class var0 = ImageLoader.class;
+        synchronized(ImageLoader.class) {
+            if(instance == null) {
+                instance = new ImageLoader();
+            }
+        }
+    }
+
+<pre><code>return instance;
+</code></pre>
+<p>}</pre></p>
+<p>&nbsp;</p></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/24/H5%E7%9B%B4%E6%92%AD%E6%96%B9%E6%A1%88%E6%80%BB%E7%BB%93/">H5直播方案总结</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2>背景</h2>
+<p>最近因为工作原因对H5直播方案进行了调研，也算是有所收获，特将此记录下来，如有不对还请指正。此文写于2020年3月，开发与测试环境如下：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MacBook</td>
+<td>macOS 10.15.1</td>
+</tr>
+<tr>
+<td>iPhone</td>
+<td>iOS13.3.1</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>9.0</td>
+</tr>
+</tbody>
+</table></div>
+<h2>概述</h2>
+<p>一个直播系统由前端与后端两部分组成，此文仅探讨前端部分。前端根据视频产生的过程又可以分为视频采集、视频发送与视频播放。对于PC端的浏览器基本上都支持采集、发送和播放，但是对于移动端的浏览器就比较尴尬了，例如iOS的Safari就不支持视频采集（也许是我的方法不对）。</p>
+<h2>视频采集</h2>
+<p>网页实现视频采集主要是通过<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia" >MediaDevices.getUserMedia()</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>方法，不同的浏览器对此的支持程度不同，经测试，IE和iOS的Safari不支持此方法。</p>
+<h3>采集配置</h3>
+<p>我们可以手动的选择需要采集的数据源，例如是否需要音频/视频，或者视频的大小，甚至是视频的帧率。</p>
+<pre><code>navigator.mediaDevices.getUserMedia(&#123; audio: true, video: &#123; width: 1280, height: 720, frameRate: &#123; ideal: 20, max: 25 &#125; &#125; &#125;)
+</code></pre>
+<h3>获取采集的数据</h3>
+<p>getUserMedia()方法返回一个表示<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream" >MediaStream</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" >Promise</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>对象，使用<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL" >URL.createObjectURL()</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>可以将其转化为网页标签可以识别的地址，例如将摄像头数据直接显示到video标签上面。</p>
+<pre><code>var video = document.getElementById(video);
+navigator.mediaDevices.getUserMedia(&#123; audio: true, video: &#123; width: 1280, height: 720, frameRate: &#123; ideal: 20, max: 25 &#125; &#125; &#125;)
+        .then(function (stream) &#123;
+            // Older browsers may not have srcObject
+            if (srcObject in video) &#123;
+                video.srcObject = stream;
+            &#125; else &#123;
+                // Avoid using this in new browsers, as it is going away.
+                video.src = window.URL.createObjectURL(stream);
+            &#125;
+            video.onloadedmetadata = function (e) &#123;
+                video.play();
+            &#125;;
+        &#125;)
+        .catch(function (err) &#123;
+            console.log(err.name + :  + err.message);
+        &#125;);
+</code></pre>
+<h2>视频发送</h2>
+<p>获取了视频数据之后，我们还需要将视频发送给服务器或者其他客户端，这里有两个方案分别是<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/WebRTC" >WebRTC</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>和<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebSockets_API" >WebSockets</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，而WebSocket根据发送的内容又可以分为图片和视频两种。对于这几种方案主要优缺点如下表所示。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WebRTC</td>
+<td>延迟低，占用带宽小</td>
+<td>观众过多时不支持</td>
+</tr>
+<tr>
+<td>WebSockets发送图片</td>
+<td>方便帧进行单独分析处理，延迟较低</td>
+<td>占用带宽较大</td>
+</tr>
+<tr>
+<td>WebSockets发送视频</td>
+<td>支持视频和音频同时传输，占用带宽少</td>
+<td>切换视频片段时容易卡顿</td>
+</tr>
+</tbody>
+</table></div>
+<h3>WebRTC</h3>
+<p>（Web Real Time Communication）WebRTC即网页实时通信协议，可实现浏览器对浏览器的点对点通信，适合用来做视频/语音通话。因为是点对点通信，所以当观众数量太多时就会很复杂。目前网上一些开源的流媒体服务器支持WebRTC协议，可以用来对视频进行处理和转发，本文暂时没有对此进行研究😓。</p>
+<h3>WebSockets</h3>
+<p>WebSockets是一种先进的技术。它可以在用户的浏览器和服务器之间打开交互式通信会话。使用此API，您可以向服务器发送消息并接收事件驱动的响应，而无需通过轮询服务器的方式以获得响应。</p>
+<h4>WebSockets发送图片</h4>
+<p>将视频绘制在Canvas上面，然后按照固定的帧率捕获Canvas画面导出为Jpeg，并发送给服务器。这种方案实现简单，但是音频需要单独发送，音视频同步也比较麻烦。</p>
+<pre><code>var video = document.getElementById(video);
+var canvas = document.getElementById(canvas);
+var ctx = canvas.getContext(2d);
+setInterval(function () &#123;
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    var img = canvas.toDataURL(image/jpeg, 1);
+    socket.send(img);
+&#125;, 1000 / 20);
+</code></pre>
+<h4>WebSockets发送视频</h4>
+<p>将Canvas的图像和麦克风的音频组合录制成视频，然后发送给服务器，录制结束之后立马开始录制新的一个视频。为了减少延迟可以将视频的时长设置短一点，例如2秒。</p>
+<pre><code class="language-javascript">var video = document.getElementById(video);
+var canvas = document.getElementById(canvas);
+var ctx = canvas.getContext(2d);
+
+<p>const mediaRecorder = new mediaRecorder(canvas.captureStream(), &#123;<br>    mimeType: video/webm;codecs=vp9,<br>    audioBitsPerSecond: 128000,<br>    videoBitsPerSecond: 1280 * 720<br>&#125;);<br>const reader = new FileReader();</p>
+<p>mediaRecorder.ondataavilable = function (e) &#123;<br>    reader.addEventListener(loadend, function () &#123;<br>        socket.send(reader.result);<br>    &#125;);<br>    reader.readAsArrayBuffer(e.data);<br>&#125;</p>
+<p>setInterval(function () &#123;<br>    mediaRecorder.stop();<br>    mediaRecorder.start();<br>&#125;, 2000);<br></code></pre></p>
+<h2>视频播放</h2>
+<p>视频播放是H5直播方案里面的重点，实现视频播放，主要有这几种方案，分别是RTMP、HLS和JSmpeg/Broadway。</p>
+<h3>RTMP</h3>
+<p>RTMP（Real Time Messaging Protocol）即实时消息传输协议，由Adobe公司提出，需要依赖浏览器的Flash插件进行播放，可使用开源的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/videojs/video.js" >video.js</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>直接播放RTMP流。在如今所有的浏览器都抛弃Flash的基础上，此方案兼容性有很大的问题，但是现在主流的视频直播网站似乎都是这个方案。</p>
+<h3>HLS</h3>
+<p>HLS（Http Live Streaming）是Apple的动态码率自适应技术，包括一个m3u(8)的索引文件，TS媒体分片文件和key加密串文件。其原理就是将一个视频切分为多个单独的小视频，将小视频的地址记录到一个文件里面（m3u8）发送给浏览器，浏览器按顺序播放每一个视频。这种方案在各大视频网站用的很多，因为可以很方便的插入广告。使用浏览器播放HLS视频十分简单，只需要将m3u8的地址放在video标签即可，如下：</p>
+<pre><code class="language-html">&lt;video controls preload=auto  autoplay=autoplay loop=loop webkit-playsinline&gt;
+    &lt;source src=http://localhost:8089/hls/test.m3u8 type=application/vnd.apple.mpegurl /&gt;
+    &lt;p class=warning&gt;Your browser does not support HTML5 video.&lt;/p&gt;
+&lt;/video&gt;
+</code></pre>
+<h3>JSMpeg/Broadway</h3>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/phoboslab/jsmpeg" >JSMpeg</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>是用JS编写的Mpeg1/MP2解码器，而<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/mbebenita/Broadway" >Broadway</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>是用JS编写的H264解码器。之所以将它们视为同一个方案是因为它们都是基于JS解码视频流用Canvas显示，不过JSMpeg支持视频和音频同时解码，而Broadway仅支持视频，所以实际使用JSMpeg会方便些。 #### FFmpeg参数设置</p>
+<p>JSmpeg的Github主页里面有一个服务端推流的demo，利用FFmpeg将视频转码并发送到中转服务器，然后再通过WebSockets发送给网页。这里面对于FFmpeg的参数需要注意一下，以免推流之后的视频无法播放，我使用的参数如下：</p>
+<pre><code class="language-shell">ffmpeg -re -i input.mp4 -f mpegts -codec:v mpeg1video -codec:a mp2 -s 640x480 -r 25 http://localhost:8081/&lt;secret&gt;
+</code></pre>
+<p>具体参数的意思见下表：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-re</td>
+<td><strong>非常重要</strong> 必须放在-i前面，表示按照视频的实际帧率发送数据</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>输入视频源</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>视频容器格式</td>
+</tr>
+<tr>
+<td>-codec:v</td>
+<td>视频编码格式</td>
+</tr>
+<tr>
+<td>-codec:a</td>
+<td>音频编码格式</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>视频大小</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>视频帧率</td>
+</tr>
+</tbody>
+</table></div>
+<h2>相关链接</h2>
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/mbebenita/Broadway" >Broadway Github主页</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>[JSMpeg Github主页]()</li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/videojs/video.js" >video.js Github主页</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/f5eaeb3fe953" >又拍云关于RTMP、Http FLV、HLS的文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://aotu.io/notes/2016/10/09/HTML5-SopCast/?o2src=juejin&amp;o2layout=compat" >H5直播起航</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/2/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/4/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

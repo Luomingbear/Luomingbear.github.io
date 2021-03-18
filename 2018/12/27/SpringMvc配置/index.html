@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。  1.IntelliJ IDE  一开始我下载的社区版的Intell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMvc配置">
+<meta property="og:url" content="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。  1.IntelliJ IDE  一开始我下载的社区版的Intell">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/spring20181212121212.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/spring_20181227144525.png">
+<meta property="og:image" content="https://file.2fun.xyz/spring_20181227152642.png">
+<meta property="og:image" content="https://file.2fun.xyz/spring_20181227155753.png">
+<meta property="og:image" content="https://file.2fun.xyz/spring_20181227155953.png">
+<meta property="article:published_time" content="2018-12-27T08:24:02.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.998Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/spring20181212121212.jpg"><title>SpringMvc配置 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SpringMvc配置</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><img src="https://file.2fun.xyz/spring20181212121212.jpg" alt="" />
+Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。
+
+<h3>1.IntelliJ IDE</h3>
+
+<p>一开始我下载的社区版的IntelliJ，发现项目中没有Spring的选项，看网上的教程都可以直接点击Spring创建项目，后来才知道<strong>需要下载完整版的IDE</strong>，破解的方式就不写了，可自行百度。</p>
+<h3>2.创建Maven工程</h3>
+
+<p>我们可以直接使用IDE创建SpringMvc的工程，但是由于目录结构与网络教程差异过大，新人表示看不懂，所以选择了创建Maven工程。大多数的Spring项目都是使用Maven构建的，通过它可以方便的实现依赖管理。很多有用的插件也在maven的仓库可以找到。<br><strong>NEW Project</strong>的时候找到<strong>Maven</strong>打开<strong>Create from archetype</strong>选择后缀为<strong>webapp</strong>的方式创建项目。<br>点击<strong>Next</strong>，填写goupId等信息就可以打开项目了。<br><img src="https://file.2fun.xyz/spring_20181227144525.png" alt="" /></p>
+<h3>3.添加依赖</h3>
+
+<p>打开<code>pom.xml</code>文件，可以在<code>properties</code>标签里面定义参数，下面的<code>dependencies</code>就可以直接使用了，这样便于版本管理。例如</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
+         &lt;!--这是spring的版本号--&gt;
+        &lt;spring.version&gt;4.3.18.RELEASE&lt;/spring.version&gt;
+        &lt;jackson.version&gt;2.9.7&lt;/jackson.version&gt;
+&lt;/properties&gt;
+</code></pre>
+
+<p>插入springmvc的依赖</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.11&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--json转换的库--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;
+        &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+
+<p>依赖添加完毕之后，鼠标右键选择<code>Maven-&gt;Reimport</code>就可以将依赖导入项目了。</p>
+<h3>4.设置文件夹</h3>
+
+<p>在<code>src/main</code>目录下面创建两个文件夹<code>java</code>和<code>resources</code>分别作为代码文件夹和资源文件夹。鼠标选中<code>java</code>文件夹，右键执行<code>Make Directory as -&gt;Sources Root</code>；鼠标选中<code>resources</code>文件夹，鼠标右键执行<code>Make Directory as -&gt;Resources Root</code></p>
+<h3>5.配置web.xml</h3>
+
+<p>打开<code>webapp/WEB-INF/web.xml</code>文件配置springMvc。<br>首先需要添加<code>servlet</code>,在<code>web-app</code>标签内加入如下代码</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml"><br />    &lt;!--配置servlet处理请求--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!--自定义servlet配置文件地址--&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;!--classpath:指向的是resources文件夹--&gt;
+            &lt;param-value&gt;classpath:config/Hello-Servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
+        &lt;!--/表示任何形式的请求都可以通过，可以设置为.do表示后缀为.do的接口才可以访问--&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>打开<code>classpath:config/Hello-Servlet.xml</code>文件，继续配置SpringMvc</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">    &lt;!--打开注解扫描--&gt;
+    &lt;mvc:annotation-driven/&gt;
+
+    &lt;!--注解扫描的位置--&gt;
+    &lt;context:component-scan base-package="com.demo"/&gt;
+
+    &lt;!--配置view资源的生成器，在prefix文件夹寻找后缀为suffix的文件--&gt;
+    &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+        &lt;!--寻找jsp文件的路径--&gt;
+        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
+        &lt;property name="suffix" value=".jsp"/&gt;
+    &lt;/bean&gt;
+</code></pre>
+
+<h3>6.编写hello.jsp</h3>
+
+<p>在<code>webapp/WEB-INF/pages</code>下面创建文件<code>hello.jsp</code>,之所以在这个目录是因为我们在<code>/Hello-Servlet.xml</code>里面配置了InternalResourceViewResolver的路径为<code>/WEB-INF/pages/</code>。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-jsp">&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Jsp Page
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h3>7.编写Controller</h3>
+
+<p>在<code>com.demo</code>（这个目录取决于你定义的项目goupId）目录下面创建一个<code>HelloController</code>：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Controller
+public class HelloController &#123;
+
+    @RequestMapping(value = "helloPage", method = RequestMethod.GET)
+    public String helloPage() &#123;
+        //返回名字为hello.jsp的view
+        return "hello";
+    &#125;
+
+    //ResponseBody注解说明返回的不是一个view，而是数据，RequestMapping注解指定接口访问的url地址
+    @ResponseBody
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    public String hello() &#123;
+        return "Nice to meet U";
+    &#125;
+&#125;
+</code></pre>
+
+<h3>8.运行</h3>
+
+<p>在IDE的右上角，点击<code>Add Configuration</code>,然后点击做上角的加号，新建一个tomcat服务<br><img src="https://file.2fun.xyz/spring_20181227152642.png" alt="" /><br>提示<strong>Warning: No artifacts marked for deployment</strong>,我们点击右边的<code>Fix</code>按钮，选择一个war包，点击<code>Ok</code>就可以了。<br>现在我们运行工程，编译完成之后会默认打开网页，可以看到“Hello World”的默认页面。<br>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/helloPage" >http://localhost:8085/hello_war/helloPage</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155753.png" alt="" /></p>
+<p>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/hello" >http://localhost:8085/hello_war/hello</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155953.png" alt="" /></p>
+<p>至此简单的SpringMvc就搭建完毕了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/">https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SpringMvc返回值中文乱码</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/05/AndroidLint%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__text">AndroidLint使用</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.IntelliJ IDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.创建Maven工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3.添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4.设置文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5.配置web.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6.编写hello.jsp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">7.编写Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">8.运行</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

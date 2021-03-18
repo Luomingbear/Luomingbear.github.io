@@ -1,0 +1,1029 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
+<meta property="og:type" content="website">
+<meta property="og:title" content="罗啰明天">
+<meta property="og:url" content="https://luomingbear.github.io/page/13/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="不只是技术">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/page/13/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/11/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%20%E4%B8%A4%E4%B8%AA%E6%A0%88%E6%9D%A5%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97/">剑指Offer（Python） 两个栈来实现队列</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>推荐在线编程平台</h3>
+
+<p><strong><span class="exturl"><a class="exturl__link"   href="https://www.nowcoder.com"  target="_blank" rel="noopener noreferrer">牛客网在线编程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></strong></p>
+<h3>题目描述</h3>
+
+<blockquote>
+用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。
+</blockquote>
+
+<h3>分析</h3>
+
+<p>题目要求我们用两个栈实现队列的效果，在python里面没有栈，但是我们可以用List模拟。<code>list.append(obj)</code>和<code>list.pop()</code>可以表示栈进和出操作。所以我们只需要想办法实现队列的队首删除的效果：我们可以用一个栈1来记录插入，用栈2将记录的数据进行颠倒顺序，这样获取栈1的第一个元素就是等同于获取栈2的最后一个元素。</p>
+<h4>基本概念</h4>
+
+<ul>
+    <li><strong>栈</strong>
+栈是一种特殊的线性表，限定在表头进行插入和删除操作。
+</li>
+    <li><strong>队列</strong>
+队列是一种特殊的线性表，限定在表尾插入，表头删除。
+</li>
+</ul>
+
+<h4>相关方法</h4>
+
+<p><strong>append()</strong></p>
+<blockquote>
+<pre>
+list.append(obj)
+</pre>
+<ul>
+    <li><code>obj</code> -- 添加到列表末尾的对象。</li>
+</ul>
+</blockquote>
+
+<p><strong>pop()</strong></p>
+<blockquote>
+<pre>
+list.pop(obj=list[-1])
+</pre>
+<ul>
+    <li><code>obj</code> -- 可选参数，要移除列表元素的对象，默认最后一个</li>
+</ul>
+</blockquote>
+
+<h3>代码</h3>
+
+<pre>
+# -*- coding:utf-8 -*-
+class Solution:
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
+
+    def push(self, node):
+        self.stack1.append(node)
+
+    def pop(self):
+        if self.stack2 == []:
+            while self.stack1:
+                p = self.stack1.pop()
+                self.stack2.append(p)
+        return self.stack2.pop()
+</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/11/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91/">剑指Offer（Python）重建二叉树</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>推荐在线编程平台</h3>
+
+<p><strong><span class="exturl"><a class="exturl__link"   href="https://www.nowcoder.com"  target="_blank" rel="noopener noreferrer">牛客网在线编程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></strong></p>
+<h3>题目描述</h3>
+
+<blockquote>
+输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。
+</blockquote>
+
+<h3>相关知识</h3>
+
+<p>题目要求根据前序遍历序列和中序遍历序列还原二叉树，我们先对二叉树进行简单的介绍，在简单介绍前序遍历、中序遍历、后序遍历的原理。</p>
+<h4>基本概念</h4>
+
+<p>二叉树是树的特殊一种:每个结点最多有两颗子树，结点的度最大为2;左子树和右子树是有顺序的，次序不能颠倒。<br><img src="https://file.2fun.xyz/twoforktree1.png" alt="二叉树" /></p>
+<h4>遍历</h4>
+
+<ul>
+    <li>前序遍历
+访问顺序：根节点 <code>-></code> 左子树 <code>-></code> 右子树。
+</li>
+
+<pre><code>    &lt;li&gt;中序遍历
+</code></pre>
+<p>访问顺序：左子树 <code>-></code> 根节点 <code>-></code> 右子树。</p>
+</li>
+
+<pre><code>    &lt;li&gt;后序遍历
+</code></pre>
+<p>访问顺序：左子树 <code>-></code> 右子树 <code>-></code> 根节点。</p>
+</li>
+</ul>
+
+<img src="https://file.2fun.xyz/twoforktree_bianli.png" alt="二叉树遍历效果图" />
+
+<h3>代码</h3>
+
+<pre>
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    
+    def reConstructBinaryTree(self, pre, tin):
+        if (len(pre) == 0):
+            return None
+        elif(len(pre) == 1):
+            return TreeNode(pre[0])
+        else:
+            rootNode = TreeNode(pre[0])
+            #遍历获得左节点
+            rootNode.left = self.reConstructBinaryTree(
+                pre[1: tin.index(pre[0]) + 1], tin[:tin.index(pre[0])])
+            #遍历获得右节点
+            rootNode.right = self.reConstructBinaryTree(
+                pre[tin.index(pre[0]) + 1:], tin[tin.index(pre[0]) + 1:])
+            return rootNode
+</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/10/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%20%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/">剑指Offer（Python） 从尾到头打印链表</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>推荐编程平台</h3>
+
+<p><span class="exturl"><a class="exturl__link"   href="https://www.nowcoder.com/"  target="_blank" rel="noopener noreferrer">牛客网在线编程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<h3>题目描述</h3>
+
+<blockquote>输入一个链表，从尾到头打印链表每个节点的值。
+</blockquote>
+
+<h3>分析</h3>
+
+<p>链表的结构如下：</p>
+<pre>
+class ListNode:
+     def __init__(self, x):
+         self.val = x
+         self.next = None
+</pre>
+
+<p>题目比较简单，要求是逆序打印链表的值，通过查看其他的语言版本的方法函数，我们可以知道系统判断成功的要求是返回一个逆序的数组。所以我们可以先构造一个空数组，通过判断<code>ListNode</code>的<code>next</code>查看下一个<code>ListNode</code>的值，将<code>ListNode</code>的<code>val</code>保存在数组里面就可以了。需要注意的时题目要求逆序，所以我们在保存数据的时候要插入到首位，涉及的方法为<code>insert()</code>。</p>
+<p><strong>insert()</strong></p>
+<blockquote>
+<pre>
+list.insert(index, obj)
+</pre>
+<ul>
+    <li><code>index </code>-- 对象 obj 需要插入的索引位置。</li>
+    <li><code>obj </code>-- 要插入列表中的对象。</li>
+</ul>
+</blockquote>
+
+<h3>代码</h3>
+
+<pre>
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    # 返回从尾部到头部的列表值序列，例如[1,2,3]
+    def printListFromTailToHead(self, listNode):
+        l = []
+        head = listNode
+        while head:
+            l.insert(0, head.val)
+            head = head.next
+        return l
+</pre></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/10/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/">剑指Offer（Python）替换空格</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>推荐编程平台</h3>
+<span class="exturl"><a class="exturl__link"   href="https://www.nowcoder.com/"  target="_blank" rel="noopener noreferrer">牛客网在线编程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>
+
+<h3>题目描述</h3>
+<blockquote>请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。
+</blockquote>
+
+<h3>分析</h3>
+题目要求替换空格，使用<code>Python</code>可以轻松的实现这个效果,使用Python的内置函数<code>replace</code>即可
+<strong>replace()</strong>
+
+
+<blockquote>
+<pre>
+str.replace(old, new[, max])
+</pre>
+<ul>
+    <li><code>old</code> -- 将被替换的子字符串。</li>
+
+<pre><code>&lt;li&gt;&lt;code&gt;new&lt;/code&gt; -- 新字符串，用于替换old子字符串。&lt;/li&gt;
+
+&lt;li&gt;&lt;code&gt;max&lt;/code&gt; -- 可选字符串, 替换不超过 max 次&lt;/li&gt;
+</code></pre>
+</ul>
+</blockquote>
+
+
+<h3>代码</h3>
+<pre>
+# -*- coding:utf-8 -*-
+class Solution:
+    # s 源字符串
+    def replaceSpace(self, s):
+        # write code here
+        return s.replace(' ','%20')
+</pre>
+
+
+
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/10/11746120_183226463117_2%5B1%5D/">11746120_183226463117_2[1]</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/10/11656401_184458403112_2%5B1%5D/">11656401_184458403112_2[1]</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/10/%E5%89%91%E6%8C%87Offer%EF%BC%88Python%EF%BC%89%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/">剑指Offer（Python）二维数组中的查找</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-10</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>推荐在线编程平台</h3>
+<span class="exturl"><a class="exturl__link"   href="https://www.nowcoder.com"  target="_blank" rel="noopener noreferrer">牛客网在线编程</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>
+
+<h3>题目描述</h3>
+<blockquote>
+在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
+</blockquote>
+
+<h3>分析</h3>
+由题意我们可以知道，该二维数组最左上角的元素最小，最右下角的元素最大，所以我们可以先判断目标值与这两个元素的大小。这里有两种情况我们可以分别考虑：
+<ul>
+    <li><strong>目标超过这两个元素的范围</strong></li>
+如果目标小于数组最小值或者大于最大值，那么我们就可以判断出它不在二维数组里面。
+    <li><strong>目标在两个元素之间</strong></li>
+当目标元素在两个值之间的时候，我们可以对二维数组进行遍历，判断每一层的元素：如果目标元素比该层第一个小或者比最后一个元素大，则说明不在该层，直接跳过。如果目标元素在该层范围里面，则遍历该层，如果没有元素与之匹配则说明该二维数组不包含目标值。
+
+</ul>
+
+
+<h3>代码</h3>
+<pre>
+# -*- coding:utf-8 -*-
+class Solution:
+    # array 二维列表
+    def Find(self, target, array):
+        if (array == None or len(array) == 0):
+            return 0
+
+<pre><code>    for x in array:
+        if (x == None or len(x) == 0):
+            return 0
+
+        if (x[0] &gt; target and x[len(x) - 1] &lt; target):
+            break
+
+        for y in x:
+            if (y == target):
+                return 1
+
+    return 0
+</code></pre>
+<p></pre><br>也可以直接用两个for循环判断每一个元素与目标的值</p>
+<pre>
+# -*- coding:utf-8 -*-
+class Solution:
+    # array 二维列表
+    def Find(self, target, array):
+        for x in array:
+            for y in x:
+                if (y == target):
+                    return 1
+        return 0
+</pre>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/10/07/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84VPN%E6%9C%8D%E5%8A%A1%E5%99%A8/">搭建自己的VPN服务器</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-10-07</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>购买服务器</h3>
+
+<p>搭建VPN的重要一步就是选择一个境外的服务器用来代理数据，这里推荐使用<a href="https://www.vultr.com/?ref=7226530" target="_blank" rel="noopener noreferrer"><strong>vultr</strong></a>，性价比高，按小时计费，不满意直接销毁就可以了。<br>可以点击下面的图片注册，对我们都有好处的。<br><a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=7226530"><img src="https://www.vultr.com/media/banner_1.png" width="728" height="90"></a></p>
+<h3>安装Shadowsocks脚本</h3>
+
+<p>Shadowsocks是一个基于python的轻量级socks代理软件,可以在任何系统简单的实现访问被屏蔽的网站。网友也常称为科学上网，简称ss,在此分享与记录CentOS一键安装shadowsocks脚本。</p>
+<h4>使用root用户登录，运行以下命令：按照提示输入即可</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log
+</code></pre>
+
+<h4>安装完成后，脚本提示如下：</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">Congratulations, shadowsocks install completed!
+Your Server IP:your_server_ip
+Your Server Port:8989
+Your Password:your_password
+Your Local IP:127.0.0.1
+Your Local Port:1080
+Your Encryption Method:aes-256-cfb
+
+Welcome to visit:http://teddysun.com/342.html
+Enjoy it!
+</code></pre>
+
+<h4>卸载方法</h4>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">./shadowsocks.sh uninstall
+</code></pre>
+
+<h4>配置文件</h4>
+
+<p>配置文件路径为：<code>/etc/shadowsocks.json</code><br>单用户配置：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-json">&#123;
+    "server":"your_server_ip",
+    "server_port":8989,
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"yourpassword",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": false
+&#125;
+</code></pre>
+
+<p>多用户配置：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-json">&#123;
+    "server":"0.0.0.0",
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "port_password":&#123;
+         "8989":"password0",
+         "9001":"password1",
+         "9002":"password2",
+         "9003":"password3",
+         "9004":"password4"
+    &#125;,
+    "timeout":300,
+    "method":"your_encryption_method",
+    "fast_open": false
+&#125;
+</code></pre>
+
+<h4>五、相关使用命令</h4>
+
+<ul>
+<li>启动
+<code>/etc/init.d/shadowsocks start</code></p></li>
+<li><p>停止
+<code>/etc/init.d/shadowsocks stop</code></p></li>
+<li><p>重启
+<code>/etc/init.d/shadowsocks restart</code></p></li>
+<li><p>状态
+<code>/etc/init.d/shadowsocks status</code></p></li>
+</ul>
+
+<p><strong>使用方法：</strong>
+默认配置服务器端口：8989客户端端口：1080，密码：自己设定（如不设定，默认为teddysun.com），多用户配置后需要<strong>重启</strong>shadowsocks服务。
+
+<h3>安装BBR加速</h3>
+
+<p>终端输入</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-sh">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh
+</code></pre>
+
+<p>安装完成后，脚本会提示需要重启 VPS，输入 y 并回车后重启。</p>
+<h3>客户端下载</h3>
+
+<ul>
+<li><strong>Win:</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/Shadowsocks_win-4.0.6.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+<li><p><strong>Mac:</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/Shadowsocks_macos-1.6.1.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+<li><p><strong>Android：</strong>
+<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/shadowsocks_android-4-1-8.zip" >点击下载</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p></li>
+</ul>
+
+<h3>注意事项</h3>
+
+<p>用centOS6系统配置了多用户之后可能会出现多用户配置失败的问题，这个问题是由于系统的防火墙关闭了端口，我们可以在服务器提供商的控制面板设置防火墙。这里简单写下Vultr的防火墙设置：
+
+<p><strong>进入防火墙配置</strong><br><img src="https://file.2fun.xyz/vultr_firwall_panal.png" alt="进入防火墙设置" /></p>
+<p><strong>配置防火墙</strong><br>将你在<code>/etc/shadowsocks.json</code>里面配置的端口添加进去<br><img src="https://file.2fun.xyz/vultr_firwall_setting.png" alt="配置防火墙" /></p>
+<p>如果设置面板添加了端口之后仍然不行可以尝试命令行的方式：</p>
+<ul>
+<li><p>查看开启的端口列表：
+<code>firewall-cmd --list-ports</code></p></li>
+<li><p>开启某个端口
+<code>firewall-cmd --zone=public --add-port=9001/tcp --permanent</code>，此处的9001替换为你想要开启的端口号</p></li>
+<li><p>重启防火墙
+<code>firewall-cmd --reload</code></p></li>
+</ul></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/09/29/Android%E4%BE%A7%E6%BB%91%E8%8F%9C%E5%8D%95%E5%AE%9E%E7%8E%B0/">Android侧滑菜单实现</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3>引言</h3>
+
+<p>所有代码已经上传到<strong><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/Luomingbear/SedeslipLayout" >GitHub</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></strong>，有兴趣的可以下载查看。<br>在平时的生活中，我们经常会看到一些使用了侧滑菜单的应用，例如QQ、滴滴等，侧滑动画可以增加应用的活性，显得不那么死板，如图：<br><img src="https://file.2fun.xyz/sidesliplayout_gcross_shows.gif" alt="“机核”侧滑菜单" /><br>今天我们的任务是实现了一通用的侧滑布局，不仅仅支持左右滑，还支持上下滑。</p>
+<h3>自定义FrameLayout</h3>
+
+<p>我选择通过自定义的FrameLayout来实现侧滑菜单的效果，因为我希望能够实现四个边都可以侧滑，并且可以通过配置来自由的设置侧滑的view，每个侧滑菜单可以自由的设定显示比例。于是我设计了一个<code>ViewItem</code>的类，用来存放view的缩放比例信息。</p>
+<pre>
+ //布局和缩放比例的类,已经省略 set/get方法
+    class ViewItem {
+        View layout; //View视图
+        float scale; //显示比例
+    }
+</pre>
+
+<h3>显示主界面</h3>
+
+<p>通过重写<code>onLayout(boolean changed, int left, int top, int right, int bottom)</code>，我们可以自由的设定view的显示位置和大小。</p>
+<pre>
+   @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        //移除所有的布局
+        removeAllViewsInLayout();
+
+        //加入主界面
+        if (mHomeView != null) {
+            addView(mHomeView);
+            mHomeView.layout(0, 0, mWidth, mHeight);
+        }
+    }
+</pre>
+
+<p>其中<code>mWidth</code>和<code>mHeight</code>表示空间的宽高，可以在<code>onSizeChanged(int w, int h, int oldw, int oldh)</code>方法里面设置，每次当空间大小发生变化的时候就更新宽高。<br>最后效果如下：<br><img src="https://file.2fun.xyz/sidesliplayout_homeview.png" alt="显示主界面" /></p>
+<h3>显示侧滑的菜单页面</h3>
+
+<p>在上面的代码后面加上如下的方法，添加上下左右的侧滑菜单。</p>
+<pre>
+//加入左边的界面
+        addItemView(mLeftViewItem, Gravity.LEFT);
+
+        //加入上面边的界面
+        addItemView(mTopViewItem, Gravity.TOP);
+
+        //加入右边的界面
+        addItemView(mRightViewItem, Gravity.RIGHT);
+
+        //加入下边的界面
+        addItemView(mBottomViewItem, Gravity.BOTTOM);
+</pre>
+
+<p>其中<code>addItemView(SideslipViewItem viewItem, int position)</code>是根据传递的viewItem和position设置显示的内容和位置</p>
+<pre>
+ /**
+     * 添加侧滑的view
+     *
+     * @param viewItem
+     * @param position 位置
+     */
+    private void addItemView(SideslipViewItem viewItem, int position) {
+        if (viewItem == null || viewItem.getLayout() == null)
+            return;
+
+        switch (position) {
+            case Gravity.LEFT: {
+                int x = (int) (-mWidth * viewItem.getScale());
+                viewItem.getLayout().layout(x, 0, 0, mHeight);
+            }
+            case Gravity.TOP: {
+                int t = (int) (-mHeight * viewItem.getScale());
+                viewItem.getLayout().layout(0, t, 0, 0);
+            }
+            case Gravity.RIGHT: {
+                int r = (int) (mWidth * (1 + viewItem.getScale()));
+                viewItem.getLayout().layout(mWidth, 0, r, mHeight);
+            }
+            case Gravity.BOTTOM: {
+                int b = (int) (mHeight * (1 + viewItem.getScale()));
+                viewItem.getLayout().layout(0, mHeight, mWidth, b);
+            }
+        }
+    }
+</pre>
+
+<h3>添加手指交互</h3>
+
+<p>为了不影响内部的view的点击响应，我们需要在<code>onInterceptTouchEvent(MotionEvent ev)</code>里面处理手指触摸逻辑，返回值为<code>true</code>则说明拦截掉触摸事件，不向下层传递。先定义几个变量：</p>
+<pre>
+    private float mTouchStartX = 0;  //手指按下的x
+    private float mTouchStartY = 0; //手指按下的y
+    private float mTouchMoveX = 0; //移动的x
+    private float mTouchMoveY = 0; //移动的y
+    private float mInterceptMoveX = 0; //手指移动的x
+    private float mInterceptMoveY = 0; //手指移动的y
+</pre>
+
+<p>重写<code>onInterceptTouchEvent(MotionEvent ev)</code>:</p>
+<pre>
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                //保存手指按下的坐标
+                mTouchStartX = ev.getX();
+                mTouchStartY = ev.getY();
+
+                mInterceptMoveX = mTouchStartX;
+                mInterceptMoveY = mTouchStartY;
+                mTouchMoveX = mTouchStartX;
+                mTouchMoveY = mTouchStartY;
+
+                touchDownTime = System.currentTimeMillis(); //保存当前时间
+                break;
+            }
+
+            case MotionEvent.ACTION_MOVE: {
+                float x = ev.getX();
+                float y = ev.getY();
+                mInterceptMoveX = x - mInterceptMoveX;
+                mInterceptMoveY = y - mInterceptMoveY;
+                
+                /**
+                 * 先判断手指按下时是否在边界
+                 * 如果在边界，并且手指滑动的距离大于10； 则拦截触摸事件
+                 */
+                if (computeIsTouchInSide(mTouchStartX, mTouchStartY) || isShowingSide) {
+                    if (Math.abs(mInterceptMoveX) > 10 || Math.abs(mInterceptMoveY) > 10) {
+                        return true;
+                    }
+                }
+
+
+                break;
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+   /**
+     * 计算手指按下的位置是否是在侧滑响应区域
+     *
+     * @param x 按下x
+     * @param y 按下y
+     * @return
+     */
+    private boolean computeIsTouchInSide(float x, float y) {
+        if (x < mWidth / 4 || x > mWidth / 4f * 3 || y < mHeight / 4 || y > mHeight / 4f * 3)
+            return true;
+        return false;
+    }
+</pre>
+
+<p>拦截了触摸事件之后，我们在<code>onTouchEvent(MotionEvent event)</code>里面进行事件的处理。因为要实现手指跟随的效果，所以我们要对<code>MotionEvent.ACTION_MOVE</code>进行处理。</p>
+<pre>
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE: {
+                float x = event.getX();
+                float y = event.getY();
+                //变化的值
+                float disX = x - mTouchMoveX;
+                float disY = y - mTouchMoveY;
+                //更新上一次手指滑动的坐标
+                mTouchMoveX = x;
+                mTouchMoveY = y;
+
+                Log.d(TAG, "onTouchEvent: x:" + disX);
+                //移动view
+                touchMoveViews(disX, disY);
+
+                break;
+            }
+    }
+</pre>
+
+<p>最后效果如下：<br><img src="https://file.2fun.xyz/sidesliplayout_normal_move.gif" alt="简单的手指交互" /></p>
+<h3>添加动画效果</h3>
+
+<p>给布局加上动画，当手指抬起来的时候就执行，在上面的代码里面加上<code>MotionEvent.ACTION_CANCEL</code>和<code>MotionEvent.ACTION_UP</code>的处理</p>
+<pre>
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP: {
+                float x = event.getX();
+                float y = event.getY();
+
+                //移动距离不够则不进行动画
+                if (Math.abs(x - mTouchStartX) < 50 && Math.abs(y - mTouchStartY) < 50)
+                    break;
+                /**
+                 * 计算手指抬起的位置，判断是否应该显示或者隐藏侧滑菜单
+                 */
+                if (computeIsShowSide(event.getX(), event.getY()))
+                    animateShowSideView(event.getX(), event.getY(), mMoveSide);
+                else
+                    animateHideSideView(event.getX(), event.getY(), mMoveSide);
+
+                break;
+            }
+</pre>
+
+<p>判断是否需要显示或者隐藏的方法如下:</p>
+<pre>
+   /**
+     * 计算是需要显示侧滑菜单还是隐藏
+     *
+     * @return true:显示侧滑菜单 false ：隐藏侧滑菜单
+     */
+    private boolean computeIsShowSide(float x, float y) {
+        //如果手指放下的时候没有在规定区域，则不进行动画
+        if (isShowingSide && !computeIsTouchInSide(mTouchStartX, mTouchStartY))
+            return true;
+        else if (!isShowingSide && !computeIsTouchInSide(mTouchStartX, mTouchStartY))
+            return false;
+
+        long time = System.currentTimeMillis() - touchDownTime;
+        float speed = 0;
+        switch (mMoveSide) {
+            case Gravity.LEFT: {
+                speed = (x - mTouchStartX) / time;
+                if (speed > 1)
+                    return true;
+                break;
+            }
+            case Gravity.RIGHT: {
+                speed = (x - mTouchStartX) / time;
+                if (speed < -1)
+                    return true;
+                break;
+            }
+            case Gravity.TOP: {
+                speed = (y - mTouchStartY) / time;
+                if (speed > 1)
+                    return true;
+                break;
+            }
+            case Gravity.BOTTOM: {
+                speed = (y - mTouchStartY) / time;
+                if (speed < -1)
+                    return true;
+                break;
+            }
+        }
+
+        //手指滑动超过半个屏幕也可以启动动画
+        if ((x - mTouchStartX) > mWidth / 2 || (y - mTouchStartY) > mHeight / 2)
+            return true;
+
+        return false;
+    }
+</pre>
+
+<p>设置动画，通过<code>ObjectAnimator</code>可以设置动画，我们只需要用它来获取中间的插值，然后后更新view的位置就可以了</p>
+<pre>
+ /**
+     * 执行view动画
+     * 在手指抬起的时候执行
+     *
+     * @param x
+     * @param y
+     * @param gravity //执行动画的侧边
+     */
+    private void animateShowSideView(float x, float y, int gravity) {
+        float startVal = 0;
+        float endVal = 0;
+        switch (gravity) {
+            case Gravity.LEFT: {
+                if (mLeftViewItem == null)
+                    break;
+                startVal = mLeftViewItem.getLayout().getX();
+                endVal = 0;
+                break;
+            }
+            case Gravity.TOP: {
+                if (mTopViewItem == null)
+                    break;
+                startVal = mTopViewItem.getLayout().getY();
+                endVal = 0;
+                break;
+            }
+            case Gravity.RIGHT: {
+                if (mTopViewItem == null)
+                    break;
+                startVal = mRightViewItem.getLayout().getX();
+                endVal = (1 - mRightViewItem.getScale()) * mWidth;
+                break;
+            }
+            case Gravity.BOTTOM: {
+                if (mBottomViewItem == null)
+                    break;
+                startVal = mBottomViewItem.getLayout().getY();
+                endVal = (1 - mBottomViewItem.getScale()) * mHeight;
+                break;
+            }
+        }
+
+        //清除之前的动画
+        clearAnimation();
+
+        /**
+         * 主界面滑动
+         */
+        BounceInterpolator bounceInterpolator = new BounceInterpolator();  //弹簧效果
+
+        final ObjectAnimator animate = ObjectAnimator.ofFloat(this, "sideslip", startVal, endVal);
+        animate.setInterpolator(bounceInterpolator);
+        animate.setDuration(mAnimateTime);
+        animate.start();
+        animate.addUpdateListener(updateListener);
+
+        //正在显示侧滑菜单
+        isShowingSide = true;
+    }
+</pre>
+
+<p>动画更新的监听器,对每一帧view的位置进行设置。</p>
+<pre>
+//动画更新监听
+    private ValueAnimator.AnimatorUpdateListener updateListener = new ValueAnimator.AnimatorUpdateListener() {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animation) {
+            float cVal = (float) animation.getAnimatedValue();
+            Log.i(TAG, "onAnimationUpdate: " + cVal);
+
+            switch (mMoveSide) {
+                case Gravity.LEFT: {
+                    if (mLeftViewItem != null)
+                        mLeftViewItem.getLayout().setX(cVal);
+                    break;
+                }
+                case Gravity.TOP: {
+                    if (mTopViewItem != null)
+                        mTopViewItem.getLayout().setY(cVal);
+                    break;
+                }
+                case Gravity.RIGHT: {
+                    if (mRightViewItem != null)
+                        mRightViewItem.getLayout().setX(cVal);
+                    break;
+                }
+                case Gravity.BOTTOM: {
+                    if (mBottomViewItem != null)
+                        mBottomViewItem.getLayout().setY(cVal);
+                    break;
+                }
+            }
+        }
+    };
+</pre>
+
+<p>最后的效果如下:<br><img src="https://file.2fun.xyz/sidesliplayout_animate_show.gif" alt="加上动画" /></p>
+<h3>添加阴影</h3>
+
+<p>侧滑菜单弹出之后，我们可能希望大家把注意力放在侧滑菜单上面，所以我们可以给其他地方加上阴影，就像是<code>Dialog</code>弹出的感觉，对此，我的方法是在主界面上面覆盖一个<code>View</code>，当弹窗出来就调整<code>View</code>的背景颜色。<br>先加入一个阴影View,在添加了主界面之后添加阴影View，这样就可以覆盖在主界面上面了。</p>
+<pre>
+        //加入主界面
+        if (mHomeView != null) {
+            addView(mHomeView);
+            mHomeView.layout(0, 0, mWidth, mHeight);
+        }
+        
+        //添加阴影view
+        mShadeView = new View(getContext());
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mShadeView.setLayoutParams(params);
+        addView(mShadeView);
+</pre>
+
+<p>当侧滑菜单滑动的时候去改变阴影的透明度就可以实现动态的阴影效果了，这里我已左边的侧滑菜单为例：在<code>moveLeftView(float mx)</code>，在后面加如下的函数：</p>
+<pre>
+            //计算移动的位置所占的比例
+            //菜单完全不可见的x坐标 减去 当前x坐标就是变化值，再求百分比就可以了
+            float change = Math.abs((-mWidth * mLeftViewItem.getScale()) - mLeftViewItem.getLayout().getX());
+            float p = change / (mWidth * mLeftViewItem.getScale());
+            mShadeView.setAlpha(p);
+</pre>
+
+<p>最终效果:<br><img src="https://file.2fun.xyz/sidesliplayout_add_shade.gif" alt="带阴影的效果" /></p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2017/09/20/LayoutManager%E8%AF%A6%E8%A7%A3%E5%8F%8A%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">LayoutManager详解及使用（二）</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/archives/284" >上一篇文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>介绍了LayoutManager的基本知识，这一篇文章我们来进行一个实际的功能开发，制作一个滚动的Banner，没什么比写代码更加爽的事情了————吧？</p>
+<h3>效果图</h3>
+
+<img src="https://file.2fun.xyz/recycler2017-09-20-111930.gif" alt="banner预览图" />
+中间的卡片显示的更大一点，两边可以看到旁边的卡片的一角，离中心距离越近卡片越大。
+
+<h3>准备</h3>
+
+<p>正式编写前，我们先新建一个<code>MyLayoutManager</code>继承至<code>RecyclerView.LayoutManager</code>并且实现一个必须实现的方法：</p>
+<pre>
+  @Override
+    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+        return new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, 
+        RecyclerView.LayoutParams.WRAP_CONTENT);
+    }
+</pre>
+
+<h3>简单显示</h3>
+
+<p>首先我们先让屏幕有东西显示出来，先不考虑数据的大小，adapter的所有数据显示出来,重写<code>onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state)</code>方法，如下：</p>
+<pre>
+  private int offsetX = 0; //水平偏移
+  private int mLeftX = 0; //卡片左端点的位置
+
+  @Override
+    public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        //没有数据就不进行处理
+        if (getItemCount() == 0) {
+            removeAndRecycleAllViews(recycler);
+            return;
+        }
+
+        //将所有的子view临时移除并且回收
+        detachAndScrapAttachedViews(recycler);
+
+        //进行布局
+        offsetX = 0;
+        for (int i = 0; i < getItemCount(); i++) {
+            View child = recycler.getViewForPosition(i);
+            addView(child);
+            measureAndLayout(child, i);
+        }
+
+    }
+
+     /**
+     * 计算view的大小并且设置位置
+     *
+     * @param view     目标view
+     * @param position 在数据里面的位置
+     */
+    private void measureAndLayout(View view, int position) {
+        //开始计算大小
+        measureChildWithMargins(view, 0, 0);
+
+        //计算宽度
+        int width = getDecoratedMeasuredWidth(view);
+        //计算高度
+        int height = getDecoratedMeasuredHeight(view);
+
+        //将view放置在RecyclerView里面
+        layoutDecoratedWithMargins(view, mLeftX , 0, mLeftX + width, height);
+
+        //更新水平位移
+        offsetX += width;    }
+</pre>
+
+<p>效果如下:<br><img src="https://file.2fun.xyz/slim-show.png" alt="简单的显示" /></p>
+<h3>简单交互</h3>
+
+<p>接下来我们来添加简单的手指滑动交互：</p>
+<pre>
+
+    /**
+     * 允许水平滑动
+     *
+     * @return
+     */
+    @Override
+    public boolean canScrollHorizontally() {
+        return true;
+    }
+
+    /**
+     * 禁止竖直滑动
+     *
+     * @return
+     */
+    @Override
+    public boolean canScrollVertically() {
+        return false;
+    }
+
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        Log.i(TAG, "scrollHorizontallyBy: " + dx);
+
+        //移动元素
+        offsetChildrenHorizontal(-dx);
+
+        offsetX -= dx;
+        return -dx;
+    }
+</pre>
+
+<h3>添加回收机制</h3>
+
+<p><code>RecyclerView</code>的强大之处在于资源回收复用，上面的代码并没有体现，接下来我们来写一个简单的水平列表的<code>LayoutManager</code>，先看效果图：<br><img src="https://file.2fun.xyz/recycler_2017091915543.gif" alt="添加了回收机制的滑动效果" /><br>实现回收的一个重要的点就是判断哪一个view需要remove，哪些只需要detach，这里我定义了几个变量用来判断，</p>
+<pre>
+    private int maxCache = 3; //最大的缓存数量
+    private int mLeftIndex = 0; //缓存最左边的卡片的下标
+    private int mRightIndex = 0; //缓存最右边的卡片的下标
+    private int mCenterIndex = 0; //中间的卡片的下标
+</pre>
+
+<p>如果view的位置小于<code>mLeftIndex</code>或者大于<code>mRightIndex</code>，则remove，否则只需要detach。所以重点就变成了怎么显示区域可见的view的位置下标。我们暂时假设每一个卡片的宽度是一致的，在实际的应用中，Banner卡片的宽度是一致的。我们需要记录view的偏移量，根据偏移量来计算可视范围的view的下标。下面定义几个变量：</p>
+<pre>
+    private int mOffsetX = 0; //水平位移
+    private int mItemWidth = 1; //单个卡片宽度
+    private int mLeftX = 0; //卡片左端点的位置
+</pre>
+
+<h4>我的思路</h4>
+
+<blockquote>
+1.在view移动的时候更新<code>mOffsetX</code>和<code>mLeftX</code>，这两个变量的意义在代码里面详细解释。
+2.通过<code>mOffsetX</code>和<code>mItemWidth</code>计算可视范围的卡片下标。
+3.对布局中的view下标进行判断，移除不需要的。
+4.重新添加view，移动view。
+</blockquote>
+
+<p>代码如下：</p>
+<pre>
+    @Override
+    public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
+        //dx>0 左滑
+
+        //实际要滑动的距离
+        int travel = dx;
+
+        //计算偏移量
+        mOffsetX += dx;
+        mLeftX -= travel;
+
+        //更新下标
+        updateIndex();
+
+        //移除显示区外的卡片
+        removeUnuseCard(recycler, state);
+
+        //重新添加
+        layoutItems(recycler, state);
+
+        //移动
+        offsetChildrenHorizontal(travel);
+
+        Log.i(TAG, "scrollHorizontallyBy: count:" + getChildCount());
+        return travel;
+    }
+
+    /**
+     * 更新下标
+     */
+    private void updateIndex() {
+        /**
+         * 计算中心卡片的下标
+         */
+        mCenterIndex = (mOffsetX) / mItemWidth;
+        //如果位移量除以 单个卡片的宽度的余数大于半个卡片则说明这个余下的卡片已经超过半个屏幕了
+        if (mOffsetX % mItemWidth > mItemWidth / 2) {
+            mCenterIndex++;
+        }
+        mCenterIndex = Math.max(0, mCenterIndex);
+        mCenterIndex = Math.min(getItemCount() - 1, mCenterIndex);
+
+        /**
+         * 计算最左边卡片的下标
+         */
+        mLeftIndex = mCenterIndex - maxCache / 2;
+        mLeftIndex = Math.max(0, mLeftIndex);
+
+        /**
+         * 计算最右边卡片的下标
+         */
+        mRightIndex = mLeftIndex + maxCache - 1;
+        mRightIndex = Math.min(getItemCount() - 1, mRightIndex);
+    }
+
+    /**
+     * 移除不需要的卡片
+     */
+    private void removeUnuseCard(RecyclerView.Recycler recycler, RecyclerView.State state) {
+        if (getChildCount() == 0)
+            return;
+
+        /**
+         * 将显示范围外的完全移除
+         */
+        for (int i = 0; i < getChildCount(); i++) {
+            View view = getChildAt(i);
+            if (getPosition(view) < mLeftIndex || getPosition(view) > mRightIndex) {
+                removeAndRecycleView(view, recycler);
+            }
+        }
+
+    }
+</pre>
+
+<p>打印log，查看页面的view数量，发现稳定在3个<br><img src="https://file.2fun.xyz/logcat_child_count_3.png" alt="log信息" /></p>
+<h3>加入缩放效果</h3>
+
+<img src="https://file.2fun.xyz/recycler_20170920.gif" alt="卡片缩放" />
+下面我们来实现卡片的缩放效果，越靠近屏幕中心点的卡片显示越大。我们需要判断出卡片与中心点的距离，以此来计算卡片应该缩放的比例。在<code>measureAndLayout(View view, int position) </code>方法的最下面调用下面的方法：
+
+<pre>
+    /**
+     * 缩放卡片
+     *
+     * @param item 需要缩放的对象
+     */
+    private void scaleView(View item) {
+        //偏移量 : 卡片默认的第一张卡片左边与可视范围左边的偏移量
+        float leftX = (getWidth() - mItemWidth) / 2;
+        //卡片与中心点的距离
+        float distance = item.getX() - leftX;
+
+        //计算绝对距离
+        float d = Math.abs(distance);
+        d = Math.min(d, getItemWidth());
+
+        /**
+         * 距离最大为一个卡片的宽度
+         */
+        if (d < getItemWidth() / 4) {
+            item.setScaleX(1);
+            item.setScaleY(1);
+        } else {
+            //卡片缩放值范围1 - 0.9
+            float scale = (float) (1.1 - (0.4 * d / getItemWidth()));
+            item.setScaleX(scale);
+            item.setScaleY(scale);
+        }
+    }
+</pre></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/12/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/14/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

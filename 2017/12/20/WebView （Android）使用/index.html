@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="WebView 介绍  WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。 设置  当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。 获取WebSet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebView （Android）使用">
+<meta property="og:url" content="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="WebView 介绍  WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。 设置  当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。 获取WebSet">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/webview_sample_gcross.png">
+<meta property="article:published_time" content="2017-12-20T03:59:01.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.993Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/webview_sample_gcross.png"><title>WebView （Android）使用 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">WebView （Android）使用</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-12-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h3>WebView 介绍</h3>
+
+<p>WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。<br><img src="https://file.2fun.xyz/webview_sample_gcross.png" alt="机核网的WebView显示文章" /></p>
+<h3>设置</h3>
+
+<p>当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。</p>
+<h4>获取WebSettings</h4>
+
+<pre>
+WebSettings webSettings = webView.getSettings();
+</pre>
+
+<h4>设置</h4>
+
+<pre>
+//如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
+webSettings.setJavaScriptEnabled(true);
+
+// 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）
+// 在 onStop 和 onResume 里分别把 setJavaScriptEnabled() 给设置成 false 和 true 即可
+
+//设置自适应屏幕，两者合用
+webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
+webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+
+//缩放操作
+webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
+webSettings.setBuiltInZoomControls(false); //设置内置的缩放控件。若为false，则该WebView不可缩放
+webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
+
+//其他细节操作
+webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
+webSettings.setAllowFileAccess(true); //设置可以访问文件
+webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
+webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
+webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
+</pre>
+
+<h3>加载网页</h3>
+
+<pre>
+//方式1. 加载一个网页：
+webView.loadUrl("http://www.google.com/");
+
+//方式2：加载apk包中的html页面
+webView.loadUrl("file:///android_asset/test.html");
+
+//方式3：加载手机本地的html页面
+webView.loadUrl("content://com.android.htmlfileprovider/sdcard/test.html");
+
+//方式4：加载html字符串
+mWebView.loadData(htmlString,"text/html", "utf-8");
+</pre>
+
+<h3>WebViewClient</h3>
+
+<p>用来处理各种通知和请求事件<br>常用的方法</p>
+<ul>
+    <li>shouldOverrideUrlLoading()</li>
+当网页跳转到新的地址的时候执行，可以用来拦截跳转等，获取用来进行HTML和app的数据交互。
+
+<pre><code>&lt;li&gt;onPageStarted&lt;/li&gt;
+</code></pre>
+<p>网页开始载入的时候调用。</p>
+<pre><code>&lt;li&gt;onPageFinished&lt;/li&gt;
+</code></pre>
+<p>网页加载结束的时候调用。</p>
+<pre><code>&lt;li&gt;onReceivedError&lt;/li&gt;
+</code></pre>
+<p>网页加载错误的时候调用，如404。</p>
+</ul>
+
+<h3>WebChromeClient</h3>
+
+<p>辅助 WebView 处理 Javascript 的对话框,网站图标,网站标题等等。</p>
+<ul>
+    <li>onProgressChanged</li>
+网页加载进度变化的时候调用。
+
+<pre><code>&lt;li&gt;onReceivedTitle&lt;/li&gt;
+</code></pre>
+<p>获取网页的标题。</p>
+<pre><code>&lt;li&gt;onJsAlert&lt;/li&gt;
+</code></pre>
+<p>当网页弹窗显示的时候调用。</p>
+<pre><code>&lt;li&gt;onJsConfirm&lt;/li&gt;
+</code></pre>
+<p>当网页点击了确认按钮时候调用。</p>
+</ul>
+
+<h3>注意事项：如何避免WebView内存泄露</h3>
+
+<ul>
+    <li>不在xml中定义 Webview ，而是在需要的时候在Activity中创建，并且Context使用 getApplicationgContext()</li>
+
+<pre><code>&lt;li&gt;在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。&lt;/li&gt;
+</code></pre>
+<pre>
+@Override
+    protected void onDestroy() {
+        if (mWebView != null) {
+            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            mWebView.clearHistory();
+
+            ((ViewGroup) mWebView.getParent()).removeView(mWebView);
+            mWebView.destroy();
+            mWebView = null;
+        }
+        super.onDestroy();
+    }
+</pre>
+</ul></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/">https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/12/28/%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E5%BA%93%20IBleLib%E7%9A%84%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">蓝牙连接库 IBleLib的使用</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/12/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0%20Java/"><span class="paginator-prev__text">线程池 Java</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">WebView 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">获取WebSettings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">加载网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">WebViewClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">WebChromeClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">注意事项：如何避免WebView内存泄露</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

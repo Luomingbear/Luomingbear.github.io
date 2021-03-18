@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="1. Behavior 介绍 Behavior是CoordinatorLayout的子类，用于处理各个子view之间的行为（这就意味着需要联动的View得用CoordinatorLayout包起来），例如：手指向下滑动的时候是View A下移，还是View B下移，亦或者给View C来一个旋转？一个例子就是Bilibili客户端视频播放页的滑动效果，如图1所示：  图1. Bilibili客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoordinatorLayout.Behavior使用指南">
+<meta property="og:url" content="https://luomingbear.github.io/2020/12/27/CoordinatorLayout.Behavior%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="1. Behavior 介绍 Behavior是CoordinatorLayout的子类，用于处理各个子view之间的行为（这就意味着需要联动的View得用CoordinatorLayout包起来），例如：手指向下滑动的时候是View A下移，还是View B下移，亦或者给View C来一个旋转？一个例子就是Bilibili客户端视频播放页的滑动效果，如图1所示：  图1. Bilibili客户端">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5446761662/b7c9/fef8/b880/c9677c9541aad643b1e28ee64b699651.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451460834/cd7f/57e4/a50e/bc05347f3caa63583efba1dbba3b8d9c.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451899328/bd10/28a6/30c5/9fc1cfb382671221a6c3359808808352.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452109480/3e41/d134/4142/263f816ae8eddbd07ef6c95e0631d3f0.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452999490/ad9f/00a7/7bfd/c5dde21104220d37bf7bd0057be0b6bd.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453229865/26cf/c6bb/d2c3/e8ac55ea17a14ce0a1a53a0d4ebc4990.gif">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453546092/a584/b537/e2cb/43adde0084ac9307355e8e5721ea40ed.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465693999/4a78/141b/6506/8084c8332b7b827d83d2a6bdf3ee85fb.png">
+<meta property="og:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463962431/9c7d/5de5/23fb/493fc5c848bff12f453879c4004927a5.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463990611/e85f/eee8/b06e/d10116319537053473939599c60d9dfc.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465299267/5bed/6f9b/86aa/6c6e018e0dba5f0926559aa8f4dc81a1.gif">
+<meta property="og:image" content="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif">
+<meta property="article:published_time" content="2020-12-27T13:20:14.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:55.041Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5446761662/b7c9/fef8/b880/c9677c9541aad643b1e28ee64b699651.gif"><title>CoordinatorLayout.Behavior使用指南 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2020/12/27/CoordinatorLayout.Behavior%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">CoordinatorLayout.Behavior使用指南</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h2>1. Behavior 介绍</h2>
+<p>Behavior是CoordinatorLayout的子类，用于处理各个子view之间的行为（<strong>这就意味着需要联动的View得用CoordinatorLayout包起来</strong>），例如：手指向下滑动的时候是View A下移，还是View B下移，亦或者给View C来一个旋转？一个例子就是Bilibili客户端视频播放页的滑动效果，如图1所示：</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5446761662/b7c9/fef8/b880/c9677c9541aad643b1e28ee64b699651.gif" alt="图1. Bilinili客户端的滑动效果" /></p>
+<p><em>图1. Bilibili客户端视频页滑动效果</em></p>
+<h2>2. 如何设置Behavior</h2>
+<p>设置Behavior有两种方式：XMl布局设置和Java（Kotlin）代码设置</p>
+<h3>2.1 XML布局设置</h3>
+<p>首先将CoordinatorLayout设置为父布局，对需要加Behavior控件设置<code>app:layout_behavior&quot;</code>属性。</p>
+<pre><code class="language-xml">&lt;androidx.core.widget.NestedScrollView
+    ...
+    app:layout_behavior= &quot;com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior&quot;&gt;</code></pre>
+<h3>2.2 Java/Kotlin代码设置</h3>
+<pre><code class="language-java">CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)scrollView.getLayoutParams();
+params.setBehavior(new MyBehavoir());
+scrollView.setLayoutParams(params);</code></pre>
+<h2>3. <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.android.google.cn/reference/com/google/android/material/appbar/AppBarLayout?hl=en" >AppBarLayout</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></h2>
+<p>AppBarLayout内部有一个默认实现的Behavior，经常和Toolbar、Recycler等结合使用，布局如下：</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:fitsSystemWindows=&quot;true&quot;&gt;
+
+<pre><code>&amp;lt;com.google.android.material.appbar.AppBarLayout
+    android:id=&amp;quot;@+id/appbar&amp;quot;
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;100dp&amp;quot;
+    android:fitsSystemWindows=&amp;quot;true&amp;quot;&amp;gt;
+
+    &amp;lt;androidx.appcompat.widget.Toolbar
+        android:id=&amp;quot;@+id/toolbar&amp;quot;
+        android:layout_width=&amp;quot;match_parent&amp;quot;
+        android:layout_height=&amp;quot;?attr/actionBarSize&amp;quot;
+        app:layout_scrollFlags=&amp;quot;scroll&amp;quot;
+        app:layout_scrollInterpolator=&amp;quot;@android:anim/decelerate_interpolator&amp;quot;
+        app:title=&amp;quot;标题栏&amp;quot; /&amp;gt;
+&amp;lt;/com.google.android.material.appbar.AppBarLayout&amp;gt;
+
+&amp;lt;androidx.core.widget.NestedScrollView
+    android:layout_width=&amp;quot;match_parent&amp;quot;
+    android:layout_height=&amp;quot;match_parent&amp;quot;
+                                       app:layout_behavior= &amp;quot;com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior&amp;quot;&amp;gt;
+
+&amp;lt;/androidx.core.widget.NestedScrollView&amp;gt;
+</code></pre>
+<p>&lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre></p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif" alt="" /></p>
+<p><em>图2. AppBarLayout效果</em></p>
+<p>AppBarLayout默认的Behavior是<code>AppBarLayout$ScrollingViewBehavior</code>，可以设置layout_scrollFlags和layout_scrollInterpolator等参数，分别表示动画风格和动画差值器。正如上面的实例代码，我们对Toolbar设置了如下的属性，使toolbar可以跟随列表滚到而显示和隐藏。</p>
+<pre><code class="language-xml"> &lt;androidx.appcompat.widget.Toolbar
+           ...
+            app:layout_scrollFlags=&quot;scroll&quot;
+            app:layout_scrollInterpolator=&quot;@android:anim/decelerate_interpolator&quot;
+           ... /&gt;</code></pre>
+<h4>3.1 layout_scrollFlags</h4>
+<p>layout_scrollFlags是ScrollingViewBehavior支持的一个属性，用来设置滚动的风格，包括移入、移出效果，一共有七个，分别是noScroll、scroll、exitUntilCollapsed、enterAlways、enterAlwaysCollapsed、snap和snapMargins，其效果如表1、表2所示。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>noScroll</th>
+<th>scroll</th>
+<th>exitUntilCollapsed</th>
+<th>enterAlways</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451460834/cd7f/57e4/a50e/bc05347f3caa63583efba1dbba3b8d9c.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451019026/58c8/1e75/2d17/fd54626fbf5b81a14902d710bc09f591.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5451899328/bd10/28a6/30c5/9fc1cfb382671221a6c3359808808352.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452109480/3e41/d134/4142/263f816ae8eddbd07ef6c95e0631d3f0.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表1. layout_scrollFlags的演示效果1</em></p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>enterAlwaysCollapsed</th>
+<th>snap</th>
+<th>snapMargins</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5452999490/ad9f/00a7/7bfd/c5dde21104220d37bf7bd0057be0b6bd.gif" alt="" /></td>
+<td><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453229865/26cf/c6bb/d2c3/e8ac55ea17a14ce0a1a53a0d4ebc4990.gif" alt="" /></td>
+<td><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5453546092/a584/b537/e2cb/43adde0084ac9307355e8e5721ea40ed.gif" alt="" /></td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表2. layout_scrollFlags的演示效果2</em></p>
+<p>关于这个七个标记的具体说明如表3所示。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>noScroll</td>
+<td>禁用视图上的滚动。此标志不应与其他任何标志相结合。</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>这个标志会让view直接跟随滚动事件。如果其他标记需要在滚动的情况下使用，则必须结合<code>scroll</code>一起使用，否则设置无效。</td>
+</tr>
+<tr>
+<td>exitUntilCollapsed</td>
+<td>手指上滑会将view折叠，折叠的高度为minHeight的值，下拉再慢慢展开，高度为height的值。</td>
+</tr>
+<tr>
+<td>enterAlways</td>
+<td>这个标志和单纯的<code>scroll</code>很相似，区别在与<code>enterAlways</code>会在你下拉的时候就显示view，上滑的时候就隐藏view，而<code>scroll</code>则必须要把列表滚到顶部之后才会显示、隐藏view。</td>
+</tr>
+<tr>
+<td>enterAlwaysCollapsed</td>
+<td>需要与<code>enterAlways</code>搭配使用，效果是下拉时先显示折叠时的高度，继续下拉，列表到顶则会讲view展开。</td>
+</tr>
+<tr>
+<td>snap</td>
+<td>与单纯的<code>scroll</code>效果很相似，区别在于<code>snap</code>有吸附效果，当view的位置很靠近显示或者隐藏时，会使用动画自动显示或者隐藏，就像是有磁铁吸附的感觉。</td>
+</tr>
+<tr>
+<td>snapMargins</td>
+<td>需要与<code>snap</code>搭配使用，吸附位置为view的top和bottom margin值。</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表3. layout_scrollFlags的参数说明</em></p>
+<h2>4 自定义Behavior</h2>
+<h3>4.1 核心方法介绍</h3>
+<p>在正式自定义一个Behavior之前，先介绍一下Behavior的几个比较重要的方法：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull V child,  @NonNull View dependency)</td>
+<td>判断<code>child</code>是否依赖<code>dependency</code></td>
+</tr>
+<tr>
+<td>boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull V child,  @NonNull View dependency)</td>
+<td>当<code>dependency</code>发生了变化的时候（位置、旋转角度等）会被调用</td>
+</tr>
+<tr>
+<td>void onDependentViewRemoved(@NonNull CoordinatorLayout parent, @NonNull V child, @NonNull View dependency)</td>
+<td>当<code>dependency</code>被移除之后会调用此方法。</td>
+</tr>
+<tr>
+<td>boolean onLayoutChild(@NonNull CoordinatorLayout parent, @NonNull View child, int layoutDirection)</td>
+<td>在这里可以给<code>child</code>进行初始位置的布局。返回ture，表示我们自定义的布局，否则使用系统默认的布局。</td>
+</tr>
+<tr>
+<td>boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View directTargetChild, @NonNull View target,  @ScrollAxis int axes, @NestedScrollType int type)</td>
+<td>一个滚动事件等开始会触发此回调，可以在这里返回是否需要消耗本次滚动事件</td>
+</tr>
+<tr>
+<td>void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout,                 @NonNull V child, @NonNull View target, int dx, int dy, @NonNull int[] consumed,  @NestedScrollType int type)</td>
+<td>如果<code>onStartNestedScroll</code>返回了true，则在滚动中会回调此方法，可以在这里做view做位置等等变化</td>
+</tr>
+<tr>
+<td>void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,  @NonNull V child, @NonNull View target, @NestedScrollType int type)</td>
+<td>一个滚动事件等结束会触发此回调，可以在这里给<code>child</code>添加回弹动画。</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>表4. Behavior的几个主要方法</em></p>
+<h3>4.2 基本流程</h3>
+<p>自定义Behavior的流程分为3步：</p>
+<ol>
+<li>判断依赖关系，即谁依赖谁</li>
+<li>当被依赖的view发生了变化时对依赖view进行变化</li>
+<li>处理嵌套滚动事件</li>
+</ol>
+<h5>4.2.1 判断依赖关系，即谁依赖谁</h5>
+<p>假设A依赖B，则Behavior应该设置在A上面，然后在<code>layoutDependsOn</code>方法里面，判断如果<code>dependency</code>为B则返回true。</p>
+<h5>4.2.2 当被依赖的view发生了变化时对依赖view进行变化</h5>
+<p><code>dependency</code>的位置、方向等变化之后会调用<code>onDependentViewChanged</code>方法，在这个方法里面，可以对view进行跟随变化，比如将view对bottom设置为<code>dependency</code>top位置，则view会始终在<code>dependency</code>的上面，高度跟随<code>dependency</code>动态变化。如果需要在<code>dependency</code>被移除的时候对view进行变化，则重写<code>onDependentViewRemoved</code>即可。</p>
+<h5>4.2.3 处理嵌套滚动事件</h5>
+<p>处理一个滚动事件的流程是：</p>
+<ol>
+<li>
+<p>判断滑动方向是否是自己需要的</p>
+</li>
+<li>
+<p>处理滑动值</p>
+</li>
+<li>
+<p>滚动事件结束是否需要回弹动画</p>
+</li>
+</ol>
+<p>与此对应的三个方法是：</p>
+<ol>
+<li>
+<p>boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View directTargetChild, @NonNull View target,  @ScrollAxis int axes, @NestedScrollType int type)</p>
+<p>其中<code>axes</code>表示的是本次滚动事件的方向、<code>type</code>表示手指触摸或者是惯性滚动。</p>
+<pre><code class="language-java">// 判断滚动是否是竖直方向
+boolean result = (axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;</code></pre>
+</li>
+<li>
+<p>void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull V child, @NonNull View target, int dx, int dy, @NonNull int[] consumed,  @NestedScrollType int type)</p>
+<p>滚动事件里面的每一次滑动会调用此方法，在这里我们可以对滑动进行拦截处理。<code>consumed</code>是一个数组，表示Behavior消耗了的X、Y方向的滑动值，消耗的滑动值就不会被传递为子view了。</p>
+</li>
+<li>
+<p>void onStopNestedScroll(@NonNull CoordinatorLayout coordinatorLayout,  @NonNull V child, @NonNull View target, @NestedScrollType int type)</p>
+<p>滚动事件结束的时候会调用此方法，可以在这里判断view是否需要回弹到默认位置。<strong>需要注意的地方是：通过动画移动view到默认位置也是会触发<code>onNestedPreScroll</code>方法的，可以结合<code>type</code>判断是否是手指触摸导致的。</strong></p>
+</li>
+</ol>
+<h2>5 实例</h2>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif" alt="" /></p>
+<p><em>图3. 实例效果图</em></p>
+<p>从图中可以知道，顶部的图片会跟随列表的滚动，列表下移的时候图片会先下移，超过默认高度之后会有一个放大的效果。也就是说背景图的高度和大小是依赖列表的位置的。所以，我们可以将Behavior设置在背景图上面，让其依赖列表。布局如图3所示。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465693999/4a78/141b/6506/8084c8332b7b827d83d2a6bdf3ee85fb.png" alt="" /></p>
+<p><em>图4. 布局文件</em></p>
+<p>接着开始自定义<code>MyBehavoir</code>。</p>
+<p>重写<code>layoutDependsOn</code>让图片依赖背景列表。</p>
+<pre><code class="language-java">@Override
+public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) &#123;
+    return dependency instanceof NestedScrollView;
+&#125;</code></pre>
+<p>当列表的位置变化的时候需要对图片的位置进行变化，使图片的底部始终跟随列表的顶部。</p>
+<pre><code class="language-java">@Override
+public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) &#123;
+    int top = dependency.getTop();
+    int bottom = child.getBottom();
+    ViewCompat.offsetTopAndBottom(child, top - bottom);
+    return true;
+&#125;</code></pre>
+<p>因为这个列表是竖直滚动的，所以我们只需要监听竖直方向的滚动。</p>
+<pre><code class="language-java">@Override
+public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) &#123;
+    return (axes &amp; ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
+&#125;</code></pre>
+<p>让列表监听滚动事件，跟随手指滑动。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    ViewCompat.offsetTopAndBottom(target, -dy);
+    consumed[1] = dy;
+&#125;</code></pre>
+<p>看看效果。</p>
+<p><img src="https://p6.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463962431/9c7d/5de5/23fb/493fc5c848bff12f453879c4004927a5.gif" alt="" /></p>
+<p><em>图5. 滑动效果演示</em></p>
+<p>现在已经实现了图片底部贴着列表顶部，并且图片滚跟随列表移动。但是这里有一个问题，就是当图片不可见的时候滚动的应该是列表内部元素，而不是对列表进行位移。我们可以通过<code>canScrollVertically</code>判断列表是否滚动到了顶部，如果列表可以向下滑动，则说明列表没有到顶部。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    if (dy &lt; 0) &#123; //手指下滑
+        //列表是否可以继续下滑，如果不可以，则说明列表到顶了
+        boolean canScrollDown = target.canScrollVertically(-1);
+        if (!canScrollDown) &#123;//列表到顶了，此时需要移动列表位置
+            ViewCompat.offsetTopAndBottom(target, -dy);
+            consumed[1] = dy; //滑动的距离被Behavior消耗了
+        &#125;
+    &#125; else if (dy &gt; 0) &#123; //手指上滑
+        //如果列表的位置已经在顶部了，则滑动内部元素，否则移动列表的位置
+        if (target.getTop() &gt; 0) &#123;
+            int maxDy = Math.min(target.getTop(), dy);
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            consumed[1] = maxDy;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>现在列表和图片都可以滚动了。</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5463990611/e85f/eee8/b06e/d10116319537053473939599c60d9dfc.gif" alt="" /></p>
+<p><em>图6. 支持列表内部滚动</em></p>
+<p>但是还是有点问题，列表会无限制的下移，我们可以限制列表下移为高度不超过图片的高度。</p>
+<pre><code class="language-java">@Override
+public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) &#123;
+    if (dy &lt; 0) &#123; //手指下滑
+        //列表是否可以继续下滑，如果不可以，则说明列表到顶了
+        boolean canScrollDown = target.canScrollVertically(-1);
+        if (!canScrollDown) &#123;//列表到顶了，此时需要移动列表位置
+            //列表下移的位置不得超过 图片的高度
+            int maxDy = Math.max(dy, target.getTop() - child.getHeight());
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            //滑动的距离被Behavior消耗了
+            consumed[1] = maxDy;
+        &#125;
+    &#125; else if (dy &gt; 0) &#123; //手指上滑
+        //如果列表的位置已经在顶部了，则滑动内部元素，否则移动列表的位置
+        if (target.getTop() &gt; 0) &#123;
+            int maxDy = Math.min(target.getTop(), dy);
+            ViewCompat.offsetTopAndBottom(target, -maxDy);
+            consumed[1] = maxDy;
+        &#125;
+    &#125;
+&#125;</code></pre>
+<p>效果如下：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465299267/5bed/6f9b/86aa/6c6e018e0dba5f0926559aa8f4dc81a1.gif" alt="" /></p>
+<p><em>图7. 限制列表下移的最大位置</em></p>
+<p>现在就剩下最后一个问题了，那就是刚进来的时候图片不可见，我们希望布局的初始位置是图片显示默认高度，列表在图片的底部，所以我们可以重写<code>onLayoutChild</code>对列表进行布局。</p>
+<pre><code class="language-java">@Override
+public boolean onLayoutChild(@NonNull CoordinatorLayout parent, @NonNull View child, int layoutDirection) &#123;
+    parent.onLayoutChild(child, layoutDirection);
+    //获取child以来的控件列表
+    List&lt;View&gt; dependencies = parent.getDependencies(child);
+    if (dependencies.size() &gt; 0) &#123;
+        //因为这个我们只依赖了一个列表，所以直接取第0个元素
+        View dependency = dependencies.get(0);
+        ViewCompat.offsetTopAndBottom(dependency, child.getHeight());
+    &#125;
+    return true;
+&#125;</code></pre>
+<p>最终的效果就是这样的了：</p>
+<p><img src="https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/5465576894/aa53/5095/a141/97e6a8aaa1f846962af914808ef83b28.gif" alt="" /></p>
+<p><em>图8. 列表默认布局在图片下方</em></p></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2020/12/27/CoordinatorLayout.Behavior%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">https://luomingbear.github.io/2020/12/27/CoordinatorLayout.Behavior%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2021/01/10/%E6%88%AA%E5%B1%8F2021-01-10%20%E4%B8%8B%E5%8D%885.06.00/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">截屏2021-01-10 下午5.06.00</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/12/26/1608975415937212.video_thumb/"><span class="paginator-prev__text">1608975415937212.video_thumb</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1. Behavior 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2. 如何设置Behavior</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 XML布局设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Java&#x2F;Kotlin代码设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3. AppBarLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">3.0.1.</span> <span class="toc-text">3.1 layout_scrollFlags</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4 自定义Behavior</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 核心方法介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 基本流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.0.1.</span> <span class="toc-text">4.2.1 判断依赖关系，即谁依赖谁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.0.2.</span> <span class="toc-text">4.2.2 当被依赖的view发生了变化时对依赖view进行变化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.2.0.3.</span> <span class="toc-text">4.2.3 处理嵌套滚动事件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5 实例</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

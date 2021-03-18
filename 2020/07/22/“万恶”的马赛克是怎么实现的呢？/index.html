@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="最近参加声网的RTC开发者大赛开发了一个陌生人视频聊天应用，为了降低聊天时的紧张感，对视频画面进行马赛克处理。此文便是对马赛克算法实现的总结。  原理 图片是由一个个像素点组成的，由于间距很小，便形成了图像的效果。将图片变成马赛克样式的本质就是修改像素点，使得一定范围内的像素用相同的颜色值表示。这里的“一定范围”我们暂且称之为马赛克块，马赛克块的大小也就决定了图片马赛克程度的不同。以3x3的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“万恶”的马赛克是怎么实现的呢？">
+<meta property="og:url" content="https://luomingbear.github.io/2020/07/22/%E2%80%9C%E4%B8%87%E6%81%B6%E2%80%9D%E7%9A%84%E9%A9%AC%E8%B5%9B%E5%85%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%91%A2%EF%BC%9F/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="最近参加声网的RTC开发者大赛开发了一个陌生人视频聊天应用，为了降低聊天时的紧张感，对视频画面进行马赛克处理。此文便是对马赛克算法实现的总结。  原理 图片是由一个个像素点组成的，由于间距很小，便形成了图像的效果。将图片变成马赛克样式的本质就是修改像素点，使得一定范围内的像素用相同的颜色值表示。这里的“一定范围”我们暂且称之为马赛克块，马赛克块的大小也就决定了图片马赛克程度的不同。以3x3的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/mosaic_compare20200420.png">
+<meta property="og:image" content="https://file.2fun.xyz/mosaic2020202020.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/mosaic_line_read2020421.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/mosaic_value_compare.png">
+<meta property="og:image" content="https://file.2fun.xyz/rgb888_2020421.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/yuv444yuv422yuv420.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/yuv420i420.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/yuv420YV12.jpg">
+<meta property="og:image" content="https://file.2fun.xyz/yuv420NV12.jpg">
+<meta property="article:published_time" content="2020-07-22T03:49:08.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:55.030Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/mosaic_compare20200420.png"><title>“万恶”的马赛克是怎么实现的呢？ | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2020/07/22/%E2%80%9C%E4%B8%87%E6%81%B6%E2%80%9D%E7%9A%84%E9%A9%AC%E8%B5%9B%E5%85%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%91%A2%EF%BC%9F/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">“万恶”的马赛克是怎么实现的呢？</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><blockquote>
+  最近参加<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://segmentfault.com/page/rtc-hackathon-2020" >声网的RTC开发者大赛</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>开发了一个陌生人<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/Luomingbear/RTC-Hackathon/tree/master/SDKChallengeProject/likemosaic" >视频聊天应用</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，为了降低聊天时的紧张感，对视频画面进行马赛克处理。此文便是对马赛克算法实现的总结。</blockquote>
+<img src="https://file.2fun.xyz/mosaic_compare20200420.png" alt="">
+<h2>原理</h2>
+<p>图片是由一个个像素点组成的，由于间距很小，便形成了图像的效果。将图片变成马赛克样式的本质就是修改像素点，使得一定范围内的像素用相同的颜色值表示。这里的“一定范围”我们暂且称之为马赛克块，马赛克块的大小也就决定了图片马赛克程度的不同。以3x3的像素点大小的马赛克块为例，原始像素点的值为<code>1...9</code>，修改之后全部为<code>n</code>,如下图所示。</p>
+<img src="https://file.2fun.xyz/mosaic2020202020.jpg" alt="">
+<p>根据这个原理，我们只需要将图片分为一个一个的马赛克块，然后遍历它们，使每一个马赛克块用相同的颜色值表示即可。</p>
+<img src="https://file.2fun.xyz/mosaic_line_read2020421.jpg" alt="">
+<h3>确定马赛克块坐标</h3>
+<p>将一个马赛克块看作一个整体，图片就被分成了<code>m_width * m_height</code>个马赛克块，那么对于横坐标x，纵坐标y的马赛克块的下标可以通过如下的公式获得。</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">index = (y - 1) * m_width + x
+</code></pre>
+<h3>确定颜色值</h3>
+<p>得到马赛克块之后，就可以把这个区域的像素点修改为同一个值了，这里有几个思路，分别是</p>
+<ol>
+<li>使用左上角的值直接替换其他点的值；</li>
+<li>计算区域像素点的平均值然后替换每一个点；</li>
+<li>使用区域内像素点的中位数值作为其他点的值。</li>
+</ol>
+<p>三种方案在显示效果和计算速度上也有差异，方案1计算快，但是显示会不够平滑。方案2显示最为平滑，计算量比方案1多，但是比方案3更少。方案3因为需要求出中位数，会增加很多比较操作，所以计算量最多，显示效果上也没有平均值的方案平滑，但是轮廓感更强。</p>
+<img src="https://file.2fun.xyz/mosaic_value_compare.png" alt="">
+<h2>颜色空间</h2>
+<p>上面仅仅是在理论层面介绍了如何实现马赛克效果，但是在实际的编码中，我们还需要了解图形在数据里面是怎么表示的。这就涉及到<strong>颜色空间</strong>的概念了，常见的颜色空间有RGB、YUV和CMYK（主要应用于打印场景，本文不讲解）等。</p>
+<h3>RGB</h3>
+<p>RGB颜色空间是根据颜色在自然界的产生原理来设计的，把颜色分为R：红色、G：绿色和B：蓝色，也就是三原色。一般使用RGB24（也称为RGB888）的颜色空间，即RGB三个分量各使用8bit表示，所以一张图片占用的内存大小就是<code>width <em> height </em> 3</code>字节。RGB颜色空间在计算机里面主要用于图形的采集、显示等领域，例如我们的显示屏显示画面时会使用RGB颜色空间对每一个像素点进行赋值显示。
+RGB24的数据排列方式为按照像素点将数据分组，每一组有RGB三个分量，对于每一组数据，按照<code>B-&gt;G-&gt;R</code>的顺序排列，如下图所示。</p>
+<img src="https://file.2fun.xyz/rgb888_2020421.jpg" alt="">
+<h3>YUV</h3>
+<p>YUV颜色空间将颜色分为了亮度分量Y和色度分量U和V，因为YUV将亮度分量独立了出来，所以可以兼容老的黑白电视机。常见的YUV格式有YUV444、YUV422和YUV420。对于YUV444、YUV422和YUV420格式的区别，主要是UV分量的分布，如图，空心圆表示UV分量，实心圆表示Y分量。</p>
+<img src="https://file.2fun.xyz/yuv444yuv422yuv420.jpg" alt="">
+<p>使用YUV420格式相比RGB可以减少一半的带宽，YUV420格式占用的内存大小为<code>width <em> height + width </em> height /4 + width * height /4</code>字节。</p>
+<p>由于YUV420可以节省大量带宽，而人眼对色度信息没有亮度敏感，所以观感不会有明显区别，日常应用最为广泛。根据UV分量在数据中的排布方式，YUV420又分为I420、NV12和YV12等格式。</p>
+<p><strong>I420</strong>
+I420格式的数据排布如下图所示，先将Y分量全部排进去，然后排U分量最后是V分量。</p>
+<img src="https://file.2fun.xyz/yuv420i420.jpg" alt="">
+<p><strong>YV12</strong>
+YV12格式的数据排布如下图所示，先将Y分量全部排进去，然后排V分量最后是U分量。</p>
+<img src="https://file.2fun.xyz/yuv420YV12.jpg" alt="">
+<p><strong>NV12</strong>
+NV12格式的数据排布如下图所示，先将Y分量全部排进去，然后U和V分量交替排列。</p>
+<img src="https://file.2fun.xyz/yuv420NV12.jpg" alt="">
+<h2>C语言实现</h2>
+<p>下面给出I420格式及RGB24格式图像进行马赛克处理的C语言实现，其中马赛克块的颜色值使用平均值法获得，当然此算法还有很多可以改进的地方，例如可考虑加入多线程并发处理提高算法效率。</p>
+<ul>
+    <li>输入RGB格式数据</li>
+</ul>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-cpp">
+/**
+ * 对像素数据进行马赛克处理
+ * input_data : 输入的原始像素数据
+ * width : 图片的宽度
+ * height: 图片的高度
+ * channel : 图像通道数，例如RGB24则有3个通道
+ * scale : 马赛克块的大小
+ * return ： 处理之后的像素数据
+ */
+void mosaic(unsigned char *input_data, unsigned char *out_data,
+            int width, int height, int channel, int scale)
+&#123;
+    int index, tindex;
+    int pix[channel];
+    for (int i = 0; i &lt; height; i += scale)
+    &#123;
+        for (int j = 0; j &lt; width; j += scale)
+        &#123;
+            index = (width * i + j) * channel;
+            for (int d = 0; d &lt; channel; d++)
+            &#123;
+                pix[d] = 0;
+            &#125;
+
+<pre><code>        //平均值
+        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width + p) * channel;
+                if (tindex &amp;lt; width * height * channel - channel)
+                &#123;
+                    for (int d = 0; d &amp;lt; channel; d++)
+                    &#123;
+                        pix[d] += input_data[tindex + d];
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        for (int d = 0; d &amp;lt; channel; d++)
+        &#123;
+            pix[d] = pix[d] / scale / scale;
+        &#125;
+
+        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width + p) * channel;
+                if (tindex &amp;lt; width * height * channel - channel)
+                &#123;
+                    for (int d = 0; d &amp;lt; channel; d++)
+                    &#123;
+                        out_data[tindex + d] = pix[d];
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>}</p>
+<p></code></pre></p>
+<ul>
+    <li>输入I420格式数据</li>
+</ul>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-cpp">
+/**
+ * 对I420格式图像进行马赛克处理
+ * input_y : 输入数据的y分量
+ * input_u : 输入数据的u分量
+ * input_v : 输入数据的v分量
+ * out_y : 输出数据的y分量 
+ * out_u : 输出数据的u分量 
+ * out_v : 输出数据的v分量
+ * width : 图片的宽度
+ * height: 图片的高度
+ * scale : 马赛克块的大小
+ */
+void mosaicyuv(unsigned char *input_y, unsigned char *input_u, unsigned char *input_v,
+               unsigned char *out_y, unsigned char *out_u, unsigned char *out_v,
+               int width, int height, int scale)
+&#123;
+    int len = width * height;
+    memcpy(out_y, input_y, len);
+    memcpy(out_u, input_u, len / 4);
+    memcpy(out_v, input_v, len / 4);
+    int index, tindex, y;
+    for (int i = 0; i &lt; height; i += scale)
+    &#123;
+        for (int j = 0; j &lt; width; j += scale)
+        &#123;
+            index = width * i + j;
+            y = out_y[index];
+
+<pre><code>        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width + p);
+                if (tindex &amp;lt; len)
+                &#123;
+                    y += out_y[tindex];
+                &#125;
+            &#125;
+        &#125;
+        y = y / scale / scale;
+        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width + p);
+                if (tindex &amp;lt; len)
+                &#123;
+                    out_y[tindex] = y;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+//处理UV分量
+int u, v;
+index = tindex = u = v = 0;
+scale = scale / 2;
+for (int i = 0; i &amp;lt; height / 2; i += scale)
+&#123;
+    for (int j = 0; j &amp;lt; width / 2; j += scale)
+    &#123;
+        index = width / 2 * i + j;
+        u = v = 0;
+        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width / 2 + p);
+                if (tindex &amp;lt; len / 4)
+                &#123;
+                    u = u + out_u[tindex];
+                    v = v + out_v[tindex];
+                &#125;
+            &#125;
+        &#125;
+        u = u / scale / scale;
+        v = v / scale / scale;
+
+        for (int k = 0; k &amp;lt; scale; k++)
+        &#123;
+            for (int p = 0; p &amp;lt; scale; p++)
+            &#123;
+                tindex = index + (k * width / 2 + p);
+                if (tindex &amp;lt; len / 4)
+                &#123;
+                    out_u[tindex] = u;
+                    out_v[tindex] = v;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>}</p>
+<p></code></pre></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2020/07/22/%E2%80%9C%E4%B8%87%E6%81%B6%E2%80%9D%E7%9A%84%E9%A9%AC%E8%B5%9B%E5%85%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%91%A2%EF%BC%9F/">https://luomingbear.github.io/2020/07/22/%E2%80%9C%E4%B8%87%E6%81%B6%E2%80%9D%E7%9A%84%E9%A9%AC%E8%B5%9B%E5%85%8B%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%91%A2%EF%BC%9F/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/22/Python%20%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">Python 快速创建服务器</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/22/AIDL%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__text">AIDL使用</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">确定马赛克块坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">确定颜色值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">颜色空间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">RGB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">YUV</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">C语言实现</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

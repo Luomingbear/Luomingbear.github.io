@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="最近的项目中出现了内存泄漏，在踩了好多坑之后，终于解决了遇到的泄漏问题，为了防止下次忘记，所以把这次的经验记录下来。 前言 内存泄漏有很多种的情况，在安卓里面，大多是因为内部类持有了Activity或者Context的引用导致Activity或者Context无法释放，最常见的是执行了一个耗时操作，在退出Activity的时候没有关闭耗时操作，导致Activity一直被耗时操作持有。 例如网上经常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio Profiler 内存泄漏分析">
+<meta property="og:url" content="https://luomingbear.github.io/2020/07/20/Android%20Studio%20Profiler%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="最近的项目中出现了内存泄漏，在踩了好多坑之后，终于解决了遇到的泄漏问题，为了防止下次忘记，所以把这次的经验记录下来。 前言 内存泄漏有很多种的情况，在安卓里面，大多是因为内部类持有了Activity或者Context的引用导致Activity或者Context无法释放，最常见的是执行了一个耗时操作，在退出Activity的时候没有关闭耗时操作，导致Activity一直被耗时操作持有。 例如网上经常">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/android_studio_profiler20190704174351.png">
+<meta property="og:image" content="https://file.2fun.xyz/android_studio_profiler20190704174635.png">
+<meta property="og:image" content="https://file.2fun.xyz/android_studio_profiler_dump2019.gif">
+<meta property="og:image" content="https://file.2fun.xyz/android_studio_profiler20190704180503.png">
+<meta property="og:image" content="https://file.2fun.xyz/android_studio_profiler20190704181022.png">
+<meta property="og:image" content="https://file.2fun.xyz/android_profiler20190704181835.png">
+<meta property="article:published_time" content="2020-07-20T09:34:05.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:55.006Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/android_studio_profiler20190704174351.png"><title>Android Studio Profiler 内存泄漏分析 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2020/07/20/Android%20Studio%20Profiler%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E5%88%86%E6%9E%90/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Android Studio Profiler 内存泄漏分析</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p>最近的项目中出现了内存泄漏，在踩了好多坑之后，终于解决了遇到的泄漏问题，为了防止下次忘记，所以把这次的经验记录下来。</p>
+<h3>前言</h3>
+内存泄漏有很多种的情况，在安卓里面，大多是因为内部类持有了<code>Activity</code>或者<code>Context</code>的引用导致<code>Activity</code>或者<code>Context</code>无法释放，最常见的是执行了一个耗时操作，在退出<code>Activity</code>的时候没有关闭耗时操作，导致<code>Activity</code>一直被耗时操作持有。
+例如网上经常会有讲到使用<code>Handler</code>的时候需要注意泄漏，需要使用静态内部类，并且弱引用<code>Activity</code>解决。这样的地方可以在写代码的时候注意到然后解决，但是有些时候我们也不知道哪里出现了内存泄漏，就需要通过工具帮助我们分析了。
+<h3>Android Studio Profiler</h3>
+Android Studio自带的Profiler就提供了这样的能力，打开Profiler会看到如下的界面，
+<img src="https://file.2fun.xyz/android_studio_profiler20190704174351.png" alt="">
+然后点击红色选框中的部分，就可以进入内存分析详情如下：
+<img src="https://file.2fun.xyz/android_studio_profiler20190704174635.png" alt="">
+为了查看到内存泄漏，我们需要对app进行一顿操作。如果我们想知道一个<code>TestActivity</code>有没有内存泄漏，那么我们可以频繁的进出<code>TestActivity</code>,按照官网的说法横竖屏切换和回退到桌面再进入app也会增加泄漏的风险。一顿操作猛如虎，要知泄漏有没有，且看下面。
+当我们频繁操作之后，可以先点击左上角的垃圾桶按钮，进行强制GC，多点几次，接下来点击左上角的下箭头图标生成分析文件，这就是我们判断有没有内存泄漏的关键。
+<img src="https://file.2fun.xyz/android_studio_profiler_dump2019.gif" alt="">
+为了方便查看，我们可以把分组方式改为按照包名分组
+<img src="https://file.2fun.xyz/android_studio_profiler20190704180503.png" alt="">
+那么怎么看有没有泄漏呢？在左下角的堆窗口找到我们想要测试的那个class名，点击会出现如下的窗口：
+<img src="https://file.2fun.xyz/android_studio_profiler20190704181022.png" alt="">
+其中左下角的<code>HandlerActivity</code>和<code>HandlerActivity$1</code>可能第一次看会很迷，难道说我的这个类有两个实例吗,那不就是内存泄漏了么?其实并不是这个意思，<code>$</code>符号只是说明这个类有一个内部类而已，因为内部类会持有外部类的引用。
+右上角的地方我们可以看到有四个<code>HandlerActivity</code>，那这个说明是内存泄漏了么？是的，这个<code>Instance View</code>就是实例窗口，有几个就说明有几个实例，如果按照逻辑这个对象同时只能有一个实例的话，那就是内存泄漏了。
+当知道是内存泄漏之后就需要找到泄漏的地方，在右下角有一个引用窗口，可以看到具体是谁引用这个它，导致内存不能及时回收。在右上角的实例窗口选中一个实例，然后在引用窗口选中一条点击右键<code>Jump to Source</code>就可以看到具体引用的地方，然后观察代码就知道是什么问题导致的内存泄漏了。
+<img src="https://file.2fun.xyz/android_profiler20190704181835.png" alt=""></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2020/07/20/Android%20Studio%20Profiler%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E5%88%86%E6%9E%90/">https://luomingbear.github.io/2020/07/20/Android%20Studio%20Profiler%20%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E5%88%86%E6%9E%90/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/20/AndroidStudio%20build%20failed/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">AndroidStudio build failed</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/07/20/%E7%99%BB%E5%BD%95/"><span class="paginator-prev__text">登录</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Android Studio Profiler</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

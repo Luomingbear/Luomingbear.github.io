@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="github链接 解决360加固导致的渠道信息丢失的问题，同时快速打多渠道包。 用法：   App添加Walle的依赖compile &#39;com.meituan.android.walle:library:1.1.6&#39; 在config360.py里面添加自己的360账号信息 在sign.json文件里面添加签名信息和buildToolVersion信息 各种渠道的定义是在channel这个文件中，请">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集成360加固和Walle多渠道打包">
+<meta property="og:url" content="https://luomingbear.github.io/2019/01/11/%E9%9B%86%E6%88%90360%E5%8A%A0%E5%9B%BA%E5%92%8CWalle%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="github链接 解决360加固导致的渠道信息丢失的问题，同时快速打多渠道包。 用法：   App添加Walle的依赖compile &#39;com.meituan.android.walle:library:1.1.6&#39; 在config360.py里面添加自己的360账号信息 在sign.json文件里面添加签名信息和buildToolVersion信息 各种渠道的定义是在channel这个文件中，请">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/LEJIAGU20190111112231.png">
+<meta property="article:published_time" content="2019-01-11T04:52:20.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.999Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/LEJIAGU20190111112231.png"><title>集成360加固和Walle多渠道打包 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2019/01/11/%E9%9B%86%E6%88%90360%E5%8A%A0%E5%9B%BA%E5%92%8CWalle%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">集成360加固和Walle多渠道打包</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2019-01-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/Luomingbear/JiaguAndWalle"  title="github链接">github链接</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>解决360加固导致的渠道信息丢失的问题，同时快速打多渠道包。</p>
+<h3>用法：</h3>
+
+<ul>
+<li>App添加Walle的依赖<code>compile 'com.meituan.android.walle:library:1.1.6'</code></li>
+<li>在config360.py里面添加自己的360账号信息</li>
+<li>在sign.json文件里面添加签名信息和buildToolVersion信息</li>
+<li>各种渠道的定义是在<code>channel</code>这个文件中，请根据项目情况修改</li>
+<li>运行命令<code>python path_of_jiagu_walle.py path_of_apk you_key_name</code> ,这里的可以<em>key_name</em>需要配置在<code>sign.json</code>文件里面</li>
+</ul>
+
+<h3>channel</h3>
+
+<p><code>channel</code>文件是存储渠道信息的文件，格式如下：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">360cn #360
+baidu # 百度
+wandoujia # 豌豆荚
+yingyongbao # 应用宝
+xiaomi # 小米
+meizu # 魅族
+vivo # vivo
+oppo # oppo
+huawei # 华为
+samsung # 三星
+chuizi # 锤子
+</code></pre>
+
+<h3>sign.json</h3>
+
+<p>sign.json存放的是签名信息，字段设计参考</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-json">&#123;
+    "myKeyName": &#123;
+        "keyStore": "C:\\Users\\Desktop\\out\\xx.jks",
+        "alias": "xxxxx",
+        "keyPassword": "xxxxx",
+        "aliasPassword": "xxx",
+        "buildToolVersion": "27.0.0"
+    &#125;
+&#125;
+</code></pre>
+
+<h3>兼容腾讯应用宝市场</h3>
+
+<p>由于腾讯的应用宝市场需要使用自己的乐加固进行加固，导致之前进行的美团渠道信息丢失，所以需要进行单独的处理。打开乐加固的软件，可以看到，它本身是支持多渠道打包的。我们可以在<code>Android Name</code>一栏写上app定义好的渠道key例如“CHANNEL”,然后<code>配置参数</code>随便写上啥，只要你自己知道这个表示的是应用宝市场就行。</p>
+<img src="https://file.2fun.xyz/LEJIAGU20190111112231.png" alt="" />
+
+<p>然后在app的<code>AndroidManifest.xml</code>里面添加应用宝的渠道设置信息：</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;!--应用宝渠道信息--&gt;
+&lt;meta-data
+    android:name="CHANNEL"
+    android:value="lingsir" /&gt;
+</code></pre>
+
+<h3>获取渠道信息</h3>
+
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">/**
+     * 获取app渠道（设备来源）
+     *
+     * @return
+     */
+    public String getAppSource(Context ctx) &#123;
+        String defChannel = "def";
+        if (ctx == null) &#123;
+            return defChannel;
+        &#125;
+
+        String channel = "";
+
+        //从manifest获取,如果manifest设置了值，说明是使用的应用宝多渠道打包，walle不可用
+        channel = getMetaData(ctx, "CHANNEL");
+        if (!TextUtils.isEmpty(channel) &amp;&amp; !channel.equals("lingsir")) &#123;
+            return channel;
+        &#125;
+
+        //walle从apk包中获取
+        channel = WalleChannelReader.getChannel(ctx, defChannel);
+        return channel;
+    &#125;
+
+    /**
+     * 获取Manifest 里面的meta-data
+     *
+     * @param context
+     * @param key
+     * @return
+     */
+    public static String getMetaData(Context context, String key) &#123;
+        ApplicationInfo ai = null;
+        try &#123;
+            ai = context.getPackageManager().getApplicationInfo(context.getPackageName(),
+                    PackageManager.GET_META_DATA);
+        &#125; catch (PackageManager.NameNotFoundException e) &#123;
+            e.printStackTrace();
+            return "";
+        &#125;
+        Bundle bundle = ai.metaData;
+        return bundle.getString(key);
+    &#125;
+</code></pre>
+
+<p>Walle渠道信息读取类</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java"><br />public final class WalleChannelReader &#123;
+    private WalleChannelReader() &#123;
+        super();
+    &#125;
+
+    /**
+     * get channel
+     *
+     * @param context context
+     * @return channel, null if not fount
+     */
+    @Nullable
+    public static String getChannel(@NonNull final Context context) &#123;
+        return getChannel(context, null);
+    &#125;
+
+    /**
+     * get channel or default
+     *
+     * @param context context
+     * @param defaultChannel default channel
+     * @return channel, default if not fount
+     */
+    @Nullable
+    public static String getChannel(@NonNull final Context context, @NonNull final String defaultChannel) &#123;
+        final ChannelInfo channelInfo = getChannelInfo(context);
+        if (channelInfo == null) &#123;
+            return defaultChannel;
+        &#125;
+        return channelInfo.getChannel();
+    &#125;
+
+    /**
+     * get channel info (include channle &amp; extraInfo)
+     *
+     * @param context context
+     * @return channel info
+     */
+    @Nullable
+    public static ChannelInfo getChannelInfo(@NonNull final Context context) &#123;
+        final String apkPath = getApkPath(context);
+        if (TextUtils.isEmpty(apkPath)) &#123;
+            return null;
+        &#125;
+        return ChannelReader.get(new File(apkPath));
+    &#125;
+
+    /**
+     * get value by key
+     *
+     * @param context context
+     * @param key     the key you store
+     * @return value
+     */
+    @Nullable
+    public static String get(@NonNull final Context context, @NonNull final String key) &#123;
+        final Map&lt;String, String&gt; channelMap = getChannelInfoMap(context);
+        if (channelMap == null) &#123;
+            return null;
+        &#125;
+        return channelMap.get(key);
+    &#125;
+
+    /**
+     * get all channl info with map
+     *
+     * @param context context
+     * @return map
+     */
+    @Nullable
+    public static Map&lt;String, String&gt; getChannelInfoMap(@NonNull final Context context) &#123;
+        final String apkPath = getApkPath(context);
+        if (TextUtils.isEmpty(apkPath)) &#123;
+            return null;
+        &#125;
+        return ChannelReader.getMap(new File(apkPath));
+    &#125;
+
+    @Nullable
+    private static String getApkPath(@NonNull final Context context) &#123;
+        String apkPath = null;
+        try &#123;
+            final ApplicationInfo applicationInfo = context.getApplicationInfo();
+            if (applicationInfo == null) &#123;
+                return null;
+            &#125;
+            apkPath = applicationInfo.sourceDir;
+        &#125; catch (Throwable e) &#123;
+        &#125;
+        return apkPath;
+    &#125;
+&#125;
+</code></pre>
+
+<h3>为什么不使用乐加固进行多渠道打包?</h3>
+
+<p>乐加固的多渠道打包时间和美团的walle差别不大，但是乐加固没有提供jar包进行操作，导致无法实现自动化操作，所以我选择了walle。</p>
+<h3>运行注意事项：</h3>
+
+<ol>
+<li>保证你Android程序的compileSdKVersion 和 buildToosVersion 版本相同</li>
+<li>建议将jdk升级到1.8</li>
+<li>保证自己本地打包签名可以正常运行</li>
+<li>保证配置的相关路径正确，编码格式为UTF-8，不要带异常字符。</li>
+<li>Android SDK buidtools请使用25.0+版本，越新越好。</li>
+</ol>
+
+<hr />
+
+<h3>参考</h3>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/Jay-Goo/ProtectedApkResignerForWalle"><strong>ProtectedApkResignerForWalle</strong></a></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2019/01/11/%E9%9B%86%E6%88%90360%E5%8A%A0%E5%9B%BA%E5%92%8CWalle%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/">https://luomingbear.github.io/2019/01/11/%E9%9B%86%E6%88%90360%E5%8A%A0%E5%9B%BA%E5%92%8CWalle%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2019/01/15/IntelliJ%E7%BB%88%E7%AB%AF%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">IntelliJ终端乱码</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2019/01/01/%E6%88%91%E7%9A%842018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"><span class="paginator-prev__text">我的2018年终总结</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">用法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">channel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">sign.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">兼容腾讯应用宝市场</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">获取渠道信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">为什么不使用乐加固进行多渠道打包?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">运行注意事项：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>

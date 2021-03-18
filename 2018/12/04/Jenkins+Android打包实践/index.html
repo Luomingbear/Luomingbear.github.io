@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="缘由  由于Android项目代码和模块的增加，每次打包需要花费很长的时间，有时候只改了几行代码重新打个包就的等待半个小时，然后啥也干不了，实在是浪费时间，于是决定研究自动化打包，目前Jenkins是使用的比较多的项目构建工具，可以轻松（才怪）实现Android的打包工作。 准备  需要下载Jenkins到你的计算机或者服务器，并且启动服务，这里不重点讲解，可以自行百度。纪录下可能使用到的Jenk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins+Android打包实践">
+<meta property="og:url" content="https://luomingbear.github.io/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="缘由  由于Android项目代码和模块的增加，每次打包需要花费很长的时间，有时候只改了几行代码重新打个包就的等待半个小时，然后啥也干不了，实在是浪费时间，于是决定研究自动化打包，目前Jenkins是使用的比较多的项目构建工具，可以轻松（才怪）实现Android的打包工作。 准备  需要下载Jenkins到你的计算机或者服务器，并且启动服务，这里不重点讲解，可以自行百度。纪录下可能使用到的Jenk">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/wx_20181204140349.png">
+<meta property="og:image" content="https://file.2fun.xyz/wx_20181204143935.png">
+<meta property="article:published_time" content="2018-12-04T06:57:12.000Z">
+<meta property="article:modified_time" content="2021-03-18T15:16:54.998Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/wx_20181204140349.png"><title>Jenkins+Android打包实践 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Jenkins+Android打包实践</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h3>缘由</h3>
+
+<p>由于Android项目代码和模块的增加，每次打包需要花费很长的时间，有时候只改了几行代码重新打个包就的等待半个小时，然后啥也干不了，实在是浪费时间，于是决定研究自动化打包，目前Jenkins是使用的比较多的项目构建工具，可以轻松（才怪）实现Android的打包工作。</p>
+<h3>准备</h3>
+
+<p>需要下载Jenkins到你的计算机或者服务器，并且启动服务，这里不重点讲解，可以自行百度。纪录下可能使用到的Jenkins服务命令（windows平台）：</p>
+<ul>
+<li>启动<br><code>net start jenkins</code>，这行命令是针对已经配置好了Jenkins服务，并且启动过一次。电脑重启了，需要重新启动服务的情况，注意可能需要管理员权限。</li>
+</ul>
+<ul>
+<li>停止
+<code>net stop jenkins</code></p></li>
+<li><p>重新启动
+浏览器输入<code>http://localhost:8080/restart</code></p></li>
+</ul>
+
+<h3>安装插件</h3>
+
+<p>进行Android项目的构建，必须要安装的插件有：<code>Gradle</code>，如果你希望能看到代码编写的问题，还可以安装<code>Android Lint</code>。
+
+<h3>Android Job</h3>
+
+<p>进入Jenkins网站，默认是<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8080/" >http://localhost:8080/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>,点击新建任务，选择<strong>构建一个自由风格的软件项目</strong>。<br>在新的页面里面你可以添加一些项目描述，方便识别。</p>
+<h4>源码管理</h4>
+
+<p>在<strong>源码管理</strong>栏目，具体配置根据你的实际情况选择即可，例如我的代码保存在subversion的，所以选择<strong>subversion</strong>，<strong>Repository URL</strong>填入你的代码在svn的地址。然后点击右边的小钥匙按钮<em>Add</em>添加的你的svn账号</p>
+<h4>构建</h4>
+
+<img src="https://file.2fun.xyz/wx_20181204140349.png" alt="invoke gradle script" />
+选择<strong>invoke gradle script</strong>，在新的面板<strong>Tasks</strong>里面填写<code>clean assembleRelease</code>表示先执行clean任务，然后编译所有的release包。
+
+<p>通常情况下，这样的配置就可以完成一个简单Android项目的编译了，但是！！！，有些项目的根目录下面没有<code>build.gradle</code>,可能在某个子目录下，这就需要配置目录了。我们展开<strong>高级</strong>按钮，在<strong>Root Build script</strong>里面填入主工程的目录，这里填写的是相对路径，例如你的项目在跟目录下的<code>LSX</code>文件夹,那你填入<code>LSX</code>即可。</p>
+<h4>巨大的坑</h4>
+
+<p>这里还有一个<strong>深坑</strong>！在windows系统里面，编译可能会报一个png格式不对的问题，但是这个png文件根本不是你的项目里面的，可能是Android Support包里面的。这个问题的原因是gradle编译的缓存文件路径名太长了，所以会报这个错误。解决办法是修改缓存地址。这里可以修改主项目目录下面的<code>gradle.properties</code>添加一行代码</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">android.buildCacheDir = 你希望的缓存地址
+</code></pre>
+
+<p>但是这种写法不便于本地编码，因为如果你的Jenkins不是安装在自己的电脑上的，就会出现缓存地址不存在的问题。这里可以利用Gradle的一个功能，在命令行传入参数,规则是<code>-PK=V</code>，上面的参数就变成了</p>
+<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">-Pandroid.buildCacheDir="你希望的缓存地址"
+</code></pre>
+
+<img src="https://file.2fun.xyz/wx_20181204143935.png" alt="gradle script 配置" />
+（<em>这个问题折腾了我一个下午，没想到就一句话说完了</em>）</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/">https://luomingbear.github.io/2018/12/04/Jenkins+Android%E6%89%93%E5%8C%85%E5%AE%9E%E8%B7%B5/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/05/AndroidLint%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">AndroidLint使用</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="paginator-prev__text">上传aar到maven服务器</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">缘由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">安装插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">Android Job</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">源码管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">巨大的坑</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
