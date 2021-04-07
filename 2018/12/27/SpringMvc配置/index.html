@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。  1.IntelliJ IDE  一开始我下载的社区版的Intell">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。                     1.IntelliJ IDE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMvc配置">
-<meta property="og:url" content="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。  1.IntelliJ IDE  一开始我下载的社区版的Intell">
+<meta property="og:description" content="Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。                     1.IntelliJ IDE">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://file.2fun.xyz/spring20181212121212.jpg">
 <meta property="og:image" content="https://file.2fun.xyz/spring_20181227144525.png">
@@ -11,15 +11,15 @@
 <meta property="og:image" content="https://file.2fun.xyz/spring_20181227155753.png">
 <meta property="og:image" content="https://file.2fun.xyz/spring_20181227155953.png">
 <meta property="article:published_time" content="2018-12-27T08:24:02.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.998Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.764Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://file.2fun.xyz/spring20181212121212.jpg"><title>SpringMvc配置 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://file.2fun.xyz/spring20181212121212.jpg"><title>SpringMvc配置 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -39,19 +39,22 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SpringMvc配置</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><img src="https://file.2fun.xyz/spring20181212121212.jpg" alt="" />
-Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SpringMvc配置</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p><img src="https://file.2fun.xyz/spring20181212121212.jpg"><br>Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第一次写Android代码的时候，连个项目都不会创建。因为我们公司使用的SpringMvc的项目架构方式，所以我的第一个任务就是搭建一个SpringMvc的项目。由于其中需要注意的地方太多了，担心自己过一段时间回来就会忘记，所以把具体的步骤纪录下来，供日后查阅。</p>
 
-<h3>1.IntelliJ IDE</h3>
+        <h3 id="1-IntelliJ-IDE"   >
+          <a href="#1-IntelliJ-IDE" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-IntelliJ-IDE" class="headerlink" title="1.IntelliJ IDE"></a>1.IntelliJ IDE</h3>
+      <p>一开始我下载的社区版的IntelliJ，发现项目中没有Spring的选项，看网上的教程都可以直接点击Spring创建项目，后来才知道<br><strong>需要下载完整版的IDE</strong> ，破解的方式就不写了，可自行百度。</p>
 
-<p>一开始我下载的社区版的IntelliJ，发现项目中没有Spring的选项，看网上的教程都可以直接点击Spring创建项目，后来才知道<strong>需要下载完整版的IDE</strong>，破解的方式就不写了，可自行百度。</p>
-<h3>2.创建Maven工程</h3>
+        <h3 id="2-创建Maven工程"   >
+          <a href="#2-创建Maven工程" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-创建Maven工程" class="headerlink" title="2.创建Maven工程"></a>2.创建Maven工程</h3>
+      <span id="more"></span>
 
-<p>我们可以直接使用IDE创建SpringMvc的工程，但是由于目录结构与网络教程差异过大，新人表示看不懂，所以选择了创建Maven工程。大多数的Spring项目都是使用Maven构建的，通过它可以方便的实现依赖管理。很多有用的插件也在maven的仓库可以找到。<br><strong>NEW Project</strong>的时候找到<strong>Maven</strong>打开<strong>Create from archetype</strong>选择后缀为<strong>webapp</strong>的方式创建项目。<br>点击<strong>Next</strong>，填写goupId等信息就可以打开项目了。<br><img src="https://file.2fun.xyz/spring_20181227144525.png" alt="" /></p>
-<h3>3.添加依赖</h3>
+<p>我们可以直接使用IDE创建SpringMvc的工程，但是由于目录结构与网络教程差异过大，新人表示看不懂，所以选择了创建Maven工程。大多数的Spring项目都是使用Maven构建的，通过它可以方便的实现依赖管理。很多有用的插件也在maven的仓库可以找到。<br><strong>NEW Project</strong> 的时候找到 <strong>Maven</strong> 打开 <strong>Create from archetype</strong> 选择后缀为 <strong>webapp</strong><br>的方式创建项目。 点击 <strong>Next</strong> ，填写goupId等信息就可以打开项目了。<br><img src="https://file.2fun.xyz/spring_20181227144525.png"></p>
 
-<p>打开<code>pom.xml</code>文件，可以在<code>properties</code>标签里面定义参数，下面的<code>dependencies</code>就可以直接使用了，这样便于版本管理。例如</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;properties&gt;
+        <h3 id="3-添加依赖"   >
+          <a href="#3-添加依赖" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-添加依赖" class="headerlink" title="3.添加依赖"></a>3.添加依赖</h3>
+      <p>打开<code>pom.xml</code>文件，可以在<code>properties</code>标签里面定义参数，下面的<code>dependencies</code>就可以直接使用了，这样便于版本管理。例如</p>
+<pre><code>&lt;properties&gt;
         &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
         &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
         &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
@@ -60,9 +63,8 @@ Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第
         &lt;jackson.version&gt;2.9.7&lt;/jackson.version&gt;
 &lt;/properties&gt;
 </code></pre>
-
 <p>插入springmvc的依赖</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;dependencies&gt;
+<pre><code>&lt;dependencies&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;junit&lt;/groupId&gt;
             &lt;artifactId&gt;junit&lt;/artifactId&gt;
@@ -96,15 +98,16 @@ Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第
         &lt;/dependency&gt;
 &lt;/dependencies&gt;
 </code></pre>
-
 <p>依赖添加完毕之后，鼠标右键选择<code>Maven-&gt;Reimport</code>就可以将依赖导入项目了。</p>
-<h3>4.设置文件夹</h3>
 
-<p>在<code>src/main</code>目录下面创建两个文件夹<code>java</code>和<code>resources</code>分别作为代码文件夹和资源文件夹。鼠标选中<code>java</code>文件夹，右键执行<code>Make Directory as -&gt;Sources Root</code>；鼠标选中<code>resources</code>文件夹，鼠标右键执行<code>Make Directory as -&gt;Resources Root</code></p>
-<h3>5.配置web.xml</h3>
+        <h3 id="4-设置文件夹"   >
+          <a href="#4-设置文件夹" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-设置文件夹" class="headerlink" title="4.设置文件夹"></a>4.设置文件夹</h3>
+      <p>在<code>src/main</code>目录下面创建两个文件夹<code>java</code>和<code>resources</code>分别作为代码文件夹和资源文件夹。鼠标选中<code>java</code>文件夹，右键执行<code>Make Directory as -&gt;Sources Root</code>；鼠标选中<code>resources</code>文件夹，鼠标右键执行<code>Make Directory as -&gt;Resources Root</code></p>
 
-<p>打开<code>webapp/WEB-INF/web.xml</code>文件配置springMvc。<br>首先需要添加<code>servlet</code>,在<code>web-app</code>标签内加入如下代码</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml"><br />    &lt;!--配置servlet处理请求--&gt;
+        <h3 id="5-配置web-xml"   >
+          <a href="#5-配置web-xml" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-配置web-xml" class="headerlink" title="5.配置web.xml"></a>5.配置web.xml</h3>
+      <p>打开<code>webapp/WEB-INF/web.xml</code>文件配置springMvc。 首先需要添加<code>servlet</code>,在<code>web-app</code>标签内加入如下代码</p>
+<pre><code>    &lt;!--配置servlet处理请求--&gt;
     &lt;servlet&gt;
         &lt;servlet-name&gt;Hello&lt;/servlet-name&gt;
         &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
@@ -122,26 +125,25 @@ Android转Java的第一天，感觉自己什么都不会，仿佛又回到了第
         &lt;url-pattern&gt;/&lt;/url-pattern&gt;
     &lt;/servlet-mapping&gt;
 </code></pre>
-
 <p>打开<code>classpath:config/Hello-Servlet.xml</code>文件，继续配置SpringMvc</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">    &lt;!--打开注解扫描--&gt;
+<pre><code>    &lt;!--打开注解扫描--&gt;
     &lt;mvc:annotation-driven/&gt;
 
     &lt;!--注解扫描的位置--&gt;
-    &lt;context:component-scan base-package="com.demo"/&gt;
+    &lt;context:component-scan base-package=&quot;com.demo&quot;/&gt;
 
     &lt;!--配置view资源的生成器，在prefix文件夹寻找后缀为suffix的文件--&gt;
-    &lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
         &lt;!--寻找jsp文件的路径--&gt;
-        &lt;property name="prefix" value="/WEB-INF/pages/"/&gt;
-        &lt;property name="suffix" value=".jsp"/&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/pages/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
     &lt;/bean&gt;
 </code></pre>
 
-<h3>6.编写hello.jsp</h3>
-
-<p>在<code>webapp/WEB-INF/pages</code>下面创建文件<code>hello.jsp</code>,之所以在这个目录是因为我们在<code>/Hello-Servlet.xml</code>里面配置了InternalResourceViewResolver的路径为<code>/WEB-INF/pages/</code>。</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-jsp">&lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt;
+        <h3 id="6-编写hello-jsp"   >
+          <a href="#6-编写hello-jsp" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-编写hello-jsp" class="headerlink" title="6.编写hello.jsp"></a>6.编写hello.jsp</h3>
+      <p>在<code>webapp/WEB-INF/pages</code>下面创建文件<code>hello.jsp</code>,之所以在这个目录是因为我们在<code>/Hello- Servlet.xml</code>里面配置了InternalResourceViewResolver的路径为<code>/WEB-INF/pages/</code>。</p>
+<pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;head&gt;
     &lt;title&gt;Page&lt;/title&gt;
@@ -152,30 +154,309 @@ Jsp Page
 &lt;/html&gt;
 </code></pre>
 
-<h3>7.编写Controller</h3>
-
-<p>在<code>com.demo</code>（这个目录取决于你定义的项目goupId）目录下面创建一个<code>HelloController</code>：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Controller
+        <h3 id="7-编写Controller"   >
+          <a href="#7-编写Controller" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-编写Controller" class="headerlink" title="7.编写Controller"></a>7.编写Controller</h3>
+      <p>在<code>com.demo</code>（这个目录取决于你定义的项目goupId）目录下面创建一个<code>HelloController</code>：</p>
+<pre><code>@Controller
 public class HelloController &#123;
 
-    @RequestMapping(value = "helloPage", method = RequestMethod.GET)
+    @RequestMapping(value = &quot;helloPage&quot;, method = RequestMethod.GET)
     public String helloPage() &#123;
         //返回名字为hello.jsp的view
-        return "hello";
+        return &quot;hello&quot;;
     &#125;
 
     //ResponseBody注解说明返回的不是一个view，而是数据，RequestMapping注解指定接口访问的url地址
     @ResponseBody
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    @RequestMapping(value = &quot;hello&quot;, method = RequestMethod.GET)
     public String hello() &#123;
-        return "Nice to meet U";
+        return &quot;Nice to meet U&quot;;
     &#125;
 &#125;
 </code></pre>
 
-<h3>8.运行</h3>
+        <h3 id="8-运行"   >
+          <a href="#8-运行" class="heading-link"><i class="fas fa-link"></i></a><a href="#8-运行" class="headerlink" title="8.运行"></a>8.运行</h3>
+      <p>在IDE的右上角，点击<code>Add Configuration</code>,然后点击做上角的加号，新建一个tomcat服务<br><img src="https://file.2fun.xyz/spring_20181227152642.png"> 提示 <strong>Warning: No<br>artifacts marked for deployment</strong> ,我们点击右边的<code>Fix</code>按钮，选择一个war包，点击<code>Ok</code>就可以了。<br>现在我们运行工程，编译完成之后会默认打开网页，可以看到“Hello World”的默认页面。<br>打开<code>http://localhost:8085/hello_war/helloPage</code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155753.png"><br>打开<code>http://localhost:8085/hello_war/hello</code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155953.png"> 至此简单的SpringMvc就搭建完毕了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/">https://www.bearever.cn/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SpringMvc返回值中文乱码</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/05/AndroidLint%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__text">AndroidLint使用</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-IntelliJ-IDE"><span class="toc-number">1.</span> <span class="toc-text">
+          1.IntelliJ IDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BAMaven%E5%B7%A5%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">
+          2.创建Maven工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-number">3.</span> <span class="toc-text">
+          3.添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">4.</span> <span class="toc-text">
+          4.设置文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEweb-xml"><span class="toc-number">5.</span> <span class="toc-text">
+          5.配置web.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BC%96%E5%86%99hello-jsp"><span class="toc-number">6.</span> <span class="toc-text">
+          6.编写hello.jsp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%BC%96%E5%86%99Controller"><span class="toc-number">7.</span> <span class="toc-text">
+          7.编写Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E8%BF%90%E8%A1%8C"><span class="toc-number">8.</span> <span class="toc-text">
+          8.运行</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
 
-<p>在IDE的右上角，点击<code>Add Configuration</code>,然后点击做上角的加号，新建一个tomcat服务<br><img src="https://file.2fun.xyz/spring_20181227152642.png" alt="" /><br>提示<strong>Warning: No artifacts marked for deployment</strong>,我们点击右边的<code>Fix</code>按钮，选择一个war包，点击<code>Ok</code>就可以了。<br>现在我们运行工程，编译完成之后会默认打开网页，可以看到“Hello World”的默认页面。<br>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/helloPage" >http://localhost:8085/hello_war/helloPage</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155753.png" alt="" /></p>
-<p>打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/hello_war/hello" >http://localhost:8085/hello_war/hello</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，效果如下：<br><img src="https://file.2fun.xyz/spring_20181227155953.png" alt="" /></p>
-<p>至此简单的SpringMvc就搭建完毕了。</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/">https://luomingbear.github.io/2018/12/27/SpringMvc%E9%85%8D%E7%BD%AE/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SpringMvc返回值中文乱码</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/05/AndroidLint%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__text">AndroidLint使用</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.IntelliJ IDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.创建Maven工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3.添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4.设置文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5.配置web.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6.编写hello.jsp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">7.编写Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">8.运行</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

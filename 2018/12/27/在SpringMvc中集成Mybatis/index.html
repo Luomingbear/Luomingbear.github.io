@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。  1.添加依赖  首先我们添加Mybatis的依赖，打开pom.xml在properties添加依赖的版本参数：     &lt;properties&gt;         &lt;mybatis.spring.version&gt;1.2.5&lt;&#x2F;m">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。                     1.添加依赖       首先我们添加Mybatis的依赖，打开pom.xml在properties添加依赖的版本参数：     &lt;properties&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在SpringMvc中集成Mybatis">
-<meta property="og:url" content="https://luomingbear.github.io/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。  1.添加依赖  首先我们添加Mybatis的依赖，打开pom.xml在properties添加依赖的版本参数：     &lt;properties&gt;         &lt;mybatis.spring.version&gt;1.2.5&lt;&#x2F;m">
+<meta property="og:description" content="Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。                     1.添加依赖       首先我们添加Mybatis的依赖，打开pom.xml在properties添加依赖的版本参数：     &lt;properties&gt;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://file.2fun.xyz/932056-20170403015857113-916302220.png">
 <meta property="og:image" content="https://file.2fun.xyz/spring_20181227204113.png">
 <meta property="article:published_time" content="2018-12-27T12:44:52.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.998Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.780Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://file.2fun.xyz/932056-20170403015857113-916302220.png"><title>在SpringMvc中集成Mybatis | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://file.2fun.xyz/932056-20170403015857113-916302220.png"><title>在SpringMvc中集成Mybatis | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -36,21 +36,22 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">在SpringMvc中集成Mybatis</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><img src="https://file.2fun.xyz/932056-20170403015857113-916302220.png" alt="" />
-Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">在SpringMvc中集成Mybatis</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-12-27</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p><img src="https://file.2fun.xyz/932056-20170403015857113-916302220.png"><br>Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到SpringMvc里面。通过Mybatis我们可以方便的进行数据交互。</p>
 
-<h3>1.添加依赖</h3>
+        <h3 id="1-添加依赖"   >
+          <a href="#1-添加依赖" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-添加依赖" class="headerlink" title="1.添加依赖"></a>1.添加依赖</h3>
+      <p>首先我们添加Mybatis的依赖，打开<code>pom.xml</code>在<code>properties</code>添加依赖的版本参数：</p>
+<pre><code>    &lt;properties&gt;
+</code></pre>
+<span id="more"></span>
 
-<p>首先我们添加Mybatis的依赖，打开<code>pom.xml</code>在<code>properties</code>添加依赖的版本参数：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">    &lt;properties&gt;
-        &lt;mybatis.spring.version&gt;1.2.5&lt;/mybatis.spring.version&gt;
+<pre><code>        &lt;mybatis.spring.version&gt;1.2.5&lt;/mybatis.spring.version&gt;
         &lt;mybatis.generator.version&gt;1.3.2&lt;/mybatis.generator.version&gt;
         &lt;mysql.version&gt;5.1.38&lt;/mysql.version&gt;
     &lt;/properties&gt;
 </code></pre>
-
 <p>然后在<code>dependencies</code>里面添加如下代码:</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">        &lt;!--mybatis start--&gt;
+<pre><code>        &lt;!--mybatis start--&gt;
         &lt;dependency&gt;
             &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
             &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
@@ -82,11 +83,9 @@ Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到Spring
             &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
             &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;
         &lt;/dependency&gt;
-
 </code></pre>
-
 <p>其中<code>mybatis-generator</code>是一个自动生成mybatis文件的插件。还需要在<code>plugins</code>里面添加插件的信息：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;!--MBG--&gt;
+<pre><code>&lt;!--MBG--&gt;
 &lt;plugin&gt;
     &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;
     &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;
@@ -98,17 +97,17 @@ Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到Spring
    &lt;/plugin&gt;
 </code></pre>
 
-<h3>2.配置自动加载ApplicationContext</h3>
+        <h3 id="2-配置自动加载ApplicationContext"   >
+          <a href="#2-配置自动加载ApplicationContext" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-配置自动加载ApplicationContext" class="headerlink" title="2.配置自动加载ApplicationContext"></a>2.配置自动加载ApplicationContext</h3>
+      <p>打开<code>web.xml</code>，修改为：</p>
+<pre><code>&lt;!DOCTYPE web-app PUBLIC
+        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;
+        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;
 
-<p>打开<code>web.xml</code>，修改为：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
-
-&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1"&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;
+         version=&quot;3.1&quot;&gt;
     &lt;display-name&gt;Hello&lt;/display-name&gt;
 
     &lt;!--ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。--&gt;
@@ -141,184 +140,157 @@ Mybatis的详细功能这里不做描述，只讲怎么将Mybatis集成到Spring
         &lt;url-pattern&gt;/&lt;/url-pattern&gt;
     &lt;/servlet-mapping&gt;
 &lt;/web-app&gt;
-
 </code></pre>
 
-<h3>3.配置Mybatis</h3>
-
-<p>在<code>resources</code>下面创建<code>mapper</code>文件夹，作为mybatis的mapper文件夹。配置mybatis先把mybatis和mybatis-generator需要使用到的参数配置到一个单独的文件,然后再调用这个文件的值方便后期修改。</p>
+        <h3 id="3-配置Mybatis"   >
+          <a href="#3-配置Mybatis" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-配置Mybatis" class="headerlink" title="3.配置Mybatis"></a>3.配置Mybatis</h3>
+      <p>在<code>resources</code>下面创建<code>mapper</code>文件夹，作为mybatis的mapper文件夹。配置mybatis先把mybatis和mybatis-<br>generator需要使用到的参数配置到一个单独的文件,然后再调用这个文件的值方便后期修改。</p>
 <ul>
-<li>a.创建<code>mybatis.properties</code>
-在<code>resources</code>文件夹下面创建一个文件<code>mybatis.properties</code>，将数据库和mybatis-generator需要的参数加进去，如下：</li>
-</ul>
+<li><p>a.创建<code>mybatis.properties</code> 在<code>resources</code>文件夹下面创建一个文件<code>mybatis.properties</code>，将数据库和mybatis-generator需要的参数加进去，如下：</p>
+<p>#jdbc<br>jdbc.driver=com.mysql.jdbc.Driver<br>jdbc.url=jdbc:mysql://192.168.2.199:3306/ming?characterEncoding=utf-8&amp;&amp;useUnicode=true&amp;&amp;zeroDateTimeBehavior=convertToNull<br>jdbc.username=lingsir<br>jdbc.password=123qwe<br>#mybatis-generator的相关配置<br>mybatis.targetProject=src/main/java<br>mybatis.modelPackage=com.bearever.model.entities<br>mybatis.daoMapperPackage=com.bearever.dao<br>mybatis.targetMapperProject=src/main/resources<br>mybatis.sqlMapperPackage=mapper</p>
+</li>
+<li><p>b.创建<code>mybatis-spring.xml</code> 这个文件的作用是引入mybatis的配置，名字无所谓，只要放入web.xml定义的<code>contextConfigLocation</code>文件夹下面就行了，通过<code>ContextLoaderListener</code>可以自动加载目录下的xml文件。</p>
+<?xml version="1.0" encoding="UTF-8"?>
+<p>&lt;beans xmlns=”<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans&quot;" >http://www.springframework.org/schema/beans&quot;</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<pre><code>   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+   xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
 
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-null">#jdbc
-jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://192.168.2.199:3306/ming?characterEncoding=utf-8&amp;&amp;useUnicode=true&amp;&amp;zeroDateTimeBehavior=convertToNull
-jdbc.username=lingsir
-jdbc.password=123qwe
-#mybatis-generator的相关配置
-mybatis.targetProject=src/main/java
-mybatis.modelPackage=com.bearever.model.entities
-mybatis.daoMapperPackage=com.bearever.dao
-mybatis.targetMapperProject=src/main/resources
-mybatis.sqlMapperPackage=mapper
+&lt;context:property-placeholder location=&quot;classpath:mybatis.properties&quot;/&gt;
+
+&lt;!--jdbc配置--&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;/&gt;
+    &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;
+    &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;
+    &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置--&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+    &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;/&gt;
+    &lt;!-- 引入mybatis configuration的相关配置 --&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatisConfig.xml&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了 --&gt;
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+    &lt;!-- 这里需要注意，必须写入映射文件的目录 --&gt;
+    &lt;property name=&quot;basePackage&quot; value=&quot;com.bearever.dao&quot;/&gt;
+    &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;!-- 事物管理器 --&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+    &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
 </code></pre>
-
-<ul>
-<li>b.创建<code>mybatis-spring.xml</code>
-这个文件的作用是引入mybatis的配置，名字无所谓，只要放入web.xml定义的<code>contextConfigLocation</code>文件夹下面就行了，通过<code>ContextLoaderListener</code>可以自动加载目录下的xml文件。</li>
-</ul>
-
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd
-       http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd"&gt;
-
-    &lt;context:property-placeholder location="classpath:mybatis.properties"/&gt;
-
-    &lt;!--jdbc配置--&gt;
-    &lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
-        &lt;property name="driverClassName" value="$&#123;jdbc.driver&#125;"/&gt;
-        &lt;property name="url" value="$&#123;jdbc.url&#125;"/&gt;
-        &lt;property name="username" value="$&#123;jdbc.username&#125;"/&gt;
-        &lt;property name="password" value="$&#123;jdbc.password&#125;"/&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 配置Mybatis的文件 ，mapperLocations配置**Mapper.xml文件位置，configLocation配置mybatis-config文件位置--&gt;
-    &lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
-        &lt;property name="dataSource" ref="dataSource"/&gt;
-        &lt;property name="mapperLocations" value="classpath:mapper/*.xml"/&gt;
-        &lt;!-- 引入mybatis configuration的相关配置 --&gt;
-        &lt;property name="configLocation" value="classpath:mybatisConfig.xml"/&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 自动扫描了所有的XxxxMapper.xml对应的mapper接口文件，这样就不用一个一个手动配置Mpper的映射了，只要Mapper接口类和Mapper映射文件对应起来就可以了 --&gt;
-    &lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
-        &lt;!-- 这里需要注意，必须写入映射文件的目录 --&gt;
-        &lt;property name="basePackage" value="com.bearever.dao"/&gt;
-        &lt;property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/&gt;
-    &lt;/bean&gt;
-
-    &lt;!-- 事物管理器 --&gt;
-    &lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
-        &lt;property name="dataSource" ref="dataSource"/&gt;
-    &lt;/bean&gt;
-
-    &lt;tx:annotation-driven transaction-manager="transactionManager"/&gt;
-
-&lt;/beans&gt;
-</code></pre>
-
-<ul>
-<li>c.创建<code>mybatisConfig.xml</code>
-在web.xml定义的<code>contextConfigLocation</code>文件夹下面创建<code>mybatisConfig.xml</code>,在开发中会遇到需要切换数据库环境,可以通过<code>environments</code>配置。</li>
-</ul>
-
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE configuration
+</beans></li>
+<li><p>c.创建<code>mybatisConfig.xml</code> 在web.xml定义的<code>contextConfigLocation</code>文件夹下面创建<code>mybatisConfig.xml</code>,在开发中会遇到需要切换数据库环境,可以通过<code>environments</code>配置。</p>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-&lt;configuration&gt;
-    &lt;properties resource="mybatis/mybatis.properties"/&gt;
-    &lt;environments default="development"&gt;
-        &lt;environment id="development"&gt;
-            &lt;transactionManager type="JDBC"/&gt;
-            &lt;dataSource type="POOLED"&gt;
-                &lt;property name="driver" value="$&#123;jdbc.drive&#125;"/&gt;
-                &lt;property name="url" value="$&#123;jdbc.url&#125;"/&gt;
-                &lt;property name="username" value="$&#123;jdbc.username&#125;"/&gt;
-                &lt;property name="password" value="$&#123;jdbc.password&#125;"/&gt;
-            &lt;/dataSource&gt;
-        &lt;/environment&gt;
-    &lt;/environments&gt;
-&lt;/configuration&gt;
-</code></pre>
+<configuration>
+    <properties resource="mybatis/mybatis.properties"/>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.drive}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration></li>
+</ul>
 
-<h3>4.配置mybatis-generator</h3>
-
-<p>通过Mybatis-Generator自动生成mybatis的mapper等文件，在<code>resources</code>创建<code>generatorConfig.xml</code>文件，如下：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <h3 id="4-配置mybatis-generator"   >
+          <a href="#4-配置mybatis-generator" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-配置mybatis-generator" class="headerlink" title="4.配置mybatis-generator"></a>4.配置mybatis-generator</h3>
+      <p>通过Mybatis-<br>Generator自动生成mybatis的mapper等文件，在<code>resources</code>创建<code>generatorConfig.xml</code>文件，如下：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE generatorConfiguration
-        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
-        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"&gt;
+        PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
 
 &lt;generatorConfiguration&gt;
 
-    &lt;properties resource="mybatis.properties"/&gt;
+    &lt;properties resource=&quot;mybatis.properties&quot;/&gt;
 
     &lt;!--mysql-connector的位置--&gt;
     &lt;classPathEntry
-            location="C:\Users\luomi\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/&gt;
+            location=&quot;C:\Users\luomi\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar&quot;/&gt;
 
-    &lt;context id="mybatis" targetRuntime="MyBatis3"&gt;
+    &lt;context id=&quot;mybatis&quot; targetRuntime=&quot;MyBatis3&quot;&gt;
         &lt;!-- 防止生成的代码中有很多注释--&gt;
         &lt;commentGenerator&gt;
-            &lt;property name="suppressAllComments" value="true"/&gt;
-            &lt;property name="suppressDate" value="true"/&gt;
+            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;
+            &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot;/&gt;
         &lt;/commentGenerator&gt;
 
         &lt;!--数据库--&gt;
-        &lt;jdbcConnection driverClass="$&#123;jdbc.driver&#125;"
-                        connectionURL="$&#123;jdbc.url&#125;"
-                        userId="$&#123;jdbc.username&#125;"
-                        password="$&#123;jdbc.password&#125;"&gt;
+        &lt;jdbcConnection driverClass=&quot;$&#123;jdbc.driver&#125;&quot;
+                        connectionURL=&quot;$&#123;jdbc.url&#125;&quot;
+                        userId=&quot;$&#123;jdbc.username&#125;&quot;
+                        password=&quot;$&#123;jdbc.password&#125;&quot;&gt;
         &lt;/jdbcConnection&gt;
 
         &lt;!--Java类型解析器不应该强制型对象字段BigDecimal的使用，此功能是为了使数据库DECIMAL和NUMERIC列容易处理--&gt;
         &lt;javaTypeResolver&gt;
-            &lt;property name="forceBigDecimals" value="false"/&gt;
+            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot;/&gt;
         &lt;/javaTypeResolver&gt;
 
         &lt;!--生成Model类存放位置--&gt;
-        &lt;javaModelGenerator targetPackage="$&#123;mybatis.modelPackage&#125;" targetProject="$&#123;mybatis.targetProject&#125;"&gt;
-            &lt;property name="enableSubPackages" value="true"/&gt;
-            &lt;property name="trimStrings" value="true"/&gt;
+        &lt;javaModelGenerator targetPackage=&quot;$&#123;mybatis.modelPackage&#125;&quot; targetProject=&quot;$&#123;mybatis.targetProject&#125;&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
+            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt;
         &lt;/javaModelGenerator&gt;
 
         &lt;!--生成映射文件存放位置--&gt;
-        &lt;sqlMapGenerator targetPackage="$&#123;mybatis.sqlMapperPackage&#125;" targetProject="$&#123;mybatis.targetMapperProject&#125;"&gt;
-            &lt;property name="enableSubPackages" value="true"/&gt;
+        &lt;sqlMapGenerator targetPackage=&quot;$&#123;mybatis.sqlMapperPackage&#125;&quot; targetProject=&quot;$&#123;mybatis.targetMapperProject&#125;&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
         &lt;/sqlMapGenerator&gt;
 
         &lt;!--生成Dao类存放位置--&gt;
-        &lt;javaClientGenerator type="XMLMAPPER" targetPackage="$&#123;mybatis.daoMapperPackage&#125;"
-                             targetProject="$&#123;mybatis.targetProject&#125;"&gt;
-            &lt;property name="enableSubPackages" value="true"/&gt;
+        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;$&#123;mybatis.daoMapperPackage&#125;&quot;
+                             targetProject=&quot;$&#123;mybatis.targetProject&#125;&quot;&gt;
+            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot;/&gt;
         &lt;/javaClientGenerator&gt;
 
-        &lt;!--生成对应表及类名 ByExample="false" 不自动生成实例代码--&gt;
-        &lt;table tableName="tb_user" domainObjectName="User"
-               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false" selectByExampleQueryId="false"/&gt;
+        &lt;!--生成对应表及类名 ByExample=&quot;false&quot; 不自动生成实例代码--&gt;
+        &lt;table tableName=&quot;tb_user&quot; domainObjectName=&quot;User&quot;
+               enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot;
+               enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;/&gt;
 
     &lt;/context&gt;
 &lt;/generatorConfiguration&gt;
 </code></pre>
-
 <p>终端cd到项目目录，执行命令生成mybatis代码和xml,提示<code>BUILD SUCCESS</code>表示配置成功了。</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-shell">mvn mybatis-generator:generate
+<pre><code>mvn mybatis-generator:generate
 </code></pre>
-
 <p>在代码文件夹里面，会自动生成<code>User</code>、<code>UserMapper</code>和资源文件夹下面的</p>
-<h3>5.编写Service</h3>
 
-<p>创建<code>UserService</code>接口文件，添加下面的方法：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">public interface UserService &#123;
+        <h3 id="5-编写Service"   >
+          <a href="#5-编写Service" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-编写Service" class="headerlink" title="5.编写Service"></a>5.编写Service</h3>
+      <p>创建<code>UserService</code>接口文件，添加下面的方法：</p>
+<pre><code>public interface UserService &#123;
     User findUser(Integer id);
 &#125;
 </code></pre>
-
 <p>实现接口方法，创建<code>UserServiceIml</code>文件，这里需要注意<code>@Service</code>标签，如果不设置<code>value</code>的值会默认将类名首字母小写设置为value，通常我们将他的接口名设置为value。</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Service(value = "userService")
+<pre><code>@Service(value = &quot;userService&quot;)
 public class UserServiceIml implements UserService &#123;
     @Autowired
     private UserMapper userMapper;
@@ -334,17 +306,17 @@ public class UserServiceIml implements UserService &#123;
 &#125;
 </code></pre>
 
-<h3>6.编写Controller</h3>
-
-<p>在<code>Controller</code>里面增加Service引用，通过<code>UserMapper</code>来操作数据库。</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-java">@Controller
+        <h3 id="6-编写Controller"   >
+          <a href="#6-编写Controller" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-编写Controller" class="headerlink" title="6.编写Controller"></a>6.编写Controller</h3>
+      <p>在<code>Controller</code>里面增加Service引用，通过<code>UserMapper</code>来操作数据库。</p>
+<pre><code>@Controller
 public class HelloController &#123;
     @Autowired
     private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "s", method = RequestMethod.GET)
-    public ResponseEntity&lt;User&gt; s(@RequestParam(value = "id", defaultValue = "") String id) &#123;
+    @RequestMapping(value = &quot;s&quot;, method = RequestMethod.GET)
+    public ResponseEntity&lt;User&gt; s(@RequestParam(value = &quot;id&quot;, defaultValue = &quot;&quot;) String id) &#123;
         if (StringUtils.isEmpty(id)) &#123;
             return new ResponseEntity&lt;&gt;(new User(), HttpStatus.OK);
         &#125;
@@ -355,8 +327,287 @@ public class HelloController &#123;
 &#125;
 </code></pre>
 
-<h3>7.运行</h3>
+        <h3 id="7-运行"   >
+          <a href="#7-运行" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-运行" class="headerlink" title="7.运行"></a>7.运行</h3>
+      <p>运行项目，打开<code>http://localhost:8085/jump_war/s?id=1</code>，如果你在数据库里面添加了user的表，并且增加了数据，就会看到如下的页面：<br><img src="https://file.2fun.xyz/spring_20181227204113.png"> <strong>Enjoy It</strong></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/">https://www.bearever.cn/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2019/01/01/%E6%88%91%E7%9A%842018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">我的2018年终总结</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__text">SpringMvc返回值中文乱码</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-number">1.</span> <span class="toc-text">
+          1.添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%8A%A0%E8%BD%BDApplicationContext"><span class="toc-number">2.</span> <span class="toc-text">
+          2.配置自动加载ApplicationContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AEMybatis"><span class="toc-number">3.</span> <span class="toc-text">
+          3.配置Mybatis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AEmybatis-generator"><span class="toc-number">4.</span> <span class="toc-text">
+          4.配置mybatis-generator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%BC%96%E5%86%99Service"><span class="toc-number">5.</span> <span class="toc-text">
+          5.编写Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%BC%96%E5%86%99Controller"><span class="toc-number">6.</span> <span class="toc-text">
+          6.编写Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%BF%90%E8%A1%8C"><span class="toc-number">7.</span> <span class="toc-text">
+          7.运行</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
 
-<p>运行项目，打开<code><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://localhost:8085/jump_war/s?id=1" >http://localhost:8085/jump_war/s?id=1</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></code>，如果你在数据库里面添加了user的表，并且增加了数据，就会看到如下的页面：<br><img src="https://file.2fun.xyz/spring_20181227204113.png" alt="" /></p>
-<p><strong>Enjoy It</strong></p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/">https://luomingbear.github.io/2018/12/27/%E5%9C%A8SpringMvc%E4%B8%AD%E9%9B%86%E6%88%90Mybatis/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2019/01/01/%E6%88%91%E7%9A%842018%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">我的2018年终总结</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/12/27/SpringMvc%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"><span class="paginator-prev__text">SpringMvc返回值中文乱码</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.添加依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.配置自动加载ApplicationContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3.配置Mybatis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4.配置mybatis-generator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">5.编写Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">6.编写Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">7.运行</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

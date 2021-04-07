@@ -1,21 +1,21 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="WebView 介绍  WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。 设置  当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。 获取WebSet">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="WebView 介绍       WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。                     设置       当我们在布局文件里面添加了WebView控件之后，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebView （Android）使用">
-<meta property="og:url" content="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="WebView 介绍  WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。 设置  当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。 获取WebSet">
+<meta property="og:description" content="WebView 介绍       WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。                     设置       当我们在布局文件里面添加了WebView控件之后，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://file.2fun.xyz/webview_sample_gcross.png">
 <meta property="article:published_time" content="2017-12-20T03:59:01.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.993Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.654Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://file.2fun.xyz/webview_sample_gcross.png"><title>WebView （Android）使用 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://file.2fun.xyz/webview_sample_gcross.png"><title>WebView （Android）使用 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -35,22 +35,26 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">WebView （Android）使用</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-12-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h3>WebView 介绍</h3>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">WebView （Android）使用</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-12-20</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body">
+        <h3 id="WebView-介绍"   >
+          <a href="#WebView-介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#WebView-介绍" class="headerlink" title="WebView 介绍"></a>WebView 介绍</h3>
+      <p>WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。<br><img src="https://file.2fun.xyz/webview_sample_gcross.png" alt="机核网的WebView显示文章"></p>
 
-<p>WebView是安卓平台用来显示网控件，可以实现App的混合开发需求。我们可能会有这样的需求，系统后台发送一个活动给用户，但是这个活动是会变化的，所以不能使用安卓的原生界面直接显示，那样会约束掉UI界面，使用网页来介绍活动就很有用了。<br><img src="https://file.2fun.xyz/webview_sample_gcross.png" alt="机核网的WebView显示文章" /></p>
-<h3>设置</h3>
+        <h3 id="设置"   >
+          <a href="#设置" class="heading-link"><i class="fas fa-link"></i></a><a href="#设置" class="headerlink" title="设置"></a>设置</h3>
+      <p>当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。</p>
 
-<p>当我们在布局文件里面添加了WebView控件之后，我们就可以对他进行操作了，首先需要对他进行设置，以满足你的需求。</p>
-<h4>获取WebSettings</h4>
+        <h4 id="获取WebSettings"   >
+          <a href="#获取WebSettings" class="heading-link"><i class="fas fa-link"></i></a><a href="#获取WebSettings" class="headerlink" title="获取WebSettings"></a>获取WebSettings</h4>
+      <span id="more"></span>
 
-<pre>
-WebSettings webSettings = webView.getSettings();
-</pre>
 
-<h4>设置</h4>
+<pre><code>WebSettings webSettings = webView.getSettings();
+</code></pre>
 
-<pre>
-//如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
+        <h4 id="设置-1"   >
+          <a href="#设置-1" class="heading-link"><i class="fas fa-link"></i></a><a href="#设置-1" class="headerlink" title="设置"></a>设置</h4>
+      <pre><code>//如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
 webSettings.setJavaScriptEnabled(true);
 
 // 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）
@@ -70,80 +74,350 @@ webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview�
 webSettings.setAllowFileAccess(true); //设置可以访问文件
 webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
 webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
-webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-</pre>
+webSettings.setDefaultTextEncodingName(&quot;utf-8&quot;);//设置编码格式
+</code></pre>
 
-<h3>加载网页</h3>
-
-<pre>
-//方式1. 加载一个网页：
-webView.loadUrl("http://www.google.com/");
+        <h3 id="加载网页"   >
+          <a href="#加载网页" class="heading-link"><i class="fas fa-link"></i></a><a href="#加载网页" class="headerlink" title="加载网页"></a>加载网页</h3>
+      <pre><code>//方式1. 加载一个网页：
+webView.loadUrl(&quot;http://www.google.com/&quot;);
 
 //方式2：加载apk包中的html页面
-webView.loadUrl("file:///android_asset/test.html");
+webView.loadUrl(&quot;file:///android_asset/test.html&quot;);
 
 //方式3：加载手机本地的html页面
-webView.loadUrl("content://com.android.htmlfileprovider/sdcard/test.html");
+webView.loadUrl(&quot;content://com.android.htmlfileprovider/sdcard/test.html&quot;);
 
 //方式4：加载html字符串
-mWebView.loadData(htmlString,"text/html", "utf-8");
-</pre>
+mWebView.loadData(htmlString,&quot;text/html&quot;, &quot;utf-8&quot;);
+</code></pre>
 
-<h3>WebViewClient</h3>
-
-<p>用来处理各种通知和请求事件<br>常用的方法</p>
+        <h3 id="WebViewClient"   >
+          <a href="#WebViewClient" class="heading-link"><i class="fas fa-link"></i></a><a href="#WebViewClient" class="headerlink" title="WebViewClient"></a>WebViewClient</h3>
+      <p>用来处理各种通知和请求事件 常用的方法</p>
 <ul>
-    <li>shouldOverrideUrlLoading()</li>
-当网页跳转到新的地址的时候执行，可以用来拦截跳转等，获取用来进行HTML和app的数据交互。
-
-<pre><code>&lt;li&gt;onPageStarted&lt;/li&gt;
-</code></pre>
-<p>网页开始载入的时候调用。</p>
-<pre><code>&lt;li&gt;onPageFinished&lt;/li&gt;
-</code></pre>
-<p>网页加载结束的时候调用。</p>
-<pre><code>&lt;li&gt;onReceivedError&lt;/li&gt;
-</code></pre>
-<p>网页加载错误的时候调用，如404。</p>
+<li><p>shouldOverrideUrlLoading()<br>当网页跳转到新的地址的时候执行，可以用来拦截跳转等，获取用来进行HTML和app的数据交互。</p>
+</li>
+<li><p>onPageStarted<br>网页开始载入的时候调用。</p>
+</li>
+<li><p>onPageFinished<br>网页加载结束的时候调用。</p>
+</li>
+<li><p>onReceivedError<br>网页加载错误的时候调用，如404。</p>
+</li>
 </ul>
 
-<h3>WebChromeClient</h3>
-
-<p>辅助 WebView 处理 Javascript 的对话框,网站图标,网站标题等等。</p>
+        <h3 id="WebChromeClient"   >
+          <a href="#WebChromeClient" class="heading-link"><i class="fas fa-link"></i></a><a href="#WebChromeClient" class="headerlink" title="WebChromeClient"></a>WebChromeClient</h3>
+      <p>辅助 WebView 处理 Javascript 的对话框,网站图标,网站标题等等。</p>
 <ul>
-    <li>onProgressChanged</li>
-网页加载进度变化的时候调用。
-
-<pre><code>&lt;li&gt;onReceivedTitle&lt;/li&gt;
-</code></pre>
-<p>获取网页的标题。</p>
-<pre><code>&lt;li&gt;onJsAlert&lt;/li&gt;
-</code></pre>
-<p>当网页弹窗显示的时候调用。</p>
-<pre><code>&lt;li&gt;onJsConfirm&lt;/li&gt;
-</code></pre>
-<p>当网页点击了确认按钮时候调用。</p>
+<li><p>onProgressChanged<br>网页加载进度变化的时候调用。</p>
+</li>
+<li><p>onReceivedTitle<br>获取网页的标题。</p>
+</li>
+<li><p>onJsAlert<br>当网页弹窗显示的时候调用。</p>
+</li>
+<li><p>onJsConfirm<br>当网页点击了确认按钮时候调用。</p>
+</li>
 </ul>
 
-<h3>注意事项：如何避免WebView内存泄露</h3>
+        <h3 id="注意事项：如何避免WebView内存泄露"   >
+          <a href="#注意事项：如何避免WebView内存泄露" class="heading-link"><i class="fas fa-link"></i></a><a href="#注意事项：如何避免WebView内存泄露" class="headerlink" title="注意事项：如何避免WebView内存泄露"></a>注意事项：如何避免WebView内存泄露</h3>
+      <ul>
+<li>不在xml中定义 Webview ，而是在需要的时候在Activity中创建，并且Context使用 getApplicationgContext()</li>
+<li>在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。<pre><code>@Override
+protected void onDestroy() &#123;
+    if (mWebView != null) &#123;
+        mWebView.loadDataWithBaseURL(null, &quot;&quot;, &quot;text/html&quot;, &quot;utf-8&quot;, null);
+        mWebView.clearHistory();
 
-<ul>
-    <li>不在xml中定义 Webview ，而是在需要的时候在Activity中创建，并且Context使用 getApplicationgContext()</li>
-
-<pre><code>&lt;li&gt;在 Activity 销毁（ WebView ）的时候，先让 WebView 加载null内容，然后移除 WebView，再销毁 WebView，最后置空。&lt;/li&gt;
+        ((ViewGroup) mWebView.getParent()).removeView(mWebView);
+        mWebView.destroy();
+        mWebView = null;
+    &#125;
+    super.onDestroy();
+&#125;
 </code></pre>
-<pre>
-@Override
-    protected void onDestroy() {
-        if (mWebView != null) {
-            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            mWebView.clearHistory();
+</li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/">https://www.bearever.cn/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/12/28/%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E5%BA%93%20IBleLib%E7%9A%84%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">蓝牙连接库 IBleLib的使用</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/12/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0%20Java/"><span class="paginator-prev__text">线程池 Java</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#WebView-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">
+          WebView 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">
+          设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96WebSettings"><span class="toc-number">2.1.</span> <span class="toc-text">
+          获取WebSettings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-1"><span class="toc-number">2.2.</span> <span class="toc-text">
+          设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E7%BD%91%E9%A1%B5"><span class="toc-number">3.</span> <span class="toc-text">
+          加载网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebViewClient"><span class="toc-number">4.</span> <span class="toc-text">
+          WebViewClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebChromeClient"><span class="toc-number">5.</span> <span class="toc-text">
+          WebChromeClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%9A%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DWebView%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="toc-number">6.</span> <span class="toc-text">
+          注意事项：如何避免WebView内存泄露</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
 
-            ((ViewGroup) mWebView.getParent()).removeView(mWebView);
-            mWebView.destroy();
-            mWebView = null;
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
         }
-        super.onDestroy();
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
     }
-</pre>
-</ul></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/">https://luomingbear.github.io/2017/12/20/WebView%20%EF%BC%88Android%EF%BC%89%E4%BD%BF%E7%94%A8/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/12/28/%E8%93%9D%E7%89%99%E8%BF%9E%E6%8E%A5%E5%BA%93%20IBleLib%E7%9A%84%E4%BD%BF%E7%94%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">蓝牙连接库 IBleLib的使用</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/12/01/%E7%BA%BF%E7%A8%8B%E6%B1%A0%20Java/"><span class="paginator-prev__text">线程池 Java</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">WebView 介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">获取WebSettings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">加载网页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">WebViewClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">WebChromeClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">注意事项：如何避免WebView内存泄露</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

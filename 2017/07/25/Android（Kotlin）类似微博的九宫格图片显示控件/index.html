@@ -1,22 +1,22 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="前言  在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。   由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGroup。在这里，我采用的是">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="前言       在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android（Kotlin）类似微博的九宫格图片显示控件">
-<meta property="og:url" content="https://luomingbear.github.io/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="前言  在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。   由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGroup。在这里，我采用的是">
+<meta property="og:description" content="前言       在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGr">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png">
 <meta property="og:image" content="https://file.2fun.xyz/imageasd53a1sd31a.png">
 <meta property="article:published_time" content="2017-07-25T04:53:45.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.977Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.573Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png"><title>Android（Kotlin）类似微博的九宫格图片显示控件 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png"><title>Android（Kotlin）类似微博的九宫格图片显示控件 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -36,17 +36,19 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Android（Kotlin）类似微博的九宫格图片显示控件</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><h3>前言</h3>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Android（Kotlin）类似微博的九宫格图片显示控件</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-07-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body">
+        <h3 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a><a href="#前言" class="headerlink" title="前言"></a>前言</h3>
+      <p>在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。<br><img src="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png" alt="微博九宫格截图"><br>由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGroup。在这里，我采用的是ViewGroup的方式实现(<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/w4lle/NineGridView" >参考w4lle大神的源码</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>)。<br>现在Android的官方语言已经变为了Kotlin，所以这里我使用的是Kotlin编写，直接上代码吧！</p>
 
-<p>在微博浏览的时候，我们可以看到一个类似下图的九宫格图片显示控件，类似的效果在微信朋友圈里面也有遇到。当只有一张图片的时候就显示一张图片占满布局宽度；如果有2-4张图片，则显示两列；如果有5-9张图片泽显示三列。</p>
-<img src="https://file.2fun.xyz/weibosdsasdasd1654531a32ds.png" alt="微博九宫格截图" />
+        <h3 id="NineGridlayout"   >
+          <a href="#NineGridlayout" class="heading-link"><i class="fas fa-link"></i></a><a href="#NineGridlayout" class="headerlink" title="NineGridlayout"></a>NineGridlayout</h3>
+      <p><code>NineGridlayout</code>是图片显示的自定义ViewGroup，在layout布局文件里面直接使用就可以了</p>
+<span id="more"></span>
 
-<p>由于工作项目的原因，我也需要实现一个类似这样的图片显示控件，通过百度发现，现在有两种方式进行制作，一个是自定义View的方式，另一个是通过ViewGroup。在这里，我采用的是ViewGroup的方式实现(<span class="exturl"><a class="exturl__link"   href="https://github.com/w4lle/NineGridView"  target="_blank" rel="noopener noreferrer">参考w4lle大神的源码</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>)。<br>现在Android的官方语言已经变为了Kotlin，所以这里我使用的是Kotlin编写，直接上代码吧！</p>
-<h3>NineGridlayout</h3>
 
-<p><code>NineGridlayout</code>是图片显示的自定义ViewGroup，在layout布局文件里面直接使用就可以了</p>
-<pre>class NineGridlayout : ViewGroup {
-    private val TAG = "NineGridlayout"
+<pre><code>class NineGridlayout : ViewGroup &#123;
+    private val TAG = &quot;NineGridlayout&quot;
     private var adapter: NineGridAdapter? = null
     private var onItemClickListerner: OnItemClickListener? = null
     /**
@@ -71,46 +73,46 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) &#123;
         gap = dip2px(context, ITEM_GAP.toFloat())
         defaultHeight = dip2px(context, DEFAULT_WIDTH.toFloat())
         defaultWidth = defaultHeight
-    }
+    &#125;
 
-    fun setDefaultWidth(defaultWidth: Int) {
+    fun setDefaultWidth(defaultWidth: Int) &#123;
         this.defaultWidth = defaultWidth
-    }
+    &#125;
 
-    fun setDefaultHeight(defaultHeight: Int) {
+    fun setDefaultHeight(defaultHeight: Int) &#123;
         this.defaultHeight = defaultHeight
-    }
+    &#125;
 
-    fun setAdapter(adapter: NineGridAdapter?) {
+    fun setAdapter(adapter: NineGridAdapter?) &#123;
         this.adapter = adapter
-        if (adapter == null) {
+        if (adapter == null) &#123;
             return
-        }
+        &#125;
         //初始化布局形状
         generateChildrenLayout(adapter.getCount())
         removeAllViews()
 
-        for (i in 0..adapter.getCount() - 1) {
+        for (i in 0..adapter.getCount() - 1) &#123;
             val itemView = adapter.getView(i)
             addView(itemView, generateDefaultLayoutParams())
-        }
+        &#125;
 
         oldCount = adapter.getCount()
-    }
+    &#125;
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        Log.e(TAG, "onMeasure")
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) &#123;
+        Log.e(TAG, &quot;onMeasure&quot;)
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val widthMode = View.MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = View.MeasureSpec.getMode(heightMeasureSpec)
         val sizeWidth = View.MeasureSpec.getSize(widthMeasureSpec)
         val sizeHeight = View.MeasureSpec.getSize(heightMeasureSpec)
         totalWidth = sizeWidth - paddingLeft - paddingRight
-        if (adapter != null &amp;&amp; adapter!!.getCount() &gt; 0) {
+        if (adapter != null &amp;&amp; adapter!!.getCount() &gt; 0) &#123;
             val measureHeight: Int
             //计算单个图片的大小
             singleWidth = (totalWidth - gap * (columns - 1)) / columns
@@ -120,62 +122,62 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
                     View.MeasureSpec.makeMeasureSpec(singleHeight, View.MeasureSpec.EXACTLY))
             measureHeight = singleHeight * rows + gap * (rows - 1) + paddingTop + paddingBottom
             setMeasuredDimension(sizeWidth, measureHeight)
-        }
+        &#125;
 
-    }
+    &#125;
 
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) &#123;
         if (!isFirstLayout)
             layoutChildrenView()
 
         isFirstLayout = false
-    }
+    &#125;
 
-    private fun layoutChildrenView() {
-        Log.e(TAG, "layoutChildrenView")
+    private fun layoutChildrenView() &#123;
+        Log.e(TAG, &quot;layoutChildrenView&quot;)
 
-        if (adapter == null || adapter!!.getCount() == 0) {
+        if (adapter == null || adapter!!.getCount() == 0) &#123;
             return
-        }
+        &#125;
         val childrenCount = adapter!!.getCount()
-        for (i in 0..childrenCount - 1) {
+        for (i in 0..childrenCount - 1) &#123;
             val position = findPosition(i)
             val left = (singleWidth + gap) * position[1] + paddingLeft
             val top = (singleHeight + gap) * position[0] + paddingTop
             val right = left + singleWidth
             val bottom = top + singleHeight
             val childrenView = getChildAt(i) as ImageView
-            if (childrenCount == 1) {
+            if (childrenCount == 1) &#123;
                 //只有一张图片
                 childrenView.scaleType = ImageView.ScaleType.FIT_CENTER
-            } else {
+            &#125; else &#123;
                 childrenView.scaleType = ImageView.ScaleType.CENTER_CROP
-            }
+            &#125;
 
             val itemPosition = i
-            childrenView.setOnClickListener {
-                if (onItemClickListerner != null) {
+            childrenView.setOnClickListener &#123;
+                if (onItemClickListerner != null) &#123;
                     onItemClickListerner!!.onClick(itemPosition)
-                }
-            }
+                &#125;
+            &#125;
             childrenView.layout(left, top, right, bottom)
-        }
-    }
+        &#125;
+    &#125;
 
 
-    private fun findPosition(childNum: Int): IntArray {
+    private fun findPosition(childNum: Int): IntArray &#123;
         val position = IntArray(2)
-        for (i in 0..rows - 1) {
-            for (j in 0..columns - 1) {
-                if (i * columns + j == childNum) {
+        for (i in 0..rows - 1) &#123;
+            for (j in 0..columns - 1) &#123;
+                if (i * columns + j == childNum) &#123;
                     position[0] = i//行
                     position[1] = j//列
                     break
-                }
-            }
-        }
+                &#125;
+            &#125;
+        &#125;
         return position
-    }
+    &#125;
 
     /**
      * 根据图片个数确定行列数量
@@ -188,46 +190,46 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
      * 7-9     3    3
      * @param length
      */
-    private fun generateChildrenLayout(length: Int) {
-        if (length == 1) {
+    private fun generateChildrenLayout(length: Int) &#123;
+        if (length == 1) &#123;
             rows = 1
             columns = 1
-        } else if (length &lt;= 4) {
+        &#125; else if (length &lt;= 4) &#123;
             rows = 2
             columns = 2
-        } else if (length &lt;= 6) {
+        &#125; else if (length &lt;= 6) &#123;
             rows = 2
             columns = 3
-        } else {
+        &#125; else &#123;
             rows = 3
             columns = 3
-        }
+        &#125;
 
         singleWidth = (totalWidth - gap * (columns - 1)) / columns
         singleHeight = singleWidth
-    }
+    &#125;
 
-    fun setOnItemClickListener(onItemClickListerner: OnItemClickListener) {
+    fun setOnItemClickListener(onItemClickListerner: OnItemClickListener) &#123;
         this.onItemClickListerner = onItemClickListerner
-    }
+    &#125;
 
-    companion object {
+    companion object &#123;
 
         /**
          * dp to px
          */
-        fun dip2px(context: Context, dpValue: Float): Int {
+        fun dip2px(context: Context, dpValue: Float): Int &#123;
             val scale = context.resources.displayMetrics.density
             return (dpValue * scale + 0.5f).toInt()
-        }
-    }
-}
-</pre>
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 
-<h3>NineGridAdapter</h3>
-
-<p><code>NineGridAdapter</code>图片的数据适配器</p>
-<pre>abstract class NineGridAdapter(protected var context: Context, protected var list: List) {
+        <h3 id="NineGridAdapter"   >
+          <a href="#NineGridAdapter" class="heading-link"><i class="fas fa-link"></i></a><a href="#NineGridAdapter" class="headerlink" title="NineGridAdapter"></a>NineGridAdapter</h3>
+      <p><code>NineGridAdapter</code>图片的数据适配器</p>
+<pre><code>abstract class NineGridAdapter(protected var context: Context, protected var list: List) &#123;
 
     abstract fun getCount(): Int
 
@@ -236,17 +238,17 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
     abstract fun getItemId(position: Int): Long
 
     abstract fun getView(i: Int): View
-}
-</pre>
+&#125;
+</code></pre>
 
-<h3>使用方法</h3>
+        <h3 id="使用方法"   >
+          <a href="#使用方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3>
+      <ul>
+<li><p>首先继承<code>NineGridAdapter</code></p>
+<pre><code>class NineGridsAdapter(context: Context, list: MutableList&lt;String&gt;) :
+    NineGridAdapter(context, list) &#123;
 
-<ul>
-    <li>首先继承<code>NineGridAdapter</code></li>
-<pre>class NineGridsAdapter(context: Context, list: MutableList&lt;String&gt;) :
-        NineGridAdapter(context, list) {
-
-<pre><code>override fun getCount(): Int &#123;
+override fun getCount(): Int &#123;
     return if (list == null) 0 else list.size
 &#125;
 
@@ -266,23 +268,302 @@ override fun getView(i: Int): View &#123;
     return iv
 &#125;
 </code></pre>
-<p>}<br></pre><br>        <li>设置Adapter显示数据,添加点击响应事件</li></p>
-<pre>val imageAdapter = NineGridsAdapter(mContext!!, imageList)
-            mMvpView?.picLayout?.setAdapter(imageAdapter)
-            mMvpView?.picLayout?.setOnItemClickListener(object : OnItemClickListener {
-                override fun onClick(vararg args: Int) {
-                    clickImage(args[0])
-                }
-            })
-</pre>
-</ul>
-
-<p>在此，我们的九宫格图片显示控件就制作完毕了，Enjoy It！<br>最后我们的实际显示效果图如下：<br><img src="https://file.2fun.xyz/imageasd53a1sd31a.png" alt="最终效果图" /></p>
-<pre class="prism-highlight line-numbers" data-start="1"><code class="language-null">&lt;h3&gt;附：点击回掉接口&lt;/h3&gt;
+<p>}</p>
+</li>
+<li><p>设置Adapter显示数据,添加点击响应事件</p>
+<pre><code>val imageAdapter = NineGridsAdapter(mContext!!, imageList)
+        mMvpView?.picLayout?.setAdapter(imageAdapter)
+        mMvpView?.picLayout?.setOnItemClickListener(object : OnItemClickListener &#123;
+            override fun onClick(vararg args: Int) &#123;
+                clickImage(args[0])
+            &#125;
+        &#125;)
 </code></pre>
-
+</li>
+</ul>
+<p>在此，我们的九宫格图片显示控件就制作完毕了，Enjoy It！ 最后我们的实际显示效果图如下：<br><img src="https://file.2fun.xyz/imageasd53a1sd31a.png" alt="最终效果图"></p>
+<pre><code>&lt;h3&gt;附：点击回掉接口&lt;/h3&gt;
+</code></pre>
 <p>文中使用的<code>OnItemClickListener</code>是一个自定义的点击回掉接口，附上代码</p>
-<pre>interface OnItemClickListener {
+<pre><code>interface OnItemClickListener &#123;
     fun onClick(vararg args: Int)
+&#125;
+</code></pre>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/">https://www.bearever.cn/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/07/26/AS%E7%A7%BB%E6%A4%8DFFmpeg%EF%BC%88Ubuntu%E5%B9%B3%E5%8F%B0%EF%BC%89/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">AS移植FFmpeg（Ubuntu平台）</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/07/16/%E8%8E%B7%E5%8F%96apk%E7%9A%84sha1%E5%80%BC/"><span class="paginator-prev__text">获取apk的sha1值</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NineGridlayout"><span class="toc-number">2.</span> <span class="toc-text">
+          NineGridlayout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NineGridAdapter"><span class="toc-number">3.</span> <span class="toc-text">
+          NineGridAdapter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">
+          使用方法</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
 }
-</pre></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/">https://luomingbear.github.io/2017/07/25/Android%EF%BC%88Kotlin%EF%BC%89%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E7%9A%84%E4%B9%9D%E5%AE%AB%E6%A0%BC%E5%9B%BE%E7%89%87%E6%98%BE%E7%A4%BA%E6%8E%A7%E4%BB%B6/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/07/26/AS%E7%A7%BB%E6%A4%8DFFmpeg%EF%BC%88Ubuntu%E5%B9%B3%E5%8F%B0%EF%BC%89/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">AS移植FFmpeg（Ubuntu平台）</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/07/16/cropped-cropped-logo%E7%9A%84%E5%89%AF%E6%9C%AC.png/"><span class="paginator-prev__text">cropped-cropped-logo的副本.png</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">NineGridlayout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">NineGridAdapter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">使用方法</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="0.起因       这篇文章是对周末折腾的一个记录，一切都源于阿里云客服说我的服务器马上到期了。之前购买的阿里云的ECS，三年下来需要两千多块钱，但是平时用的多的就一个博客系统和账单接口在跑，CPU使用率仅有4%。然后无意间看到阿里的语雀团队使用函数计算大大的减少了服务器的维护成本，也避免了CPU使用率一直很低的情况。受此启发决定将我的博客转移到阿里云函">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用阿里云函数计算部署Wordpress博客系统">
+<meta property="og:url" content="https://www.bearever.cn/2020/07/21/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="0.起因       这篇文章是对周末折腾的一个记录，一切都源于阿里云客服说我的服务器马上到期了。之前购买的阿里云的ECS，三年下来需要两千多块钱，但是平时用的多的就一个博客系统和账单接口在跑，CPU使用率仅有4%。然后无意间看到阿里的语雀团队使用函数计算大大的减少了服务器的维护成本，也避免了CPU使用率一直很低的情况。受此启发决定将我的博客转移到阿里云函">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722034153856.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722063100237.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/aa24a63302dfac74a54fbada4b273361bf5d179b.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97+wordpress%E6%B5%81%E7%A8%8B2.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722031827413-1024x436.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722032110237.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722032358299.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722032501994.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/0cbbe03eebd58f5e6696e3214c9750083f8013ea.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/WX20200721-121201@2x.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/WX20200721-121525@2x.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/WX20200721-122239@2x.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/WX20200721-130217@2x.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/WX20200721-130652@2x.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722060955108.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722033434130.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722032808721.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722060809233.png">
+<meta property="og:image" content="https://file.2fun.xyz/2020/07/20200722060852936.png">
+<meta property="article:published_time" content="2020-07-21T05:27:10.000Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:13.129Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/2020/07/20200722034153856.png"><title>使用阿里云函数计算部署Wordpress博客系统 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2020/07/21/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">使用阿里云函数计算部署Wordpress博客系统</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p><img src="https://file.2fun.xyz/2020/07/20200722034153856.png" alt="阿里云函数计算部署Wordpress"></p>
+
+        <h2 id="0-起因"   >
+          <a href="#0-起因" class="heading-link"><i class="fas fa-link"></i></a><a href="#0-起因" class="headerlink" title="0.起因"></a>0.起因</h2>
+      <p>这篇文章是对周末折腾的一个记录，一切都源于阿里云客服说我的服务器马上到期了。之前购买的阿里云的ECS，三年下来需要两千多块钱，但是平时用的多的就一个博客系统和账单接口在跑，CPU使用率仅有4%。然后无意间看到阿里的语雀团队使用函数计算大大的减少了服务器的维护成本，也避免了CPU使用率一直很低的情况。受此启发决定将我的博客转移到阿里云函数计算上面，幸运的是官方也给了wordpress搭建教程（仅仅是能用）。<br>附上官方的函数计算与传统ECS价格对比：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>ITEM</th>
+<th>成本</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基于 VM 方案</td>
+<td>使用 ecs.t5-lc1m1.small, 22.8元/月</td>
+<td>服务器和数据库在同一台VM,</td>
+</tr>
+</tbody></table></div>
+<span id="more"></span>
+
+<p>均无主备容灾，同时该规格的主机本身性能弱<br>轻量应用服务器 | 60元/月(1vCPU 1GB 1Mbps 20GB[ssd]) | 服务器和数据库在同一台VM,<br>均无主备容灾，同时该规格的主机本身性能弱<br>函数计算 | sqlite3 版本约为 1元/月 mysql 版本大约 26元/月 | 高  </p>
+
+        <h2 id="1-概要"   >
+          <a href="#1-概要" class="heading-link"><i class="fas fa-link"></i></a><a href="#1-概要" class="headerlink" title="1.概要"></a>1.概要</h2>
+      <p>本文将对部署的过程和函数计算+Wordpress的架构做一个简单的描述，如有不对请以<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/146729.html?source=5176.11533457&userCode=bdcxtb8v&type=copy" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>为准。整个文章的目录如图1所示，分为函数计算架构设计、准备工作、搭建Wordpress、配置Wordpress和支持Https五大部分。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722063100237.png" alt="图1. 文章目录结构"> <em>图1.<br>文章目录结构</em></p>
+
+        <h2 id="2-函数计算-Wordpress的架构设计"   >
+          <a href="#2-函数计算-Wordpress的架构设计" class="heading-link"><i class="fas fa-link"></i></a><a href="#2-函数计算-Wordpress的架构设计" class="headerlink" title="2.函数计算+Wordpress的架构设计"></a>2.函数计算+Wordpress的架构设计</h2>
+      <p>在使用函数计算之前，我们先了解一下函数计算是什么，这样有助于理解每一步在干嘛。下面是阿里云官网的介绍：</p>
+<blockquote>
+<p>函数计算（Function Compute）是一个事件驱动的全托管 Serverless<br>计算服务。您无需管理服务器等基础设施，只需编写代码并上传。函数计算会为您准备好计算资源，并以弹性、可靠的方式运行您的代码。</p>
+</blockquote>
+<p>可以把函数计算理解成一个运行在容器里面的代码片段，我们只需要上传自己的代码片段，函数计算服务会自动帮我们处理运行环境和伸缩配置。但是函数计算只是用来运行一段代码的，它本身是没有上下文记录的功能的，所以官方的做法是搭配使用了阿里云的NAS服务（阿里云文件存储服务）。NAS相当于一台远程的移动硬盘，函数计算引擎可以与这块硬盘进行绑定，以实现文件操作。通过上面的介绍我们就可以看看基于函数计算的Wordpress是怎么架构的。</p>
+<p><img src="https://file.2fun.xyz/2020/07/aa24a63302dfac74a54fbada4b273361bf5d179b.png" alt="图2.函数计算Wordpress架构"><br><em>图2. 函数计算Wordpress架构</em></p>
+<p>如图2所示，客户端的请求会发送到函数计算服务器的PHP运行环境，该环境与NAS进行了绑定，所以我们的请求可以直接操作NAS里面的Wordpress文件。这里如果需要用到数据库的话，就会连接RDS（云数据库服务）进行数据的增删改查。由于所有的函数执行的时候都是对同一个NAS和RDS进行的操作，最后的效果就像是在同一台服务器上面进行的操作一样。<br><strong>重点：Wordpress的源文件是存放在NAS上面的，函数计算仅仅是提供了一个入口，数据库在RDS上面，通过远程连接的方式进行访问。</strong></p>
+
+        <h2 id="3-流程"   >
+          <a href="#3-流程" class="heading-link"><i class="fas fa-link"></i></a><a href="#3-流程" class="headerlink" title="3.流程"></a>3.流程</h2>
+      <p>创建Wordpress博客系统一共需要4个步骤，如图3所示，分别是准备阶段、创建Wordpress、配置Wordpress和支持Https，如果不想支持Https的话，那第四步可以省略。</p>
+<p><img src="https://file.2fun.xyz/2020/07/%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97+wordpress%E6%B5%81%E7%A8%8B2.png" alt="图3. 创建wordpress的流程"><br><em>图3. 创建wordpress的流程</em></p>
+
+        <h2 id="4-准备阶段"   >
+          <a href="#4-准备阶段" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-准备阶段" class="headerlink" title="4.准备阶段"></a>4.准备阶段</h2>
+      
+        <h3 id="4-1购买域名"   >
+          <a href="#4-1购买域名" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-1购买域名" class="headerlink" title="4.1购买域名"></a>4.1购买域名</h3>
+      <p>一个完整的个人博客需要有一个独立的域名，所以在开发之前需要申请一个个人域名，可以直接在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wanwang.aliyun.com/domain?source=5176.11533457&userCode=bdcxtb8v&type=copy" >万网官网</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>进行申请，输入想要的域名下单购买就好。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722031827413-1024x436.png" alt="图4. 万网购买域名"><br><em>图4. 万网购买域名</em></p>
+
+        <h3 id="4-2域名备案"   >
+          <a href="#4-2域名备案" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-2域名备案" class="headerlink" title="4.2域名备案"></a>4.2域名备案</h3>
+      <p>购买域名之后就需要进行备案了，如果是在万网上面购买的域名，则可以直接使用阿里云的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/activity/beian/gift?source=5176.11533457&userCode=bdcxtb8v&type=copy" >备案服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>进行备案。在发起备案申请之后需要等待阿里云寄送一张幕布过来，收到幕布之后站在幕布前面手持生份证进行拍照提交审核就可以了，整个过程可能需要两周。</p>
+
+        <h3 id="4-3开通函数计算服务"   >
+          <a href="#4-3开通函数计算服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-3开通函数计算服务" class="headerlink" title="4.3开通函数计算服务"></a>4.3开通函数计算服务</h3>
+      <p>在阿里云<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/product/fc?source=5176.11533457&userCode=bdcxtb8v&type=copy" >开通函数计算服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，选择<a target="_blank" rel="noopener" href="https://www.aliyun.com/product/fc?source=5176.11533457&userCode=bdcxtb8v&type=copy"><br><strong>免费开通</strong></a>，这样就是按量付费，函数计算每月有100万次免费额度，基本上够我们使用了。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722032110237.png" alt="图5. 免费开通函数计算"> <em>图5.<br>免费开通函数计算</em></p>
+
+        <h3 id="4-5开通NAS服务"   >
+          <a href="#4-5开通NAS服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-5开通NAS服务" class="headerlink" title="4.5开通NAS服务"></a>4.5开通NAS服务</h3>
+      <p>在阿里云<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/product/nas?source=5176.11533457&userCode=bdcxtb8v&type=copy" >开通使用文件存储NAS服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>即可。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722032358299.png"> <em>图6. 开通NAS服务</em></p>
+
+        <h3 id="4-6开通RDS服务"   >
+          <a href="#4-6开通RDS服务" class="heading-link"><i class="fas fa-link"></i></a><a href="#4-6开通RDS服务" class="headerlink" title="4.6开通RDS服务"></a>4.6开通RDS服务</h3>
+      <p>另外我们还需要为博客创建RDS数据库，进入阿里云，开通<a target="_blank" rel="noopener" href="https://www.aliyun.com/product/rds/mysql?source=5176.11533457&userCode=bdcxtb8v&type=copy">RDS-<br>MySQL版</a>，我购买的时候有新客优惠，一年仅需54元，如果没有优惠的话推荐购买3年及以上，这样更划算。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722032501994.png" alt="图7. RDS MySQL服务"> <em>图7.<br>RDS MySQL服务</em></p>
+
+        <h2 id="5-创建Wordpress"   >
+          <a href="#5-创建Wordpress" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-创建Wordpress" class="headerlink" title="5.创建Wordpress"></a>5.创建Wordpress</h2>
+      <p>准备工作完成之后我们就可以开发创建Wordpress了，首先需要下载函数计算的工具fun，并clone fc-wordpress代码到本地。</p>
+
+        <h3 id="5-1下载fun工具"   >
+          <a href="#5-1下载fun工具" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-1下载fun工具" class="headerlink" title="5.1下载fun工具"></a>5.1下载fun工具</h3>
+      <p>fun工具提供了多种方式安装，详细信息请查看[官方文档](<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/alibaba/funcraft/blob/master/docs/usage/installation-" >https://github.com/alibaba/funcraft/blob/master/docs/usage/installation-</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>zh.md?spm=a2c6h.12873639.0.0.7b8427b4YkbbwW&amp;file=installation-zh.md)。</p>
+
+        <h3 id="5-2git-clone-fc-wordpress"   >
+          <a href="#5-2git-clone-fc-wordpress" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-2git-clone-fc-wordpress" class="headerlink" title="5.2git clone fc-wordpress"></a>5.2git clone fc-wordpress</h3>
+      <p>将fc-wordpress到源码下载到本地。</p>
+<pre><code>git clone https://github.com/awesome-fc/fc-wordpress.git
+</code></pre>
+
+        <h3 id="5-3将Wordpress上传到NAS"   >
+          <a href="#5-3将Wordpress上传到NAS" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-3将Wordpress上传到NAS" class="headerlink" title="5.3将Wordpress上传到NAS"></a>5.3将Wordpress上传到NAS</h3>
+      <p><strong>5.3.1初始化NAS</strong> 这里我使用的是MySQL数据库，所以首先cd进入<code>fc-wp-mysql</code>文件夹(<br><strong>强烈建议打开显示隐藏文件的功能，这样更容易理解步骤</strong> )，执行以下命令：</p>
+<pre><code>fun nas init
+fun nas info
+</code></pre>
+<blockquote>
+<p><code>fun nas init</code>: 初始化 NAS, 基于您的 .env 中的信息获取(已有满足条件的nas)或创建一个同region可用的nas<br>如果你没有修改 templata.yml 中的配置 service名字， 那么则可以进入下一步； 如果有修改， 会在当前目录生成新的目录<br>.fun/nas/auto-default/{serviceName} (<code>fun nas info</code> 可以列出新的目录), 将默认目录下的<br>.fun/nas/auto-default/fc-wp-mysql/wordpress 的wordpress目录拷贝到 .fun/nas/auto-<br>default/{serviceName} 下， 同时可以删除目录 .fun/nas/auto-default/fc-wp-<br>mysql/wordpress</p>
+</blockquote>
+<p><strong>5.3.2上传到NAS</strong> 执行如下命令将本地的Wordpress文件上传到NAS：</p>
+<pre><code>fun nas sync
+fun nas ls nas:///mnt/auto/
+</code></pre>
+<blockquote>
+<p><code>fun nas sync</code>: 将本地 NAS 中的内容（.fun/nas/auto-default/fc-wp-mysql）上传到 NAS 中的<br>fc-wp-mysql 目录 <code>fun nas ls nas:///mnt/auto/</code>: 查看我们是否已经正确将文件上传到了NAS</p>
+</blockquote>
+
+        <h3 id="5-4配置域名信息"   >
+          <a href="#5-4配置域名信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-4配置域名信息" class="headerlink" title="5.4配置域名信息"></a>5.4配置域名信息</h3>
+      <p>修改<code> index.php</code> 中的<code>$host</code>中的值，<code> $host</code> 修改为自己的域名， 修改 <code>template.yml </code>中<br><code>DomainName: Auto </code>, Auto 修改成自己的域名。 修改 <code>template.yml </code>LogConfig 中的 Project,<br>任意取一个不会重复的名字即可, 有两处地方需要更改，如图8所示。</p>
+<p><img src="https://file.2fun.xyz/2020/07/0cbbe03eebd58f5e6696e3214c9750083f8013ea.png" alt="图8.
+修改template.yml"><br><em>图8. 修改template.yml</em></p>
+
+        <h3 id="5-5发布函数"   >
+          <a href="#5-5发布函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#5-5发布函数" class="headerlink" title="5.5发布函数"></a>5.5发布函数</h3>
+      <p>执行<code>fun deploy</code>，完成最终的部署。 登录控制台 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fc.console.aliyun.com/" >https://fc.console.aliyun.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> ，可以看到service 和<br>函数已经创建成功， 并且 service 也已经正确配置。</p>
+<ol start="3">
+<li>通过浏览器自己的域名，即可看到Wordpress页面。</li>
+</ol>
+
+        <h2 id="6-配置Wordpress"   >
+          <a href="#6-配置Wordpress" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-配置Wordpress" class="headerlink" title="6.配置Wordpress"></a>6.配置Wordpress</h2>
+      <p>完成Wordpress安装之后我们就可以进行博客具体配置了，首次打开会提示选择一个语言，在底部有一个“简体中文”。选择语言之后就进入正式配置阶段，如图9所示。</p>
+<p>![图9. Wordpress初始页面](<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/2020/07/generate-wp-config-" >https://file.2fun.xyz/2020/07/generate-wp-config-</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>file.png) <em>图9. Wordpress初始页面</em></p>
+
+        <h3 id="6-1创建RDS数据库"   >
+          <a href="#6-1创建RDS数据库" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-1创建RDS数据库" class="headerlink" title="6.1创建RDS数据库"></a>6.1创建RDS数据库</h3>
+      <p>如图9所示，我们需要提供一个数据库，这时可以去RDS<br><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://rdsnext.console.aliyun.com/" >MYSQL控制台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>创建一个数据库。</p>
+<p><strong>6.1.1创建数据库账户</strong> 首先我们创建一个普通账号，用来管理博客的数据库。</p>
+<p><img src="https://file.2fun.xyz/2020/07/WX20200721-121201@2x.png" alt="图10. 创建普通账户"> <em>图10.<br>创建普通账户</em></p>
+<p><strong>6.1.2创建数据库</strong> 然后创建一个数据库，并将权限授予刚才的账户。</p>
+<p><img src="https://file.2fun.xyz/2020/07/WX20200721-121525@2x.png" alt="图11. 创建数据库"> <em>图11.<br>创建数据库</em></p>
+<p><strong>6.1.3设置白名单</strong><br>这时我们的数据库还不能背外面访问，需要先设置白名单，为了简单，我这里是直接添加的允许<code>0.0.0.0/0</code>访问，如果想要更加精细的权限控制，可以查看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/100272.html?source=5176.11533457&userCode=bdcxtb8v&type=copy" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
+<p><img src="https://file.2fun.xyz/2020/07/WX20200721-122239@2x.png" alt="图12. 设置白名单"> <em>图12.<br>设置白名单</em></p>
+<p><strong>6.1.4获取外网地址</strong> 设置白名单之后就可以申请外网地址了。</p>
+<p><img src="https://file.2fun.xyz/2020/07/WX20200721-130217@2x.png" alt="图13. 获取RDS外网地址"><br><em>图13. 获取RDS外网地址</em></p>
+
+        <h3 id="6-2Wordpress绑定数据库"   >
+          <a href="#6-2Wordpress绑定数据库" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-2Wordpress绑定数据库" class="headerlink" title="6.2Wordpress绑定数据库"></a>6.2Wordpress绑定数据库</h3>
+      <p>数据库创建成功之后就可以配置Wordpress的数据库信息了，需要注意的地方是 <strong>数据库主机要填写RDS的外网地址，而不是locallhost</strong></p>
+<p><img src="https://file.2fun.xyz/2020/07/WX20200721-130652@2x.png" alt="图14. Wordpress绑定数据库"><br><em>图14. Wordpress绑定数据库</em></p>
+
+        <h3 id="6-3创建账户和网站信息"   >
+          <a href="#6-3创建账户和网站信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-3创建账户和网站信息" class="headerlink" title="6.3创建账户和网站信息"></a>6.3创建账户和网站信息</h3>
+      <p>配置好数据库之后就可以进入网站信息配置页面了，如图15所示，需要填写网站标题、用户名、密码和邮箱等信息。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722060955108.png" alt="图15. 创建账户和网站信息"> <em>图15.<br>创建账户和网站信息</em></p>
+
+        <h3 id="6-4网站个性化（可选）"   >
+          <a href="#6-4网站个性化（可选）" class="heading-link"><i class="fas fa-link"></i></a><a href="#6-4网站个性化（可选）" class="headerlink" title="6.4网站个性化（可选）"></a>6.4网站个性化（可选）</h3>
+      <p>经过上面的步骤，我们的网站就配置完成了，但是这时的网站还十分简陋，外观也不能达到我们的需求，所以我们需要对它换个皮。我尝试在Wordpress的后台直接安装主题，但是每一次都是安装失败，最后我找到了一种安装主题的方式：直接把主题文件上传到NAS里面。</p>
+<p><strong>6.4.1下载主题</strong> 首先去<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/themes" >https://wordpress.org/themes
+</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>下载喜欢的主题，然后将主题的文件夹拷贝到本地<code>fc-wordpress地址/fc-web- mysql/.fun/nas/auto-default/fc-wp-mysql/wordpress/wp- content/themes</code>文件夹下面，如图16所示，writers文件夹就是我下载的主题。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722033434130.png" alt="下载主题"> <em>图16. 下载主题</em></p>
+<p><strong>6.4.2同步NAS</strong> 将主题复制到wordpress的主题文件夹之后，我们需要把本地的wordpress信息与NAS进行同步，执行<code>fun nas sync</code>即可将本地文件上传到NAS上面。这时在我们的Wordpress后台就可以看到新安装的主题了。</p>
+
+        <h2 id="7支持Https（可选）"   >
+          <a href="#7支持Https（可选）" class="heading-link"><i class="fas fa-link"></i></a><a href="#7支持Https（可选）" class="headerlink" title="7支持Https（可选）"></a>7支持Https（可选）</h2>
+      <p>一切就这么顺利的完成了，直到我用Safari浏览器访问<a href="www.bearever.cn">www.bearever.cn</a>时，我感觉自己遭受了暴击！浏览效果如图17所示。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722032808721.png" alt="页面样式丢失"> <em>图17. 页面样式丢失</em></p>
+<p>导致这个的原因是我们的博客现在还不支持Https，百度了一下怎么解决都说是需要改<code>wp- config.php</code>文件，这个文件是配置的时候创建在NAS上面的。问题难就难在这里，我没有办法下载NAS上面的文件进行修改，fun工具目前只支持列出文件目录，使用本地文件替换NAS文件，但是没有下载文件的功能。。。就在我一筹莫展的时候，发现了一个叫[really-<br>simple-ssl](<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-" >https://wordpress.org/plugins/really-simple-</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>ssl/)的插件，官方描述说可以让你的网站轻松支持Https，带着试一试的态度下载安装，发现真的可以！</p>
+<p>如果你要让你的博客支持Https的话，需要下载Https证书，然后更新函数计算域名信息，最后安装<a target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-ssl/">really-simple-<br>ssl</a>插件就可以了。</p>
+
+        <h3 id="7-1下载Https证书"   >
+          <a href="#7-1下载Https证书" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-1下载Https证书" class="headerlink" title="7.1下载Https证书"></a>7.1下载Https证书</h3>
+      <p>下载证书之前我们需要先去阿里云购买一个证书，然后下载下来。 <strong>7.1.1申请Https证书</strong><br>在阿里云SSL平台购买一个证书，选择免费版的就可以了，如图18所示。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722060809233.png" alt="图18. 申请免费版Https证书"><br><em>图18. 申请免费版Https证书</em></p>
+<p><strong>7.1.2下载证书</strong> 证书申请成功之后将证书下载到本地，下载的时候选择Nginx版本的。</p>
+
+        <h3 id="7-2更新函数计算域名信息"   >
+          <a href="#7-2更新函数计算域名信息" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-2更新函数计算域名信息" class="headerlink" title="7.2更新函数计算域名信息"></a>7.2更新函数计算域名信息</h3>
+      <p>在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fc.console.aliyun.com/fc/overview" >函数计算控制台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>选择“自定义域名”，可以看到我们自己的域名信息，点击“修改”将支持协议改为“Http、Https”，如图19所示。其中.pem和.key文件的内容可以直接用记事本打开查看。</p>
+<p><img src="https://file.2fun.xyz/2020/07/20200722060852936.png" alt="图19. 配置Https证书信息"> <em>图19.<br>配置Https证书信息</em></p>
+
+        <h3 id="7-3安装really-simple-ssl插件"   >
+          <a href="#7-3安装really-simple-ssl插件" class="heading-link"><i class="fas fa-link"></i></a><a href="#7-3安装really-simple-ssl插件" class="headerlink" title="7.3安装really-simple-ssl插件"></a>7.3安装really-simple-ssl插件</h3>
+      <p>去[really-simple-ssl主页](<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-" >https://wordpress.org/plugins/really-simple-</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>ssl/)下载插件，然后将插件文件夹复制到<code>fc-wordpress地址/fc-web-mysql/.fun/nas/auto-default/fc-wp- mysql/wordpress/wp-content/plugins</code>文件夹下面。执行<code>fun nas sync</code>将本地的本地的插件同步到NAS上面，最后打开Wordpress后台开启really-simple-ssl即可。</p>
+
+        <h2 id="8-Enjoy"   >
+          <a href="#8-Enjoy" class="heading-link"><i class="fas fa-link"></i></a><a href="#8-Enjoy" class="headerlink" title="8.Enjoy"></a>8.Enjoy</h2>
+      <p>好了，一个Wordpress博客就这么部署完毕了，你已经迈出了成功的第一步，接下来就是不断的丰富你的博客，为她填充智慧与思想！</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2020/07/21/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">https://www.bearever.cn/2020/07/21/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/10/29/getString%E8%BF%98%E6%98%AFoptString%EF%BC%9F/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">getString还是optString？</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/06/18/%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85%E5%8D%8A%E5%B9%B4%E8%AE%B0/"><span class="paginator-prev__text">阿里外包半年记</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">
+          0.起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A6%82%E8%A6%81"><span class="toc-number">2.</span> <span class="toc-text">
+          1.概要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97-Wordpress%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">
+          2.函数计算+Wordpress的架构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B5%81%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">
+          3.流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="toc-number">5.</span> <span class="toc-text">
+          4.准备阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="toc-number">5.1.</span> <span class="toc-text">
+          4.1购买域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E5%9F%9F%E5%90%8D%E5%A4%87%E6%A1%88"><span class="toc-number">5.2.</span> <span class="toc-text">
+          4.2域名备案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E5%BC%80%E9%80%9A%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.3.</span> <span class="toc-text">
+          4.3开通函数计算服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5%E5%BC%80%E9%80%9ANAS%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.4.</span> <span class="toc-text">
+          4.5开通NAS服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6%E5%BC%80%E9%80%9ARDS%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.5.</span> <span class="toc-text">
+          4.6开通RDS服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%88%9B%E5%BB%BAWordpress"><span class="toc-number">6.</span> <span class="toc-text">
+          5.创建Wordpress</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E4%B8%8B%E8%BD%BDfun%E5%B7%A5%E5%85%B7"><span class="toc-number">6.1.</span> <span class="toc-text">
+          5.1下载fun工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2git-clone-fc-wordpress"><span class="toc-number">6.2.</span> <span class="toc-text">
+          5.2git clone fc-wordpress</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E5%B0%86Wordpress%E4%B8%8A%E4%BC%A0%E5%88%B0NAS"><span class="toc-number">6.3.</span> <span class="toc-text">
+          5.3将Wordpress上传到NAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF"><span class="toc-number">6.4.</span> <span class="toc-text">
+          5.4配置域名信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5%E5%8F%91%E5%B8%83%E5%87%BD%E6%95%B0"><span class="toc-number">6.5.</span> <span class="toc-text">
+          5.5发布函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%85%8D%E7%BD%AEWordpress"><span class="toc-number">7.</span> <span class="toc-text">
+          6.配置Wordpress</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E5%88%9B%E5%BB%BARDS%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">7.1.</span> <span class="toc-text">
+          6.1创建RDS数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2Wordpress%E7%BB%91%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">7.2.</span> <span class="toc-text">
+          6.2Wordpress绑定数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3%E5%88%9B%E5%BB%BA%E8%B4%A6%E6%88%B7%E5%92%8C%E7%BD%91%E7%AB%99%E4%BF%A1%E6%81%AF"><span class="toc-number">7.3.</span> <span class="toc-text">
+          6.3创建账户和网站信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4%E7%BD%91%E7%AB%99%E4%B8%AA%E6%80%A7%E5%8C%96%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">7.4.</span> <span class="toc-text">
+          6.4网站个性化（可选）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E6%94%AF%E6%8C%81Https%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">
+          7支持Https（可选）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E4%B8%8B%E8%BD%BDHttps%E8%AF%81%E4%B9%A6"><span class="toc-number">8.1.</span> <span class="toc-text">
+          7.1下载Https证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2%E6%9B%B4%E6%96%B0%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF"><span class="toc-number">8.2.</span> <span class="toc-text">
+          7.2更新函数计算域名信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3%E5%AE%89%E8%A3%85really-simple-ssl%E6%8F%92%E4%BB%B6"><span class="toc-number">8.3.</span> <span class="toc-text">
+          7.3安装really-simple-ssl插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Enjoy"><span class="toc-number">9.</span> <span class="toc-text">
+          8.Enjoy</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

@@ -1,19 +1,19 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf 文件结构 项目的文件目录推荐如下： #表示一级目录，##表示二级目录 #app    ----项目">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf                     文件结构       项目的文件目录推荐如下： #表示一级">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SlimPhp框架的使用（二）编写接口">
-<meta property="og:url" content="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf 文件结构 项目的文件目录推荐如下： #表示一级目录，##表示二级目录 #app    ----项目">
+<meta property="og:description" content="SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。推荐查看akrabat的简单Slim项目理解Slim的运行逻辑Glihub地址:Slim-Bookshelf                     文件结构       项目的文件目录推荐如下： #表示一级">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2017-09-12T10:29:06.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.984Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.592Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
-<meta name="twitter:card" content="summary"><title>SlimPhp框架的使用（二）编写接口 | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>SlimPhp框架的使用（二）编写接口 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -33,11 +33,14 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SlimPhp框架的使用（二）编写接口</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><p>SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。<br>推荐查看akrabat的简单Slim项目理解Slim的运行逻辑<span class="exturl"><a class="exturl__link"   href="https://github.com/akrabat/slim-bookshelf"  target="_blank" rel="noopener noreferrer">Glihub地址:Slim-Bookshelf</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-<h3>文件结构</h3>
-项目的文件目录推荐如下：
-<code>#</code>表示一级目录，<code>##</code>表示二级目录
-<pre>#app    ----项目主要目录
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">SlimPhp框架的使用（二）编写接口</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2017-09-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p>SlimPhp使用路由管理页面的访问，Slim本身并没有MVC模式，但是我们可以通过Controller来实现MVC的效果，因为我们的目标是编写接口，所以现在我们不考虑View层,只解决MC。<br>推荐查看akrabat的简单Slim项目理解Slim的运行逻辑<a target="_blank" rel="noopener" href="https://github.com/akrabat/slim-bookshelf">Glihub地址:Slim-<br>Bookshelf</a></p>
+
+        <h3 id="文件结构"   >
+          <a href="#文件结构" class="heading-link"><i class="fas fa-link"></i></a><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h3>
+      <p>项目的文件目录推荐如下： <code>#</code>表示一级目录，<code>##</code>表示二级目录</p>
+<span id="more"></span>
+
+<pre><code>#app    ----项目主要目录
 ##HelloWordController.php    ----测试用的controller
 ##dependencies.php    ----添加需要使用的controller文件
 ##routes.php    ----定义路由
@@ -47,71 +50,386 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 #vendor    ----使用composer自动生成的目录
 ##composer.json    ----composer配置文件
 ##composer.lock    ----composer文件不需要管
-</pre>
-<h3>创建目录</h3>
-按照上面的目录结构创建文件的目录app和public，vendor目录使用composer命令自动生成，所以不需要我们创建。
-<h3>安装Slim</h3>
-Slim的安装可以看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/slim/slimphp%e6%a1%86%e6%9e%b6%e7%9a%84%e4%bd%bf%e7%94%a8%ef%bc%88%e4%b8%80%ef%bc%89%e5%ae%89%e8%a3%85composer%e5%92%8cslim/" >上一篇文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。
-<h3>编辑composer.json</h3>
-编辑<code>composer.json</code>文件，添加<code>autoload</code>地址,然后执行终端执行<code>composer update</code>
-<pre>{
-    "require": {
-        "slim/slim": "^3.0"
-    },
-    "autoload": {
-        "psr-4":{
-          "Sample\\":"app" //“Sample” 是自己定义的一个命名空间,"app"对应的是文件路径
-        }
-    }
-}
-</pre>
-<h3>编辑Controller文件</h3>
-在app文件夹里面创建<code>HelloWordController.php</code>文件，先把<code>HelloWordController</code>代码贴上来
-<pre>namespace Sample\Controllers; //命名空间，很重要，引用文件都需要使用这个路径
+</code></pre>
 
-<p>use \interop\Container\ContainerInterface;</p>
-<p>final class HelloWordController<br>{<br>    protected $app;</p>
-<pre><code>public function __construct(ContainerInterface $ci)
-&#123;
-    $this-&amp;gt;app = $ci;
-&#125;
-/**
-* 测试的方法
-**/
-public function say($request, $response, $params)
-&#123;
-    echo &#39;Welcome Slim&#39;;
+        <h3 id="创建目录"   >
+          <a href="#创建目录" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h3>
+      <p>按照上面的目录结构创建文件的目录app和public，vendor目录使用composer命令自动生成，所以不需要我们创建。</p>
+
+        <h3 id="安装Slim"   >
+          <a href="#安装Slim" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装Slim" class="headerlink" title="安装Slim"></a>安装Slim</h3>
+      <p>Slim的安装可以看<a href="https://www.bearever.cn/slim/slimphp%e6%a1%86%e6%9e%b6%e7%9a%84%e4%bd%bf%e7%94%a8%ef%bc%88%e4%b8%80%ef%bc%89%e5%ae%89%e8%a3%85composer%e5%92%8cslim/">上一篇文章</a>。</p>
+
+        <h3 id="编辑composer-json"   >
+          <a href="#编辑composer-json" class="heading-link"><i class="fas fa-link"></i></a><a href="#编辑composer-json" class="headerlink" title="编辑composer.json"></a>编辑composer.json</h3>
+      <p>编辑<code>composer.json</code>文件，添加<code>autoload</code>地址,然后执行终端执行<code>composer update</code></p>
+<pre><code>&#123;
+    &quot;require&quot;: &#123;
+        &quot;slim/slim&quot;: &quot;^3.0&quot;
+    &#125;,
+    &quot;autoload&quot;: &#123;
+        &quot;psr-4&quot;:&#123;
+          &quot;Sample\\&quot;:&quot;app&quot; //“Sample” 是自己定义的一个命名空间,&quot;app&quot;对应的是文件路径
+        &#125;
+    &#125;
 &#125;
 </code></pre>
-<p>}<br></pre></p>
-<h3>编辑index.php文件</h3>
-在public文件夹里面创建<code>index.php</code>文件,用来处理网络访问
-<pre>use \Psr\Http\Message\ServerRequestInterface as Request;
+
+        <h3 id="编辑Controller文件"   >
+          <a href="#编辑Controller文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#编辑Controller文件" class="headerlink" title="编辑Controller文件"></a>编辑Controller文件</h3>
+      <p>在app文件夹里面创建<code>HelloWordController.php</code>文件，先把<code>HelloWordController</code>代码贴上来</p>
+<pre><code>namespace Sample\Controllers; //命名空间，很重要，引用文件都需要使用这个路径
+
+use \interop\Container\ContainerInterface;
+
+final class HelloWordController
+&#123;
+    protected $app;
+
+    public function __construct(ContainerInterface $ci)
+    &#123;
+        $this-&gt;app = $ci;
+    &#125;
+    /**
+    * 测试的方法
+    **/
+    public function say($request, $response, $params)
+    &#123;
+        echo &#39;Welcome Slim&#39;;
+    &#125;
+&#125;
+</code></pre>
+
+        <h3 id="编辑index-php文件"   >
+          <a href="#编辑index-php文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#编辑index-php文件" class="headerlink" title="编辑index.php文件"></a>编辑index.php文件</h3>
+      <p>在public文件夹里面创建<code>index.php</code>文件,用来处理网络访问</p>
+<pre><code>use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-<p>require ‘../vendor/autoload.php’; //自动加载的脚本</p>
-<p>$settings = require ‘../app/setting.php’; //引入设置的配置文件<br>$app = new \Slim\App($settings);</p>
-<p>require ‘../app/dependencies.php’; //引入controller配置文件<br>require ‘../app/routes.php’; //引入路由管理文件</p>
-<p>$app-&gt;run(); //执行<br></pre></p>
-<h3>编写设置配置文件</h3>
-在app目录下面创建<code>setting.php</code>文件,根据自己的需求编写配置文件
-<pre>return [
-    'settings' =&gt; [
-        'addContentLengthHeader' =&gt; false,
-        'displayErrorDetails' =&gt; true //开启错误提示
+require &#39;../vendor/autoload.php&#39;; //自动加载的脚本
+
+$settings = require &#39;../app/setting.php&#39;; //引入设置的配置文件
+$app = new \Slim\App($settings);
+
+require &#39;../app/dependencies.php&#39;; //引入controller配置文件
+require &#39;../app/routes.php&#39;; //引入路由管理文件
+
+$app-&gt;run(); //执行
+</code></pre>
+
+        <h3 id="编写设置配置文件"   >
+          <a href="#编写设置配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#编写设置配置文件" class="headerlink" title="编写设置配置文件"></a>编写设置配置文件</h3>
+      <p>在app目录下面创建<code>setting.php</code>文件,根据自己的需求编写配置文件</p>
+<pre><code>return [
+    &#39;settings&#39; =&gt; [
+        &#39;addContentLengthHeader&#39; =&gt; false,
+        &#39;displayErrorDetails&#39; =&gt; true //开启错误提示
     ],
 ];
-</pre>
-<h3>编写Controller配置文件</h3>
-在app文件夹里面创建<code>dependencies.php</code>
-注意：所有的文件需要使用命名空间的路径，如“Sample\Controllers\HelloWordController”
-<pre>$container = $app-&gt;getContainer();
+</code></pre>
 
-<p>//hello<br>$container[‘Sample\Controllers\HelloWordController’] = function ($c) {<br>    return new \Sample\Controllers\HelloWordController($c);<br>};<br></pre></p>
-<h3>添加路由管理文件</h3>
-在app文件夹里面创建<code>routes.php</code>文件
-<pre>//处理域名/hello地址的访问,跳转到<code>HelloWordController</code>的say方法
-$app-&gt;get('/hello','Sample\Controllers\HelloWordController:say');
-</pre>
-<h3>完毕？</h3>
-那么现在我们访问网址，是不是就会出现我们期待的东西呢？然而事实是不是的，提示<code>controller not fund</code>。这是什么bug??WTF，我们还需要执行一步，在终端输入<code>composer dump-autoload -o</code>,然后在输入网址，总算可以了。</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/">https://luomingbear.github.io/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/09/12/slim_php_logo/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">slim_php_logo</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85Composer%E5%92%8CSlim/"><span class="paginator-prev__text">SlimPhp框架的使用（一）安装Composer和Slim</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">创建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">安装Slim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">编辑composer.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">编辑Controller文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">编辑index.php文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">编写设置配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">编写Controller配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">添加路由管理文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">完毕？</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+        <h3 id="编写Controller配置文件"   >
+          <a href="#编写Controller配置文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#编写Controller配置文件" class="headerlink" title="编写Controller配置文件"></a>编写Controller配置文件</h3>
+      <p>在app文件夹里面创建<code>dependencies.php</code><br>注意：所有的文件需要使用命名空间的路径，如“Sample\Controllers\HelloWordController”</p>
+<pre><code>$container = $app-&gt;getContainer();
+
+//hello
+$container[&#39;Sample\Controllers\HelloWordController&#39;] = function ($c) &#123;
+    return new \Sample\Controllers\HelloWordController($c);
+&#125;;
+</code></pre>
+
+        <h3 id="添加路由管理文件"   >
+          <a href="#添加路由管理文件" class="heading-link"><i class="fas fa-link"></i></a><a href="#添加路由管理文件" class="headerlink" title="添加路由管理文件"></a>添加路由管理文件</h3>
+      <p>在app文件夹里面创建<code>routes.php</code>文件</p>
+<pre><code>//处理域名/hello地址的访问,跳转到HelloWordController的say方法
+$app-&gt;get(&#39;/hello&#39;,&#39;Sample\Controllers\HelloWordController:say&#39;);
+</code></pre>
+
+        <h3 id="完毕？"   >
+          <a href="#完毕？" class="heading-link"><i class="fas fa-link"></i></a><a href="#完毕？" class="headerlink" title="完毕？"></a>完毕？</h3>
+      <p>那么现在我们访问网址，是不是就会出现我们期待的东西呢？然而事实是不是的，提示<code>controller not fund</code>。这是什么bug??WTF，我们还需要执行一步，在终端输入<code>composer dump-autoload -o</code>,然后在输入网址，总算可以了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/">https://www.bearever.cn/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BC%96%E5%86%99%E6%8E%A5%E5%8F%A3/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2017/09/13/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%89%EF%BC%89%E8%8E%B7%E5%8F%96POST%E6%95%B0%E6%8D%AE/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">SlimPhp框架的使用（三）获取POST数据</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2017/09/12/SlimPhp%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85Composer%E5%92%8CSlim/"><span class="paginator-prev__text">SlimPhp框架的使用（一）安装Composer和Slim</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">
+          文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">
+          创建目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Slim"><span class="toc-number">3.</span> <span class="toc-text">
+          安装Slim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91composer-json"><span class="toc-number">4.</span> <span class="toc-text">
+          编辑composer.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91Controller%E6%96%87%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">
+          编辑Controller文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91index-php%E6%96%87%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">
+          编辑index.php文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E8%AE%BE%E7%BD%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">
+          编写设置配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Controller%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">
+          编写Controller配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86%E6%96%87%E4%BB%B6"><span class="toc-number">9.</span> <span class="toc-text">
+          添加路由管理文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%AF%95%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">
+          完毕？</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

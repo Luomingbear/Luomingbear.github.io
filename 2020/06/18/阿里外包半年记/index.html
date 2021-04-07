@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="2019年11月阴差阳错进入了阿里巴巴视频基础实验室做外包，至今已有半年，收获挺多。本文即是对个人收获的记录，主要分为技术与工作方式两个方面。                     技术       如果说要总结自己这段时间技术方面具体的收获的话，那就主要有Android、C&#x2F;C++和Python三个方面：对Android平台的视频编解码有了一定了解，可以快速的进行视频数据采集和编码；C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里外包半年记">
+<meta property="og:url" content="https://www.bearever.cn/2020/06/18/%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85%E5%8D%8A%E5%B9%B4%E8%AE%B0/index.html">
+<meta property="og:site_name" content="罗啰明天">
+<meta property="og:description" content="2019年11月阴差阳错进入了阿里巴巴视频基础实验室做外包，至今已有半年，收获挺多。本文即是对个人收获的记录，主要分为技术与工作方式两个方面。                     技术       如果说要总结自己这段时间技术方面具体的收获的话，那就主要有Android、C&#x2F;C++和Python三个方面：对Android平台的视频编解码有了一定了解，可以快速的进行视频数据采集和编码；C&#x2F;C++">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://file.2fun.xyz/2020/06/IMG_20191126_191837R.jpg">
+<meta property="article:published_time" content="2020-06-18T13:47:29.000Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.869Z">
+<meta property="article:author" content="Bearever">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.2fun.xyz/2020/06/IMG_20191126_191837R.jpg"><title>阿里外包半年记 | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2020/06/18/%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85%E5%8D%8A%E5%B9%B4%E8%AE%B0/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"Copy","copySuccess":"Copy Success","copyError":"Copy Error"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">阿里外包半年记</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-06-18</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p><img src="https://file.2fun.xyz/2020/06/IMG_20191126_191837R.jpg" alt="阿里巴巴西溪园区">2019年11月阴差阳错进入了阿里巴巴视频基础实验室做外包，至今已有半年，收获挺多。本文即是对个人收获的记录，主要分为技术与工作方式两个方面。</p>
+
+        <h2 id="技术"   >
+          <a href="#技术" class="heading-link"><i class="fas fa-link"></i></a><a href="#技术" class="headerlink" title="技术"></a>技术</h2>
+      <p>如果说要总结自己这段时间技术方面具体的收获的话，那就主要有Android、C/C++和Python三个方面：对Android平台的视频编解码有了一定了解，可以快速的进行视频数据采集和编码；C/C++使用更加熟练，终于不再担心被指针气哭；Python使用也更加熟练了，能够使用Python快速的开发一些工具脚本及跨平台的GUI程序开发。</p>
+
+        <h3 id="Android"   >
+          <a href="#Android" class="heading-link"><i class="fas fa-link"></i></a><a href="#Android" class="headerlink" title="Android"></a>Android</h3>
+      <p>由于我是在视频基础实验室做外包，所以工作内容都是和视频相关的。入职之后做的第一个项目就是一个视频算法可视化Android软件开发，应用需要调用摄像头获取实时数据，然后使用JNI技术对流进行处理，处理之后的结果需要及时的显示在屏幕上面。处理摄像头数据的时候需要注意视频的帧率，因为CPU处理算法的时间比较长，所以需要判断手机硬件支持的帧率，设置合适的值，甚至是使用人为丢弃部分帧减少计算量。除了帧率还需要考虑到视频的颜色空间，常见的有I420、NV12等，需要根据算法支持情况进行选择或则转换。摄像头读取到的是裸流数据，如果要保存到本地，可能还需要使用编码器进行编码，主要有MediacCodec和FFmpeg两种方案。MediaCodec是Android<br>4.1加入的API，其通过调用手机硬件实现快速的视频编解码，效率非常高，但是不同的手机设备支持的编解码算法不一样，需要根据具体机型判断做优化处理。FFmpeg是一个十分优秀的视频处理库，使用软件算法实现视频的编解码，所以支持的格式十分多，不过效率不及MeidaCodec，需要根据实际情况判断使用。另外视频的绘制也是一个比较复杂的地方，常见的方案有通过OpenGLES或者自己利用Canvas直接绘制。使用OpenGLES渲染效率很高，不过由于项目赶时间，之前对OpenGLES也不熟，所以没有用这个方案。我使用的是利用SurfaceView控件，获取其Canvas对象，然后将视频数据转成Bitmap的方式，这种方式优点就是实现简单，缺点就是占用内存大，性能差。</p>
+<span id="more"></span>
+
+
+
+        <h3 id="C-C"   >
+          <a href="#C-C" class="heading-link"><i class="fas fa-link"></i></a><a href="#C-C" class="headerlink" title="C/C++"></a>C/C++</h3>
+      <p>在做视频算法可视化软件开发的时候，因为算法都是C语言编译的so库，所以会涉及到C/C++的编程，在这个项目中C/C++的东西还算比较少，多是调用接口传递数据和转换格式的操作。该项目结束之后做了纯C/C++的Linux应用开发，第一次搞Linux遇到很多问题，对C/C++语言的不熟悉也导致项目进度缓慢，那段时间自己也非常焦虑。不过马老板有句鸡汤说了：“当你觉得不舒服的时候，就是你在成长的时候。”，确实是这样，当时虽然很难受，但是让我对Linux环境的使用和C/C++编程更加熟悉了。经过这些事情让我明白了C/C++是很重要的一门技术，无论是否是Android开发都会涉及到，为了弥补自己C/C++的不足，现在也一直在看《C<br>++ Primer Plus》这本书，对于C++初学者，这本书真的写的很好（除去很多地方翻译的很蹩脚），推荐感兴趣的人去看看。</p>
+
+        <h3 id="Python"   >
+          <a href="#Python" class="heading-link"><i class="fas fa-link"></i></a><a href="#Python" class="headerlink" title="Python"></a>Python</h3>
+      <p>视频算法开发中的很多工作都可以使用Python脚本自动完成，例如视频质量客观检查，通过对比原始视频与编码之后的视频像素的匹配度即可告诉开发者算法的质量。另外，对于视频主观质量检查则需要肉眼观看视频对比，考虑到实验室成员使用的电脑系统很多，有Windows、Mac和Ubuntu，所以需要一个跨平台的解决方案。我选择的方案是使用Qt的Python版本进行开发，Qt是一个很强大的跨平台框架，使用C++编写，但是提供了Python接口，安装一个PyQt5即可进行开发了。另外如果需要对Python的脚本编译成exe可执行文件，可以使用pyinstaller库，然后执行<code>pyinstaller xx.py --onefile</code>就可以了。因为Python是脚本语言，所以第一次写的时候总是一溜从上到下写过去，很少定义函数，但是Python3是有Class的，可以实现面向对象的设计，对于大型的程序还是建议用面向对象的思路编程，可以提高代码的可读性和复用性。</p>
+
+        <h2 id="习惯"   >
+          <a href="#习惯" class="heading-link"><i class="fas fa-link"></i></a><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h2>
+      <p>回顾自己的这半年，技术部分固然有了很多收获，除此之外，也学到了很多工作习惯的东西。 ### 重视文档</p>
+<p>早在进入外包之前，我对于技术文档就非常重视，十分关注企业内部知识的传播效率，曾主动搭建了公司内部的博客平台，分享知识。与善老师（我在阿里的主管）共事之后发现他也是一名对文档有着极致追求的人，对于文档的要求，比我更加严格。他对文字中的标点符号都很在意，如果需要配一个图片都话，对于图片的排列位置，图片元素的配色也很有讲究，这个是我需要学习的地方。</p>
+
+        <h3 id="重视注释"   >
+          <a href="#重视注释" class="heading-link"><i class="fas fa-link"></i></a><a href="#重视注释" class="headerlink" title="重视注释"></a>重视注释</h3>
+      <p>代码中的注释就如同是给程序员的文档，需要格外重视，切不可因为一时懒惰而忽略了。注释可以提高团队开发时的效率，尤其是现在疫情环境下大家经常会远程办公。很多人不写注释的原因是自己觉得这个地方很简单，没必要。可一旦你离职之后，这块代码归别人负责，那他就不一定可以理解你的思维了。</p>
+
+        <h3 id="不要害怕挑战"   >
+          <a href="#不要害怕挑战" class="heading-link"><i class="fas fa-link"></i></a><a href="#不要害怕挑战" class="headerlink" title="不要害怕挑战"></a>不要害怕挑战</h3>
+      <p>刚进实验室工作的时候，经常会遇到一些让人很头疼的任务，例如Linux<br>程序的开发，由于自己对Linux和C/C++不熟，导致项目进度缓慢，从而产生了恐惧心理，工作也不积极。但是害怕是解决不了问题的，逃避问题只会让自己更加害怕。在之后的工作中，也经常遇到这种从来没有做过的任务，不过慢慢的就不再害怕了，无非是多花点时间研究一下。当然这个也是有度的，像我就知道自己搞不定深度学习模型的训练，这里面涉及的基础知识太多了，不是几天可以突破的。</p>
+
+        <h2 id="End"   >
+          <a href="#End" class="heading-link"><i class="fas fa-link"></i></a><a href="#End" class="headerlink" title="End"></a>End</h2>
+      <p>单老师曾经说过一句话让我印象很深，他说：</p>
+<blockquote>
+<p>没有广度的深度是烟囱，没有深度的广度是浮萍。</p>
+</blockquote>
+<p>在技术领域，我涉及了很多，像上文提到的Android、C/C++和Python，自己现在可能连浮萍都算不上。无论如何做技术的多学一点肯定是没错的，只不过需要取舍，例如现在我会更加偏重于C/C++方面的学习，如果一个工作在不紧急的情况下，我会优先考虑使用C/C++。以前的话我可能更加注重实用自己熟悉的技术框架去完成，这样就会让自己在一个领域跳不出来，甚至会有固步自封的可能性。半年的时间就这样过去了，虽然还在阿里做外包，但始终觉得不是个事儿，还是希望自己可以成为一名大厂的正式员工。今年下半年最大的目标就是能进个大厂了，那么，奋斗吧，骚年！</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2020/06/18/%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85%E5%8D%8A%E5%B9%B4%E8%AE%B0/">https://www.bearever.cn/2020/06/18/%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85%E5%8D%8A%E5%B9%B4%E8%AE%B0/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2020/07/21/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">使用阿里云函数计算部署Wordpress博客系统</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2020/05/17/%E5%A3%B0%E7%BD%912020%E6%98%A5%E5%AD%A3RTC%E7%BC%96%E7%A8%8B%E6%8C%91%E6%88%98%E8%B5%9B%E6%80%BB%E7%BB%93/"><span class="paginator-prev__text">声网2020春季RTC编程挑战赛总结</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">
+          技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Android"><span class="toc-number">1.1.</span> <span class="toc-text">
+          Android</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-C"><span class="toc-number">1.2.</span> <span class="toc-text">
+          C&#x2F;C++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python"><span class="toc-number">1.3.</span> <span class="toc-text">
+          Python</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A0%E6%83%AF"><span class="toc-number">2.</span> <span class="toc-text">
+          习惯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A7%86%E6%B3%A8%E9%87%8A"><span class="toc-number">2.1.</span> <span class="toc-text">
+          重视注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E5%AE%B3%E6%80%95%E6%8C%91%E6%88%98"><span class="toc-number">2.2.</span> <span class="toc-text">
+          不要害怕挑战</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#End"><span class="toc-number">3.</span> <span class="toc-text">
+          End</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

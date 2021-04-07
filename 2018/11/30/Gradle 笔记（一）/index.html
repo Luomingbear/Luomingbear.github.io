@@ -1,21 +1,21 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="缘由  在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。 Groovy  Gradle使用Groovy作为开发语音，而Groovy完全兼容Java语法。需要注意的点： 字符串   &#39;&#39;单引号 表示一段不可变的字符串，不可以执行字符串内的">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="缘由       在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。                     Groovy       Gradle使用Groovy作为开发语音，而Groovy完全兼容">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle 笔记（一）">
-<meta property="og:url" content="https://luomingbear.github.io/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:url" content="https://www.bearever.cn/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="罗啰明天">
-<meta property="og:description" content="缘由  在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。 Groovy  Gradle使用Groovy作为开发语音，而Groovy完全兼容Java语法。需要注意的点： 字符串   &#39;&#39;单引号 表示一段不可变的字符串，不可以执行字符串内的">
+<meta property="og:description" content="缘由       在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。                     Groovy       Gradle使用Groovy作为开发语音，而Groovy完全兼容">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png">
 <meta property="article:published_time" content="2018-11-30T08:08:39.000Z">
-<meta property="article:modified_time" content="2021-03-18T15:16:54.997Z">
+<meta property="article:modified_time" content="2021-03-20T17:22:12.737Z">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png"><title>Gradle 笔记（一） | 罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:image" content="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png"><title>Gradle 笔记（一） | 罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -35,76 +35,362 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Gradle 笔记（一）</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><img src="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png" alt="gradle" title="gradle" />
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Gradle 笔记（一）</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><p><img src="https://file.2fun.xyz/1_GOm7MTviWJdJm_smWDjBHw.png" alt="gradle"></p>
 
-<h3>缘由</h3>
+        <h3 id="缘由"   >
+          <a href="#缘由" class="heading-link"><i class="fas fa-link"></i></a><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h3>
+      <p>在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。</p>
 
-<p>在Android的开发中，总遇到需要和Gradle脚本打交道的时候，一开始我觉得这个没啥用没有在意，但是每次打包都需要大半个小时，实在难受，遂决定研究学习下Gradle，这篇文章实我学习中的笔记，供日后参考。</p>
-<h3>Groovy</h3>
+        <h3 id="Groovy"   >
+          <a href="#Groovy" class="heading-link"><i class="fas fa-link"></i></a><a href="#Groovy" class="headerlink" title="Groovy"></a>Groovy</h3>
+      <p>Gradle使用Groovy作为开发语音，而Groovy完全兼容Java语法。 需要注意的点：</p>
+<span id="more"></span>
 
-<p>Gradle使用Groovy作为开发语音，而Groovy完全兼容Java语法。<br>需要注意的点：</p>
-<h4>字符串</h4>
 
-<ul>
-<li><code>''</code>单引号
-表示一段不可变的字符串，不可以执行字符串内的表达式计算</li>
-<li><code>""</code>双引号
-表示一段可变的字符串，可以使用字符串内的表达式计算，例如<code>"$&#123;rootProject&#125;"</code></li>
+        <h4 id="字符串"   >
+          <a href="#字符串" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4>
+      <ul>
+<li><code>&#39;&#39;</code>单引号 表示一段不可变的字符串，不可以执行字符串内的表达式计算</li>
+<li><code>&quot;&quot;</code>双引号 表示一段可变的字符串，可以使用字符串内的表达式计算，例如<code>&quot;$&#123;rootProject&#125;&quot;</code></li>
 </ul>
 
-<h4>Map</h4>
-
-<p>在Groovy里面，Map表示的是一个K-V列表，本质是<code>LinkedHashMap</code>，使用方式如下：</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">def map = ['width':1024,'height':1820]
+        <h4 id="Map"   >
+          <a href="#Map" class="heading-link"><i class="fas fa-link"></i></a><a href="#Map" class="headerlink" title="Map"></a>Map</h4>
+      <p>在Groovy里面，Map表示的是一个K-V列表，本质是<code>LinkedHashMap</code>，使用方式如下：</p>
+<pre><code>def map = [&#39;width&#39;:1024,&#39;height&#39;:1820]
 //下面两种方式都可以取值
-println map['width']
+println map[&#39;width&#39;]
 println map.height
 </code></pre>
 
-<h4>方法</h4>
+        <h4 id="方法"   >
+          <a href="#方法" class="heading-link"><i class="fas fa-link"></i></a><a href="#方法" class="headerlink" title="方法"></a>方法</h4>
+      <p>在Groovy中，执行一个方法可以不加括号<code>()</code>，例如方法<code>sum(int a,int b)</code>，调用的时候可以写成<code>sum 1,2</code>结果与<code>sum(1,2)</code>一样</p>
 
-<p>在Groovy中，执行一个方法可以不加括号<code>()</code>，例如方法<code>sum(int a,int b)</code>，调用的时候可以写成<code>sum 1,2</code>结果与<code>sum(1,2)</code>一样</p>
-<h4>get/set</h4>
+        <h4 id="get-set"   >
+          <a href="#get-set" class="heading-link"><i class="fas fa-link"></i></a><a href="#get-set" class="headerlink" title="get/set"></a>get/set</h4>
+      <p>Java Bean<br>的设计里面，通过<code>get</code>来获取属性值，在Groovy里面不需要写这些方法，直接通过<code>.</code>就可以读取和设置属性的值。例如我们经常使用的获取项目编译目录文件夹<code>rootProject.buildDir</code>，他的本质也是<code>rootProject.getBuildDir()</code>。<br>对于<code>set</code>设置属性，在groovy里面只需要添加``面就可以跟新的值，例如<code>description &#39;这是描述&#39;</code>，等同于<code>setDescription(&#39;这是描述&#39;)</code>。</p>
 
-<p>Java Bean 的设计里面，通过<code>get</code>来获取属性值，在Groovy里面不需要写这些方法，直接通过<code>.</code>就可以读取和设置属性的值。例如我们经常使用的获取项目编译目录文件夹<code>rootProject.buildDir</code>，他的本质也是<code>rootProject.getBuildDir()</code>。<br>对于<code>set</code>设置属性，在groovy里面只需要添加<code></code>面就可以跟新的值，例如<code>description '这是描述'</code>，等同于<code>setDescription('这是描述')</code>。</p>
-<h3>Gradle</h3>
+        <h3 id="Gradle"   >
+          <a href="#Gradle" class="heading-link"><i class="fas fa-link"></i></a><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3>
+      <p>asdasd</p>
 
-<p>asdasd</p>
-<h3>断言onlyIf</h3>
-
-<p><code>onlyIf</code>可以用来控制一个Task是否执行，当返回值为<code>true</code>时表示执行，否则表示不执行。这个效果同<code>enabled</code>属性一样可以控制是否执行，但是<code>onlyIf</code>接收的是一个闭包<code>&#123;&#125;</code>可以在里面添加代码进行判断。例如</p>
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">taskTest.onlyIf &#123;
+        <h3 id="断言onlyIf"   >
+          <a href="#断言onlyIf" class="heading-link"><i class="fas fa-link"></i></a><a href="#断言onlyIf" class="headerlink" title="断言onlyIf"></a>断言onlyIf</h3>
+      <p><code>onlyIf</code>可以用来控制一个Task是否执行，当返回值为<code>true</code>时表示执行，否则表示不执行。这个效果同<code>enabled</code>属性一样可以控制是否执行，但是<code>onlyIf</code>接收的是一个闭包<code>&#123;&#125;</code>可以在里面添加代码进行判断。例如</p>
+<pre><code>taskTest.onlyIf &#123;
     false
 &#125;
 </code></pre>
 
-<h4>编译参数</h4>
+        <h4 id="编译参数"   >
+          <a href="#编译参数" class="heading-link"><i class="fas fa-link"></i></a><a href="#编译参数" class="headerlink" title="编译参数"></a>编译参数</h4>
+      <p>在执行<code>gradlew</code>命令的时候，可以添加一些参数来改变编译环境，例如我们在打包APK的时候，可以设计一个字段<code>buildMarket</code>来表示打包的具体应用市场渠道，在编译的时候通过<code>-PK=V</code>的形式这只属性值，其中<code>K V</code>表示的是key和value。</p>
 
-<p>在执行<code>gradlew</code>命令的时候，可以添加一些参数来改变编译环境，例如我们在打包APK的时候，可以设计一个字段<code>buildMarket</code>来表示打包的具体应用市场渠道，在编译的时候通过<code>-PK=V</code>的形式这只属性值，其中<code>K V</code>表示的是key和value。</p>
-<h4>创建任务</h4>
-
-<ul>
-<li>使用任务名+闭包的形式：</li>
-</ul>
-
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">task name&#123;
-    doLast&#123;
-        doSomething....
-    &#125;
+        <h4 id="创建任务"   >
+          <a href="#创建任务" class="heading-link"><i class="fas fa-link"></i></a><a href="#创建任务" class="headerlink" title="创建任务"></a>创建任务</h4>
+      <ul>
+<li><p>使用任务名+闭包的形式：</p>
+<p>task name{</p>
+<pre><code>doLast&#123;
+    doSomething....
 &#125;
 </code></pre>
-
-<ul>
-<li>任务名的形式</li>
+<p>}</p>
+</li>
+<li><p>任务名的形式</p>
+<p>def Task name = task(name)<br>name.doLast{</p>
+<pre><code>doSomething.....
+</code></pre>
+<p>}</p>
+</li>
 </ul>
 
-<pre class="line-numbers prism-highlight" data-start="1"><code class="language-groovy">def Task name = task(name)
-name.doLast&#123;
-    doSomething.....
-&#125;
-</code></pre>
+        <h4 id="查找任务"   >
+          <a href="#查找任务" class="heading-link"><i class="fas fa-link"></i></a><a href="#查找任务" class="headerlink" title="查找任务"></a>查找任务</h4>
+      <p>可以通过<code>tasks</code>找到定义好的任务，例如<code>tasks.findByName(name)</code>或者<code>tasks.findByPath(path)</code>等。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://www.bearever.cn">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://www.bearever.cn/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">https://www.bearever.cn/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">上传aar到maven服务器</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/11/21/Shader%E6%8C%87%E5%8D%97(%E4%B8%80)/"><span class="paginator-prev__text">Shader指南(一)</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%98%E7%94%B1"><span class="toc-number">1.</span> <span class="toc-text">
+          缘由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Groovy"><span class="toc-number">2.</span> <span class="toc-text">
+          Groovy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.1.</span> <span class="toc-text">
+          字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Map"><span class="toc-number">2.2.</span> <span class="toc-text">
+          Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">
+          方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#get-set"><span class="toc-number">2.4.</span> <span class="toc-text">
+          get&#x2F;set</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradle"><span class="toc-number">3.</span> <span class="toc-text">
+          Gradle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%AD%E8%A8%80onlyIf"><span class="toc-number">4.</span> <span class="toc-text">
+          断言onlyIf</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%8F%82%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">
+          编译参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.2.</span> <span class="toc-text">
+          创建任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.3.</span> <span class="toc-text">
+          查找任务</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
 
-<h4>查找任务</h4>
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
 
-<p>可以通过<code>tasks</code>找到定义好的任务，例如<code>tasks.findByName(name)</code>或者<code>tasks.findByPath(path)</code>等。</p>
-</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ END ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">Author: </span><span class="copyright-author__value"><a href="https://Luomingbear.github.io">Bearever</a></span></div><div class="copyright-link"><span class="copyright-link__name">Link: </span><span class="copyright-link__value"><a href="https://luomingbear.github.io/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">https://luomingbear.github.io/2018/11/30/Gradle%20%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">Copyright: </span><span class="copyright-notice__value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2018/12/04/%E4%B8%8A%E4%BC%A0aar%E5%88%B0maven%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">上传aar到maven服务器</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2018/11/21/Shader%E6%8C%87%E5%8D%97(%E4%B8%80)/"><span class="paginator-prev__text">Shader指南(一)</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">缘由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Groovy</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.1.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text">Map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.3.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">2.4.</span> <span class="toc-text">get&#x2F;set</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">Gradle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">断言onlyIf</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.1.</span> <span class="toc-text">编译参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.2.</span> <span class="toc-text">创建任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link"><span class="toc-number">4.3.</span> <span class="toc-text">查找任务</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">You have read </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>

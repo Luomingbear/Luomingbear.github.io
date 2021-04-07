@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="theme-color" content="#00BE8F"><link rel="manifest" href="/manifest.json?v=2.6.2"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="不只是技术">
 <meta property="og:type" content="website">
 <meta property="og:title" content="罗啰明天">
-<meta property="og:url" content="https://luomingbear.github.io/page/4/index.html">
+<meta property="og:url" content="https://www.bearever.cn/page/4/index.html">
 <meta property="og:site_name" content="罗啰明天">
 <meta property="og:description" content="不只是技术">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Bearever">
 <meta property="article:tag" content="Android">
-<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://luomingbear.github.io/page/4/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+<meta name="twitter:card" content="summary"><title>罗啰明天</title><link ref="canonical" href="https://www.bearever.cn/page/4/index.html"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
 var CONFIG = {
   root: '/',
   algolia: undefined,
-  assistSearch: undefined,
+  assistSearch: ["google","bing","baidu"],
   fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
   sidebar: {"offsetTop":"20px","tocMaxDepth":6},
   header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
@@ -31,422 +31,383 @@ var CONFIG = {
   sourcePath: {"js":"js","css":"css","images":"images"},
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle"></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/24/Html5%E7%9B%B4%E6%92%AD%E5%89%8D%E7%AB%AF%E6%80%BB%E7%BB%93/">Html5直播前端总结</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><h2>背景</h2>
-<p>最近因为工作原因对网页实现直播进行了调研，也算是有所收获，特将此记录下来，如有不对还请指正。此文写于2020年3月，开发与测试环境如下：</p>
-<div class="table-container"><table>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">Home</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">Archives</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">Search</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">罗啰明天</div><div class="header-banner-info__subtitle">不只是技术</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home" id="content"><section class="postlist"><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/09/25/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%88%B0%E6%B6%88%E6%81%AF/">极光推送接收不到消息</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-09-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>第三方系统收不到推送的消息 由于第三方 ROM 的管理软件需要用户手动操作</p>
+<ul>
+<li><p><strong>小米【 MIUI 】</strong> 自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程无法开启 通知栏设置：应用默认都是显示通知栏通知，如果关闭，则收到通知也不会提示 网络助手：可以手动禁止已安装的第三方程序访问 2G/3G 和 WIFI 的网络和设置以后新安装程序是否允许访问 2G/3G 和 WIFI 的网络 MIUI 7 神隐模式： 允许应用进行自定义配置模式，应用在后台保持联网可用，否则应用进入后台时，应用无法正常接收消息。【设置】下电量和性能中【神隐模式】</p>
+</li>
+<li><p><strong>华为【 Emotion 】</strong> 自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程不会开启，只能手动开启应用 后台应用保护：需要手动把应用加到此列表，否则设备进入睡眠后会自动杀掉应用进程，只有手动开启应用才能恢复运行 通知管理：应用状态有三种：提示、允许、禁止。禁止应用则通知栏不会有任何提醒</p>
+</li>
+<li><p><strong>魅族【 Flyme 】</strong> 自启动管理：需要把应用加到【自启动管理】列表，否则杀进程或重新开机后进程无法开启 通知栏推送：关闭应用通知则收到消息不会有任何展示 省电管理： 安全中心里设置省电模式，在【待机耗电管理】中允许应用待机时，保持允许，否则手机休眠或者应用闲置一段时间，无法正常接收消息。</p>
+</li>
+<li><p><strong>VIVO【 Funtouch OS 】</strong> 内存一键清理：需要将应用加入【白名单】列表，否则系统自带的“一键加速”，会杀掉进程 自启动管理：需要将应用加入 “i 管家”中的【自启动管理】列表，否则重启手机后进程不会自启。但强制手动杀进程，即使加了这个列表中，后续进程也无法自启动。</p>
+</li>
+</ul></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/09/25/%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81%E6%8E%A5%E6%94%B6%E4%B8%8D%E5%88%B0%E6%B6%88%E6%81%AF/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/09/21/AS3.0Gradle%E5%BC%95%E7%94%A8%E5%8F%98%E5%8C%96/">AS3.0Gradle引用变化</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-09-21</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><div class="table-container"><table>
 <thead>
 <tr>
-<th>平台</th>
-<th>版本</th>
+<th>从AS3.0开始类库依赖出现了四种新语法如下：  新语法</th>
+<th>旧语法</th>
+<th>功能</th>
+<th>支持类型</th>
+<th>隔离效果</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td>MacBook</td>
-<td>macOS 10.15.1</td>
+<tbody><tr>
+<td>implementation</td>
+<td>compile</td>
+<td>编译期间对其他宿主不可见，运行期间可见</td>
+<td>jar，arr</td>
+<td>对其他宿主可见</td>
 </tr>
 <tr>
-<td>iPhone</td>
-<td>iOS13.3.1</td>
+<td>api</td>
+<td>compile</td>
+<td>编译和运行期间都可见</td>
+<td>jar，arr</td>
+<td>不隔离</td>
 </tr>
 <tr>
-<td>Android</td>
-<td>9.0</td>
-</tr>
-</tbody>
-</table></div>
-<h2>概述</h2>
-<p>一个直播系统由前端与后端两部分组成，此文仅探讨前端部分。前端根据视频产生的过程又可以分为视频采集、视频发送与视频播放。对于PC端的浏览器基本上都支持采集、发送和播放，但是对于移动端的浏览器就比较尴尬了，例如iOS的Safari就不支持视频采集（也许是我的方法不对）。 </p>
-<h2>视频采集</h2>
-<p>网页实现视频采集主要是通过<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaDevices/getUserMedia" >MediaDevices.getUserMedia()</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>方法，不同的浏览器对此的支持程度不同，经测试，IE和iOS的Safari不支持此方法。</p>
-<h3>采集配置</h3>
-<p>我们可以手动的选择需要采集的数据源，例如是否需要音频/视频，或者视频的大小，甚至是视频的帧率。</p>
-<pre><code>navigator.mediaDevices.getUserMedia(&#123; audio: true, video: &#123; width: 1280, height: 720, frameRate: &#123; ideal: 20, max: 25 &#125; &#125; &#125;)
-</code></pre>
-<h3>获取采集的数据</h3>
-<p>getUserMedia()方法返回一个表示<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream" >MediaStream</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" >Promise</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>对象，使用<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL" >URL.createObjectURL()</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>可以将其转化为网页标签可以识别的地址，例如将摄像头数据直接显示到video标签上面。</p>
-<pre><code>var video = document.getElementById(video);
-navigator.mediaDevices.getUserMedia(&#123; audio: true, video: &#123; width: 1280, height: 720, frameRate: &#123; ideal: 20, max: 25 &#125; &#125; &#125;)
-        .then(function (stream) &#123;
-            // Older browsers may not have srcObject
-            if (srcObject in video) &#123;
-                video.srcObject = stream;
-            &#125; else &#123;
-                // Avoid using this in new browsers, as it is going away.
-                video.src = window.URL.createObjectURL(stream);
-            &#125;
-            video.onloadedmetadata = function (e) &#123;
-                video.play();
-            &#125;;
-        &#125;)
-        .catch(function (err) &#123;
-            console.log(err.name + :  + err.message);
-        &#125;);
-</code></pre>
-<h2>视频发送</h2>
-<p>获取了视频数据之后，我们还需要将视频发送给服务器或者其他客户端，这里有两个方案分别是<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/WebRTC" >WebRTC</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>和<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebSockets_API" >WebSockets</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，而WebSocket根据发送的内容又可以分为图片和视频两种。对于这几种方案主要优缺点如下表所示。</p>
-<div class="table-container"><table>
-<thead>
-<tr>
-<th>方案</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>WebRTC</td>
-<td>延迟低，占用带宽小</td>
-<td>观众过多时不支持</td>
+<td>compileOnly</td>
+<td>provided</td>
+<td>编译期间可见，运行期间不可见</td>
+<td>jar</td>
+<td>不隔离</td>
 </tr>
 <tr>
-<td>WebSockets发送图片</td>
-<td>方便帧进行单独分析处理，延迟较低</td>
-<td>占用带宽较大</td>
+<td>runtimeOnly</td>
+<td>provided</td>
+<td>编译期间不可见，运行期间可见</td>
+<td>jar，arr</td>
+<td>编译期间隔离</td>
 </tr>
-<tr>
-<td>WebSockets发送视频</td>
-<td>支持视频和音频同时传输，占用带宽少</td>
-<td>切换视频片段时容易卡顿</td>
-</tr>
-</tbody>
-</table></div>
-<h3>WebRTC</h3>
-<p>（Web Real Time Communication）WebRTC即网页实时通信协议，可实现浏览器对浏览器的点对点通信，适合用来做视频/语音通话。因为是点对点通信，所以当观众数量太多时就会很复杂。目前网上一些开源的流媒体服务器支持WebRTC协议，可以用来对视频进行处理和转发，本文暂时没有对此进行研究😓。</p>
-<h3>WebSockets</h3>
-<p>WebSockets是一种先进的技术。它可以在用户的浏览器和服务器之间打开交互式通信会话。使用此API，您可以向服务器发送消息并接收事件驱动的响应，而无需通过轮询服务器的方式以获得响应。</p>
-<h4>WebSockets发送图片</h4>
-<p>将视频绘制在Canvas上面，然后按照固定的帧率捕获Canvas画面导出为Jpeg，并发送给服务器。这种方案实现简单，但是音频需要单独发送，音视频同步也比较麻烦。</p>
-<pre><code>var video = document.getElementById(video);
-var canvas = document.getElementById(canvas);
-var ctx = canvas.getContext(2d);
-setInterval(function () &#123;
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    var img = canvas.toDataURL(image/jpeg, 1);
-    socket.send(img);
-&#125;, 1000 / 20);
-</code></pre>
-<h4>WebSockets发送视频</h4>
-<p>将Canvas的图像和麦克风的音频组合录制成视频，然后发送给服务器，录制结束之后立马开始录制新的一个视频。为了减少延迟可以将视频的时长设置短一点，例如2秒。</p>
-<pre><code class="language-javascript">var video = document.getElementById(video);
-var canvas = document.getElementById(canvas);
-var ctx = canvas.getContext(2d);
+</tbody></table></div>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/07/31/%E4%B8%8D%E8%A6%81%E5%9C%A8foreach%E5%BE%AA%E7%8E%AF%E9%87%8C%E8%BF%9B%E8%A1%8C%E5%85%83%E7%B4%A0%E7%9A%84remove,add%E6%93%8D%E4%BD%9C/">不要在foreach循环里进行元素的remove,add操作</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-07-31</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>不要在foreach循环里进行元素的remove/add操作。remove元素请使用Iterator方式，如果并发操作，需要对Iterator对象加锁。</p>
+<ul>
+<li><p>正确方法：</p>
+<p>List<String> list = new ArrayList&lt;&gt;();<br>list.add(“1”);<br>list.add(“2”);<br>Iterator<String> iterator = list.iterator();</p>
+</li>
+</ul></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/07/31/%E4%B8%8D%E8%A6%81%E5%9C%A8foreach%E5%BE%AA%E7%8E%AF%E9%87%8C%E8%BF%9B%E8%A1%8C%E5%85%83%E7%B4%A0%E7%9A%84remove,add%E6%93%8D%E4%BD%9C/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/07/30/%E9%87%8D%E6%9E%84-%E6%94%B9%E5%96%84%E6%97%A2%E6%9C%89%E4%BB%A3%E7%A0%81%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">重构-改善既有代码的设计（一）</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-07-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><blockquote>
+<p>这篇文章是我对于《重构-改善既有代码的设计》一书的记录。</p>
+</blockquote>
 
-<p>const mediaRecorder = new mediaRecorder(canvas.captureStream(), &#123;<br>    mimeType: video/webm;codecs=vp9,<br>    audioBitsPerSecond: 128000,<br>    videoBitsPerSecond: 1280 * 720<br>&#125;);<br>const reader = new FileReader();</p>
-<p>mediaRecorder.ondataavilable = function (e) &#123;<br>    reader.addEventListener(loadend, function () &#123;<br>        socket.send(reader.result);<br>    &#125;);<br>    reader.readAsArrayBuffer(e.data);<br>&#125;</p>
-<p>setInterval(function () &#123;<br>    mediaRecorder.stop();<br>    mediaRecorder.start();<br>&#125;, 2000);<br></code></pre></p>
-<h2>视频播放</h2>
-<p>网页端实现视频播放，主要有这几种方案，分别是RTMP、HLS和JSmpeg/Broadway。 </p>
-<h3>RTMP</h3>
-<p>RTMP（Real Time Messaging Protocol）即实时消息传输协议，由Adobe公司提出，需要依赖浏览器的Flash插件进行播放，可使用开源的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/videojs/video.js" >video.js</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>直接播放RTMP流。在如今所有的浏览器都抛弃Flash的基础上，此方案兼容性有很大的问题，但是现在主流的视频直播网站似乎都是这个方案。</p>
-<h3>HLS</h3>
-<p>HLS（Http Live Streaming）是Apple的动态码率自适应技术，包括一个m3u(8)的索引文件，TS媒体分片文件和key加密串文件。其原理就是将一个视频切分为多个单独的小视频，将小视频的地址记录到一个文件里面（m3u8）发送给浏览器，浏览器按顺序播放每一个视频。这种方案在各大视频网站用的很多，因为可以很方便的插入广告。使用浏览器播放HLS视频十分简单，只需要将m3u8的地址放在video标签即可，如下：</p>
-<pre><code class="language-html">&lt;video controls preload=auto  autoplay=autoplay loop=loop webkit-playsinline&gt;
-    &lt;source src=http://localhost:8089/hls/test.m3u8 type=application/vnd.apple.mpegurl /&gt;
-    &lt;p class=warning&gt;Your browser does not support HTML5 video.&lt;/p&gt;
-&lt;/video&gt;
-</code></pre>
-<h3>JSMpeg/Broadway</h3>
-<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/phoboslab/jsmpeg" >JSMpeg</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>是用JS编写的Mpeg1/MP2解码器，而<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/mbebenita/Broadway" >Broadway</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>是用JS编写的H264解码器。之所以将它们视为同一个方案是因为它们都是基于JS解码视频流用Canvas显示，不过JSMpeg支持视频和音频同时解码，而Broadway仅支持视频，所以实际使用JSMpeg会方便些。 #### FFmpeg参数设置</p>
-<p>JSmpeg的Github主页里面有一个服务端推流的demo，利用FFmpeg将视频转码并发送到中转服务器，然后再通过WebSockets发送给网页。这里面对于FFmpeg的参数需要注意一下，以免推流之后的视频无法播放，我使用的参数如下：</p>
-<pre><code class="language-shell">ffmpeg -re -i input.mp4 -f mpegts -codec:v mpeg1video -codec:a mp2 -s 640x480 -r 25 http://localhost:8081/&lt;secret&gt;
-</code></pre>
-<p>具体参数的意思见下表：</p>
-<div class="table-container"><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-re</td>
-<td><strong>非常重要</strong> 必须放在-i前面，表示按照视频的实际帧率发送数据</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>输入视频源</td>
-</tr>
-<tr>
-<td>-f</td>
-<td>视频容器格式</td>
-</tr>
-<tr>
-<td>-codec:v</td>
-<td>视频编码格式</td>
-</tr>
-<tr>
-<td>-codec:a</td>
-<td>音频编码格式</td>
-</tr>
-<tr>
-<td>-s</td>
-<td>视频大小</td>
-</tr>
-<tr>
-<td>-r</td>
-<td>视频帧率</td>
-</tr>
-</tbody>
-</table></div>
-<h2>相关链接</h2>
-<ul>
-<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/mbebenita/Broadway" >Broadway Github主页</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li>[JSMpeg Github主页]()</li>
-<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/videojs/video.js" >video.js Github主页</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/f5eaeb3fe953" >又拍云关于RTMP、Http FLV、HLS的文章</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://aotu.io/notes/2016/10/09/HTML5-SopCast/?o2src=juejin&amp;o2layout=compat" >H5直播起航</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
-</ul></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/24/20200724021003375.png/">20200724021003375.png</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://file.2fun.xyz/2020/07/20200724021003375.png" >https://file.2fun.xyz/2020/07/20200724021003375.png</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/24/cropped-luo-1/">cropped-luo-1</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/23/%E6%88%AA%E5%B1%8F2020-07-23%20%E4%B8%8B%E5%8D%888.42.51/">截屏2020-07-23 下午8.42.51</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-23</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/23/%E6%88%91%E7%9A%842019%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/">我的2019年终总结</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-23</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>如果用一个字总结2019年的话，那就是“<strong>南</strong>”，“<strong>南</strong>”主要体现在工作事业上面：年初从花生有信离职，随后入职杭州布洛，本以为可以长期在公司效劳，可是年底公司又因为经营问题裁员2/3。被裁之后去了阿里巴巴人工智能实验室外包岗，每天都很幸苦，基本属于996的状态，感觉身体有点吃不消，不过还是很有收获（等有空的时候单独写一篇工作总结文章）。</p>
-<p><img src="https://file.2fun.xyz/2020/01/20200722035430143.jpg" alt="南" /></p>
-<h2>2018年Flag</h2>
-<p>写2019年总结的时候，特意翻看了一下<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bearever.cn/story/2018summary/" >2018年的总结</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，心想，可别又成了一个失信于己/于人的人，在2018年的总结里面立的Flag是在2019年制作一款独立游戏。 <img src="https://file.2fun.xyz/review-2018-flag.png" alt="2018年立的Flag" />9月份参加<strong>机核</strong>的独立游戏大赛，制作了一款Love2D平台的小游戏，也算是实现了Flag。在这里，非常感谢“阿廖”和“大超”放弃国庆假期来帮助开发，还有中间给予帮助的学妹“亦嘉”和女汉子“朝怡”。虽然游戏最后没有获奖，但是3天极限开发，一边写代码一边画图的过程还是很充实（累成狗）。</p>
-<p><img src="https://file.2fun.xyz/love2d-loverun-shotscreeen.png" alt="小游戏的截图" /></p>
-<h2>2019年总结</h2>
-<p>2018年的总结是按照时间线排的，2019年准备换一个思路。前段时候看梁爽同事的方法挺好，也想尝试一下，总结分为四个部分：专业技能、个人成长、兴趣爱好和月事记。</p>
-<h2>专业技能</h2>
-<p>2019年，专业技能方面有明显的提升，不局限于安卓，主要有以下几块：</p>
-<blockquote>
-<ul>
-<li>安卓</li>
-<li>Python</li>
-<li>C/C++（厚颜无耻的写上去）</li>
-</ul>
+        <h3 id="缘由"   >
+          <a href="#缘由" class="heading-link"><i class="fas fa-link"></i></a><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h3>
+      <p>我们经常会遇到需要对之前的功能进行修改的局面，当我们重新阅读之前的代码的时候，可能会有这样的感受：“我当时到底是怎么想的啊，我根本看不懂了啊，要怎么加功能呢？写的和*一样”。如果你有这种想法的话，就说明你需要对之前的代码进行重构了。</p>
+
+        <h3 id="概念"   >
+          <a href="#概念" class="heading-link"><i class="fas fa-link"></i></a><a href="#概念" class="headerlink" title="概念"></a>概念</h3>
+      <blockquote>
+<p><strong>重构</strong> 是在不影响业务的外在表现的时候对代码进行修改和优化的行为。</p>
+</blockquote></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/07/30/%E9%87%8D%E6%9E%84-%E6%94%B9%E5%96%84%E6%97%A2%E6%9C%89%E4%BB%A3%E7%A0%81%E7%9A%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/07/24/Android8%E9%80%82%E9%85%8D%E6%8C%87%E5%8D%97/">Android8适配指南</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-07-24</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><h1 id="Android-8-0适配指南"   >
+          <a href="#Android-8-0适配指南" class="heading-link"><i class="fas fa-link"></i></a><a href="#Android-8-0适配指南" class="headerlink" title="Android 8.0适配指南"></a>Android 8.0适配指南</h1>
+      <blockquote>
+<p>转载自“鸿洋公众号”</p>
 </blockquote>
-<h3>安卓</h3>
-<p>所谓“你知道的越多，你不知道的越多”，做安卓开发一年的时候，我觉得自己到了尽头，好像什么页面都能写，什么动画都能画，工作上的需求都能完成，似乎没有什么能难倒我的了。想想那时的自己，真的是“Too Young Too Simple”。今年自己安卓方面的提升，主要有以下几块：</p>
-<blockquote>
+<p>适配是个循序渐进的事情，不要想着一步到位。所以如果你还没有适配6.0或7.0可以先看看我之前的两篇了解一下。</p>
+
+        <h3 id="准备工作"   >
+          <a href="#准备工作" class="heading-link"><i class="fas fa-link"></i></a><a href="#准备工作" class="headerlink" title="准备工作"></a><strong>准备工作</strong></h3>
+      <p>将我们项目中的targetSdkVersion改为 26（8.0） 或者 27（8.1），记住不要超过27，毕竟我还没有告诉你Android<br>P怎么适配（滑稽）。</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/07/24/Android8%E9%80%82%E9%85%8D%E6%8C%87%E5%8D%97/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/07/14/lover/">lover</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-07-14</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><p>/* 您可以在此处加入您的CSS。 点击上方的帮助图标来了解更多。 */</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/07/12/TabLayout%20%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/">TabLayout 使用入门</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-07-12</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3 id="介绍"   >
+          <a href="#介绍" class="heading-link"><i class="fas fa-link"></i></a><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3>
+      <p>TabLayout是Google官方设计的一个分类UI，效果类似如下：<br><img src="https://file.2fun.xyz/wx20180712162109.png" alt="TabLayout"><br>通常，我们会和ViewPager一起配合使用，实现滑动ViewPager，上面的分类也会跟着切换的效果。</p>
+
+        <h3 id="ViewPager设置"   >
+          <a href="#ViewPager设置" class="heading-link"><i class="fas fa-link"></i></a><a href="#ViewPager设置" class="headerlink" title="ViewPager设置"></a>ViewPager设置</h3>
+      <p>使用ViewPager之前，需要设置Adapter，推荐使用<code>FragmentStatePagerAdapter</code>或者<code>FragmentPagerAdapter</code>。TabLayout会根据ViewPager的页数显示Tab,默认的Tab是一个文本view，里面的文字需要通过实现Adapter的<code>getPageTitle(int position)</code>方法来自动生成。 TabLayout绑定ViewPager，只需要调用一个方法即可：</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/07/12/TabLayout%20%E4%BD%BF%E7%94%A8%E5%85%A5%E9%97%A8/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/06/23/Lets%20Encrypt%20%E4%BD%BF%E7%94%A8/">Lets Encrypt 使用</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-06-23</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3 id="Lets-Encrypt"   >
+          <a href="#Lets-Encrypt" class="heading-link"><i class="fas fa-link"></i></a><a href="#Lets-Encrypt" class="headerlink" title="Lets Encrypt"></a>Lets Encrypt</h3>
+      <p>Lets Encrypt是一个免费的Https签发服务。</p>
+
+        <h3 id="acme-sh"   >
+          <a href="#acme-sh" class="heading-link"><i class="fas fa-link"></i></a><a href="#acme-sh" class="headerlink" title="acme.sh"></a>acme.sh</h3>
+      <p>acme.sh是一个方便Lets Encrypt生成签证的脚本，可以非常方便的使用。</p>
+
+        <h3 id="安装acme-sh"   >
+          <a href="#安装acme-sh" class="heading-link"><i class="fas fa-link"></i></a><a href="#安装acme-sh" class="headerlink" title="安装acme.sh"></a>安装acme.sh</h3></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/06/23/Lets%20Encrypt%20%E4%BD%BF%E7%94%A8/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/05/06/Eloquent%20in%20SlimPHP/">Eloquent in SlimPHP</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-05-06</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3 id="环境安装"   >
+          <a href="#环境安装" class="heading-link"><i class="fas fa-link"></i></a><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3>
+      <p>在项目目录里面执行 <code>composer require illuminate/database &quot;~5.1&quot;</code></p>
+
+        <h3 id="配置数据库"   >
+          <a href="#配置数据库" class="heading-link"><i class="fas fa-link"></i></a><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h3>
+      <p>在settings的文件里面添加数据库的配置信息，主要是“db=&gt;”对应的内容。</p></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/05/06/Eloquent%20in%20SlimPHP/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2018/03/22/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/">备忘录模式</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2018-03-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-21</span></span></div></header><div class="post-body"><div class="post-excerpt"><h3 id="缘由"   >
+          <a href="#缘由" class="heading-link"><i class="fas fa-link"></i></a><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h3>
+      <p>今天在看关于设计模式的文章的时候，偶然看到一个叫做“ <strong>备忘录模式</strong> ”的设计模式，感觉名字甚是有趣，便研究了一番。</p>
+
+        <h3 id="开始学习"   >
+          <a href="#开始学习" class="heading-link"><i class="fas fa-link"></i></a><a href="#开始学习" class="headerlink" title="开始学习"></a>开始学习</h3>
+      <p>备忘录模式，顾名思义就是可以向备忘录一样支持记录过程并且可以查看到每一步的状态的一种设计模式。最常见的使用是一些美图软件里面，需要对图片处理的过程进行记录，用户可以回退到上一步，也可以前进到最新的一步。下面是类图：<br><img src="http://my.csdn.net/uploads/201205/02/1335891550_5966.jpg" alt="类图"></p>
 <ul>
-<li>模块化</li>
-<li>库设计</li>
-<li>团队协作</li>
-</ul>
-</blockquote>
-<h4>模块化</h4>
-<p>安卓应用开发，随着业务的发展，最后项目变得十分巨大，单人项目变成了多人项目，就需要模块化了。在杭州布洛的时候对于模块化略有研究，主要的方案是通过抽象一个底层核心库，抽离业务，然后实现一个应用基础库，让不同的业务引用业务库，通过路由进行通信，实现模块化。当项目数量增加的时候，仓库的重要性就体现出来了，对业务库进行封装，上传仓库，其他项目组即可方便的使用，减少开发时间。</p>
-<p><img src="https://file.2fun.xyz/drawio20200118x.png" alt="模块化设计" /></p>
-<h4>库设计</h4>
-<p>在杭州布洛的时候设计了很多库方便同事使用，例如“权限库”、“异步链式库”和“IM库”。在进行库设计的时候，遵循了先设计后编码的流程，使用Markdown编写库设计文档，然后和同事商量改进点，最后进行编码。这样可以提高库的实用性和规范化，对于设计模式的使用也会更有经验。</p>
-<h4>团队协作</h4>
-<p>小公司喜欢全栈工程师，一人包揽所有的活，当公司达到一定的规模的时候，团队协作就十分有必要了。对于安卓来说，多人协作主要是：<strong>代码管理、环境统一和功能复用</strong>。其中代码管理通过Git/SVN可以解决，如果希望更加规范的化，可以加入代码Review的设计进去。环境统一是多人协作的一个重点，开发人员众多，我们在引用其他库的时候，肯定不希望与自己现有的功能冲突，所以就需要解决统一环境，包括SDK版本、依赖库版本、项目配置等信息。功能复用的核心是业务的抽离，对于程序员的要求主要体现在颗粒度的把握，如果模块化做的足够的好，功能复用也就可以变得很简单。</p>
-<h3>Python</h3>
-<p>本年度Python脚本写的较多，对于Python算是有一点儿了解了，已经可以比较熟练的使用Python编写脚本处理日常任务，还能用Python开发带有GUI的工具，提高业务处理效率。不过对于Python进行网络处理这一块还是不熟，应用的比较少。</p>
-<h3>C/C++</h3>
-<p>2019年底在阿里做了一点嵌入式开发的工作，需要使用C/C++进行开发。刚接触的时候也是一头雾水，完全不知道从哪里入手，光是编译一个Hello World 就很折腾。后来找系统团队发了一点Demo，学着写写，目前嵌入式开发的流程基本明白了：先在PC上面用C/C++开发应用，使用嵌入式设备的开发工具包打包成可执行文件，再拷贝到嵌入式设备里面，运行可执行文件。里面涉及的技术点主要有：C/C++、CMake和Linux等。</p>
-<h2>个人成长</h2>
-<p>个人成长方面，主要是读书和博客更新。</p>
-<h3>读书情况</h3>
-<p>今年，一共读了6本书，分别是《Android艺术探索》、《Android Gradle权威指南》、《流浪地球》、《人间失格》、《三体Ⅰ》和《三体Ⅱ》。对我影响较大的是《人间失格》和《三体》，一小一大，不同的视野，不同的感受。</p>
-<p><img src="https://file.2fun.xyz/截屏2020-01-18下午5.13.58.png" alt="" /></p>
-<p><strong>人间失格</strong></p>
-<p>《人间失格》讲述了一个自卑、自弃的人的悲惨一生。放正常人的眼中，他其实是一个幸运儿，有一个好的出生家庭，有众多异性的喜爱。但是他小心翼翼的经营着自己，免得惹怒别人。看完之后感觉自己很幸运，至少对世间和未来充满希望。</p>
-<p><strong>三体</strong></p>
-<p>《三体》描绘了一个十分宏大的世界，用近乎历朴实的语言讲述了一个非常震撼的故事，从文化大革命时期一直到四百年后的未来。一直听别人说《三体》多么多么牛逼，直到自己亲眼所见整个故事，才觉得这不仅仅是牛逼能形容的。宇宙一百多亿的时间里面，人类的出现是偶然还是必然，为什么到现在仍然没有发现其他文明，大危机爆发时人类如何选择？如果你对这些问题感兴趣，强烈推荐你看看《三体》。</p>
-<h3>维护博客</h3>
-<p>本年度一共更新了9篇博客，整体质量较低。主要原因是在公司也经常写博客，所以就不想再回家继续写了，来年需要改进。</p>
-<h2>兴趣爱好</h2>
-<p>兴趣爱好方面，基本上属于退步阶段，之前还会偶尔玩下滑板，2019年碰都没有碰一下，2020年希望还是能够捡起来玩玩。</p>
-<h3>Vlog</h3>
-<p>都说大疆的<strong>OSMO Action</strong>是拍摄Vlog的神器，双十一的时候我也买了一个，结果一直等到双十二所有的东西才发货完成（大疆的客服真的很差）。但是不得不说Action真的很强，4K/30FPS还可以防抖，加上前置屏幕，使用非常方便。</p>
-<p><img src="https://file.2fun.xyz/31579328672_.pic.jpg" alt="" /></p>
-<h3>【机核】游戏大赛</h3>
-<p>十月份的时候参加了机核主办的游戏创作大赛“BOOOM”，因为前面有提到，这里就不详细写了。</p>
-<h2>月事记</h2>
-<p>每个月最重要的事情，主要是下面的这些：</p>
-<ul>
-<li>2月 过年回家，大年初一看《流浪地球》</li>
-</ul>
-<p><img src="https://file.2fun.xyz/IMG_20190205_002312R.jpg" alt="" /></p>
-<ul>
-<li>4月 入职“杭州布洛科技有限公司”</li>
-</ul>
-<p><img src="https://file.2fun.xyz/IMG_20190415_165709R.jpg" alt="" /></p>
-<ul>
-<li>5月 游览杭州国际动漫节；宇哥生日一起玩桌游</li>
-</ul>
-<p><img src="https://file.2fun.xyz/21579405877_.pic_hd.jpg" alt="" /></p>
-<ul>
-<li>7月 公司团建，一起吃日料</li>
-</ul>
-<p><img src="https://file.2fun.xyz/IMG_20190727_111022R.jpg" alt="" /></p>
-<ul>
-<li>9月 参加【机核】游戏大赛；参观丹姐家的豪宅</li>
-</ul>
-<p><img src="https://file.2fun.xyz/2ee679cb-9d91-4120-988d-f5c7bb71beb5.jpg" alt="" /></p>
-<ul>
-<li>10月 国庆节去绍兴游玩</li>
-</ul>
-<p><img src="https://file.2fun.xyz/IMG_20191005_141108R.jpg" alt="" /></p>
-<ul>
-<li>11月 因公司经营问题被裁员；入职阿里人工智能实验室外包岗</li>
-</ul>
-<p><img src="https://file.2fun.xyz/IMG_20191126_191837R.jpg" alt="" /></p>
-<ul>
-<li>12月 梁爽生日，吃“冬阴功火锅”</li>
-</ul>
-<p><img src="https://file.2fun.xyz/11579421574.jpg" alt="" /></p>
-<h2>2020年的Flag</h2>
-<p>一年的结束也就意味着新的一年的到来，这既是总结，也是一个计划，把2020年的Flag立下来，看看明年能有多少收获。</p>
-<p><img src="https://file.2fun.xyz/截屏2020-01-18下午3.28.00.png" alt="" /></p></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/22/%E4%BD%BF%E7%94%A8%E9%98%BF%E9%87%8C%E4%BA%91%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E9%83%A8%E7%BD%B2Wordpress%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">使用阿里云函数计算部署Wordpress博客系统</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"><p><img src="https://file.2fun.xyz/2020/07/20200722034153856.png" alt="阿里云函数计算部署Wordpress" /></p>
-<h2>0.起因</h2>
-<p>这篇文章是对周末折腾的一个记录，一切都源于阿里云客服说我的服务器马上到期了。之前购买的阿里云的ECS，三年下来需要两千多块钱，但是平时用的多的就一个博客系统和账单接口在跑，CPU使用率仅有4%。然后无意间看到阿里的语雀团队使用函数计算大大的减少了服务器的维护成本，也避免了CPU使用率一直很低的情况。受此启发决定将我的博客转移到阿里云函数计算上面，幸运的是官方也给了wordpress搭建教程（仅仅是能用）。
-附上官方的函数计算与传统ECS价格对比：</p>
-<div class="table-container"><table>
-<thead>
-<tr>
-<th>ITEM</th>
-<th>成本</th>
-<th>稳定性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>基于 VM 方案</td>
-<td>使用 ecs.t5-lc1m1.small, 22.8元/月</td>
-<td>服务器和数据库在同一台VM, 均无主备容灾，同时该规格的主机本身性能弱</td>
-</tr>
-<tr>
-<td>轻量应用服务器</td>
-<td>60元/月(1vCPU 1GB 1Mbps 20GB[ssd])</td>
-<td>服务器和数据库在同一台VM, 均无主备容灾，同时该规格的主机本身性能弱</td>
-</tr>
-<tr>
-<td>函数计算</td>
-<td>sqlite3 版本约为 1元/月 mysql 版本大约 26元/月</td>
-<td>高</td>
-</tr>
-</tbody>
-</table></div>
-<h2>1.概要</h2>
-<p>本文将对部署的过程和函数计算+Wordpress的架构做一个简单的描述，如有不对请以<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/146729.html?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>为准。整个文章的目录如图1所示，分为函数计算架构设计、准备工作、搭建Wordpress、配置Wordpress和支持Https五大部分。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722063100237.png" alt="图1. 文章目录结构" />
-<em>图1. 文章目录结构</em></p>
-<h2>2.函数计算+Wordpress的架构设计</h2>
-<p>在使用函数计算之前，我们先了解一下函数计算是什么，这样有助于理解每一步在干嘛。下面是阿里云官网的介绍：</p>
-<blockquote>
-<p>函数计算（Function Compute）是一个事件驱动的全托管 Serverless 计算服务。您无需管理服务器等基础设施，只需编写代码并上传。函数计算会为您准备好计算资源，并以弹性、可靠的方式运行您的代码。</p>
-</blockquote>
-<p>可以把函数计算理解成一个运行在容器里面的代码片段，我们只需要上传自己的代码片段，函数计算服务会自动帮我们处理运行环境和伸缩配置。但是函数计算只是用来运行一段代码的，它本身是没有上下文记录的功能的，所以官方的做法是搭配使用了阿里云的NAS服务（阿里云文件存储服务）。NAS相当于一台远程的移动硬盘，函数计算引擎可以与这块硬盘进行绑定，以实现文件操作。通过上面的介绍我们就可以看看基于函数计算的Wordpress是怎么架构的。</p>
-<p><img src="https://file.2fun.xyz/2020/07/aa24a63302dfac74a54fbada4b273361bf5d179b.png" alt="图2.函数计算Wordpress架构" />
-<em>图2. 函数计算Wordpress架构</em></p>
-<p>如图2所示，客户端的请求会发送到函数计算服务器的PHP运行环境，该环境与NAS进行了绑定，所以我们的请求可以直接操作NAS里面的Wordpress文件。这里如果需要用到数据库的话，就会连接RDS（云数据库服务）进行数据的增删改查。由于所有的函数执行的时候都是对同一个NAS和RDS进行的操作，最后的效果就像是在同一台服务器上面进行的操作一样。
-<strong>重点：Wordpress的源文件是存放在NAS上面的，函数计算仅仅是提供了一个入口，数据库在RDS上面，通过远程连接的方式进行访问。</strong></p>
-<h2>3.流程</h2>
-<p>创建Wordpress博客系统一共需要4个步骤，如图3所示，分别是准备阶段、创建Wordpress、配置Wordpress和支持Https，如果不想支持Https的话，那第四步可以省略。</p>
-<p><img src="https://file.2fun.xyz/2020/07/函数计算+wordpress流程2.png" alt="图3. 创建wordpress的流程" />
-<em>图3. 创建wordpress的流程</em></p>
-<h2>4.准备阶段</h2>
-<h3>4.1购买域名</h3>
-<p>一个完整的个人博客需要有一个独立的域名，所以在开发之前需要申请一个个人域名，可以直接在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wanwang.aliyun.com/domain?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >万网官网</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>进行申请，输入想要的域名下单购买就好。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722031827413-1024x436.png" alt="图4. 万网购买域名" />
-<em>图4. 万网购买域名</em></p>
-<h3>4.2域名备案</h3>
-<p>购买域名之后就需要进行备案了，如果是在万网上面购买的域名，则可以直接使用阿里云的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/activity/beian/gift?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >备案服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>进行备案。在发起备案申请之后需要等待阿里云寄送一张幕布过来，收到幕布之后站在幕布前面手持生份证进行拍照提交审核就可以了，整个过程可能需要两周。</p>
-<h3>4.3开通函数计算服务</h3>
-<p>在阿里云<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/product/fc?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >开通函数计算服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，选择<a target="_blank" rel="noopener" href="https://www.aliyun.com/product/fc?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy"><strong>免费开通</strong></a>，这样就是按量付费，函数计算每月有100万次免费额度，基本上够我们使用了。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722032110237.png" alt="图5. 免费开通函数计算" />
-<em>图5. 免费开通函数计算</em></p>
-<h3>4.5开通NAS服务</h3>
-<p>在阿里云<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/product/nas?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >开通使用文件存储NAS服务</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>即可。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722032358299.png" alt="" />
-<em>图6. 开通NAS服务</em></p>
-<h3>4.6开通RDS服务</h3>
-<p>另外我们还需要为博客创建RDS数据库，进入阿里云，开通<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/product/rds/mysql?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >RDS-MySQL版</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，我购买的时候有新客优惠，一年仅需54元，如果没有优惠的话推荐购买3年及以上，这样更划算。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722032501994.png" alt="图7. RDS MySQL服务" />
-<em>图7. RDS MySQL服务</em></p>
-<h2>5.创建Wordpress</h2>
-<p>准备工作完成之后我们就可以开发创建Wordpress了，首先需要下载函数计算的工具fun，并clone fc-wordpress代码到本地。</p>
-<h3>5.1下载fun工具</h3>
-<p>fun工具提供了多种方式安装，详细信息请查看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/alibaba/funcraft/blob/master/docs/usage/installation-zh.md?spm=a2c6h.12873639.0.0.7b8427b4YkbbwW&amp;file=installation-zh.md" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
-<h3>5.2git clone fc-wordpress</h3>
-<p>将fc-wordpress到源码下载到本地。</p>
-<pre><code>git clone https://github.com/awesome-fc/fc-wordpress.git</code></pre>
-<h3>5.3将Wordpress上传到NAS</h3>
-<p><strong>5.3.1初始化NAS</strong>
-这里我使用的是MySQL数据库，所以首先cd进入<code>fc-wp-mysql</code>文件夹(<strong>强烈建议打开显示隐藏文件的功能，这样更容易理解步骤</strong>)，执行以下命令：</p>
-<pre><code>fun nas init
-fun nas info</code></pre>
-<blockquote>
-<p><code>fun nas init</code>: 初始化 NAS, 基于您的 .env 中的信息获取(已有满足条件的nas)或创建一个同region可用的nas
-如果你没有修改 templata.yml 中的配置 service名字， 那么则可以进入下一步； 如果有修改， 会在当前目录生成新的目录 .fun/nas/auto-default/{serviceName} (<code>fun nas info</code> 可以列出新的目录), 将默认目录下的 .fun/nas/auto-default/fc-wp-mysql/wordpress 的wordpress目录拷贝到 .fun/nas/auto-default/{serviceName} 下， 同时可以删除目录 .fun/nas/auto-default/fc-wp-mysql/wordpress</p>
-</blockquote>
-<p><strong>5.3.2上传到NAS</strong>
-执行如下命令将本地的Wordpress文件上传到NAS：</p>
-<pre><code>fun nas sync
-fun nas ls nas:///mnt/auto/</code></pre>
-<blockquote>
-<p><code>fun nas sync</code>: 将本地 NAS 中的内容（.fun/nas/auto-default/fc-wp-mysql）上传到 NAS 中的 fc-wp-mysql 目录
-<code>fun nas ls nas:///mnt/auto/</code>: 查看我们是否已经正确将文件上传到了NAS</p>
-</blockquote>
-<h3>5.4配置域名信息</h3>
-<p>修改<code> index.php</code> 中的<code>$host</code>中的值，<code> $host</code> 修改为自己的域名， 修改 <code>template.yml </code>中 <code>DomainName: Auto </code>, Auto 修改成自己的域名。
-修改 <code>template.yml </code>LogConfig 中的 Project, 任意取一个不会重复的名字即可, 有两处地方需要更改，如图8所示。</p>
-<p><img src="https://file.2fun.xyz/2020/07/0cbbe03eebd58f5e6696e3214c9750083f8013ea.png" alt="图8. 修改template.yml" />
-<em>图8. 修改template.yml</em></p>
-<h3>5.5发布函数</h3>
-<p>执行<code>fun deploy</code>，完成最终的部署。
-登录控制台 <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fc.console.aliyun.com" >https://fc.console.aliyun.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> ，可以看到service 和 函数已经创建成功， 并且 service 也已经正确配置。</p>
-<ol start="3">
-<li>通过浏览器自己的域名，即可看到Wordpress页面。</li>
-</ol>
-<h2>6.配置Wordpress</h2>
-<p>完成Wordpress安装之后我们就可以进行博客具体配置了，首次打开会提示选择一个语言，在底部有一个“简体中文”。选择语言之后就进入正式配置阶段，如图9所示。</p>
-<p><img src="https://file.2fun.xyz/2020/07/generate-wp-config-file.png" alt="图9. Wordpress初始页面" />
-<em>图9. Wordpress初始页面</em></p>
-<h3>6.1创建RDS数据库</h3>
-<p>如图9所示，我们需要提供一个数据库，这时可以去RDS <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://rdsnext.console.aliyun.com/" >MYSQL控制台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>创建一个数据库。</p>
-<p><strong>6.1.1创建数据库账户</strong>
-首先我们创建一个普通账号，用来管理博客的数据库。</p>
-<p><img src="https://file.2fun.xyz/2020/07/WX20200721-121201@2x.png" alt="图10. 创建普通账户" />
-<em>图10. 创建普通账户</em></p>
-<p><strong>6.1.2创建数据库</strong>
-然后创建一个数据库，并将权限授予刚才的账户。</p>
-<p><img src="https://file.2fun.xyz/2020/07/WX20200721-121525@2x.png" alt="图11. 创建数据库" />
-<em>图11. 创建数据库</em></p>
-<p><strong>6.1.3设置白名单</strong>
-这时我们的数据库还不能背外面访问，需要先设置白名单，为了简单，我这里是直接添加的允许<code>0.0.0.0/0</code>访问，如果想要更加精细的权限控制，可以查看<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/100272.html?source=5176.11533457&amp;userCode=bdcxtb8v&amp;type=copy" >官方文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>。</p>
-<p><img src="https://file.2fun.xyz/2020/07/WX20200721-122239@2x.png" alt="图12. 设置白名单" />
-<em>图12. 设置白名单</em></p>
-<p><strong>6.1.4获取外网地址</strong>
-设置白名单之后就可以申请外网地址了。</p>
-<p><img src="https://file.2fun.xyz/2020/07/WX20200721-130217@2x.png" alt="图13. 获取RDS外网地址" />
-<em>图13. 获取RDS外网地址</em></p>
-<h3>6.2Wordpress绑定数据库</h3>
-<p>数据库创建成功之后就可以配置Wordpress的数据库信息了，需要注意的地方是<strong>数据库主机要填写RDS的外网地址，而不是locallhost</strong></p>
-<p><img src="https://file.2fun.xyz/2020/07/WX20200721-130652@2x.png" alt="图14. Wordpress绑定数据库" />
-<em>图14. Wordpress绑定数据库</em></p>
-<h3>6.3创建账户和网站信息</h3>
-<p>配置好数据库之后就可以进入网站信息配置页面了，如图15所示，需要填写网站标题、用户名、密码和邮箱等信息。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722060955108.png" alt="图15. 创建账户和网站信息" />
-<em>图15. 创建账户和网站信息</em></p>
-<h3>6.4网站个性化（可选）</h3>
-<p>经过上面的步骤，我们的网站就配置完成了，但是这时的网站还十分简陋，外观也不能达到我们的需求，所以我们需要对它换个皮。我尝试在Wordpress的后台直接安装主题，但是每一次都是安装失败，最后我找到了一种安装主题的方式：直接把主题文件上传到NAS里面。</p>
-<p><strong>6.4.1下载主题</strong>
-首先去<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/themes" >https://wordpress.org/themes </a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>下载喜欢的主题，然后将主题的文件夹拷贝到本地<code>fc-wordpress地址/fc-web-mysql/.fun/nas/auto-default/fc-wp-mysql/wordpress/wp-content/themes</code>文件夹下面，如图16所示，writers文件夹就是我下载的主题。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722033434130.png" alt="下载主题" />
-<em>图16. 下载主题</em></p>
-<p><strong>6.4.2同步NAS</strong>
-将主题复制到wordpress的主题文件夹之后，我们需要把本地的wordpress信息与NAS进行同步，执行<code>fun nas sync</code>即可将本地文件上传到NAS上面。这时在我们的Wordpress后台就可以看到新安装的主题了。</p>
-<h2>7支持Https（可选）</h2>
-<p>一切就这么顺利的完成了，直到我用Safari浏览器访问<a href="www.bearever.cn">www.bearever.cn</a>时，我感觉自己遭受了暴击！浏览效果如图17所示。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722032808721.png" alt="页面样式丢失" />
-<em>图17. 页面样式丢失</em></p>
-<p>导致这个的原因是我们的博客现在还不支持Https，百度了一下怎么解决都说是需要改<code>wp-config.php</code>文件，这个文件是配置的时候创建在NAS上面的。问题难就难在这里，我没有办法下载NAS上面的文件进行修改，fun工具目前只支持列出文件目录，使用本地文件替换NAS文件，但是没有下载文件的功能。。。就在我一筹莫展的时候，发现了一个叫<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-ssl/" >really-simple-ssl</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>的插件，官方描述说可以让你的网站轻松支持Https，带着试一试的态度下载安装，发现真的可以！</p>
-<p>如果你要让你的博客支持Https的话，需要下载Https证书，然后更新函数计算域名信息，最后安装<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-ssl/" >really-simple-ssl</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>插件就可以了。</p>
-<h3>7.1下载Https证书</h3>
-<p>下载证书之前我们需要先去阿里云购买一个证书，然后下载下来。
-<strong>7.1.1申请Https证书</strong>
-在阿里云SSL平台购买一个证书，选择免费版的就可以了，如图18所示。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722060809233.png" alt="图18. 申请免费版Https证书" />
-<em>图18. 申请免费版Https证书</em></p>
-<p><strong>7.1.2下载证书</strong>
-证书申请成功之后将证书下载到本地，下载的时候选择Nginx版本的。</p>
-<h3>7.2更新函数计算域名信息</h3>
-<p>在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fc.console.aliyun.com/fc/overview" >函数计算控制台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>选择“自定义域名”，可以看到我们自己的域名信息，点击“修改”将支持协议改为“Http、Https”，如图19所示。其中.pem和.key文件的内容可以直接用记事本打开查看。</p>
-<p><img src="https://file.2fun.xyz/2020/07/20200722060852936.png" alt="图19. 配置Https证书信息" />
-<em>图19. 配置Https证书信息</em></p>
-<h3>7.3安装really-simple-ssl插件</h3>
-<p>去<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://wordpress.org/plugins/really-simple-ssl/" >really-simple-ssl主页</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>下载插件，然后将插件文件夹复制到<code>fc-wordpress地址/fc-web-mysql/.fun/nas/auto-default/fc-wp-mysql/wordpress/wp-content/plugins</code>文件夹下面。执行<code>fun nas sync</code>将本地的本地的插件同步到NAS上面，最后打开Wordpress后台开启really-simple-ssl即可。</p>
-<h2>8.Enjoy</h2>
-<p>好了，一个Wordpress博客就这么部署完毕了，你已经迈出了成功的第一步，接下来就是不断的丰富你的博客，为她填充智慧与思想！</p></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/22/temp/">temp</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/22/WX20200721-131400@2x%20%E4%B8%8A%E5%8D%8810.48.30/">WX20200721-131400@2x 上午10.48.30</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/22/WX20200721-135402@2x%20%E4%B8%8A%E5%8D%8810.48.30/">WX20200721-135402@2x 上午10.48.30</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2020/07/22/WX20200721-134654@2x/">WX20200721-134654@2x</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">Created</span><span class="post-meta-item__value">2020-07-22</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">Updated</span><span class="post-meta-item__value">2021-03-18</span></span></div></header><div class="post-body"><div class="post-excerpt"></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svg" alt="avatar"></div><p class="sidebar-ov-author__text">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">162</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span></div><div><span>Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a></span><span> v5.4.0</span><span class="footer__devider">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
+<li><strong>Originator</strong> 原发器：动作的发起者，负责创建一个备忘录来记录当前对象的内部状态，并可使用备忘录恢复内部状态。</li>
+</ul></div><div class="post-readmore"><a class="post-readmore__link" href="/2018/03/22/%E5%A4%87%E5%BF%98%E5%BD%95%E6%A8%A1%E5%BC%8F/"><span class="post-readmore__text">Read More</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://file.2fun.xyz/2021%2F03%2FIMG_0867_AVATAR-2.JPG" alt="avatar"></div><p class="sidebar-ov-author__text">Bearever</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">75</div><div class="sidebar-ov-state-item__name">Archives</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Bearever</span><span class="footer__devider">|</span><span><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn">浙ICP备17002285号-2</a></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"><div class="search-btns">Search by:<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>Google</span><span class="search-btns-item search-btns-item--bing"><i></i>Bing</span><span class="search-btns-item search-btns-item--baidu"><i></i>Baidu</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ Untitled ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', 'Please enter characters');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.xml"></script></body></html>
